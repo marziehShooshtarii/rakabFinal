@@ -3,9 +3,61 @@
 #include <vector>
 #include <string>
 using namespace std;
+// class Map
+// {
+// public:
+//     int setMapFromFile()
+//     {
+//         mapFile.open("map.txt", ios::in);
+//         if (!mapFile.is_open())
+//         {
+//             cerr << "Error opening the file!" << endl;
+//             return 1;
+//         }
+//         for (int i = 0; i < 7; i++)
+//         {
+//             for (int j = 0; j < 5; j++)
+//             {
+
+//                 mapFile >> map[i][j];
+//                 cout << map[i][j] << endl;
+//             }
+//         }
+
+//         return 0;
+//     }
+//     void printMap()
+//     {
+//         for (int i = 0; i < 7; i++)
+//         {
+
+//             for (int j = 0; j < 5; j++)
+//             {
+//                 cout << map[i][j];
+//             }
+//         }
+//     }
+
+// private:
+//     string map[7][5];
+//     ifstream mapFile;
+//     struct mapStates
+//     {
+//     };
+// };
 class Map
 {
 public:
+    Map()
+    {
+        for (int i = 0; i < 7; i++)
+        {
+            for (int j = 0; j < 5; j++)
+            {
+                setStateColor("white", i, j);
+            }
+        }
+    }
     int setMapFromFile()
     {
         mapFile.open("map.txt", ios::in);
@@ -19,32 +71,48 @@ public:
             for (int j = 0; j < 5; j++)
             {
 
-                mapFile >> map[i][j];
-                cout << map[i][j] << endl;
+                mapFile >> map[i][j].stateName;
+                // cout << map[i][j] << endl;
             }
         }
 
         return 0;
     }
-    void printMap()
+    void setStateColor(string color, int i, int j)
     {
-        for (int i = 0; i < 7; i++)
-        {
-
-            for (int j = 0; j < 5; j++)
-            {
-                cout << map[i][j];
-            }
-        }
+        map[i][j].stateColor = color;
     }
 
+    // void printMap()
+    // {
+    //     for (int i = 0; i < 7; i++)
+    //     {
+
+    //         for (int j = 0; j < 5; j++)
+    //         {
+    //             cout << map[i][j];
+    //         }
+    //     }
+    // }
+    
+
 private:
-    string map[7][5];
-    ifstream mapFile;
     struct mapStates
     {
+        string stateName;
+        string stateColor;
     };
+    mapStates map[7][5];
+    ifstream mapFile;
 };
+// int main()
+// {
+//     Map m;
+//     m.setMapFromFile();
+//     // m.printMap();
+//     return 0;
+// }
+
 class Player
 {
 public:
@@ -219,7 +287,7 @@ int main()
 {
     Map M;
     M.setMapFromFile();
-    M.printMap();
+    //M.printMap();
     Zemestan m;
     // m.setName ();
     shirDokht s;
