@@ -4,15 +4,15 @@
 #include <stdlib.h>
 #include <unordered_map>
 #include <vector>
+#include <algorithm>
 dealingCards::dealingCards() {}
 bool dealingCards::setDealing()
 {
-    std ::unordered_map<std ::string, int> deck = {
+    deck = {
         {"bahar", 3},
         {"zemestan", 3},
         {"matarsak", 16},
         {"tabl_zan", 6},
-        {"parchamdar", 3},
         {"shah_dokht", 3},
         {"sarbaz_1", 8},
         {"sarbaz_2", 10},
@@ -23,19 +23,32 @@ bool dealingCards::setDealing()
         {"sarbaz_10", 10},
 
     };
-    std ::vector<std::string> allCards;
+
     for (const auto &pair : deck)
     {
         allCards.insert(allCards.end(), pair.second, pair.first);
     }
 }
-
+int dealingCards::randomCardSet()
+{
+    for (size_t i = 0; i < 10; i++)
+    {
+        randomCard = rand() % 107;
+        playerCard[i] = allCards[randomCard];
+    }
+    for (const auto &card : playerCard)
+        std::cout << card << " ";
+}
+void dealingCards::shuffelingCards()
+{
+    random_shuffle(allCards.begin(), allCards.end());
+}
 int main()
 {
     srand(unsigned(time(NULL)));
     dealingCards r;
-    // r.setValidNumberOfCards();
     r.setDealing();
-    // r.setPlayerCard();
+    r.shuffelingCards();
+    r.randomCardSet();
     return 1;
 }
