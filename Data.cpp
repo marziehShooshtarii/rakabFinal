@@ -1,11 +1,15 @@
 #include "Data.hpp"
 #include <vector>
 #include <iostream>
-void getData::setPlayerNumber()
+int getData::getPlayerNumber()
 {
-    std::cout << "Enter the number of players in the game:" << std::endl; 
+    std::cout << "Enter the number of players in the game:" << std::endl;
     std::cin >> playerNumber;
     players.push_back(Player(playerNumber));
+    return playerNumber;
+}
+void getData::setPlayerNumber()
+{
     if (playerNumber >= 3 && playerNumber <= 6)
     {
         for (size_t i = 0; i < playerNumber; i++)
@@ -32,8 +36,9 @@ void getData::setPlayerNumber()
 
     // }
 }
-int main()
-{
-    getData e;
-    e.setPlayerNumber();
-}
+// int main()
+// {
+//     getData e;
+//     std::vector <Player> players;
+//     e.setPlayerNumber(players);
+// }
