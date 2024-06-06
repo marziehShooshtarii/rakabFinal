@@ -31,13 +31,31 @@ bool dealingCards::setDealing()
 }
 int dealingCards::randomCardSet()
 {
-    for (size_t i = 0; i < 10; i++)
+    for (int j = 0; j < numberOfPlayer; j++)
     {
-        randomCard = rand() % 107;
-        playerCard[i] = allCards[randomCard];
+        for (size_t i = 0; i < 10; i++)
+        {
+            randomCard = rand() % 107;
+            playerCard[i] = allCards[randomCard];
+            Player adam;
+            adam.controlPlayerCard(playerCard[i]);
+            Players.push_back(adam);
+        }
+
+        for (const auto &card : playerCard)
+            std::cout << card << " ";
+        std::cout << std::endl;
     }
-    for (const auto &card : playerCard)
-        std::cout << card << " ";
+    // for (size_t i = 0; i < numberOfPlayer; i++)
+    // {
+    //     std::cout << Players[i];
+    //     std::cout << std::endl;
+    //     /* code */
+    // }
+}
+void dealingCards::validateIdentity()
+{
+    identity.setPlayerNumber();
 }
 void dealingCards::shuffelingCards()
 {
@@ -49,6 +67,7 @@ int main()
     dealingCards r;
     r.setDealing();
     r.shuffelingCards();
+    r.validateIdentity();
     r.randomCardSet();
     return 1;
 }
