@@ -1,11 +1,13 @@
-#include "Dealing.hpp"
-#include <iostream>
 #include <time.h>
 #include <stdlib.h>
-#include <unordered_map>
-#include <vector>
 #include <algorithm>
-dealingCards::dealingCards() {}
+#include "Dealing.hpp"
+#include "Player.hpp"
+
+dealingCards::dealingCards(){
+    
+}
+
 bool dealingCards::setDealing()
 {
     deck = {
@@ -41,6 +43,7 @@ int dealingCards::randomCardSet()
             adam.controlPlayerCard(playerCard[i]);
             Players.push_back(adam);
         }
+        
 
         for (const auto &card : playerCard)
             std::cout << card << " ";
@@ -53,6 +56,7 @@ int dealingCards::randomCardSet()
     //     /* code */
     // }
 }
+
 void dealingCards::validateIdentity()
 {
     identity.setPlayerNumber();

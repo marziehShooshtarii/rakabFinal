@@ -1,6 +1,7 @@
 #ifndef SPEACIAL_HPP
 #define SPEACIAL_HPP
-#include "Card.cpp"
+#include "Card.hpp"
+
 class Special : public Card
 {
 private:

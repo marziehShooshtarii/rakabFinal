@@ -1,26 +1,8 @@
-<<<<<<< HEAD
-#include <string>
-class Player 
-{
-    public:
-    Player(int Age, std::string Name, std::string COLOR);
-    int getAge();
-    std::string getName();
-    std::string getColor();
-    int getNumberOfPlayer();
-
-private:
-    int age;
-    int numberOfPlayer;
-    std::string name;
-    std::string color;
-};
-=======
 #ifndef PLAYER_HPP
 #define PLAYER_HPP
+#include <iostream>
 #include <string>
 #include <vector>
-#include <iostream>
 class Player
 {
 public:
@@ -44,4 +26,3 @@ private:
     std::string card;
 };
 #endif
->>>>>>> 10a37b3c6165781a99725dc5e57003351a18dfa0

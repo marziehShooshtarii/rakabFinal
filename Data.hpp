@@ -1,7 +1,11 @@
+#ifndef DATA_H
+#define DATA_H
+
 #include <iostream>
 #include <vector>
 #include <string>
-#include "Player.cpp"
+#include "Player.hpp"
+
 class getData {
     public:
     void setPlayerNumber();
@@ -13,3 +17,5 @@ class getData {
     int playerAge;
     int playerNumber;
 };
+
+#endif // !DATA_H
