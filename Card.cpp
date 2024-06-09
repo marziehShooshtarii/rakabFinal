@@ -1,5 +1,6 @@
 #include "Card.hpp"
 #include <string>
+
 Card::Card(std::string nameOfCard)
 {
     setName(nameOfCard);
@@ -8,14 +9,7 @@ int Card::getNumberOfCard()
 {
     return numberOfCard;
 }
-void Card::setCharacter(int value)
-{
-    characteristic = value;
-}
-int Card::getCharacter()
-{
-    return characteristic;
-}
+
 std::string Card::getName()
 {
     return nameOfCard;
