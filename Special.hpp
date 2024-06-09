@@ -7,14 +7,12 @@ class Special : public Card
 private:
 public:
     Special(std::string name);
-    void setCharacter(int value);
+    void setCharacter(int value) override
+    {
+        Card::setCharacter(value);
+    }
     void setNumberOfCard(int value);
     void setName(std::string name);
-    int getPriority();
-    int shirDokht ();
-    int tablZan();
-    int zemestan();
-    int bahar();
-    int matarsak();
+    // int getPriority();
 };
 #endif
