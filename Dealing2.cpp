@@ -33,14 +33,15 @@ bool dealingCards::setDealing()
 }
 int dealingCards::randomCardSet()
 {
+    int i=0 ;
     for (int j = 0; j < numberOfPlayer; j++)
     {
-        for (size_t i = 0; i < 10; i++)
+        for (i = i + j ; i < 10; i++)
         {
-            randomCard = rand() % 107;
+            randomCard = rand() % 89;
             playerCard[i] = allCards[randomCard];
-            Player adam;
-            adam.controlPlayerCard(playerCard[i]);
+            // Player adam;
+            adam.controlPlayerCard(allCards[randomCard]);
             Players.push_back(adam);
         }
         
@@ -49,12 +50,11 @@ int dealingCards::randomCardSet()
             std::cout << card << " ";
         std::cout << std::endl;
     }
-    // for (size_t i = 0; i < numberOfPlayer; i++)
-    // {
-    //     std::cout << Players[i];
-    //     std::cout << std::endl;
-    //     /* code */
-    // }
+    for (size_t i = 0; i < numberOfPlayer; i++)
+    {
+        std::cout << adam.getPlayerCard() << " ";
+        /* code */
+    }
 }
 
 void dealingCards::validateIdentity()

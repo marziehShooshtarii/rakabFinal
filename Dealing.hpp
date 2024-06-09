@@ -28,6 +28,7 @@ private:
     std::ifstream dealingFile;
     std::string playerCard[10];
     getData identity;
+    Player adam;
     int numberOfPlayer = identity.getPlayerNumber();
     int randomCard;
 };
