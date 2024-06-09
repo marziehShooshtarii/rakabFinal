@@ -1,5 +1,5 @@
 #include "Army.hpp"
-armyCard::armyCard(std::string name) : Card (name){};
+// armyCard::armyCard(std::string name) : Card (name){};
 
 
 

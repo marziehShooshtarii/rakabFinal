@@ -4,7 +4,7 @@
 class armyCard : public Card
 {
 public:
-    armyCard(std::string name);
+    // armyCard(std::string name);
     void setCharacter(int value) override
     {
         Card::setCharacter(value);
