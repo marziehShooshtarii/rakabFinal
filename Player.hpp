@@ -13,7 +13,6 @@ public:
     std::string getColor();
     void setNumberOfPlayers(int numberOfPlayer);
     void controlPlayerCard(std::string playerCard);
-    void returnPlayerCard();
     int getNumberOfPlayer();
     int getAge();
     std::string getPlayerCard ();

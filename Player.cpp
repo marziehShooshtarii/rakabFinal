@@ -37,14 +37,7 @@ void Player::controlPlayerCard(std::string playerCard)
 {
     playerCardList.push_back(playerCard);
 }
-void Player::returnPlayerCard()
-{
-    for (int i = 0; i < 10; i++)
-    {
-        std::cout << playerCardList[i]<< std::endl;
-    }
-    
-}
+
 std::string Player::getPlayerCard ()
 {
     for (size_t i = 0; i < 30; i++)
