@@ -45,6 +45,14 @@ void Player::returnPlayerCard()
     }
     
 }
+std::string Player::getPlayerCard ()
+{
+    for (size_t i = 0; i < 30; i++)
+    {
+        return playerCardList[i];
+    }
+    
+}
 // int main ()
 // {
 //     std::vector <Player> adam;

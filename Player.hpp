@@ -16,6 +16,7 @@ public:
     void returnPlayerCard();
     int getNumberOfPlayer();
     int getAge();
+    std::string getPlayerCard ();
 
 private:
     int age;
