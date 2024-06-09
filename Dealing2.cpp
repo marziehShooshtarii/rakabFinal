@@ -65,13 +65,13 @@ void dealingCards::shuffelingCards()
 {
     random_shuffle(allCards.begin(), allCards.end());
 }
-int main()
-{
-    srand(unsigned(time(NULL)));
-    dealingCards r;
-    r.setDealing();
-    r.shuffelingCards();
-    r.validateIdentity();
-    r.randomCardSet();
-    return 1;
-}
+// int main()
+// {
+//     srand(unsigned(time(NULL)));
+//     dealingCards r;
+//     r.setDealing();
+//     r.shuffelingCards();
+//     r.validateIdentity();
+//     r.randomCardSet();
+//     return 1;
+// }
