@@ -1,6 +1,6 @@
-#include "Data.hpp"
-#include <vector>
+// #include <vector>
 #include <iostream>
+#include "Data.hpp"
 int getData::getPlayerNumber()
 {
     std::cout << "Enter the number of players in the game:" << std::endl;
