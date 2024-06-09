@@ -4,8 +4,7 @@
 class Card
 {
 public:
-    Card(std::string nameOfCard);
-    int getNumberOfCard();
+    Card(std::string p_nameOfCard);
     virtual int getCharacter()
     {
         return characteristic;
@@ -14,13 +13,8 @@ public:
     {
         characteristic = value;
     }
-    int getCharacter();
-    int getNumberOfCard();
-    void setNumberOfCard(int numberOfCard);
-    void setCharacter(int value);
-    void setExplanation(std::string description);
+    void setExplanation(std::string p_description);
     std::string getName();
-    void setName(std::string nameOfCard);
 
 private:
     int numberOfCard;
