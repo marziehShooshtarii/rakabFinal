@@ -4,8 +4,9 @@
 void getData::setPlayerNumber()
 {
     std::cout << "Enter the number of players in the game:" << std::endl;
-    std::cin >> playerNumber;
-    players.push_back(Player(playerNumber));
+    int number;
+    std::cin >> number;
+    this->playerNumber = number;
 }
 void getData::setData()
 {
