@@ -2,14 +2,15 @@
 #define DATA_H
 
 #include <iostream>
-#include <vector>
-#include <string>
+// #include <vector>
+// #include <string>
 #include "Player.hpp"
 
 class getData {
     public:
-    void setPlayerNumber();
+    void setData();
     int getPlayerNumber();
+    void setPlayerNumber ();
     private:
     std::string PlayerName;
     std::string playerColor;
