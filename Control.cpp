@@ -1,3 +1,4 @@
+#include <unistd.h>
 #include "Control.hpp"
 void Control::diplayBeggingOfTheGame()
 {
@@ -16,6 +17,9 @@ void Control::diplayBeggingOfTheGame()
             }
             i++;
             std::cout << std::endl;
+            // sleep (5);
+            std::cin.ignore();
+            system("CLS");
         }
     }
 }
