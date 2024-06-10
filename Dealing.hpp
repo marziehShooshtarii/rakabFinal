@@ -5,8 +5,8 @@
 #include <unordered_map>
 #include <fstream>
 #include "Data.hpp"
-#include "Special.hpp"
 #include "Army.hpp"
+#include "Special.hpp"
 
 class dealingCards
 {

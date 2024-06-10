@@ -1,8 +1,8 @@
 #include <time.h>
 #include <stdlib.h>
 #include <algorithm>
+// #include "Player.hpp"
 #include "Dealing.hpp"
-#include "Player.hpp"
 
 dealingCards::dealingCards(){
     
@@ -33,28 +33,23 @@ bool dealingCards::setDealing()
 }
 int dealingCards::randomCardSet()
 {
-    int i=0 ;
     for (int j = 0; j < numberOfPlayer; j++)
     {
-        for (i = i + j ; i < 10; i++)
+        for (int i=0 ; i < 10; i++)
         {
             randomCard = rand() % 89;
-            playerCard[i] = allCards[randomCard];
-            // Player adam;
+            // playerCard[i] = allCards[randomCard];
             adam.controlPlayerCard(allCards[randomCard]);
-            Players.push_back(adam);
         }
-        
-
-        for (const auto &card : playerCard)
-            std::cout << card << " ";
-        std::cout << std::endl;
+        // for (const auto &card : playerCard)
+        //     std::cout << card << " ";
+        // std::cout << std::endl;
     }
-    for (size_t i = 0; i < numberOfPlayer; i++)
-    {
-        std::cout << adam.getPlayerCard() << " ";
-        /* code */
-    }
+    // for (size_t k = 0; k < numberOfPlayer; k++)
+    // {
+    //     std::cout <<adam.getPlayerCard() << " ";
+    // }
+    adam.getPlayerCard();
 }
 
 void dealingCards::validateIdentity()
@@ -65,13 +60,13 @@ void dealingCards::shuffelingCards()
 {
     random_shuffle(allCards.begin(), allCards.end());
 }
-// int main()
-// {
-//     srand(unsigned(time(NULL)));
-//     dealingCards r;
-//     r.setDealing();
-//     r.shuffelingCards();
-//     r.validateIdentity();
-//     r.randomCardSet();
-//     return 1;
-// }
+int main()
+{
+    srand(unsigned(time(NULL)));
+    dealingCards r;
+    r.setDealing();
+    r.shuffelingCards();
+    r.validateIdentity();
+    r.randomCardSet();
+    return 1;
+}
