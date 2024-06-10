@@ -49,24 +49,25 @@ int dealingCards::randomCardSet()
     // {
     //     std::cout <<adam.getPlayerCard() << " ";
     // }
-    adam.getPlayerCard();
+    // adam.getPlayerCard();
 }
 
 void dealingCards::validateIdentity()
 {
     identity.setPlayerNumber();
+    identity.setData();
 }
 void dealingCards::shuffelingCards()
 {
     random_shuffle(allCards.begin(), allCards.end());
 }
-int main()
-{
-    srand(unsigned(time(NULL)));
-    dealingCards r;
-    r.setDealing();
-    r.shuffelingCards();
-    r.validateIdentity();
-    r.randomCardSet();
-    return 1;
-}
+// int main()
+// {
+//     srand(unsigned(time(NULL)));
+//     dealingCards r;
+//     r.setDealing();
+//     r.shuffelingCards();
+//     r.validateIdentity();
+//     r.randomCardSet();
+//     return 1;
+// }
