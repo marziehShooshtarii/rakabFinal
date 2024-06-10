@@ -1,13 +1,28 @@
 #include <iostream>
 #include <vector>
+#include <unordered_map>
+#include <time.h>
+#include <stdlib.h>
+#include <algorithm>
 #include "Map.hpp"
-#include "Dealing.hpp"
+#include "Player.hpp"
+#include "Data.hpp"
+// #include "Dealing.hpp"
 class Control {
     public:
     void diplayBeggingOfTheGame();
+    void dealingCards();
+    void validateIdentity();
+    void shuffelingCards();
+    void randomCardSet ();
     private:
-    std::vector <Player> players;
-    getData gettingData;
-    dealingCards playerDeck;
-    int numberOfPlayers = gettingData.getPlayerNumber();
+    std::vector  <std::string> players;
+    getData identity;
+    // dealingCards playerDeck;
+    // int numberOfPlayers = identity.getPlayerNumber();
+    std ::unordered_map<std ::string, int> deck;
+    std ::vector<std::string> allCards;
+    Player adam;
+    int randomCard;
+    std::string playerCard[10];
 };
