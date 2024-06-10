@@ -1,5 +1,27 @@
 #include <unistd.h>
 #include "Control.hpp"
+// Player Control::getAge(int i)
+// {
+//     return bazikonha[i];
+// }
+void Control::displayStarterPlayer()
+{
+    std::cout <<" nnnnnnnnnn ";
+}
+int Control::determinMinAge()
+{
+    int min = identity.getAge(0);
+    for (int i=1 ; i < identity.getPlayerNumber() ; i++)
+    {
+        if (min < identity.getAge(i))
+        {
+            min = identity.getAge(i);
+            starterPlayer = i;
+        }
+    }
+    return starterPlayer;
+}
+
 void Control::diplayBeggingOfTheGame()
 {
     std::cout << "Are you ready?!\n\tLets start the game\n";
@@ -56,9 +78,9 @@ void Control::randomCardSet()
             playerCard[i] = allCards[randomCard];
             adam.controlPlayerCard(allCards[randomCard]);
         }
-        for (const auto &card : playerCard)
-            std::cout << card << " ";
-        std::cout << std::endl;
+        // for (const auto &card : playerCard)
+        //     std::cout << card << " ";
+        // std::cout << std::endl;
     }
     for (size_t i = 0; i < identity.getPlayerNumber() * 10; i += 10)
     {
@@ -75,7 +97,7 @@ void Control::randomCardSet()
     // {
     //     std::cout <<adam.getPlayerCard() << " ";
     // }
-    // adam.getPlayerCard();
+    // adam.getAge();
 }
 
 void Control::validateIdentity()
@@ -99,4 +121,5 @@ int main()
     c.shuffelingCards();
     c.randomCardSet();
     c.diplayBeggingOfTheGame();
+    std::cout<< c.determinMinAge();
 }

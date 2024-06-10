@@ -8,6 +8,14 @@
 
 class getData {
     public:
+    int getAge(int i)
+    {
+        return players[i].getAge();
+    }
+    std::string getName(int i)
+    {
+        return players[i].getName();
+    }
     void setData();
     int getPlayerNumber();
     void setPlayerNumber ();

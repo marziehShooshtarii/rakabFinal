@@ -8,15 +8,21 @@
 #include "Player.hpp"
 #include "Data.hpp"
 // #include "Dealing.hpp"
-class Control {
-    public:
+class Control
+{
+public:
     void diplayBeggingOfTheGame();
     void dealingCards();
     void validateIdentity();
     void shuffelingCards();
-    void randomCardSet ();
-    private:
-    std::vector  <std::string> players;
+    void randomCardSet();
+    int determinMinAge();
+    void displayStarterPlayer();
+
+
+private:
+    std::vector<std::string> players;
+    std::vector<Player> bazikonha;
     getData identity;
     // dealingCards playerDeck;
     // int numberOfPlayers = identity.getPlayerNumber();
@@ -25,4 +31,5 @@ class Control {
     Player adam;
     int randomCard;
     std::string playerCard[10];
+    int starterPlayer;
 };
