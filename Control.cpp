@@ -6,7 +6,8 @@
 // }
 void Control::displayStarterPlayer()
 {
-    std::cout <<" nnnnnnnnnn ";
+    std::cout <<identity.getName(starterPlayer) << " please choose the warzone";
+    std::cin >> warzone;
 }
 int Control::determinMinAge()
 {
@@ -121,5 +122,5 @@ int main()
     c.shuffelingCards();
     c.randomCardSet();
     c.diplayBeggingOfTheGame();
-    std::cout<< c.determinMinAge();
+    c.displayStarterPlayer();
 }

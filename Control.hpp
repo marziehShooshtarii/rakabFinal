@@ -32,4 +32,5 @@ private:
     int randomCard;
     std::string playerCard[10];
     int starterPlayer;
+    std::string warzone;
 };
