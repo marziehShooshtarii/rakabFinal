@@ -1,17 +1,17 @@
 #include "Player.hpp"
 
-Player::Player(){}
-Player::Player(int numberOfPlayers)
+Player::Player() {}
+Player::Player(int p_numberOfPlayers)
 {
-    if (numberOfPlayers >= 3 && numberOfPlayers <= 6)
-    // this->numberOfPlayers = numberOfPlayers;
-       setNumberOfPlayers(numberOfPlayers);
+    if (p_numberOfPlayers >= 3 && p_numberOfPlayers <= 6)
+        // this->numberOfPlayers = numberOfPlayers;
+        setNumberOfPlayers(p_numberOfPlayers);
 }
-Player::Player(int age, std::string name, std::string color)
+Player::Player(int p_age, std::string p_name, std::string p_color)
 {
-    this->age = age;
-    this->color = color;
-    this->name = name;
+    this->age = p_age;
+    this->color = p_color;
+    this->name = p_name;
 }
 int Player::getAge()
 {
@@ -29,23 +29,23 @@ int Player::getNumberOfPlayer()
 {
     return numberOfPlayers;
 }
-void Player::setNumberOfPlayers(int numberOfPlayer)
+void Player::setNumberOfPlayers(int p_numberOfPlayer)
 {
-    this->numberOfPlayers = numberOfPlayer;
+    this->numberOfPlayers = p_numberOfPlayer;
 }
-void Player::controlPlayerCard(std::string playerCard)
+std::string Player::getPlayerCard()
 {
-    playerCardList.push_back(playerCard);
+    for (int i = 0; i < 30; i++)
+    {
+        std::cout << playerCardList[i] << " ";
+    }
+    // std::cout << "asghar ahgha";
+}
+void Player::controlPlayerCard(std::string p_playerCard)
+{
+    playerCardList.push_back(p_playerCard);
 }
 
-std::string Player::getPlayerCard ()
-{
-    for (size_t i = 0; i < 30; i++)
-    {
-        return playerCardList[i];
-    }
-    
-}
 // int main ()
 // {
 //     std::vector <Player> adam;

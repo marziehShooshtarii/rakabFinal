@@ -9,13 +9,13 @@ public:
     Player();
     Player(int numberOfPlayers);
     Player(int age, std::string name, std::string color);
+    std::string getPlayerCard ();
     std::string getName();
     std::string getColor();
     void setNumberOfPlayers(int numberOfPlayer);
     void controlPlayerCard(std::string playerCard);
     int getNumberOfPlayer();
     int getAge();
-    std::string getPlayerCard ();
 
 private:
     int age;
