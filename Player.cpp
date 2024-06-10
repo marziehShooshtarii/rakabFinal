@@ -33,12 +33,13 @@ void Player::setNumberOfPlayers(int p_numberOfPlayer)
 {
     this->numberOfPlayers = p_numberOfPlayer;
 }
-std::string Player::getPlayerCard()
+std::string Player::getPlayerCard(int i)
 {
-    for (int i = 0; i < 30; i++)
-    {
-        std::cout << playerCardList[i] << " ";
-    }
+    // for (int i = 0; i < 30; i++)
+    // {
+    //     std::cout << playerCardList[i] << " ";
+    // }
+    return playerCardList [i];
     // std::cout << "asghar ahgha";
 }
 void Player::controlPlayerCard(std::string p_playerCard)

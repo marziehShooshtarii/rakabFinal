@@ -9,7 +9,7 @@ public:
     Player();
     Player(int numberOfPlayers);
     Player(int age, std::string name, std::string color);
-    std::string getPlayerCard ();
+    std::string getPlayerCard (int i);
     std::string getName();
     std::string getColor();
     void setNumberOfPlayers(int numberOfPlayer);
