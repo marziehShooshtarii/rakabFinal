@@ -58,7 +58,18 @@ void Player::setPlayerCard(Card p_playerCard)
 // {
 //     return owenedStates.size();
 // }
-
+void Player::setPlayedCard(Card p_playedCard)
+{
+    playedCardList.push_back(p_playedCard);
+}
+Card Player::getPlayedCard(int i)
+{
+    return playedCardList[i];
+}
+void Player::eraseCard(int i)
+{
+    playerCardList.erase(playerCardList.begin() + i);
+}
     // int main ()
     // {
     //     std::vector <Player> adam;
