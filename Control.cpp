@@ -9,6 +9,10 @@ void Control::displayStarterPlayer()
     std::cout <<identity.getName(starterPlayer) << " please choose the warzone";
     std::cin >> warzone;
 }
+void Control::dispalyWarzone()
+{
+    std:: cout << "the selected warzone is " << warzone << " get ready for a war!!\n";
+}
 int Control::determinMinAge()
 {
     int min = identity.getAge(0);
@@ -123,4 +127,5 @@ int main()
     c.randomCardSet();
     c.diplayBeggingOfTheGame();
     c.displayStarterPlayer();
+    c.dispalyWarzone();
 }

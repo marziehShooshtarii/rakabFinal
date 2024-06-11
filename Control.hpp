@@ -18,6 +18,7 @@ public:
     void randomCardSet();
     int determinMinAge();
     void displayStarterPlayer();
+    void dispalyWarzone();
 
 
 private:
