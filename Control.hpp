@@ -23,6 +23,9 @@ public:
     void dispalyWarzone();
     bool winCheck();
     void setPlayers();
+    void displayStartOfWar();
+    void cinSelectedCard();
+    void playingCards();
 private:
     std::vector<Player> players;
     //std::vector<Player> bazikonha;
@@ -37,5 +40,6 @@ private:
     Card playerCard[10];
     int starterPlayer;
     std::string warzone;
-    Card card;
+    Card selectedCard;
+    std::string cardName;
 };

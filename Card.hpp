@@ -16,7 +16,8 @@ public:
     }
     void setExplanation(std::string p_description);
     std::string getName();
-
+    void setName(std::string p_name);
+    bool operator == (const Card &c);
 private:
     int numberOfCard;
     int characteristic;
