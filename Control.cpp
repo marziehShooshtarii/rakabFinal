@@ -81,7 +81,7 @@ void Control::randomCardSet()
         {
             randomCard = rand() % 89;
             playerCard[i] = allCards[randomCard];
-            adam.controlPlayerCard(allCards[randomCard]);
+            adam.setPlayerCard(allCards[randomCard]);
         }
         // for (const auto &card : playerCard)
         //     std::cout << card << " ";

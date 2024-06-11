@@ -13,9 +13,11 @@ public:
     std::string getName();
     std::string getColor();
     void setNumberOfPlayers(int numberOfPlayer);
-    void controlPlayerCard(std::string playerCard);
+    void setPlayerCard(std::string playerCard);
     int getNumberOfPlayer();
     int getAge();
+    void setOwenedStates(std::string);
+    std::string getOwenedStates(int i);
 
 private:
     int age;
@@ -24,5 +26,6 @@ private:
     std::string name;
     std::string color;
     std::string card;
+    std::vector<std::string> owenedStates;
 };
 #endif

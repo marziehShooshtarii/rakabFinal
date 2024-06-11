@@ -39,17 +39,25 @@ std::string Player::getPlayerCard(int i)
     // {
     //     std::cout << playerCardList[i] << " ";
     // }
-    return playerCardList [i];
+    return playerCardList[i];
     // std::cout << "asghar ahgha";
 }
-void Player::controlPlayerCard(std::string p_playerCard)
+void Player::setPlayerCard(std::string p_playerCard)
 {
     playerCardList.push_back(p_playerCard);
 }
+void Player::setOwenedStates(std::string state)
+{
+    owenedStates.push_back(state);
+}
+std::string Player ::getOwenedStates(int i)
+{
+    return owenedStates[i];
+}
 
-// int main ()
-// {
-//     std::vector <Player> adam;
-//     adam.push_back(Player (4)) ;
-//     std::cout << adam[0].getNumberOfPlayer();
-// }
+    // int main ()
+    // {
+    //     std::vector <Player> adam;
+    //     adam.push_back(Player (4)) ;
+    //     std::cout << adam[0].getNumberOfPlayer();
+    // }
