@@ -35,21 +35,23 @@ void Control::diplayBeggingOfTheGame()
     // std::cout << (identity.getPlayerNumber()) * 10 << std::endl;
     for (size_t i = 0; i < identity.getPlayerNumber();)
     {
-        for (int j = 0; j < (identity.getPlayerNumber()) * 10; j += 10)
-        {
+        // for (int j = 0; j < (identity.getPlayerNumber()) * 10; j += 10)
+        // {
             std::cout << "player number " << i + 1 << "s turn " << i + 1 << "\n\tpass the laptop to player number " << i + 1 << "\t\n";
             std::cin.ignore();
-            
-            for (int k = j; k < j + 10; k++)
-            {
-                std::cout << players[k].getPlayerCard(k) << " ";
-            }
+            // for (int g = 0; g < (identity.getPlayerNumber()); g++)
+            // {
+                for (int k = 0; k < 10; k++)
+                {
+                    std::cout << (players[i].getPlayerCard(k).getName()) << " ";
+                }
+            //}
             i++;
             std::cout << std::endl;
             // sleep (5);
             std::cin.ignore();
             system("CLS");
-        }
+        //}
     }
 }
 void Control::dealingCards()
@@ -77,8 +79,8 @@ void Control::dealingCards()
             }
         }
 
-    // for (auto f : allCards) 
-    //     std::cout << f.getName() << "\n";
+    for (auto f : allCards) 
+        std::cout << f.getName() << "\n";
 
 }
 void Control::setPlayers()
@@ -87,17 +89,20 @@ void Control::setPlayers()
     {
         players.push_back(Player(identity.getAge(i), identity.getName(i), identity.getColor(i)));
     }
+    
 }
 void Control::randomCardSet()
 {
     for (int j = 0; j < identity.getPlayerNumber(); j++)
     {
+        
         for (int i = 0; i < 10; i++)
         {
+            
             randomCard = rand() % 89;
             playerCard[i] = allCards[randomCard];
             // adam.setPlayerCard(allCards[randomCard])
-             players[i].setPlayerCard(allCards[randomCard]);
+            players[j].setPlayerCard(allCards[randomCard]);
         }
         // for (const auto &card : playerCard)
         //     std::cout << card << " ";
@@ -119,6 +124,7 @@ void Control::randomCardSet()
     //     std::cout <<adam.getPlayerCard() << " ";
     // }
     // adam.getAge();
+    
 }
 
 void Control::validateIdentity()
@@ -130,6 +136,7 @@ void Control::validateIdentity()
 void Control::shuffelingCards()
 {
     random_shuffle(allCards.begin(), allCards.end());
+    
 }
 // bool Control::winCheck()
 // {
@@ -144,7 +151,7 @@ int main()
     srand(unsigned(time(NULL)));
     Control c;
     c.validateIdentity();
-
+    c.setPlayers();
     c.dealingCards();
     c.shuffelingCards();
     c.randomCardSet();
