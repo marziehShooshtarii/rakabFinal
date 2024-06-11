@@ -33,7 +33,7 @@ void Player::setNumberOfPlayers(int p_numberOfPlayer)
 {
     this->numberOfPlayers = p_numberOfPlayer;
 }
-std::string Player::getPlayerCard(int i)
+Card Player::getPlayerCard(int i)
 {
     // for (int i = 0; i < 30; i++)
     // {
@@ -42,18 +42,22 @@ std::string Player::getPlayerCard(int i)
     return playerCardList[i];
     // std::cout << "asghar ahgha";
 }
-void Player::setPlayerCard(std::string p_playerCard)
+void Player::setPlayerCard(Card p_playerCard)
 {
     playerCardList.push_back(p_playerCard);
 }
-void Player::setOwenedStates(std::string state)
-{
-    owenedStates.push_back(state);
-}
-std::string Player ::getOwenedStates(int i)
-{
-    return owenedStates[i];
-}
+// void Player::setOwenedStates(std::string state)
+// {
+//     owenedStates.push_back(state);
+// }
+// std::string Player ::getOwenedStates(int i)
+// {
+//     return owenedStates[i];
+// }
+// int Player::getNumberOfOwenedStates ()
+// {
+//     return owenedStates.size();
+// }
 
     // int main ()
     // {

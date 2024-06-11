@@ -7,10 +7,12 @@
 #include "Map.hpp"
 #include "Player.hpp"
 #include "Data.hpp"
+#include "Card.hpp"
 // #include "Dealing.hpp"
 class Control
 {
 public:
+    Control();
     void diplayBeggingOfTheGame();
     void dealingCards();
     void validateIdentity();
@@ -19,19 +21,21 @@ public:
     int determinMinAge();
     void displayStarterPlayer();
     void dispalyWarzone();
-
-
+    bool winCheck();
+    void setPlayers();
 private:
-    std::vector<std::string> players;
-    std::vector<Player> bazikonha;
+    std::vector<Player> players;
+    //std::vector<Player> bazikonha;
     getData identity;
     // dealingCards playerDeck;
     // int numberOfPlayers = identity.getPlayerNumber();
-    std ::unordered_map<std ::string, int> deck;
-    std ::vector<std::string> allCards;
+    std ::unordered_map<std::string, int> deck;
+    std ::vector<Card> allCards;
     Player adam;
+    //Player adam2;
     int randomCard;
-    std::string playerCard[10];
+    Card playerCard[10];
     int starterPlayer;
     std::string warzone;
+    Card card;
 };

@@ -16,6 +16,10 @@ class getData {
     {
         return players[i].getName();
     }
+    std::string getColor(int i)
+    {
+        return players[i].getColor();
+    } 
     void setData();
     int getPlayerNumber();
     void setPlayerNumber ();

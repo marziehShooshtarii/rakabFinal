@@ -1,10 +1,10 @@
 #include "Card.hpp"
 #include <string>
-
-// Card::Card(std::string p_nameOfCard)
-// {
-//     nameOfCard = p_nameOfCard;
-// }
+Card::Card(){}
+Card::Card(const std::string &p_nameOfCard)
+{
+    nameOfCard = p_nameOfCard;
+}
 
 std::string Card::getName()
 {

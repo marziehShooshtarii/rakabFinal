@@ -4,6 +4,7 @@
 // {
 //     return bazikonha[i];
 // }
+ Control::Control(){}
 void Control::displayStarterPlayer()
 {
     std::cout <<identity.getName(starterPlayer) << " please choose the warzone";
@@ -38,9 +39,10 @@ void Control::diplayBeggingOfTheGame()
         {
             std::cout << "player number " << i + 1 << "s turn " << i + 1 << "\n\tpass the laptop to player number " << i + 1 << "\t\n";
             std::cin.ignore();
+            
             for (int k = j; k < j + 10; k++)
             {
-                std::cout << players[k] << " ";
+                std::cout << players[k].getPlayerCard(k) << " ";
             }
             i++;
             std::cout << std::endl;
@@ -68,9 +70,22 @@ void Control::dealingCards()
 
     };
 
-    for (const auto &pair : deck)
+    
+    for (const auto& pair : deck) {
+            for (int i = 0; i < pair.second; ++i) {
+                allCards.emplace_back(pair.first);
+            }
+        }
+
+    // for (auto f : allCards) 
+    //     std::cout << f.getName() << "\n";
+
+}
+void Control::setPlayers()
+{
+    for (int i = 0; i < identity.getPlayerNumber() ; i++)
     {
-        allCards.insert(allCards.end(), pair.second, pair.first);
+        players.push_back(Player(identity.getAge(i), identity.getName(i), identity.getColor(i)));
     }
 }
 void Control::randomCardSet()
@@ -81,19 +96,20 @@ void Control::randomCardSet()
         {
             randomCard = rand() % 89;
             playerCard[i] = allCards[randomCard];
-            adam.setPlayerCard(allCards[randomCard]);
+            // adam.setPlayerCard(allCards[randomCard])
+             players[i].setPlayerCard(allCards[randomCard]);
         }
         // for (const auto &card : playerCard)
         //     std::cout << card << " ";
         // std::cout << std::endl;
     }
-    for (size_t i = 0; i < identity.getPlayerNumber() * 10; i += 10)
-    {
-        for (int j = i; j < i + 10; j++)
-        {
-            players.push_back(adam.getPlayerCard(j));
-        }
-    }
+    // for (size_t i = 0; i < identity.getPlayerNumber() * 10; i += 10)
+    // {
+    //     for (int j = i; j < i + 10; j++)
+    //     {
+    //         players[i].push_back(adam.getPlayerCard(j));
+    //     }
+    // }
     // for (int g=0 ; g < identity.getPlayerNumber() * 10 ; g ++)
     // {
     //     std::cout << players[g] << " ";
@@ -115,6 +131,13 @@ void Control::shuffelingCards()
 {
     random_shuffle(allCards.begin(), allCards.end());
 }
+// bool Control::winCheck()
+// {
+//     if (adam.getNumberOfOwenedStates() > 3)
+//     {
+
+//     }
+// }
 
 int main()
 {
