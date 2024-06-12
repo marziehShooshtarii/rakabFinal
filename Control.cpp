@@ -165,8 +165,8 @@ void Control::playingInput()
                     for (int k = 0; k < 9; k++)
                     {
                         std::cout << (players[i].getPlayerCard(k).getName()) << " ";
-                        // std::cout << "the cards on the floor: " << players[i].getPlayedCard(k).getName() << " ";
                     }
+                        // std::cout << "the cards on the floor: " << players[i].getPlayedCard(0).getName() << " ";
                 // }
             }
             i++;

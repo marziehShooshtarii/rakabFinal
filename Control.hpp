@@ -45,5 +45,6 @@ private:
     int starterPlayer;
     std::string warzone;
     Card selectedCard;
-    std::string cardName;
+    std::string cardName; 
+    int turn;
 };
