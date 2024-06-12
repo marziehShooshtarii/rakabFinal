@@ -34,6 +34,7 @@ void getData::setData()
     else
     {
         std::cout << "invalid number of player!!!\ntry again:\t" << std::endl;
+        setPlayerNumber();
         setData();
     }
 }
