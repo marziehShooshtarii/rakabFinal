@@ -148,7 +148,7 @@ void Control::playingInput()
     {
         int indexControler = identity.getPlayerNumber();
         // std::cin.ignore();
-        for (size_t i = starterPlayer; i <= indexControler;)
+        for (size_t i = starterPlayer; i < indexControler;)
         {
             if (!checkIfCertianPlayerPassed(i))
             {
