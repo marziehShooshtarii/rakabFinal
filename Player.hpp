@@ -10,7 +10,7 @@ class Player
 public:
     Player();
     Player(int numberOfPlayers);
-    Player(int age, std::string name, std::string color);
+    Player(int age, std::string name, std::string color,bool P_ifPassed);
     Card getPlayerCard (int i);
     std::string getName();
     std::string getColor();
@@ -24,7 +24,9 @@ public:
     // void setOwenedStates(std::string);
     // std::string getOwenedStates(int i);
     // int getNumberOfOwenedStates();
-    
+    void setIfPassed(bool P_ifPassed);
+    bool getIfPassed();
+
 
 private:
     int age;
@@ -34,6 +36,7 @@ private:
     std::string name;
     std::string color;
     std::string card;
+    bool ifPassed;
 
     // std::vector<enum states> owenedStates;
 };

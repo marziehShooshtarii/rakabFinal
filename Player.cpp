@@ -7,11 +7,12 @@ Player::Player(int p_numberOfPlayers)
         // this->numberOfPlayers = numberOfPlayers;
         setNumberOfPlayers(p_numberOfPlayers);
 }
-Player::Player(int p_age, std::string p_name, std::string p_color)
+Player::Player(int p_age, std::string p_name, std::string p_color, bool P_ifPassed)
 {
     this->age = p_age;
     this->color = p_color;
     this->name = p_name;
+    this->ifPassed = P_ifPassed;
 }
 int Player::getAge()
 {
@@ -45,6 +46,14 @@ Card Player::getPlayerCard(int i)
 void Player::setPlayerCard(Card p_playerCard)
 {
     playerCardList.push_back(p_playerCard);
+}
+void Player::setIfPassed(bool P_ifPassed)
+{
+    this ->ifPassed = P_ifPassed;
+}
+bool Player::getIfPassed()
+{
+    return ifPassed;
 }
 // void Player::setOwenedStates(std::string state)
 // {
