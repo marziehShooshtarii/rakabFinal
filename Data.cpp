@@ -28,7 +28,7 @@ void getData::setData()
             std::cin >> playerAge;
             std::cout << "Enter the " << i + 1 << " player chosen color: ";
             std::cin >> playerColor;
-            players.push_back(Player(playerAge, PlayerName, playerColor));
+            players.push_back(Player(playerAge, PlayerName, playerColor , false));
         }
     }
     else

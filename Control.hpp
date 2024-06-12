@@ -24,9 +24,12 @@ public:
     bool winCheck();
     void setPlayers();
     void displayStartOfWar();
-    void cinSelectedCard();
+    bool cinSelectedCard(int index);
     void playingInput();
-    void playingCards(int index);
+    bool playingCards(int index);
+    bool checkIfAllPlayersPassed();
+    bool checkIfCertianPlayerPassed(int index);
+    
 private:
     std::vector<Player> players;
     //std::vector<Player> bazikonha;
