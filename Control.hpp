@@ -25,7 +25,8 @@ public:
     void setPlayers();
     void displayStartOfWar();
     void cinSelectedCard();
-    void playingCards();
+    void playingInput();
+    void playingCards(int index);
 private:
     std::vector<Player> players;
     //std::vector<Player> bazikonha;

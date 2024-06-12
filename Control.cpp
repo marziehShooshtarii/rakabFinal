@@ -44,7 +44,7 @@ void Control::diplayBeggingOfTheGame()
         std::cout << std::endl;
         // sleep (5);
         std::cin.ignore();
-        system("CLS");
+        //system("CLS");
     }
 }
 
@@ -140,10 +140,11 @@ void Control::displayStartOfWar()
 {
     std::cout << starterPlayer << "start the war by pressing enter" << std::endl;
 }
-void Control:: playingCards()
+void Control:: playingInput()
 {
+    int indexControler = identity.getPlayerNumber();
     std::cin.ignore();
-    for (size_t i = 0; i < identity.getPlayerNumber();)
+    for (size_t i = starterPlayer; i <= indexControler;)
     {
         std::cout << players[i].getName() << "it's your turn " << "\n\tplease chose your card from the list:\n " <<"\t\n";
         // std::cout << "chose your card:\n";
@@ -153,19 +154,21 @@ void Control:: playingCards()
             std::cout << (players[i].getPlayerCard(k).getName()) << " ";
         }
         cinSelectedCard();
-        for (int v = 0; v < identity.getPlayerNumber(); v++)
-        {
-            for (int h = 0; h < 10; h++)
-            {
-                if ((players[v].getPlayerCard(h)) == selectedCard)
-                {
-                    players[v].setPlayedCard(selectedCard);
-                    players[v].eraseCard(h);
-                }
-            }
+        playingCards(i);
+
+        // for (int v = 0; v < identity.getPlayerNumber(); v++)
+        // {
+        //     for (int h = 0; h < 10; h++)
+        //     {
+        //         if ((players[v].getPlayerCard(h)) == selectedCard)
+        //         {
+        //             players[v].setPlayedCard(selectedCard);
+        //             players[v].eraseCard(h);
+        //         }
+        //     }
             
             
-        }
+        // }
         for (int k = 0; k < 9; k++)
         {
             std::cout << (players[i].getPlayerCard(k).getName()) << " ";
@@ -175,7 +178,32 @@ void Control:: playingCards()
         // sleep (5);
         std::cin.ignore();
         // system("CLS");
+        if (i == identity.getPlayerNumber())
+        {
+            i = 0;
+            indexControler = starterPlayer;
+
+        }
+        
     }
+
+    
+
+}
+void Control::playingCards(int index)
+{
+    
+            for (int h = 0; h < 10; h++)
+            {
+                if ((players[index].getPlayerCard(h)) == selectedCard)
+                {
+                    players[index].setPlayedCard(selectedCard);
+                    players[index].eraseCard(h);
+                    break;
+                }
+            }
+            
+            
 
 }
 void Control::cinSelectedCard()
@@ -197,5 +225,6 @@ int main()
     c.displayStarterPlayer();
     c.dispalyWarzone();
   //  c.displayStarterPlayer();
-    c.playingCards();
+    //c.playingCards();
+    c.playingInput();
 }
