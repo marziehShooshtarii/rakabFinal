@@ -29,6 +29,7 @@ public:
     bool playingCards(int index);
     bool checkIfAllPlayersPassed();
     bool checkIfCertianPlayerPassed(int index);
+    void controlTurn();
     
 private:
     std::vector<Player> players;
@@ -46,5 +47,5 @@ private:
     std::string warzone;
     Card selectedCard;
     std::string cardName; 
-    int turn;
+    int turn = 1;
 };

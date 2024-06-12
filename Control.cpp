@@ -7,7 +7,9 @@
 Control::Control() {}
 void Control::displayStarterPlayer()
 {
-    std::cout << identity.getName(starterPlayer) << " please choose the warzone";
+    std::cout << "press enter to start the war ";
+    std::cin.ignore();
+    std::cout << identity.getName(determinMinAge()) << " please choose the warzone";
     std::cin >> warzone;
 }
 void Control::dispalyWarzone()
@@ -144,9 +146,8 @@ void Control::playingInput()
 {
     while (checkIfAllPlayersPassed())
     {
-        std::cout << "while " << std::endl;
         int indexControler = identity.getPlayerNumber();
-        std::cin.ignore();
+        // std::cin.ignore();
         for (size_t i = starterPlayer; i <= indexControler;)
         {
             if (!checkIfCertianPlayerPassed(i))
@@ -158,17 +159,23 @@ void Control::playingInput()
                     std::cout << (players[i].getPlayerCard(k).getName()) << " ";
                 }
                 cinSelectedCard(i);
-                // if (cinSelectedCard(i))
-                // {
-                    playingCards(i);
 
-                    for (int k = 0; k < 9; k++)
+                if (playingCards(i))
+                {
+                    for (int k = 0; k < 10 - turn; k++)
                     {
                         std::cout << (players[i].getPlayerCard(k).getName()) << " ";
                     }
-                        // std::cout << "the cards on the floor: " << players[i].getPlayedCard(0).getName() << " ";
-                // }
+                    // if (turn > 1)
+                    // {
+                    for (int r = 0; r < turn; r++)
+                    {
+                        std::cout << "\nthe cards on the floor: " << players[i].getPlayedCard(r).getName() << " ";
+                    }
+                }
+                //}
             }
+            //}
             i++;
             std::cout << std::endl;
             std::cin.ignore();
@@ -179,16 +186,18 @@ void Control::playingInput()
                 indexControler = starterPlayer;
             }
         }
+        controlTurn();
+        // std::cout << "turn is " << turn << std::endl;
     }
 }
 bool Control::playingCards(int index)
 {
     if (cardName == "pass")
     {
-        std::cout << cardName << std::endl
-                  << index;
+        // std::cout << cardName << std::endl
+        //           << index;
         players[index].setIfPassed(true);
-        // index++;
+        checkIfCertianPlayerPassed(index);
         return false;
     }
     for (int h = 0; h < 10; h++)
@@ -206,10 +215,8 @@ bool Control::checkIfAllPlayersPassed()
 {
     for (int i = 0; i < identity.getPlayerNumber(); i++)
     {
-        std::cout << "naz.cout " << std::endl;
         if (players[i].getIfPassed() == false)
         {
-            std::cout << "naz222.cout " << std::endl;
             return true;
         }
     }
@@ -218,6 +225,11 @@ bool Control::checkIfAllPlayersPassed()
 bool Control::cinSelectedCard(int i)
 {
     std::cin >> cardName;
+    if (cardName == "pass")
+    {
+        cardName = "pass";
+        return false;
+    }
     selectedCard.setName(cardName);
     return true;
 }
@@ -225,10 +237,14 @@ bool Control::checkIfCertianPlayerPassed(int i)
 {
     if (players[i].getIfPassed())
     {
-        std::cout << players[i].getName ()<< " you can't play any cards; you have passe\npress ENTER and pass the lap top to the next player" << std::endl;
+        std::cout << players[i].getName() << " you can't play any cards; you have passe\npress ENTER and pass the lap top to the next player" << std::endl;
         return true;
     }
     return false;
+}
+void Control::controlTurn()
+{
+    turn++;
 }
 int main()
 {
