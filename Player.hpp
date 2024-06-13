@@ -21,11 +21,15 @@ public:
     void setPlayedCard(Card P_playedCard);
     Card getPlayedCard(int i);
     void eraseCard(int i);
-    // void setOwenedStates(std::string);
+    void setOwenedStates(std::string);
     // std::string getOwenedStates(int i);
     // int getNumberOfOwenedStates();
     void setIfPassed(bool P_ifPassed);
     bool getIfPassed();
+    int getNumberOfPlayedCards();
+    // int countTabl_zan();
+    // int countBahar();
+    // int countShir_dokht();
 
 
 private:
@@ -38,6 +42,6 @@ private:
     std::string card;
     bool ifPassed;
 
-    // std::vector<enum states> owenedStates;
+    //std::vector<std::string> owenedStates;
 };
 #endif

@@ -79,6 +79,18 @@ void Player::eraseCard(int i)
 {
     playerCardList.erase(playerCardList.begin() + i);
 }
+int Player::getNumberOfPlayedCards()
+{
+    return playedCardList.size();
+}
+// int Player ::countTabl_zan()
+// {
+//     for(int i = 0; i < playedCardList.size(); i++)
+//     {
+//         if (playedCardList[i])
+//     }
+//     playedCardList.getPlayedCard().count(playedCardList.begin(),playedCardList.end(),"tabl_zan")
+// }
     // int main ()
     // {
     //     std::vector <Player> adam;
