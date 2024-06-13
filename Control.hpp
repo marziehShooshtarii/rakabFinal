@@ -19,20 +19,20 @@ class Control
 {
 public:
     Control();
-    Control(Zemestan z,Tabl_zan t,Bahar b,shir_dokht s)
-    {
-    std::cout <<"-> inja"<<std::endl;
-    // Zemestan z;
-    // Tabl_zan t;
-    // Bahar b;
-    // shir_dokht s;
-    specialCards[0] = &z;
-    specialCards[1] = &t;
-    specialCards[2] = &b;
-    specialCards[3] = &s;
-    std::cout <<"-> inja"<<std::endl;
+    // Control(Zemestan z,Tabl_zan t,Bahar b,shir_dokht s)
+    // {
+    // std::cout <<"-> inja"<<std::endl;
+    // // Zemestan z;
+    // // Tabl_zan t;
+    // // Bahar b;
+    // // shir_dokht s;
+    // specialCards[0] = &z;
+    // specialCards[1] = &t;
+    // specialCards[2] = &b;
+    // specialCards[3] = &s;
+    // std::cout <<"-> inja"<<std::endl;
 
-    }
+    // }
 //     void initializeSpecialCards()
 // {
 
@@ -62,6 +62,11 @@ public:
     // int countTabl_zan(int index);
     // int countBahar();
     // int countShir_dokht();
+    int countTabl_zan(int index);
+    int countBahar(int index);
+    int countShir_dokht(int index);
+    //void setStringToSpecialCard();
+    void initializeSpecialCards();
     
 private:
     std::vector<Player> players;
@@ -83,6 +88,7 @@ private:
     std::vector<int> scorsAtEndOfWar = {0};
     //std::vector<Card>allPlayedCards;
     armyCard army;
-    std::vector<Special*> specialCards;
     //void initializeSpecialCards();
+    std::vector<Special*> specialCards;
+    //std ::unordered_map<std::string, Card> stringToSpecialCard;
 };

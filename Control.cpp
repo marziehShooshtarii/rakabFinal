@@ -19,7 +19,7 @@ void Control::dispalyWarzone()
 int Control::determinMinAge()
 {
 
-    std::cout <<"getPlayerNumber ->"<<identity.getPlayerNumber()<<std::endl;
+    std::cout << "getPlayerNumber ->" << identity.getPlayerNumber() << std::endl;
     int min = identity.getAge(0);
     for (int i = 1; i < identity.getPlayerNumber(); i++)
     {
@@ -28,9 +28,9 @@ int Control::determinMinAge()
             min = identity.getAge(i);
             starterPlayer = i;
         }
-        std::cout <<"i ->"<<i<<std::endl;
+        std::cout << "i ->" << i << std::endl;
     }
-    std::cout <<"starterPlayer ->"<<starterPlayer<<std::endl;
+    std::cout << "starterPlayer ->" << starterPlayer << std::endl;
     return starterPlayer;
 }
 
@@ -211,7 +211,7 @@ void Control::playingInput()
         controlTurn();
         // std::cout << "turn is " << turn << std::endl;
     }
-    //initializeSpecialCards();
+    // initializeSpecialCards();
     determinWinner();
 }
 // std::string Control::determinWinner()
@@ -294,20 +294,34 @@ int Control::findMaxScoreCard()
 }
 std::string Control::determinWinner()
 {
+    initializeSpecialCards();
+    std::cout << "specialCards.size() -> " <<specialCards.size()<< std::endl;
     int winnerScore = 0;
     int winner = 0;
     for (int i = 0; i < identity.getPlayerNumber(); i++)
     {
-        std::cout <<"i -> "<<i<<std::endl;
+        std::cout << "i -> " << i << std::endl;
         for (int k = 0; k < specialCards.size(); k++)
         {
-            std::cout <<"k -> "<<k<<std::endl;
+            std::cout << "k -> " << k << std::endl;
+            for (int g = 0; g < countTabl_zan(i) && k == 1 ; g++)
+            {
             specialCards[k]->effectOfCard(scorsAtEndOfWar[i]);
-            std::cout <<"scorsAtEndOfWar[i] -> "<<scorsAtEndOfWar[i]<<std::endl;
+            }
+            for (int g = 0; g < countBahar(i) && k == 2 ; g++)
+            {
+            specialCards[k]->effectOfCard(scorsAtEndOfWar[i]);
+            }
+            for (int g = 0; g < countShir_dokht(i) && k == 3 ; g++)
+            {
+            specialCards[k]->effectOfCard(scorsAtEndOfWar[i]);
+            }
+
+            std::cout << "scorsAtEndOfWar[i] -> " << scorsAtEndOfWar[i] << std::endl;
         }
         for (int j = 0; j < players[i].getNumberOfPlayedCards(); j++)
         {
-            
+
             army.increasScore(players[i].getPlayedCard(j).getName(), scorsAtEndOfWar[i]);
         }
         if (scorsAtEndOfWar[i] > winnerScore)
@@ -315,34 +329,70 @@ std::string Control::determinWinner()
             winnerScore = scorsAtEndOfWar[i];
             winner = i;
         }
-
     }
-    std::cout <<players[winner].getName()<<"-> winner"<<std::endl;
+    std::cout << players[winner].getName() << "-> winner" << std::endl;
     return players[winner].getName();
+}
+void Control::initializeSpecialCards()
+{
+    std::cout <<"-> inja"<<std::endl;
+    Zemestan* z = new Zemestan();
+    Tabl_zan* t = new Tabl_zan();
+    Bahar* b = new Bahar();
+
+    shir_dokht* s = new shir_dokht();
+
+    specialCards.push_back(z);
+    specialCards.push_back(t);
+    specialCards.push_back(b);
+    specialCards.push_back(s);
+ 
+    std::cout <<"-> inja"<<std::endl;
 
 }
-// void Control::initializeSpecialCards()
-// {
-//     std::cout <<"-> inja"<<std::endl;
-//     Zemestan z;
-//     Tabl_zan t;
-//     Bahar b;
-//     shir_dokht s;
-//     specialCards[0] = &z;
-//     specialCards[1] = &t;
-//     specialCards[2] = &b;
-//     specialCards[3] = &s;
-//     std::cout <<"-> inja"<<std::endl;
-
-// }
 // int Control::searchInCardScore(std::string str)
 // {
 //     return cardsScore.at(str);
 // }
-// int Control ::countTabl_zan(int index)
-// {
-//     players[index].
-// }
+int Control ::countTabl_zan(int index)
+{
+    int counter = 0;
+    for (int j = 0; j < players[index].getNumberOfPlayedCards(); j++)
+    {
+        if (players[index].getPlayedCard(j).getName() == "tabl_zan")
+        {
+            counter++;
+        }
+       
+    }
+    return counter;
+}
+int Control ::countBahar(int index)
+{
+    int counter = 0;
+    for (int j = 0; j < players[index].getNumberOfPlayedCards(); j++)
+    {
+        if (players[index].getPlayedCard(j).getName() == "bahar")
+        {
+            counter++;
+        }
+       
+    }
+    return counter;
+}
+int Control ::countShir_dokht(int index)
+{
+    int counter = 0;
+    for (int j = 0; j < players[index].getNumberOfPlayedCards(); j++)
+    {
+        if (players[index].getPlayedCard(j).getName() == "shir_dokht")
+        {
+            counter++;
+        }
+       
+    }
+    return counter;
+}
 int main()
 {
     srand(unsigned(time(NULL)));
@@ -351,6 +401,11 @@ int main()
     Tabl_zan t;
     Bahar b;
     shir_dokht s;
+     //std::vector<Special*> specialCards(4);
+    // specialCards[0] = &z;
+    // specialCards[1] = &t;
+    // specialCards[2] = &b;
+    // specialCards[3] = &s;
     c.validateIdentity();
     c.setPlayers();
     c.dealingCards();
