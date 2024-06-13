@@ -12,7 +12,7 @@ public:
         Card::setCharacter(value);
     }
     // int getPriority();
-    virtual void effectOfCard(std::vector<Card>played,int index,std::vector<Card> inHand) = 0;
+    virtual int effectOfCard(int score) = 0;
 
 };
 #endif
