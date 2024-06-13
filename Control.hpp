@@ -19,6 +19,24 @@ class Control
 {
 public:
     Control();
+    Control(Zemestan z,Tabl_zan t,Bahar b,shir_dokht s)
+    {
+    std::cout <<"-> inja"<<std::endl;
+    // Zemestan z;
+    // Tabl_zan t;
+    // Bahar b;
+    // shir_dokht s;
+    specialCards[0] = &z;
+    specialCards[1] = &t;
+    specialCards[2] = &b;
+    specialCards[3] = &s;
+    std::cout <<"-> inja"<<std::endl;
+
+    }
+//     void initializeSpecialCards()
+// {
+
+// }
     void diplayBeggingOfTheGame();
     void dealingCards();
     void validateIdentity();
@@ -41,7 +59,9 @@ public:
     int findMaxScoreCard();
     //int searchInCardScore(std::string str);
     // ::unordered_map<std::string, int> cardsScore;
-
+    // int countTabl_zan(int index);
+    // int countBahar();
+    // int countShir_dokht();
     
 private:
     std::vector<Player> players;
@@ -64,5 +84,5 @@ private:
     //std::vector<Card>allPlayedCards;
     armyCard army;
     std::vector<Special*> specialCards;
-    void initializeSpecialCards();
+    //void initializeSpecialCards();
 };

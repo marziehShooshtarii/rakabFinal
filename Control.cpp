@@ -18,6 +18,8 @@ void Control::dispalyWarzone()
 }
 int Control::determinMinAge()
 {
+
+    std::cout <<"getPlayerNumber ->"<<identity.getPlayerNumber()<<std::endl;
     int min = identity.getAge(0);
     for (int i = 1; i < identity.getPlayerNumber(); i++)
     {
@@ -26,7 +28,9 @@ int Control::determinMinAge()
             min = identity.getAge(i);
             starterPlayer = i;
         }
+        std::cout <<"i ->"<<i<<std::endl;
     }
+    std::cout <<"starterPlayer ->"<<starterPlayer<<std::endl;
     return starterPlayer;
 }
 
@@ -79,24 +83,24 @@ void Control::dealingCards()
     // for (auto f : allCards)
     //     std::cout << f.getName() << "\n";
 }
-void Control::setCardScores()
-{
-    cardsScore =
-        {
-            {"bahar", 0},
-            {"zemestan", 0},
-            {"matarsak", 0},
-            {"tabl_zan", 0},
-            {"shah_dokht", 0},
-            {"sarbaz_1", 1},
-            {"sarbaz_2", 2},
-            {"sarbaz_3", 3},
-            {"sarbaz_4", 4},
-            {"sarbaz_5", 5},
-            {"sarbaz_6", 6},
-            {"sarbaz_10", 10},
-        };
-}
+// void Control::setCardScores()
+// {
+//     cardsScore =
+//         {
+//             {"bahar", 0},
+//             {"zemestan", 0},
+//             {"matarsak", 0},
+//             {"tabl_zan", 0},
+//             {"shah_dokht", 0},
+//             {"sarbaz_1", 1},
+//             {"sarbaz_2", 2},
+//             {"sarbaz_3", 3},
+//             {"sarbaz_4", 4},
+//             {"sarbaz_5", 5},
+//             {"sarbaz_6", 6},
+//             {"sarbaz_10", 10},
+//         };
+// }
 void Control::setPlayers()
 {
     for (int i = 0; i < identity.getPlayerNumber(); i++)
@@ -207,6 +211,8 @@ void Control::playingInput()
         controlTurn();
         // std::cout << "turn is " << turn << std::endl;
     }
+    //initializeSpecialCards();
+    determinWinner();
 }
 // std::string Control::determinWinner()
 // {
@@ -272,27 +278,79 @@ void Control::controlTurn()
 }
 int Control::findMaxScoreCard()
 {
+    Card card; // for accesing Card member functions
     for (int j = 0; j < identity.getPlayerNumber(); j++)
     {
 
-        int maxScore = searchInCardScore(players[j].getPlayedCard(0).getName());
+        int maxScore = card.searchInCardScore(players[j].getPlayedCard(0).getName());
         for (int i = 1; i < players[j].getNumberOfPlayedCards(); i++)
         {
-            if (maxScore > searchInCardScore(players[j].getPlayedCard(0).getName()))
+            if (maxScore > card.searchInCardScore(players[j].getPlayedCard(0).getName()))
             {
-                maxScore = searchInCardScore(players[j].getPlayedCard(0).getName());
+                maxScore = card.searchInCardScore(players[j].getPlayedCard(0).getName());
             }
         }
     }
 }
-int Control::searchInCardScore(std::string str)
+std::string Control::determinWinner()
 {
-    return cardsScore.at(str);
+    int winnerScore = 0;
+    int winner = 0;
+    for (int i = 0; i < identity.getPlayerNumber(); i++)
+    {
+        std::cout <<"i -> "<<i<<std::endl;
+        for (int k = 0; k < specialCards.size(); k++)
+        {
+            std::cout <<"k -> "<<k<<std::endl;
+            specialCards[k]->effectOfCard(scorsAtEndOfWar[i]);
+            std::cout <<"scorsAtEndOfWar[i] -> "<<scorsAtEndOfWar[i]<<std::endl;
+        }
+        for (int j = 0; j < players[i].getNumberOfPlayedCards(); j++)
+        {
+            
+            army.increasScore(players[i].getPlayedCard(j).getName(), scorsAtEndOfWar[i]);
+        }
+        if (scorsAtEndOfWar[i] > winnerScore)
+        {
+            winnerScore = scorsAtEndOfWar[i];
+            winner = i;
+        }
+
+    }
+    std::cout <<players[winner].getName()<<"-> winner"<<std::endl;
+    return players[winner].getName();
+
 }
+// void Control::initializeSpecialCards()
+// {
+//     std::cout <<"-> inja"<<std::endl;
+//     Zemestan z;
+//     Tabl_zan t;
+//     Bahar b;
+//     shir_dokht s;
+//     specialCards[0] = &z;
+//     specialCards[1] = &t;
+//     specialCards[2] = &b;
+//     specialCards[3] = &s;
+//     std::cout <<"-> inja"<<std::endl;
+
+// }
+// int Control::searchInCardScore(std::string str)
+// {
+//     return cardsScore.at(str);
+// }
+// int Control ::countTabl_zan(int index)
+// {
+//     players[index].
+// }
 int main()
 {
     srand(unsigned(time(NULL)));
     Control c;
+    Zemestan z;
+    Tabl_zan t;
+    Bahar b;
+    shir_dokht s;
     c.validateIdentity();
     c.setPlayers();
     c.dealingCards();
