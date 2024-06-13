@@ -14,5 +14,6 @@ public:
         return Card::getCharacter();
     }
     //    void SetNumberOfCard();
+    int increasScore(std::string,int score);
 };
 #endif

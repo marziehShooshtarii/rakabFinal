@@ -10,4 +10,7 @@
 //     else 
 //         Card::setNumberOfCard(8);    
 // }
-
+int armyCard::increasScore(std::string str,int score)
+{
+    return score + cardsScore.at(str);
+}
