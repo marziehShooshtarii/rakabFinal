@@ -8,6 +8,12 @@
 #include "Player.hpp"
 #include "Data.hpp"
 #include "Card.hpp"
+#include "Army.hpp"
+#include "Special.hpp"
+#include "Zemestan.hpp"
+#include "Tabl_zan.hpp"
+#include "Bahar.hpp"
+#include "Shir_dokht.hpp"
 // #include "Dealing.hpp"
 class Control
 {
@@ -31,9 +37,11 @@ public:
     bool checkIfCertianPlayerPassed(int index);
     void controlTurn();
     std::string determinWinner();
-    void setCardScores();
+    //void setCardScores();
     int findMaxScoreCard();
-    int searchInCardScore(std::string str);
+    //int searchInCardScore(std::string str);
+    // ::unordered_map<std::string, int> cardsScore;
+
     
 private:
     std::vector<Player> players;
@@ -47,12 +55,14 @@ private:
     //Player adam2;
     int randomCard;
     Card playerCard[10];
-    int starterPlayer;
+    int starterPlayer = 0;
     std::string warzone;
     Card selectedCard;
     std::string cardName; 
     int turn = 1;
-    std::vector<int> pointsAtEndOfWar;
+    std::vector<int> scorsAtEndOfWar = {0};
     //std::vector<Card>allPlayedCards;
-    std ::unordered_map<std::string, int> cardsScore;
+    armyCard army;
+    std::vector<Special*> specialCards;
+    void initializeSpecialCards();
 };
