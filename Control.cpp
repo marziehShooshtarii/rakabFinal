@@ -79,6 +79,24 @@ void Control::dealingCards()
     // for (auto f : allCards)
     //     std::cout << f.getName() << "\n";
 }
+void Control::setCardScores()
+{
+    cardsScore =
+        {
+            {"bahar", 0},
+            {"zemestan", 0},
+            {"matarsak", 0},
+            {"tabl_zan", 0},
+            {"shah_dokht", 0},
+            {"sarbaz_1", 1},
+            {"sarbaz_2", 2},
+            {"sarbaz_3", 3},
+            {"sarbaz_4", 4},
+            {"sarbaz_5", 5},
+            {"sarbaz_6", 6},
+            {"sarbaz_10", 10},
+        };
+}
 void Control::setPlayers()
 {
     for (int i = 0; i < identity.getPlayerNumber(); i++)
@@ -190,6 +208,11 @@ void Control::playingInput()
         // std::cout << "turn is " << turn << std::endl;
     }
 }
+// std::string Control::determinWinner()
+// {
+
+// }
+
 bool Control::playingCards(int index)
 {
     if (cardName == "pass")
@@ -205,6 +228,7 @@ bool Control::playingCards(int index)
         if ((players[index].getPlayerCard(h)) == selectedCard)
         {
             players[index].setPlayedCard(selectedCard);
+            // allPlayedCards.push_back(selectedCard);
             players[index].eraseCard(h);
             break;
         }
@@ -245,6 +269,25 @@ bool Control::checkIfCertianPlayerPassed(int i)
 void Control::controlTurn()
 {
     turn++;
+}
+int Control::findMaxScoreCard()
+{
+    for (int j = 0; j < identity.getPlayerNumber(); j++)
+    {
+
+        int maxScore = searchInCardScore(players[j].getPlayedCard(0).getName());
+        for (int i = 1; i < players[j].getNumberOfPlayedCards(); i++)
+        {
+            if (maxScore > searchInCardScore(players[j].getPlayedCard(0).getName()))
+            {
+                maxScore = searchInCardScore(players[j].getPlayedCard(0).getName());
+            }
+        }
+    }
+}
+int Control::searchInCardScore(std::string str)
+{
+    return cardsScore.at(str);
 }
 int main()
 {

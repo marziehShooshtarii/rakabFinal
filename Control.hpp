@@ -30,6 +30,10 @@ public:
     bool checkIfAllPlayersPassed();
     bool checkIfCertianPlayerPassed(int index);
     void controlTurn();
+    std::string determinWinner();
+    void setCardScores();
+    int findMaxScoreCard();
+    int searchInCardScore(std::string str);
     
 private:
     std::vector<Player> players;
@@ -48,4 +52,7 @@ private:
     Card selectedCard;
     std::string cardName; 
     int turn = 1;
+    std::vector<int> pointsAtEndOfWar;
+    //std::vector<Card>allPlayedCards;
+    std ::unordered_map<std::string, int> cardsScore;
 };
