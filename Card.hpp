@@ -25,10 +25,11 @@ public:
     std ::unordered_map<std::string, int> cardsScore;
     void setCardScores();
     int searchInCardScore(std::string str);
+    
     //std ::unordered_map<std::string, Card> stringToSpecialCard;
     //void setStringToSpecialCard();
    // void setSpacial();
-
+    
 private:
     // int numberOfCard;
     int characteristic;
