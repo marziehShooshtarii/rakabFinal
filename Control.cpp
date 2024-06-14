@@ -190,10 +190,11 @@ void Control::playingInput()
                     }
                     // if (turn > 1)
                     // {
-                    for (int r = 0; r < turn; r++)
+                    for (int r = 0; r <players[i].getNumberOfPlayedCards() ; r++)
                     {
+                        std::cout << "turn - > "<<turn<<std::endl;
                         std::cout << "\nthe cards on the floor: " << players[i].getPlayedCard(r).getName() << " ";
-                        std::cout << "\nthe cards on the floor: " << players[i].getNumberOfPlayedCards() << " ";
+                        std::cout << "\nthe number of cards on the floor: " << players[i].getNumberOfPlayedCards() << " ";
                     }
                 }
                 //}
@@ -253,16 +254,58 @@ bool Control::checkIfAllPlayersPassed()
     }
     return false;
 }
-bool Control::cinSelectedCard(int i)
+bool Control::cinSelectedCard(int index)
 {
+    Card selectedCardForMatarsak;
     std::cin >> cardName;
     if (cardName == "pass")
     {
         cardName = "pass";
         return false;
     }
+    if (cardName == "matarsak")
+    {
+        if (players[index].getNumberOfPlayedCards() == 0)
+        {
+            std::cout << "you can't play matarsak before playing any other cards.please choose another card." << std::endl;
+            cinSelectedCard(index);
+        }
+        else
+        {
+            std::cout << "please choose the card that you want to get back." << std::endl;
+            for (int i = 0; i < players[index].getNumberOfPlayedCards(); i++)
+            {
+                std::cout << players[index].getPlayedCard(i).getName() << std::endl;
+            }
+            std::cin >> cardName;
+
+            selectedCardForMatarsak.setName(cardName);
+            std::cout<<"selectedCardForMatarsak - > " <<selectedCardForMatarsak.getName()<<std::endl;
+            effectOfMatarsak(selectedCardForMatarsak, index);
+        }
+        return false;
+    }
+    
     selectedCard.setName(cardName);
     return true;
+}
+void Control::effectOfMatarsak(Card played, int index)
+{
+    Card matarsakCard; // for accessing Card member functions
+    matarsakCard.setName("matarsak");
+    players[index].setPlayerCard(played);
+    players[index].erasePlayedCard(findSelectedCardForMatarsak(cardName, index));
+    players[index].setPlayedCard(matarsakCard);
+}
+int Control ::findSelectedCardForMatarsak(std::string str, int index)
+{
+    for (int i = 0; i < players[index].getNumberOfPlayedCards(); i++)
+    {
+        if (str == players[index].getPlayedCard(i).getName())
+        {
+            return i;
+        }
+    }
 }
 bool Control::checkIfCertianPlayerPassed(int i)
 {
@@ -312,7 +355,7 @@ std ::string Control::findMaxScoreCard()
         std::cout << "maxScore -> " << maxScore << std::endl;
         // std::cout<<"players[j].getPlayedCard(0).getName() - > "<<players[j].getPlayedCard(0).getName()<<std::endl;
         std::cout << "players[j].getNumberOfPlayedCards() - > " << players[j].getNumberOfPlayedCards();
-        //std::cout << "players[j].getPlayedCard(j).getName() - > " << players[j].getPlayedCard(j).getName() << std::endl;
+        // std::cout << "players[j].getPlayedCard(j).getName() - > " << players[j].getPlayedCard(j).getName() << std::endl;
         if (players[j].getNumberOfPlayedCards() == 0)
         {
             return "kooft";
@@ -332,7 +375,7 @@ std ::string Control::findMaxScoreCard()
 }
 bool Control ::ifMaxScoreCardIsInHand(int index)
 {
-        std::cout << " margggggg 1 players[j].getNumberOfPlayedCards()determinWinner - > " << players[index].getNumberOfPlayedCards() << std::endl;
+    std::cout << " margggggg 1 players[j].getNumberOfPlayedCards()determinWinner - > " << players[index].getNumberOfPlayedCards() << std::endl;
     for (int i = 0; i < players[index].getNumberOfPlayedCards(); i++)
     {
         std::cout << "findMaxScoreCard() - > " << findMaxScoreCard() << std::endl;
@@ -478,6 +521,7 @@ int Control ::countShir_dokht(int index)
     }
     return counter;
 }
+
 int main()
 {
     srand(unsigned(time(NULL)));
@@ -504,6 +548,4 @@ int main()
     //  c.displayStarterPlayer();
     // c.playingCards();
     c.playingInput();
-    
-
 }

@@ -76,9 +76,12 @@ public:
     int countShir_dokht(int index);
     //void setStringToSpecialCard();
     void initializeSpecialCards();
+    void effectOfMatarsak(Card played,int index);
+    int findSelectedCardForMatarsak(std::string,int index);
     // std ::unordered_map<std::string, int> cardsScore;
     // void setCardScores();
     // int searchInCardScore(std::string str);
+    bool ifMaxScoreCardIsInHand(int index);
     
 private:
     std::vector<Player> players;
@@ -103,6 +106,5 @@ private:
     //void initializeSpecialCards();
     std::vector<Special*> specialCards;
     //std ::unordered_map<std::string, Card> stringToSpecialCard;
-    bool ifMaxScoreCardIsInHand(int index);
     int maxScore = 0;
 };
