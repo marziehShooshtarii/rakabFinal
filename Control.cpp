@@ -193,6 +193,7 @@ void Control::playingInput()
                     for (int r = 0; r < turn; r++)
                     {
                         std::cout << "\nthe cards on the floor: " << players[i].getPlayedCard(r).getName() << " ";
+                        std::cout << "\nthe cards on the floor: " << players[i].getNumberOfPlayedCards() << " ";
                     }
                 }
                 //}
@@ -283,11 +284,14 @@ std ::string Control::findMaxScoreCard()
     card.setCardScores();
     for (int j = 0; j < identity.getPlayerNumber(); j++)
     {
-        std::cout<<"maxScore -> "<< maxScore<<std::endl;
-        std::cout<<"players[j].getPlayedCard(0).getName() - > "<<players[j].getPlayedCard(0).getName()<<std::endl;
-        std::cout<<"players[j].getNumberOfPlayedCards() - > "<<players[j].getNumberOfPlayedCards();
+        std::cout << " marggggg 2 players[j].getNumberOfPlayedCards()determinWinner - > " << players[j].getNumberOfPlayedCards() << std::endl;
+        std::cout << "maxScore -> " << maxScore << std::endl;
+        // std::cout<<"players[j].getPlayedCard(0).getName() - > "<<players[j].getPlayedCard(0).getName()<<std::endl;
+        std::cout << "players[j].getNumberOfPlayedCards() - > " << players[j].getNumberOfPlayedCards();
+        std::cout << "players[j].getPlayedCard(j).getName() - > " << players[j].getPlayedCard(j).getName() << std::endl;
+
         maxScore = card.searchInCardScore(players[j].getPlayedCard(0).getName());
-        std::cout<<"maxScore -> "<< maxScore<<std::endl;
+        std::cout << "maxScore -> " << maxScore << std::endl;
         for (int i = 1; i < players[j].getNumberOfPlayedCards(); i++)
         {
             if (maxScore > card.searchInCardScore(players[j].getPlayedCard(i).getName()))
@@ -300,13 +304,14 @@ std ::string Control::findMaxScoreCard()
 }
 bool Control ::ifMaxScoreCardIsInHand(int index)
 {
+        std::cout << " margggggg 1 players[j].getNumberOfPlayedCards()determinWinner - > " << players[index].getNumberOfPlayedCards() << std::endl;
     for (int i = 0; i < players[index].getNumberOfPlayedCards(); i++)
     {
-std::cout<<"findMaxScoreCard() - > "<<findMaxScoreCard()<<std::endl;
-   if ( findMaxScoreCard() == players[index].getPlayedCard(i).getName())
-   {
-    return true;
-   }
+        std::cout << "findMaxScoreCard() - > " << findMaxScoreCard() << std::endl;
+        if (findMaxScoreCard() == players[index].getPlayedCard(i).getName())
+        {
+            return true;
+        }
     }
     return false;
 }
@@ -314,8 +319,11 @@ std::string Control::determinWinner()
 {
     std::vector<int> scorsAtEndOfWar(identity.getPlayerNumber());
     for (int i = 0; i < identity.getPlayerNumber(); i++)
+    {
         scorsAtEndOfWar[i] = 0;
-    //initializeSpecialCards();
+       // std::cout << " 1 players[j].getNumberOfPlayedCards()determinWinner - > " << players[i].getNumberOfPlayedCards() << std::endl;
+    }
+    // initializeSpecialCards();
     std::cout << "specialCards.size() -> " << specialCards.size() << std::endl;
     int winnerScore = 0;
     int winner = 0;
@@ -336,21 +344,20 @@ std::string Control::determinWinner()
         for (int k = 0; k < specialCards.size(); k++)
         {
             std::cout << "k -> " << k << std::endl;
-            
+
             for (int g = 0; g < repeatForEachCard[k]; g++)
             {
-
+                findMaxScoreCard();
                 std::cout << "ifMaxScoreCardIsInHand(i) -> " << ifMaxScoreCardIsInHand(i) << std::endl;
-               if ( k== 2 && ifMaxScoreCardIsInHand(i))
-               {
-                scorsAtEndOfWar[i] = specialCards[k]->effectOfCard( maxScore);
-                std::cout << "maxScore -> " << maxScore << std::endl;
-               }
-               else 
-               {
-               scorsAtEndOfWar[i] = specialCards[k]->effectOfCard(scorsAtEndOfWar[i]);
-
-               }
+                if (k == 2 && ifMaxScoreCardIsInHand(i))
+                {
+                    scorsAtEndOfWar[i] = specialCards[k]->effectOfCard(maxScore);
+                    std::cout << "maxScore -> " << maxScore << std::endl;
+                }
+                else
+                {
+                    scorsAtEndOfWar[i] = specialCards[k]->effectOfCard(scorsAtEndOfWar[i]);
+                }
             }
             // for (int g = 0; g < countTabl_zan(i) && k == 1 ; g++)
             // {
