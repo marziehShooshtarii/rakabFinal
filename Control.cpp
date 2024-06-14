@@ -190,9 +190,9 @@ void Control::playingInput()
                     }
                     // if (turn > 1)
                     // {
-                    for (int r = 0; r <players[i].getNumberOfPlayedCards() ; r++)
+                    for (int r = 0; r < players[i].getNumberOfPlayedCards(); r++)
                     {
-                        std::cout << "turn - > "<<turn<<std::endl;
+                        std::cout << "turn - > " << turn << std::endl;
                         std::cout << "\nthe cards on the floor: " << players[i].getPlayedCard(r).getName() << " ";
                         std::cout << "\nthe number of cards on the floor: " << players[i].getNumberOfPlayedCards() << " ";
                     }
@@ -280,12 +280,12 @@ bool Control::cinSelectedCard(int index)
             std::cin >> cardName;
 
             selectedCardForMatarsak.setName(cardName);
-            std::cout<<"selectedCardForMatarsak - > " <<selectedCardForMatarsak.getName()<<std::endl;
+            std::cout << "selectedCardForMatarsak - > " << selectedCardForMatarsak.getName() << std::endl;
             effectOfMatarsak(selectedCardForMatarsak, index);
         }
         return false;
     }
-    
+
     selectedCard.setName(cardName);
     return true;
 }
@@ -452,6 +452,12 @@ std::string Control::determinWinner()
         }
     }
     std::cout << players[winner].getName() << "-> winner" << std::endl;
+    players[winner].setOwenedStates(warzone);
+    for (int a = 0; a < players[winner].getNumberOfOwenedStates(); a++)
+    {
+        std::cout << "players[winner].getOwenedStates(a) -> " << players[winner].getOwenedStates(a) << " " << std::endl;
+        std::cout << "players[winner].getColors() -> " << players[winner].getColor() << std::endl;
+    }
     return players[winner].getName();
 }
 void Control::initializeSpecialCards()
