@@ -77,6 +77,8 @@ void Card::setCardScores()
 }
 int Card::searchInCardScore(std::string str)
 {
+    std::cout<<"kooft"<<std::endl;
+    std::cout <<"cardsScore.at(str) - >" <<cardsScore.at(str) <<std::endl;
     return cardsScore.at(str);
 }
 // void Card::setStringToSpecialCard()
