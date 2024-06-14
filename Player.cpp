@@ -75,14 +75,22 @@ Card Player::getPlayedCard(int i)
 {
     return playedCardList[i];
 }
-void Player::eraseCard(int i)
+void Player::eraseCard(int index)
 {
-    playerCardList.erase(playerCardList.begin() + i);
+    playerCardList.erase(playerCardList.begin() + index);
 }
 int Player::getNumberOfPlayedCards()
 {
     return playedCardList.size();
 }
+void Player::erasePlayedCard(int index)
+{
+    playedCardList.erase(playedCardList.begin() + index);
+}
+// void decreaseNumberOfPlayedCards()
+// {
+
+// }
 // int Player ::countTabl_zan()
 // {
 //     for(int i = 0; i < playedCardList.size(); i++)

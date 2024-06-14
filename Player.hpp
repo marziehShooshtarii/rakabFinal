@@ -30,6 +30,7 @@ public:
     // int countTabl_zan();
     // int countBahar();
     // int countShir_dokht();
+    void erasePlayedCard(int index);
 
 
 private:
