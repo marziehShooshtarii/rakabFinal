@@ -277,6 +277,30 @@ void Control::controlTurn()
 {
     turn++;
 }
+// void Control::setCardScores()
+// {
+//     cardsScore =
+//         {
+//             {"bahar", 0},
+//             {"zemestan", 0},
+//             {"matarsak", 0},
+//             {"tabl_zan", 0},
+//             {"shah_dokht", 0},
+//             {"sarbaz_1", 1},
+//             {"sarbaz_2", 2},
+//             {"sarbaz_3", 3},
+//             {"sarbaz_4", 4},
+//             {"sarbaz_5", 5},
+//             {"sarbaz_6", 6},
+//             {"sarbaz_10", 10},
+//         };
+// }
+// int Control::searchInCardScore(std::string str)
+// {
+//     std::cout<<"kooft"<<std::endl;
+//     std::cout <<"cardsScore.at(str) - >" <<cardsScore.at(str) <<std::endl;
+//     return cardsScore.at(str);
+// }
 std ::string Control::findMaxScoreCard()
 {
     Card card; // for accesing Card member functions
@@ -288,8 +312,11 @@ std ::string Control::findMaxScoreCard()
         std::cout << "maxScore -> " << maxScore << std::endl;
         // std::cout<<"players[j].getPlayedCard(0).getName() - > "<<players[j].getPlayedCard(0).getName()<<std::endl;
         std::cout << "players[j].getNumberOfPlayedCards() - > " << players[j].getNumberOfPlayedCards();
-        std::cout << "players[j].getPlayedCard(j).getName() - > " << players[j].getPlayedCard(j).getName() << std::endl;
-
+        //std::cout << "players[j].getPlayedCard(j).getName() - > " << players[j].getPlayedCard(j).getName() << std::endl;
+        if (players[j].getNumberOfPlayedCards() == 0)
+        {
+            return "kooft";
+        }
         maxScore = card.searchInCardScore(players[j].getPlayedCard(0).getName());
         std::cout << "maxScore -> " << maxScore << std::endl;
         for (int i = 1; i < players[j].getNumberOfPlayedCards(); i++)
@@ -301,6 +328,7 @@ std ::string Control::findMaxScoreCard()
             }
         }
     }
+    return "maraz";
 }
 bool Control ::ifMaxScoreCardIsInHand(int index)
 {
@@ -321,7 +349,7 @@ std::string Control::determinWinner()
     for (int i = 0; i < identity.getPlayerNumber(); i++)
     {
         scorsAtEndOfWar[i] = 0;
-       // std::cout << " 1 players[j].getNumberOfPlayedCards()determinWinner - > " << players[i].getNumberOfPlayedCards() << std::endl;
+        std::cout << " 1 players[j].getNumberOfPlayedCards()determinWinner - > " << players[i].getNumberOfPlayedCards() << std::endl;
     }
     // initializeSpecialCards();
     std::cout << "specialCards.size() -> " << specialCards.size() << std::endl;
@@ -476,4 +504,6 @@ int main()
     //  c.displayStarterPlayer();
     // c.playingCards();
     c.playingInput();
+    
+
 }

@@ -19,6 +19,14 @@ class Control
 {
 public:
     Control();
+    ~Control()
+    {
+        for (auto p : specialCards)
+   {
+     delete p;
+   } 
+   specialCards.clear();
+    }
     // Control(Zemestan z,Tabl_zan t,Bahar b,shir_dokht s)
     // {
     // std::cout <<"-> inja"<<std::endl;
@@ -68,7 +76,9 @@ public:
     int countShir_dokht(int index);
     //void setStringToSpecialCard();
     void initializeSpecialCards();
-
+    // std ::unordered_map<std::string, int> cardsScore;
+    // void setCardScores();
+    // int searchInCardScore(std::string str);
     
 private:
     std::vector<Player> players;
