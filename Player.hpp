@@ -10,8 +10,8 @@ class Player
 public:
     Player();
     Player(int numberOfPlayers);
-    Player(int age, std::string name, std::string color,bool P_ifPassed);
-    Card getPlayerCard (int i);
+    Player(int age, std::string name, std::string color, bool P_ifPassed);
+    Card getPlayerCard(int i);
     std::string getName();
     std::string getColor();
     void setNumberOfPlayers(int numberOfPlayer);
@@ -27,16 +27,14 @@ public:
     void setIfPassed(bool P_ifPassed);
     bool getIfPassed();
     int getNumberOfPlayedCards();
-    // int countTabl_zan();
-    // int countBahar();
-    // int countShir_dokht();
+    int getNumberOfPlayerCards();
     void erasePlayedCard(int index);
 
 private:
     int age;
     int numberOfPlayers;
-    std::vector <Card> playerCardList; //list of the cards each player has got in hand
-    std::vector <Card> playedCardList; //list of cards played by the players
+    std::vector<Card> playerCardList; // list of the cards each player has got in hand
+    std::vector<Card> playedCardList; // list of cards played by the players
     std::vector<std::string> owenedStates;
     std::string name;
     std::string color;

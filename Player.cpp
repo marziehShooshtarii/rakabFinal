@@ -4,7 +4,6 @@ Player::Player() {}
 Player::Player(int p_numberOfPlayers)
 {
     if (p_numberOfPlayers >= 3 && p_numberOfPlayers <= 6)
-        // this->numberOfPlayers = numberOfPlayers;
         setNumberOfPlayers(p_numberOfPlayers);
 }
 Player::Player(int p_age, std::string p_name, std::string p_color, bool P_ifPassed)
@@ -36,12 +35,7 @@ void Player::setNumberOfPlayers(int p_numberOfPlayer)
 }
 Card Player::getPlayerCard(int i)
 {
-    // for (int i = 0; i < 30; i++)
-    // {
-    //     std::cout << playerCardList[i] << " ";
-    // }
     return playerCardList[i];
-    // std::cout << "asghar ahgha";
 }
 void Player::setPlayerCard(Card p_playerCard)
 {
@@ -49,7 +43,7 @@ void Player::setPlayerCard(Card p_playerCard)
 }
 void Player::setIfPassed(bool P_ifPassed)
 {
-    this ->ifPassed = P_ifPassed;
+    this->ifPassed = P_ifPassed;
 }
 bool Player::getIfPassed()
 {
@@ -59,11 +53,11 @@ void Player::setOwenedStates(std::string state)
 {
     owenedStates.push_back(state);
 }
-std::string Player ::getOwenedStates(int i)
+std::string Player::getOwenedStates(int i)
 {
     return owenedStates[i];
 }
-int Player::getNumberOfOwenedStates ()
+int Player::getNumberOfOwenedStates()
 {
     return owenedStates.size();
 }
@@ -83,6 +77,10 @@ int Player::getNumberOfPlayedCards()
 {
     return playedCardList.size();
 }
+int Player::getNumberOfPlayerCards()
+{
+    return playerCardList.size();
+}
 void Player::erasePlayedCard(int index)
 {
     playedCardList.erase(playedCardList.begin() + index);
@@ -99,9 +97,9 @@ void Player::erasePlayedCard(int index)
 //     }
 //     playedCardList.getPlayedCard().count(playedCardList.begin(),playedCardList.end(),"tabl_zan")
 // }
-    // int main ()
-    // {
-    //     std::vector <Player> adam;
-    //     adam.push_back(Player (4)) ;
-    //     std::cout << adam[0].getNumberOfPlayer();
-    // }
+// int main ()
+// {
+//     std::vector <Player> adam;
+//     adam.push_back(Player (4)) ;
+//     std::cout << adam[0].getNumberOfPlayer();
+// }
