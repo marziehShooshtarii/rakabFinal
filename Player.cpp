@@ -55,18 +55,18 @@ bool Player::getIfPassed()
 {
     return ifPassed;
 }
-// void Player::setOwenedStates(std::string state)
-// {
-//     owenedStates.push_back(state);
-// }
-// std::string Player ::getOwenedStates(int i)
-// {
-//     return owenedStates[i];
-// }
-// int Player::getNumberOfOwenedStates ()
-// {
-//     return owenedStates.size();
-// }
+void Player::setOwenedStates(std::string state)
+{
+    owenedStates.push_back(state);
+}
+std::string Player ::getOwenedStates(int i)
+{
+    return owenedStates[i];
+}
+int Player::getNumberOfOwenedStates ()
+{
+    return owenedStates.size();
+}
 void Player::setPlayedCard(Card p_playedCard)
 {
     playedCardList.push_back(p_playedCard);

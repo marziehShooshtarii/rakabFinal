@@ -22,8 +22,8 @@ public:
     Card getPlayedCard(int i);
     void eraseCard(int i);
     void setOwenedStates(std::string);
-    // std::string getOwenedStates(int i);
-    // int getNumberOfOwenedStates();
+    std::string getOwenedStates(int i);
+    int getNumberOfOwenedStates();
     void setIfPassed(bool P_ifPassed);
     bool getIfPassed();
     int getNumberOfPlayedCards();
@@ -32,17 +32,15 @@ public:
     // int countShir_dokht();
     void erasePlayedCard(int index);
 
-
 private:
     int age;
     int numberOfPlayers;
     std::vector <Card> playerCardList; //list of the cards each player has got in hand
     std::vector <Card> playedCardList; //list of cards played by the players
+    std::vector<std::string> owenedStates;
     std::string name;
     std::string color;
     std::string card;
     bool ifPassed;
-
-    //std::vector<std::string> owenedStates;
 };
 #endif
