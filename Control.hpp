@@ -56,7 +56,7 @@ public:
     void controlTurn();
     std::string determinWinner();
     //void setCardScores();
-    int findMaxScoreCard();
+    std::string findMaxScoreCard();
     //int searchInCardScore(std::string str);
     // ::unordered_map<std::string, int> cardsScore;
     // int countTabl_zan(int index);
@@ -68,6 +68,7 @@ public:
     int countShir_dokht(int index);
     //void setStringToSpecialCard();
     void initializeSpecialCards();
+
     
 private:
     std::vector<Player> players;
@@ -92,4 +93,6 @@ private:
     //void initializeSpecialCards();
     std::vector<Special*> specialCards;
     //std ::unordered_map<std::string, Card> stringToSpecialCard;
+    bool ifMaxScoreCardIsInHand(int index);
+    int maxScore = 0;
 };
