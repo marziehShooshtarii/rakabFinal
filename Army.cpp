@@ -1,3 +1,4 @@
+#include <iostream>
 #include "Army.hpp"
 // armyCard::armyCard(std::string name) : Card (name){};
 
@@ -12,5 +13,9 @@
 // }
 int armyCard::increasScore(std::string str,int score)
 {
-    return score + cardsScore.at(str);
+    setCardScores();
+    std::cout << "score army - > " << score  << std::endl;
+    std::cout << "string army - > " << str << std::endl;
+    std::cout << "cardsScore.at(str) army - > " << cardsScore.at(str) << std::endl;
+    return (score + cardsScore.at(str));
 }

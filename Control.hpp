@@ -62,6 +62,7 @@ public:
     // int countTabl_zan(int index);
     // int countBahar();
     // int countShir_dokht();
+    int countZemestan(int index);
     int countTabl_zan(int index);
     int countBahar(int index);
     int countShir_dokht(int index);
@@ -85,7 +86,7 @@ private:
     Card selectedCard;
     std::string cardName; 
     int turn = 1;
-    std::vector<int> scorsAtEndOfWar = {0};
+    //std::vector<int> scorsAtEndOfWar = {0};
     //std::vector<Card>allPlayedCards;
     armyCard army;
     //void initializeSpecialCards();
