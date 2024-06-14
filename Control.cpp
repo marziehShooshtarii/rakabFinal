@@ -1,9 +1,6 @@
 #include <unistd.h>
 #include "Control.hpp"
-// Player Control::getAge(int i)
-// {
-//     return bazikonha[i];
-// }
+
 Control::Control() {}
 void Control::displayStarterPlayer()
 {
@@ -188,8 +185,7 @@ void Control::playingInput()
                     {
                         std::cout << (players[i].getPlayerCard(k).getName()) << " ";
                     }
-                    // if (turn > 1)
-                    // {
+                
                     for (int r = 0; r < players[i].getNumberOfPlayedCards(); r++)
                     {
                         std::cout << "turn - > " << turn << std::endl;
@@ -197,7 +193,7 @@ void Control::playingInput()
                         std::cout << "\nthe number of cards on the floor: " << players[i].getNumberOfPlayedCards() << " ";
                     }
                 }
-                //}
+
             }
             //}
             i++;
@@ -211,22 +207,14 @@ void Control::playingInput()
             }
         }
         controlTurn();
-        // std::cout << "turn is " << turn << std::endl;
     }
-    // initializeSpecialCards();
     determinWinner();
 }
-// std::string Control::determinWinner()
-// {
-
-// }
 
 bool Control::playingCards(int index)
 {
     if (cardName == "pass")
     {
-        // std::cout << cardName << std::endl
-        //           << index;
         players[index].setIfPassed(true);
         checkIfCertianPlayerPassed(index);
         return false;
@@ -236,7 +224,6 @@ bool Control::playingCards(int index)
         if ((players[index].getPlayerCard(h)) == selectedCard)
         {
             players[index].setPlayedCard(selectedCard);
-            // allPlayedCards.push_back(selectedCard);
             players[index].eraseCard(h);
             break;
         }
@@ -320,30 +307,6 @@ void Control::controlTurn()
 {
     turn++;
 }
-// void Control::setCardScores()
-// {
-//     cardsScore =
-//         {
-//             {"bahar", 0},
-//             {"zemestan", 0},
-//             {"matarsak", 0},
-//             {"tabl_zan", 0},
-//             {"shah_dokht", 0},
-//             {"sarbaz_1", 1},
-//             {"sarbaz_2", 2},
-//             {"sarbaz_3", 3},
-//             {"sarbaz_4", 4},
-//             {"sarbaz_5", 5},
-//             {"sarbaz_6", 6},
-//             {"sarbaz_10", 10},
-//         };
-// }
-// int Control::searchInCardScore(std::string str)
-// {
-//     std::cout<<"kooft"<<std::endl;
-//     std::cout <<"cardsScore.at(str) - >" <<cardsScore.at(str) <<std::endl;
-//     return cardsScore.at(str);
-// }
 std ::string Control::findMaxScoreCard()
 {
     Card card; // for accesing Card member functions
@@ -351,14 +314,9 @@ std ::string Control::findMaxScoreCard()
     card.setCardScores();
     for (int j = 0; j < identity.getPlayerNumber(); j++)
     {
-        std::cout << " marggggg 2 players[j].getNumberOfPlayedCards()determinWinner - > " << players[j].getNumberOfPlayedCards() << std::endl;
-        std::cout << "maxScore -> " << maxScore << std::endl;
-        // std::cout<<"players[j].getPlayedCard(0).getName() - > "<<players[j].getPlayedCard(0).getName()<<std::endl;
-        std::cout << "players[j].getNumberOfPlayedCards() - > " << players[j].getNumberOfPlayedCards();
-        // std::cout << "players[j].getPlayedCard(j).getName() - > " << players[j].getPlayedCard(j).getName() << std::endl;
         if (players[j].getNumberOfPlayedCards() == 0)
         {
-            return "kooft";
+            return "1";
         }
         maxScore = card.searchInCardScore(players[j].getPlayedCard(0).getName());
         std::cout << "maxScore -> " << maxScore << std::endl;
@@ -371,14 +329,12 @@ std ::string Control::findMaxScoreCard()
             }
         }
     }
-    return "maraz";
+    return "9";
 }
 bool Control ::ifMaxScoreCardIsInHand(int index)
 {
-    std::cout << " margggggg 1 players[j].getNumberOfPlayedCards()determinWinner - > " << players[index].getNumberOfPlayedCards() << std::endl;
     for (int i = 0; i < players[index].getNumberOfPlayedCards(); i++)
     {
-        std::cout << "findMaxScoreCard() - > " << findMaxScoreCard() << std::endl;
         if (findMaxScoreCard() == players[index].getPlayedCard(i).getName())
         {
             return true;
@@ -392,26 +348,19 @@ std::string Control::determinWinner()
     for (int i = 0; i < identity.getPlayerNumber(); i++)
     {
         scorsAtEndOfWar[i] = 0;
-        std::cout << " 1 players[j].getNumberOfPlayedCards()determinWinner - > " << players[i].getNumberOfPlayedCards() << std::endl;
     }
-    // initializeSpecialCards();
-    std::cout << "specialCards.size() -> " << specialCards.size() << std::endl;
+
     int winnerScore = 0;
     int winner = 0;
     for (int i = 0; i < identity.getPlayerNumber(); i++)
     {
         int repeatForEachCard[4] = {countZemestan(i), countTabl_zan(i), countBahar(i), countShir_dokht(i)};
-        std::cout << "countZemestan(i) - > " << countZemestan(i) << std::endl;
-        std::cout << "countTabl_zan(i) - > " << countTabl_zan(i) << std::endl;
-        std::cout << "countBahar(i) - > " << countBahar(i) << std::endl;
-        std::cout << "countShir_dokht(i) - > " << countShir_dokht(i) << std::endl;
-        std::cout << "i -> " << i << std::endl;
         for (int j = 0; j < players[i].getNumberOfPlayedCards(); j++)
         {
 
             scorsAtEndOfWar[i] = army.increasScore(players[i].getPlayedCard(j).getName(), scorsAtEndOfWar[i]);
         }
-        std::cout << "2 scorsAtEndOfWar[i] -> " << scorsAtEndOfWar[i] << std::endl;
+  
         for (int k = 0; k < specialCards.size(); k++)
         {
             std::cout << "k -> " << k << std::endl;
@@ -419,11 +368,10 @@ std::string Control::determinWinner()
             for (int g = 0; g < repeatForEachCard[k]; g++)
             {
                 findMaxScoreCard();
-                std::cout << "ifMaxScoreCardIsInHand(i) -> " << ifMaxScoreCardIsInHand(i) << std::endl;
+        
                 if (k == 2 && ifMaxScoreCardIsInHand(i))
                 {
                     scorsAtEndOfWar[i] = specialCards[k]->effectOfCard(maxScore);
-                    std::cout << "maxScore -> " << maxScore << std::endl;
                 }
                 else
                 {
@@ -442,7 +390,6 @@ std::string Control::determinWinner()
             // {
             // specialCards[k]->effectOfCard(scorsAtEndOfWar[i]);
             // }
-            std::cout << "1  scorsAtEndOfWar[i] -> " << scorsAtEndOfWar[i] << std::endl;
         }
 
         if (scorsAtEndOfWar[i] > winnerScore)
@@ -536,11 +483,6 @@ int main()
     Tabl_zan t;
     Bahar b;
     Shir_dokht s;
-    // std::vector<Special*> specialCards(4);
-    // specialCards[0] = &z;
-    // specialCards[1] = &t;
-    // specialCards[2] = &b;
-    // specialCards[3] = &s;
     c.initializeSpecialCards();
     c.validateIdentity();
     c.setPlayers();
@@ -551,7 +493,5 @@ int main()
     c.determinMinAge();
     c.displayStarterPlayer();
     c.dispalyWarzone();
-    //  c.displayStarterPlayer();
-    // c.playingCards();
     c.playingInput();
 }
