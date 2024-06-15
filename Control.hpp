@@ -52,17 +52,17 @@ public:
     void randomCardSet();
     int determinMinAge();
     void displayStarterPlayer();
-    void dispalyWarzone();
+    void displayWarzone();
     bool winCheck();
     void setPlayers();
     void displayStartOfWar();
     bool cinSelectedCard(int index);
-    void playingInput();
+    bool playingInput();
     bool playingCards(int index);
     bool checkIfAllPlayersPassed();
     bool checkIfCertianPlayerPassed(int index);
     void controlTurn();
-    std::string determinWinner();
+    std::string determinWinnerOfWar();
     // void setCardScores();
     std::string findMaxScoreCard();
     // int searchInCardScore(std::string str);
@@ -82,6 +82,9 @@ public:
     // void setCardScores();
     // int searchInCardScore(std::string str);
     bool ifMaxScoreCardIsInHand(int index);
+    bool checkWin(int index);
+    void initializeMapInControl();
+    bool checkingTheNeighborhoodOfTwoStates(int index,int first,int second);
 
 private:
     std::vector<Player> players;
@@ -96,7 +99,7 @@ private:
     int randomCard;
     Card playerCard[10];
     int starterPlayer = 0;
-    std::string warzone;
+    std::string warzone = "bella";
     Card selectedCard;
     std::string cardName;
     int turn = 1;
@@ -107,4 +110,7 @@ private:
     std::vector<Special *> specialCards;
     // std ::unordered_map<std::string, Card> stringToSpecialCard;
     int maxScore = 0;
+    int counterNeighbores = 0;
+    std::string winnerOfGame;
+    int winner = -3;
 };
