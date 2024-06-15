@@ -1,5 +1,5 @@
 #include "Player.hpp"
-
+//std::vector<std::string> owenedStates(0);
 Player::Player() {}
 Player::Player(int p_numberOfPlayers)
 {
