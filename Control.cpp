@@ -177,6 +177,7 @@ bool Control::playingInput()
             players[c].setIfPassed(false);
         }
         winner = -3;
+        
         std::cout << "ifPassed - > " << players[0].getIfPassed() << std::endl;
         std::cout << "kooft 1 - > " << std::endl;
         std::cout << "kooft 2 - > " << std::endl;
@@ -532,11 +533,17 @@ int Control ::countShir_dokht(int index)
 bool Control ::checkingTheNeighborhoodOfTwoStates(int index, int first, int second)
 {
     Map map; // for accessing Map's member functions.
+    Map map2;
     std::cout << "checkingTheNeighborhoodOfTwoStates 1- >" << std::endl;
     // if (players[index].getNumberOfOwenedStates() > 2)
     // {
-
-    if (map.getNeighborMap(map.searchInStates(players[index].getOwenedStates(first)), map.searchInStates(players[index].getOwenedStates(second))) == map.getNeighborMap(first, second))
+    std::cout<<"players[index].getOwenedStates(first) -> " <<players[index].getOwenedStates(first)<<std::endl;
+    std::cout<<"map2.searchInStates(players[index].getOwenedStates(first)) -> " <<map2.searchInStates(players[index].getOwenedStates(first))<<std::endl;
+    std::cout<<"players[index].getOwenedStates(second) -> " <<players[index].getOwenedStates(second)<<std::endl;
+    std::cout<<"map2.searchInStates(players[index].getOwenedStates(second)) -> " <<map2.searchInStates(players[index].getOwenedStates(second))<<std::endl;
+    std::cout<<"map2.searchInStates(players[index].getOwenedStates(first)) -> " <<map2.searchInStates(players[index].getOwenedStates(first))<<std::endl;
+    std::cout<<"map2.searchInStates(players[index].getOwenedStates(second)) -> " <<map2.searchInStates(players[index].getOwenedStates(second))<<std::endl;
+    if (map.getNeighborMap(map2.searchInStates(players[index].getOwenedStates(first)), map2.searchInStates(players[index].getOwenedStates(second))) == map.getNeighborMap(map2.searchInStates(players[index].getOwenedStates(first)), map2.searchInStates(players[index].getOwenedStates(second))))
     {
         std::cout << "checkingTheNeighborhoodOfTwoStates 2- >" << std::endl;
         counterNeighbores++;
