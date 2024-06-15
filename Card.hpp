@@ -19,25 +19,16 @@ public:
     std::string getName();
     void setName(std::string p_name);
     bool operator==(const Card &c);
-
-    // int searchInCardScore(std::string str);
-    void kooft(int i);
     std ::unordered_map<std::string, int> cardsScore;
     void setCardScores();
     int searchInCardScore(std::string str);
-    
-    //std ::unordered_map<std::string, Card> stringToSpecialCard;
-    //void setStringToSpecialCard();
-   // void setSpacial();
+
     
 private:
-    // int numberOfCard;
     int characteristic;
-    // int score;
     std::string typeOfCard;
     std::string nameOfCard;
     std::string explanation;
     std::string description;
-   // std::vector<Special> special;
 };
 #endif
