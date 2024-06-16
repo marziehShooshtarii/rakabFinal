@@ -113,4 +113,5 @@ private:
     int counterNeighbores = 0;
     std::string winnerOfGame;
     int winner = -3;
+    std::vector<Card> baharVSzemestan;
 };
