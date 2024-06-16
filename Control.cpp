@@ -519,7 +519,7 @@ std::cout << players[i].getName() << "-> i" << std::endl;
         Zemestan *z = new Zemestan();
         Tabl_zan *t = new Tabl_zan();
         Bahar *b = new Bahar();
-        Shir_dokht *s = new Shir_dokht();
+        Shah_dokht *s = new Shah_dokht();
 
         specialCards.push_back(z);
         specialCards.push_back(t);
@@ -653,7 +653,7 @@ std::cout << players[i].getName() << "-> i" << std::endl;
         Zemestan z;
         Tabl_zan t;
         Bahar b;
-        Shir_dokht s;
+        Shah_dokht s;
         c.initializeMapInControl();
         c.initializeSpecialCards();
         c.validateIdentity();

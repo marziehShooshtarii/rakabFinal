@@ -13,7 +13,7 @@
 #include "Zemestan.hpp"
 #include "Tabl_zan.hpp"
 #include "Bahar.hpp"
-#include "Shir_dokht.hpp"
+#include "Shah_dokht.hpp"
 // #include "Dealing.hpp"
 class Control
 {
