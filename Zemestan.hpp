@@ -6,6 +6,7 @@ class Zemestan : public Special
 public:
     virtual int effectOfCard(int score) override 
     {
+        
         return score=1;
     }
 
