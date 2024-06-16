@@ -64,6 +64,7 @@ void initializeStates()
 }
 int searchInStates(std::string str)
 {
+    //std::cout <<"states.at(str) - >" << states.at(str) <<std::endl;
    return states.at(str);
 }
 int getNeighborMap(int i,int j)
