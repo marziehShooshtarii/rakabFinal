@@ -26,6 +26,11 @@ void getData::setData()
             std::cin >> PlayerName;
             std::cout << "Enter the " << i + 1 << " player age: ";
             std::cin >> playerAge;
+            if (playerAge < 0)
+            {
+                std::cout << "your age can't be under 0 ; please enter a valid age" << std::endl;
+                std::cin >> playerAge;
+            }    
             std::cout << "Enter the " << i + 1 << " player chosen color: ";
             std::cin >> playerColor;
             players.push_back(Player(playerAge, PlayerName, playerColor , false));
