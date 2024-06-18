@@ -89,6 +89,10 @@ public:
     void displayPlayedCards(int index);
     bool searchForExistingCards(int index , Card searchingCard);
     bool checkMatarsakPlayed(int index);
+    bool checkIfItsTimeToDealHands();
+    int lastPlayerWithRemainedCards();
+    int findMatarsak();
+    
 private:
     std::vector<Player> players;
     // std::vector<Player> bazikonha;

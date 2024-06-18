@@ -93,8 +93,8 @@ void Control::randomCardSet()
     setPlayers();
     for (int j = 0; j < identity.getPlayerNumber(); j++)
     {
-
-        for (int i = 0; i < 10; i++)
+        std::cout<<"margggggggggggggggggggggggggggggggggggggggggg"<<std::endl;
+        for (int i = 0; i < 10 + players[j].getNumberOfOwenedStates(); i++)
         {
 
             randomCard = rand() % 89;
@@ -134,9 +134,9 @@ bool Control::playingInput()
 {
     while (1)
     {
-
-        // std::cout<<"oni ke kharabe 0 - > "<<players[q].getNumberOfOwenedStates()<<std::endl;
-        // std::cin.ignore();
+        // randomCardSet();
+        //  std::cout<<"oni ke kharabe 0 - > "<<players[q].getNumberOfOwenedStates()<<std::endl;
+        //  std::cin.ignore();
         displayStarterPlayer();
         displayWarzone();
         for (int c = 0; c < identity.getPlayerNumber(); c++)
@@ -162,7 +162,7 @@ bool Control::playingInput()
                     displayPlayingCards(i);
                     bool checkformatarsak = cinSelectedCard(i);
 
-                    if (playingCards(i , checkformatarsak))
+                    if (playingCards(i, checkformatarsak))
                     {
 
                         displayPlayingCards(i);
@@ -196,6 +196,19 @@ bool Control::playingInput()
         // std::cout<<"oni ke kharabe 2 - > "<<players[q].getNumberOfOwenedStates()<<std::endl;
         determinWinnerOfWar();
         players[starterPlayer].setOwenedStates(warzone);
+        if (turn != 1)
+        {
+
+            if (checkIfItsTimeToDealHands())
+            {
+                for (int x = 0; x < players[lastPlayerWithRemainedCards()].getNumberOfPlayerCards(); x++)
+                    players[lastPlayerWithRemainedCards()].eraseCard(x);
+                shuffelingCards();
+                randomCardSet();
+                for (int t = 0; t < identity.getPlayerNumber(); t++)
+                    displayPlayingCards(t);
+            }
+        }
         for (int a = 0; a < players[starterPlayer].getNumberOfOwenedStates(); a++)
         {
             std::cout << "players[winner].getOwenedStates(a) -> " << players[starterPlayer].getOwenedStates(a) << " " << std::endl;
@@ -234,7 +247,7 @@ void Control::displayPlayingCards(int index)
         std::cout << (players[index].getPlayerCard(k).getName()) << " ";
     }
 }
-bool Control::playingCards(int index , bool checkForMatarsak)
+bool Control::playingCards(int index, bool checkForMatarsak)
 {
     if (cardName == "pass")
     {
@@ -367,6 +380,21 @@ void Control::effectOfMatarsak(Card played, int index)
     // std ::cout << std::endl;
     // std :: cout << "after matarsak playing cards in hand\n";
     // displayPlayingCards(index);
+    players[index].eraseCard(findMatarsak());
+}
+int Control ::findMatarsak()
+{
+    for (int i = 0; i < identity.getPlayerNumber(); i++)
+    {
+        for (int j = 0; j < players[i].getNumberOfPlayerCards(); j++)
+        {
+        if (players[i].getPlayerCard(j).getName() == "matarsak")
+        {
+            return j;
+        }
+
+        }
+    }
 }
 int Control ::findSelectedCardForMatarsak(std::string str, int index)
 {
@@ -635,7 +663,32 @@ void Control::initializeMapInControl()
     map.initializeStates();
     map.setMapStates();
 }
-
+bool Control::checkIfItsTimeToDealHands()
+{
+    int counterFullHands = 0;
+    for (int i = 0; i < identity.getPlayerNumber(); i++)
+    {
+        if (players[i].getNumberOfPlayerCards() != 0)
+        {
+            counterFullHands++;
+        }
+    }
+    if (counterFullHands > 1)
+    {
+        return false;
+    }
+    return true;
+}
+int Control::lastPlayerWithRemainedCards()
+{
+    for (int i = 0; i < identity.getPlayerNumber(); i++)
+    {
+        if (players[i].getNumberOfPlayerCards() != 0)
+        {
+            return i;
+        }
+    }
+}
 int main()
 {
     srand(unsigned(time(NULL)));
