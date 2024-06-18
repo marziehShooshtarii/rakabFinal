@@ -91,7 +91,7 @@ public:
     bool checkMatarsakPlayed(int index);
     bool checkIfItsTimeToDealHands();
     int lastPlayerWithRemainedCards();
-    int findMatarsak();
+    int findMatarsak(int i);
     
 private:
     std::vector<Player> players;

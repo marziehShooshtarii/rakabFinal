@@ -1,7 +1,12 @@
 #include <unistd.h>
 #include "Control.hpp"
 
-Control::Control() {}
+Control::Control() {
+    // for (int i= 0 ; i < identity.getPlayerNumber() ; i++)
+    // {
+    //     players
+    // }
+}
 void Control::displayStarterPlayer()
 {
     std::cout << "press enter to start the war ";
@@ -94,18 +99,23 @@ void Control::randomCardSet()
     for (int j = 0; j < identity.getPlayerNumber(); j++)
     {
         std::cout<<"margggggggggggggggggggggggggggggggggggggggggg"<<std::endl;
-        for (int i = 0; i < 10 + players[j].getNumberOfOwenedStates(); i++)
+        std::cout << "size of vector - > " << players[j].getNumberOfOwenedStates();
+        for (int i = 0; i < (10 + players[j].getNumberOfOwenedStates()) ; i++)
         {
-
+            std::cout << "to for random pakhsh kardan 0 " << std::endl;
             randomCard = rand() % 89;
-            playerCard[i] = allCards[randomCard];
+            std::cout << "to for random pakhsh kardan 1 " << std::endl;
+            // playerCard[i] = allCards[randomCard];
             // adam.setPlayerCard(allCards[randomCard])
             players[j].setPlayerCard(allCards[randomCard]);
+            std::cout << "to for random pakhsh kardan 2 " << std::endl;
         }
+            std::cout << "biron for random pakhsh kardan 3 " << std::endl;
         // for (const auto &card : playerCard)
         //     std::cout << card << " ";
         // std::cout << std::endl;
     }
+            std::cout << "biron for asli random pakhsh kardan 4 " << std::endl;
 }
 
 void Control::validateIdentity()
@@ -380,21 +390,22 @@ void Control::effectOfMatarsak(Card played, int index)
     // std ::cout << std::endl;
     // std :: cout << "after matarsak playing cards in hand\n";
     // displayPlayingCards(index);
-    players[index].eraseCard(findMatarsak());
+    players[index].eraseCard(findMatarsak(index));
 }
-int Control ::findMatarsak()
+int Control ::findMatarsak(int i)
 {
-    for (int i = 0; i < identity.getPlayerNumber(); i++)
-    {
+    // for (int i = 0; i < identity.getPlayerNumber(); i++)
+    // {
         for (int j = 0; j < players[i].getNumberOfPlayerCards(); j++)
         {
         if (players[i].getPlayerCard(j).getName() == "matarsak")
         {
+            std::cout << "find matarsak -> " << j << std::endl;
             return j;
         }
 
         }
-    }
+    // }
 }
 int Control ::findSelectedCardForMatarsak(std::string str, int index)
 {
