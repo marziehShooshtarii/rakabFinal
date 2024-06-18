@@ -80,24 +80,7 @@ void Control::dealingCards()
     // for (auto f : allCards)
     //     std::cout << f.getName() << "\n";
 }
-// void Control::setCardScores()
-// {
-//     cardsScore =
-//         {
-//             {"bahar", 0},
-//             {"zemestan", 0},
-//             {"matarsak", 0},
-//             {"tabl_zan", 0},
-//             {"shah_dokht", 0},
-//             {"sarbaz_1", 1},
-//             {"sarbaz_2", 2},
-//             {"sarbaz_3", 3},
-//             {"sarbaz_4", 4},
-//             {"sarbaz_5", 5},
-//             {"sarbaz_6", 6},
-//             {"sarbaz_10", 10},
-//         };
-// }
+
 void Control::setPlayers()
 {
     for (int i = 0; i < identity.getPlayerNumber(); i++)
@@ -123,22 +106,6 @@ void Control::randomCardSet()
         //     std::cout << card << " ";
         // std::cout << std::endl;
     }
-    // for (size_t i = 0; i < identity.getPlayerNumber() * 10; i += 10)
-    // {
-    //     for (int j = i; j < i + 10; j++)
-    //     {
-    //         players[i].push_back(adam.getPlayerCard(j));
-    //     }
-    // }
-    // for (int g=0 ; g < identity.getPlayerNumber() * 10 ; g ++)
-    // {
-    //     std::cout << players[g] << " ";
-    // }
-    // for (size_t k = 0; k < numberOfPlayer; k++)
-    // {
-    //     std::cout <<adam.getPlayerCard() << " ";
-    // }
-    // adam.getAge();
 }
 
 void Control::validateIdentity()
@@ -178,40 +145,39 @@ bool Control::playingInput()
         }
         winner = -3;
 
-        std::cout << "ifPassed - > " << players[0].getIfPassed() << std::endl;
-        std::cout << "kooft 1 - > " << std::endl;
-        std::cout << "kooft 2 - > " << std::endl;
         while (checkIfAllPlayersPassed())
         {
-            std::cout << "kooft 3 - > " << std::endl;
             int indexControler = identity.getPlayerNumber();
             // std::cin.ignore();
             for (size_t i = starterPlayer; i < indexControler;)
             {
-                std::cout << "kooft 4 - > " << std::endl;
+
                 if (!checkIfCertianPlayerPassed(i))
                 {
-                    std::cout << "kooft 5 - > " << std::endl;
                     std::cout << players[i].getName() << " it's your turn " << "\n\tplease chose your card from the list or pass:\n " << "\t\n";
-                    for (int k = 0; k < 10; k++)
-                    {
-                        std::cout << (players[i].getPlayerCard(k).getName()) << " ";
-                    }
-                    cinSelectedCard(i);
+                    // for (int k = 0; k < 10; k++)
+                    // {
+                    //     std::cout << (players[i].getPlayerCard(k).getName()) << " ";
+                    // }
+                    displayPlayingCards(i);
+                    bool checkformatarsak = cinSelectedCard(i);
 
-                    if (playingCards(i))
+                    if (playingCards(i , checkformatarsak))
                     {
-                        for (int k = 0; k < 10 - turn; k++)
-                        {
-                            std::cout << (players[i].getPlayerCard(k).getName()) << " ";
-                        }
 
-                        for (int r = 0; r < players[i].getNumberOfPlayedCards(); r++)
-                        {
-                            std::cout << "turn - > " << turn << std::endl;
-                            std::cout << "\nthe cards on the floor: " << players[i].getPlayedCard(r).getName() << " ";
-                            std::cout << "\nthe number of cards on the floor: " << players[i].getNumberOfPlayedCards() << " ";
-                        }
+                        displayPlayingCards(i);
+                        // for (int k = 0; k < 10 - turn; k++)
+                        // {
+                        //     std::cout << (players[i].getPlayerCard(k).getName()) << " ";
+                        // }
+
+                        // for (int r = 0; r < players[i].getNumberOfPlayedCards(); r++)
+                        // {
+                        //     // std::cout << "turn - > " << turn << std::endl;
+                        //     std::cout << "\nthe cards on the floor: " << players[i].getPlayedCard(r).getName() << " ";
+                        //     // std::cout << "\nthe number of cards on the floor: " << players[i].getNumberOfPlayedCards() << " ";
+                        // }
+                        displayPlayedCards(i);
                     }
                 }
                 //}
@@ -229,7 +195,6 @@ bool Control::playingInput()
         }
         // std::cout<<"oni ke kharabe 2 - > "<<players[q].getNumberOfOwenedStates()<<std::endl;
         determinWinnerOfWar();
-        std::cout << "starter Player -> " << starterPlayer << std::endl;
         players[starterPlayer].setOwenedStates(warzone);
         for (int a = 0; a < players[starterPlayer].getNumberOfOwenedStates(); a++)
         {
@@ -240,11 +205,14 @@ bool Control::playingInput()
         // starterPlayer = winner;
         // winner = -3;
         //  setPlayers();
+        // int count = 0;
+        // std :: cout << "count - > " <<
         for (int s = 0; s < identity.getPlayerNumber(); s++)
         {
             for (int n = 0; n < players[s].getNumberOfPlayedCards(); n++)
             {
                 players[s].erasePlayedCard(n);
+                std::cout << "cards eraased " << std::endl;
             }
         }
         for (int q = 0; q < identity.getPlayerNumber(); q++)
@@ -259,8 +227,14 @@ bool Control::playingInput()
         // checkWin(q);
     }
 }
-
-bool Control::playingCards(int index)
+void Control::displayPlayingCards(int index)
+{
+    for (int k = 0; k < players[index].getNumberOfPlayerCards(); k++)
+    {
+        std::cout << (players[index].getPlayerCard(k).getName()) << " ";
+    }
+}
+bool Control::playingCards(int index , bool checkForMatarsak)
 {
     if (cardName == "pass")
     {
@@ -268,8 +242,16 @@ bool Control::playingCards(int index)
         checkIfCertianPlayerPassed(index);
         return false;
     }
+    if (!checkForMatarsak)
+        return true;
+    // if (searchForExistingCards(index, selectedCard))
+    // {
+    // std :: cout << "card name in playing card func - >" << cardName << std::endl;
+    // std :: cout << "selected card in playing card func - >" << selectedCard.getName() << std::endl;
     for (int h = 0; h < 10; h++)
     {
+        std ::cout << "helooooooooooooooooooo" << std::endl;
+        std ::cout << "selected card - > " << selectedCard.getName() << std::endl;
         if ((players[index].getPlayerCard(h)) == selectedCard)
         {
             if (selectedCard.getName() == "bahar" || selectedCard.getName() == "zemestan")
@@ -281,7 +263,35 @@ bool Control::playingCards(int index)
             break;
         }
     }
+    // }
+    // else if (cardName != "matarsak")
+    // {
+    //     std::cout << "the choosen card is not your's!\nplease choose a valid card from the list:\n";
+    //     displayPlayingCards(index);
+    //     cinSelectedCard(index);
+    //     std:: cout << "selected card - > " << selectedCard.getName() << std::endl << "card Name - > " << cardName << std::endl;
+    //     playingCards(index);
+    // }
     return true;
+}
+bool Control::searchForExistingCards(int index, Card searchingCard)
+{
+    for (int i = 0; i < players[index].getNumberOfPlayerCards(); i++)
+    {
+        if (searchingCard == players[index].getPlayerCard(i))
+        {
+            return true;
+        }
+    }
+    return false;
+}
+void Control::displayPlayedCards(int index)
+{
+    for (int i = 0; i < players[index].getNumberOfPlayedCards(); i++)
+    {
+        std::cout << "the cards on the floor: \n"
+                  << players[index].getPlayedCard(i).getName() << std::endl;
+    }
 }
 bool Control::checkIfAllPlayersPassed()
 {
@@ -296,13 +306,23 @@ bool Control::checkIfAllPlayersPassed()
 }
 bool Control::cinSelectedCard(int index)
 {
-    Card selectedCardForMatarsak;
     std::cin >> cardName;
     if (cardName == "pass")
     {
         cardName = "pass";
         return false;
     }
+    if (!checkMatarsakPlayed(index))
+    {
+        selectedCard.setName(cardName);
+        return true;
+    }
+    return false;
+}
+bool Control::checkMatarsakPlayed(int index)
+{
+
+    Card selectedCardForMatarsak;
     if (cardName == "matarsak")
     {
         if (players[index].getNumberOfPlayedCards() == 0)
@@ -320,22 +340,33 @@ bool Control::cinSelectedCard(int index)
             std::cin >> cardName;
 
             selectedCardForMatarsak.setName(cardName);
-            std::cout << "selectedCardForMatarsak - > " << selectedCardForMatarsak.getName() << std::endl;
+            // std::cout << "selectedCardForMatarsak - > " << selectedCardForMatarsak.getName() << std::endl;
             effectOfMatarsak(selectedCardForMatarsak, index);
+            // cardName = "matarsak";
         }
-        return false;
+        return true;
+        // std :: cout << "not returned" << std::endl;
     }
-
-    selectedCard.setName(cardName);
-    return true;
+    return false;
 }
 void Control::effectOfMatarsak(Card played, int index)
 {
     Card matarsakCard; // for accessing Card member functions
     matarsakCard.setName("matarsak");
+    std ::cout << "played card - >" << played.getName() << std::endl;
+    std ::cout << "matarsak card - >" << matarsakCard.getName() << std::endl;
     players[index].setPlayerCard(played);
     players[index].erasePlayedCard(findSelectedCardForMatarsak(cardName, index));
+    // std :: cout << "after matarsak played cards on floor1\n";
+    // displayPlayedCards(index);
+    // std ::cout << std::endl;
+    // displayPlayingCards(index);
     players[index].setPlayedCard(matarsakCard);
+    // // std :: cout << "after matarsak played cards on floor2\n";
+    // displayPlayedCards(index);
+    // std ::cout << std::endl;
+    // std :: cout << "after matarsak playing cards in hand\n";
+    // displayPlayingCards(index);
 }
 int Control ::findSelectedCardForMatarsak(std::string str, int index)
 {
@@ -380,7 +411,6 @@ std ::string Control::findMaxScoreCard()
                 maxScoreCardName = players[j].getPlayedCard(i).getName();
             }
         }
-        std::cout << "maxScore -> " << maxScore << std::endl;
     }
     return "9";
 }
@@ -403,21 +433,6 @@ std::string Control::determinWinnerOfWar()
         scorsAtEndOfWar[i] = 0;
     }
 
-    // for (int r = 0; r < identity.getPlayerNumber(); r++)
-    // {
-    //     for (int f = 0; f < players[r].getNumberOfPlayedCards(); f++)
-    //     {
-    //         if (countZemestan(r) > 0)
-    //         {
-    //             for (int e = 0; e < identity.getPlayerNumber(); e++)
-    //             {
-    //                 scorsAtEndOfWar[e] = players[e].getNumberOfPlayedCards();
-    //             }
-    //             break;
-    //         }
-    //     }
-    // }
-
     int winnerScore = 0;
     winner = -3;
     for (int i = 0; i < identity.getPlayerNumber(); i++)
@@ -433,237 +448,212 @@ std::string Control::determinWinnerOfWar()
         {
             std::cout << "k -> " << k << std::endl;
 
-                if (baharVSzemestan.size() > 0)
+            if (baharVSzemestan.size() > 0)
+            {
+                if (baharVSzemestan[baharVSzemestan.size() - 1].getName() == "bahar")
                 {
-                    if (baharVSzemestan[baharVSzemestan.size() - 1].getName() == "bahar")
-                    {
 
-                        findMaxScoreCard();
-                        if (ifMaxScoreCardIsInHand(i))
-                        {
+                    findMaxScoreCard();
+                    if (ifMaxScoreCardIsInHand(i))
+                    {
                         scorsAtEndOfWar[i] = specialCards[2]->effectOfCard(maxScore);
-                        std::cout<<"bbbbbbbbbbbbbbbbbbbbbbbbbbbb - > "<<scorsAtEndOfWar[i]<<std::endl;
-
-                        }
-                    }
-                    else
-                    {
-                        for (int r = 0; r < identity.getPlayerNumber(); r++)
-                        {
-
-                            scorsAtEndOfWar[r] = players[r].getNumberOfPlayedCards();
-                            std::cout<<"zzzzzzzzzzzzzzzzzzzzzzzzzz - > "<<scorsAtEndOfWar[i]<<std::endl;
-                        }
                     }
                 }
+                else
+                {
+                    for (int r = 0; r < identity.getPlayerNumber(); r++)
+                    {
+
+                        scorsAtEndOfWar[r] = players[r].getNumberOfPlayedCards();
+                    }
+                }
+            }
             for (int g = 0; g < repeatForEachCard[k]; g++)
             {
 
-                    // if (k == 2 && ifMaxScoreCardIsInHand(i))
-                    // {
-                    // }
-                    // else if (k == 0)
-                    // {
-                    //     for (int r = 0; r < identity.getPlayerNumber(); r++)
-                    //     {
-                    //        scorsAtEndOfWar[i] = players[r].getNumberOfPlayedCards();
-                    //     }
-                    // }
-                  
-                        scorsAtEndOfWar[i] = specialCards[k]->effectOfCard(scorsAtEndOfWar[i]);
-                        std::cout<<"ffffffffffffffffffffffffffffffff - > "<<scorsAtEndOfWar[i]<<std::endl;
-                    
-                }
-                // for (int g = 0; g < countTabl_zan(i) && k == 1 ; g++)
+                // if (k == 2 && ifMaxScoreCardIsInHand(i))
                 // {
-                // specialCards[k]->effectOfCard(scorsAtEndOfWar[i]);
                 // }
-                // for (int g = 0; g < countBahar(i) && k == 2 ; g++)
+                // else if (k == 0)
                 // {
-                // specialCards[k]->effectOfCard(scorsAtEndOfWar[i]);
+                //     for (int r = 0; r < identity.getPlayerNumber(); r++)
+                //     {
+                //        scorsAtEndOfWar[i] = players[r].getNumberOfPlayedCards();
+                //     }
                 // }
-                // for (int g = 0; g < countShir_dokht(i) && k == 3 ; g++)
-                // {
-                // specialCards[k]->effectOfCard(scorsAtEndOfWar[i]);
-                // }
+
+                scorsAtEndOfWar[i] = specialCards[k]->effectOfCard(scorsAtEndOfWar[i]);
             }
-std::cout<<"wwwwwwwwwwwwwwwwwwwwwwwwwwww - > "<<scorsAtEndOfWar[i]<<std::endl;
-std::cout<<"winner score - > "<<winnerScore<<std::endl;
-std::cout<<"i - > "<<i<<std::endl;
-std::cout << players[i].getName() << "-> i" << std::endl;
-            if (scorsAtEndOfWar[i] > winnerScore)
-            {
-                winnerScore = scorsAtEndOfWar[i];
-                winner = i;
-            }
+            // for (int g = 0; g < countTabl_zan(i) && k == 1 ; g++)
+            // {
+            // specialCards[k]->effectOfCard(scorsAtEndOfWar[i]);
+            // }
+            // for (int g = 0; g < countBahar(i) && k == 2 ; g++)
+            // {
+            // specialCards[k]->effectOfCard(scorsAtEndOfWar[i]);
+            // }
+            // for (int g = 0; g < countShir_dokht(i) && k == 3 ; g++)
+            // {
+            // specialCards[k]->effectOfCard(scorsAtEndOfWar[i]);
+            // }
         }
-        std::cout << "winner - > " << winner << std::endl;
-        std::cout << players[winner].getName() << "-> winner" << std::endl;
-        // players[winner].setOwenedStates(warzone);
-        std::cout << "oon koofti ke kharabe - > " << players[winner].getNumberOfOwenedStates() << std::endl;
-        // for (int a = 0; a < players[winner].getNumberOfOwenedStates(); a++)
-        // {
-        //     std::cout << "players[winner].getOwenedStates(a) -> " << players[winner].getOwenedStates(a) << " " << std::endl;
-        //     std::cout << "players[winner].getname() - > " << players[winner].getName()<< " " << std::endl;
-        //     std::cout << "players[winner].getColors() -> " << players[winner].getColor() << std::endl;
-        // }
-        starterPlayer = winner;
-        int temp = winner;
-        winner = -3;
-
-        return players[temp].getName();
+        if (scorsAtEndOfWar[i] > winnerScore)
+        {
+            winnerScore = scorsAtEndOfWar[i];
+            winner = i;
+        }
     }
-    void Control::initializeSpecialCards()
-    {
-        std::cout << "-> inja" << std::endl;
-        Zemestan *z = new Zemestan();
-        Tabl_zan *t = new Tabl_zan();
-        Bahar *b = new Bahar();
-        Shah_dokht *s = new Shah_dokht();
-
-        specialCards.push_back(z);
-        specialCards.push_back(t);
-        specialCards.push_back(b);
-        specialCards.push_back(s);
-
-        std::cout << "-> inja" << std::endl;
-    }
-    // int Control::searchInCardScore(std::string str)
+    std::cout << "winner - > " << winner << std::endl;
+    std::cout << players[winner].getName() << "-> winner" << std::endl;
+    // players[winner].setOwenedStates(warzone);
+    std::cout << "oon koofti ke kharabe - > " << players[winner].getNumberOfOwenedStates() << std::endl;
+    // for (int a = 0; a < players[winner].getNumberOfOwenedStates(); a++)
     // {
-    //     return cardsScore.at(str);
+    //     std::cout << "players[winner].getOwenedStates(a) -> " << players[winner].getOwenedStates(a) << " " << std::endl;
+    //     std::cout << "players[winner].getname() - > " << players[winner].getName()<< " " << std::endl;
+    //     std::cout << "players[winner].getColors() -> " << players[winner].getColor() << std::endl;
     // }
-    int Control ::countTabl_zan(int index)
-    {
-        int counter = 0;
-        for (int j = 0; j < players[index].getNumberOfPlayedCards(); j++)
-        {
-            if (players[index].getPlayedCard(j).getName() == "tabl_zan")
-            {
-                counter++;
-            }
-        }
-        return counter;
-    }
-    int Control ::countZemestan(int index)
-    {
-        int counter = 0;
-        for (int j = 0; j < players[index].getNumberOfPlayedCards(); j++)
-        {
-            if (players[index].getPlayedCard(j).getName() == "zemestan")
-            {
-                counter++;
-            }
-        }
-        return counter;
-    }
-    int Control ::countBahar(int index)
-    {
-        int counter = 0;
-        for (int j = 0; j < players[index].getNumberOfPlayedCards(); j++)
-        {
-            if (players[index].getPlayedCard(j).getName() == "bahar")
-            {
-                counter++;
-            }
-        }
-        return counter;
-    }
-    int Control ::countShir_dokht(int index)
-    {
-        int counter = 0;
-        for (int j = 0; j < players[index].getNumberOfPlayedCards(); j++)
-        {
-            if (players[index].getPlayedCard(j).getName() == "shir_dokht")
-            {
-                counter++;
-            }
-        }
-        return counter;
-    }
-    bool Control ::checkingTheNeighborhoodOfTwoStates(int index, int first, int second)
-    {
-        Map map; // for accessing Map's member functions.
-        Map map2;
-        std::cout << "checkingTheNeighborhoodOfTwoStates 1- >" << std::endl;
-        // if (players[index].getNumberOfOwenedStates() > 2)
-        // {
-        map.initializeStates();
-        map2.initializeStates();
-        map2.setMapStates();
-        initializeMapInControl();
-        // std::cout << "oooooooooooooooooooo " << map2.searchInStates("bella") << std::endl;
-        // ;
-        // std::cout << "players[index].getOwenedStates(first) -> " << players[index].getOwenedStates(first) << std::endl;
-        // std::cout << "map2.searchInStates(players[index].getOwenedStates(first)) -> " << map2.searchInStates(players[index].getOwenedStates(first)) << std::endl;
-        // std::cout << "players[index].getOwenedStates(second) -> " << players[index].getOwenedStates(second) << std::endl;
-        // std::cout << "map2.searchInStates(players[index].getOwenedStates(second)) -> " << map2.searchInStates(players[index].getOwenedStates(second)) << std::endl;
-        // std::cout << "map2.searchInStates(players[index].getOwenedStates(first)) -> " << map2.searchInStates(players[index].getOwenedStates(first)) << std::endl;
-        // std::cout << "map2.searchInStates(players[index].getOwenedStates(second)) -> " << map2.searchInStates(players[index].getOwenedStates(second)) << std::endl;
-        // std::cout << "gggggggggggggggggggg " << map2.getNeighborMap(0, 1) << std::endl;
-        // std::cout << "gggggggggggggggggggg " << map2.getNeighborMap(1, 6) << std::endl;
-        // std::cout << "gggggggggggggggggggg " << map2.getNeighborMap(0, 6) << std::endl;
-        // std::cout << "map2.getNeighborMap(map2.searchInStates(players[index].getOwenedStates(first)), map2.searchInStates- > " << map2.getNeighborMap(map2.searchInStates(players[index].getOwenedStates(first)), map2.searchInStates(players[index].getOwenedStates(second))) << std::endl;
-        if (map2.getNeighborMap(map2.searchInStates(players[index].getOwenedStates(first)), map2.searchInStates(players[index].getOwenedStates(second))) == 1)
-        // std::cout << "checkingTheNeighborhoodOfTwoStates 2- >" << std::endl;
-        {
-            counterNeighbores++;
-            std::cout << "hhhhhhhhhhhhhhhhhhhhhhhhh -> true" << std::endl;
-            return true;
-        }
-        // }
-        std::cout << "checkingTheNeighborhoodOfTwoStates 3- >" << std::endl;
-        std::cout << "hhhhhhhhhhhhhhhhhhhhhhhhh -> false" << std::endl;
-        return false;
-    }
-    bool Control ::checkWin(int index)
-    {
-        std::cout << "oni ke kharabe 1 - > " << players[index].getNumberOfOwenedStates() << std::endl;
-        std::cout << "checkWin 1 -> " << std::endl;
-        for (int i = 0; i < players[index].getNumberOfOwenedStates() - 1; i++)
-        {
-            std::cout << "checkWin 2 -> " << std::endl;
-            checkingTheNeighborhoodOfTwoStates(index, i, i + 1);
-        }
-        std::cout << "checkWin 3 -> " << std::endl;
-        checkingTheNeighborhoodOfTwoStates(index, 0, players[index].getNumberOfOwenedStates() - 1);
+    starterPlayer = winner;
+    int temp = winner;
+    winner = -3;
 
-        if (counterNeighbores == 3 || players[index].getNumberOfOwenedStates() == 5)
-        {
-            std::cout << "checkWin 4 -> " << std::endl;
-            winnerOfGame = players[index].getName();
-            std::cout << "winnerOfGame -> " << winnerOfGame;
-            std::cout << "true" << std::endl;
-            return true;
-        }
-        std::cout << "checkWin 5 -> " << std::endl;
-        std::cout << "false" << std::endl;
-        return false;
-    }
-    void Control::initializeMapInControl()
+    return players[temp].getName();
+}
+void Control::initializeSpecialCards()
+{
+    // std::cout << "-> inja" << std::endl;
+    Zemestan *z = new Zemestan();
+    Tabl_zan *t = new Tabl_zan();
+    Bahar *b = new Bahar();
+    Shah_dokht *s = new Shah_dokht();
+
+    specialCards.push_back(z);
+    specialCards.push_back(t);
+    specialCards.push_back(b);
+    specialCards.push_back(s);
+
+    // std::cout << "-> inja" << std::endl;
+}
+// int Control::searchInCardScore(std::string str)
+// {
+//     return cardsScore.at(str);
+// }
+int Control ::countTabl_zan(int index)
+{
+    int counter = 0;
+    for (int j = 0; j < players[index].getNumberOfPlayedCards(); j++)
     {
-        Map map;
-        map.initializeStates();
-        map.setMapStates();
+        if (players[index].getPlayedCard(j).getName() == "tabl_zan")
+        {
+            counter++;
+        }
+    }
+    return counter;
+}
+int Control ::countZemestan(int index)
+{
+    int counter = 0;
+    for (int j = 0; j < players[index].getNumberOfPlayedCards(); j++)
+    {
+        if (players[index].getPlayedCard(j).getName() == "zemestan")
+        {
+            counter++;
+        }
+    }
+    return counter;
+}
+int Control ::countBahar(int index)
+{
+    int counter = 0;
+    for (int j = 0; j < players[index].getNumberOfPlayedCards(); j++)
+    {
+        if (players[index].getPlayedCard(j).getName() == "bahar")
+        {
+            counter++;
+        }
+    }
+    return counter;
+}
+int Control ::countShir_dokht(int index)
+{
+    int counter = 0;
+    for (int j = 0; j < players[index].getNumberOfPlayedCards(); j++)
+    {
+        if (players[index].getPlayedCard(j).getName() == "shah_dokht")
+        {
+            counter++;
+        }
+    }
+    return counter;
+}
+bool Control ::checkingTheNeighborhoodOfTwoStates(int index, int first, int second)
+{
+    Map map; // for accessing Map's member functions.
+    Map map2;
+    // std::cout << "checkingTheNeighborhoodOfTwoStates 1- >" << std::endl;
+    // if (players[index].getNumberOfOwenedStates() > 2)
+    // {
+    map.initializeStates();
+    map2.initializeStates();
+    map2.setMapStates();
+    initializeMapInControl();
+
+    if (map2.getNeighborMap(map2.searchInStates(players[index].getOwenedStates(first)), map2.searchInStates(players[index].getOwenedStates(second))) == 1)
+
+    {
+        counterNeighbores++;
+        return true;
     }
 
-    int main()
+    return false;
+}
+bool Control ::checkWin(int index)
+{
+
+    for (int i = 0; i < players[index].getNumberOfOwenedStates() - 1; i++)
     {
-        srand(unsigned(time(NULL)));
-        Control c;
-        Zemestan z;
-        Tabl_zan t;
-        Bahar b;
-        Shah_dokht s;
-        c.initializeMapInControl();
-        c.initializeSpecialCards();
-        c.validateIdentity();
-        // c.setPlayers();
-        c.dealingCards();
-        c.shuffelingCards();
-        c.randomCardSet();
-        c.diplayBeggingOfTheGame();
-        c.determinMinAge();
-        // c.displayStarterPlayer();
-        // c.displayWarzone();
-        c.playingInput();
+        checkingTheNeighborhoodOfTwoStates(index, i, i + 1);
     }
+
+    checkingTheNeighborhoodOfTwoStates(index, 0, players[index].getNumberOfOwenedStates() - 1);
+
+    if (counterNeighbores == 3 || players[index].getNumberOfOwenedStates() == 5)
+    {
+        // std::cout << "checkWin 4 -> " << std::endl;
+        winnerOfGame = players[index].getName();
+        // std::cout << "winnerOfGame -> " << winnerOfGame;
+        // std::cout << "true" << std::endl;
+        return true;
+    }
+    // std::cout << "checkWin 5 -> " << std::endl;
+    // std::cout << "false" << std::endl;
+    return false;
+}
+void Control::initializeMapInControl()
+{
+    Map map;
+    map.initializeStates();
+    map.setMapStates();
+}
+
+int main()
+{
+    srand(unsigned(time(NULL)));
+    Control c;
+    Zemestan z;
+    Tabl_zan t;
+    Bahar b;
+    Shah_dokht s;
+    c.initializeMapInControl();
+    c.initializeSpecialCards();
+    c.validateIdentity();
+    // c.setPlayers();
+    c.dealingCards();
+    c.shuffelingCards();
+    c.randomCardSet();
+    c.diplayBeggingOfTheGame();
+    c.determinMinAge();
+    // c.displayStarterPlayer();
+    // c.displayWarzone();
+    c.playingInput();
+}

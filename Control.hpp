@@ -58,7 +58,7 @@ public:
     void displayStartOfWar();
     bool cinSelectedCard(int index);
     bool playingInput();
-    bool playingCards(int index);
+    bool playingCards(int index , bool checkForMatarsak);
     bool checkIfAllPlayersPassed();
     bool checkIfCertianPlayerPassed(int index);
     void controlTurn();
@@ -85,7 +85,10 @@ public:
     bool checkWin(int index);
     void initializeMapInControl();
     bool checkingTheNeighborhoodOfTwoStates(int index,int first,int second);
-
+    void displayPlayingCards(int index);
+    void displayPlayedCards(int index);
+    bool searchForExistingCards(int index , Card searchingCard);
+    bool checkMatarsakPlayed(int index);
 private:
     std::vector<Player> players;
     // std::vector<Player> bazikonha;
