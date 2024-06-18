@@ -1,7 +1,8 @@
 #include <unistd.h>
 #include "Control.hpp"
 
-Control::Control() {
+Control::Control()
+{
     // for (int i= 0 ; i < identity.getPlayerNumber() ; i++)
     // {
     //     players
@@ -98,9 +99,9 @@ void Control::randomCardSet()
     setPlayers();
     for (int j = 0; j < identity.getPlayerNumber(); j++)
     {
-        std::cout<<"margggggggggggggggggggggggggggggggggggggggggg"<<std::endl;
+        std::cout << "margggggggggggggggggggggggggggggggggggggggggg" << std::endl;
         std::cout << "size of vector - > " << players[j].getNumberOfOwenedStates();
-        for (int i = 0; i < (10 + players[j].getNumberOfOwenedStates()) ; i++)
+        for (int i = 0; i < (10 + players[j].getNumberOfOwenedStates()); i++)
         {
             std::cout << "to for random pakhsh kardan 0 " << std::endl;
             randomCard = rand() % 89;
@@ -110,12 +111,12 @@ void Control::randomCardSet()
             players[j].setPlayerCard(allCards[randomCard]);
             std::cout << "to for random pakhsh kardan 2 " << std::endl;
         }
-            std::cout << "biron for random pakhsh kardan 3 " << std::endl;
+        std::cout << "biron for random pakhsh kardan 3 " << std::endl;
         // for (const auto &card : playerCard)
         //     std::cout << card << " ";
         // std::cout << std::endl;
     }
-            std::cout << "biron for asli random pakhsh kardan 4 " << std::endl;
+    std::cout << "biron for asli random pakhsh kardan 4 " << std::endl;
 }
 
 void Control::validateIdentity()
@@ -267,34 +268,35 @@ bool Control::playingCards(int index, bool checkForMatarsak)
     }
     if (!checkForMatarsak)
         return true;
-    // if (searchForExistingCards(index, selectedCard))
-    // {
-    // std :: cout << "card name in playing card func - >" << cardName << std::endl;
-    // std :: cout << "selected card in playing card func - >" << selectedCard.getName() << std::endl;
-    for (int h = 0; h < 10; h++)
+
+    if (searchForExistingCards(index, selectedCard))
     {
-        std ::cout << "helooooooooooooooooooo" << std::endl;
-        std ::cout << "selected card - > " << selectedCard.getName() << std::endl;
-        if ((players[index].getPlayerCard(h)) == selectedCard)
+        // std :: cout << "card name in playing card func - >" << cardName << std::endl;
+        // std :: cout << "selected card in playing card func - >" << selectedCard.getName() << std::endl;
+        for (int h = 0; h < 10; h++)
         {
-            if (selectedCard.getName() == "bahar" || selectedCard.getName() == "zemestan")
+            std ::cout << "helooooooooooooooooooo" << std::endl;
+            std ::cout << "selected card - > " << selectedCard.getName() << std::endl;
+            if ((players[index].getPlayerCard(h)) == selectedCard)
             {
-                baharVSzemestan.push_back(selectedCard);
+                if (selectedCard.getName() == "bahar" || selectedCard.getName() == "zemestan")
+                {
+                    baharVSzemestan.push_back(selectedCard);
+                }
+                players[index].setPlayedCard(selectedCard);
+                players[index].eraseCard(h);
+                break;
             }
-            players[index].setPlayedCard(selectedCard);
-            players[index].eraseCard(h);
-            break;
         }
     }
-    // }
-    // else if (cardName != "matarsak")
-    // {
-    //     std::cout << "the choosen card is not your's!\nplease choose a valid card from the list:\n";
-    //     displayPlayingCards(index);
-    //     cinSelectedCard(index);
-    //     std:: cout << "selected card - > " << selectedCard.getName() << std::endl << "card Name - > " << cardName << std::endl;
-    //     playingCards(index);
-    // }
+    else 
+    {
+        std::cout << "the choosen card is not your's!\nplease choose a valid card from the list:\n";
+        displayPlayingCards(index);
+        std::cout << "selected card - > " << selectedCard.getName() << std::endl
+                  << "card Name - > " << cardName << std::endl;
+        playingCards(index , cinSelectedCard(index));
+    }
     return true;
 }
 bool Control::searchForExistingCards(int index, Card searchingCard)
@@ -396,15 +398,14 @@ int Control ::findMatarsak(int i)
 {
     // for (int i = 0; i < identity.getPlayerNumber(); i++)
     // {
-        for (int j = 0; j < players[i].getNumberOfPlayerCards(); j++)
-        {
+    for (int j = 0; j < players[i].getNumberOfPlayerCards(); j++)
+    {
         if (players[i].getPlayerCard(j).getName() == "matarsak")
         {
             std::cout << "find matarsak -> " << j << std::endl;
             return j;
         }
-
-        }
+    }
     // }
 }
 int Control ::findSelectedCardForMatarsak(std::string str, int index)
