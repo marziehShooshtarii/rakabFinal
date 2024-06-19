@@ -19,7 +19,7 @@ public:
         // for (auto it = cardsScore)
         // std::cout<<maxScore->first;
     }
-    virtual int effectOfCard(int score) override 
+    int effectOfCard(int score)
     {
         return score+=3;
     }
