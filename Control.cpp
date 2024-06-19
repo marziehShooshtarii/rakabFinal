@@ -513,7 +513,7 @@ std::string Control::determinWinnerOfWar()
                 for (int r = 0; r < identity.getPlayerNumber(); r++)
                 {
 
-                    scorsAtEndOfWar[r] = players[r].getNumberOfPlayedCards();
+                    scorsAtEndOfWar[r] = players[r].getNumberOfPlayedCards() - countAllSpecialCards(i);
                 }
             }
         }
@@ -638,6 +638,23 @@ int Control ::countShir_dokht(int index)
         }
     }
     return counter;
+}
+int Control ::countMatarsak(int index)
+{
+    int counter = 0;
+    for (int j = 0; j < players[index].getNumberOfPlayedCards(); j++)
+    {
+        if (players[index].getPlayedCard(j).getName() == "matarsak")
+        {
+            counter++;
+        }
+    }
+    return counter;
+}
+int Control ::countAllSpecialCards(int index)
+{
+    return countBahar(index) + countMatarsak(index) + countShir_dokht(index) + countTabl_zan(index) + countZemestan(index);
+    
 }
 bool Control ::checkingTheNeighborhoodOfTwoStates(int index, int first, int second)
 {

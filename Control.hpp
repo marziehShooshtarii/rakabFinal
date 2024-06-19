@@ -74,6 +74,8 @@ public:
     int countTabl_zan(int index);
     int countBahar(int index);
     int countShir_dokht(int index);
+    int countMatarsak(int index);
+    int countAllSpecialCards(int index);
     // void setStringToSpecialCard();
     void initializeSpecialCards();
     void effectOfMatarsak(Card played, int index);
