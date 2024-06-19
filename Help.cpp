@@ -2,9 +2,7 @@
 #include "Help.hpp"
 Help ::Help()
 {
-    std::cout << "bala" << std::endl;
     setHelpOrders();
-    std::cout << "paiin" << std::endl;
 }
 bool Help::setHelpOrders()
 {
@@ -21,7 +19,6 @@ bool Help::setHelpOrders()
         {
             std::istringstream textHelp(line);
             readHelpFile >> key;
-            std::cout << key << std::endl;
             std::getline(readHelpFile, line);
             help.insert({key, line});
         }
@@ -35,4 +32,3 @@ std::string Help::searchInHelps(std::string str)
 
     return help.at(str);
 }
-//}

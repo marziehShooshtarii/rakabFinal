@@ -13,13 +13,10 @@ public:
 
 private:
     std::ifstream readHelpFile;
-    //std::ifstream readHelpGeneralFile;
     std::unordered_map<std::string,std::string> help;
     std::string line;
-    //std::istringstream textHelp;
     std::string key;
     std::string value;
-    std::vector <std::string> helpDescription;
 };
 
 #endif

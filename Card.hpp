@@ -22,7 +22,6 @@ public:
     std ::unordered_map<std::string, int> cardsScore;
     void setCardScores();
     int searchInCardScore(std::string str);
-
     
 private:
     int characteristic;

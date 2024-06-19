@@ -15,7 +15,6 @@
 #include "Bahar.hpp"
 #include "Shah_dokht.hpp"
 #include "Help.hpp"
-// #include "Dealing.hpp"
 class Control
 {
 public:
@@ -28,24 +27,6 @@ public:
         }
         specialCards.clear();
     }
-    // Control(Zemestan z,Tabl_zan t,Bahar b,shir_dokht s)
-    // {
-    // std::cout <<"-> inja"<<std::endl;
-    // // Zemestan z;
-    // // Tabl_zan t;
-    // // Bahar b;
-    // // shir_dokht s;
-    // specialCards[0] = &z;
-    // specialCards[1] = &t;
-    // specialCards[2] = &b;
-    // specialCards[3] = &s;
-    // std::cout <<"-> inja"<<std::endl;
-
-    // }
-    //     void initializeSpecialCards()
-    // {
-
-    // }
     void diplayBeggingOfTheGame();
     void dealingCards();
     void validateIdentity();
@@ -54,63 +35,47 @@ public:
     int determinMinAge();
     void displayStarterPlayer();
     void displayWarzone();
-    bool winCheck();
     void setPlayers();
     void displayStartOfWar();
     int cinSelectedCard(int index);
     bool playingInput();
-    bool playingCards(int index , int checkForMatarsak);
+    bool playingCards(int index, int checkForMatarsak);
     bool checkIfAllPlayersPassed();
     bool checkIfCertianPlayerPassed(int index);
     void controlTurn();
     std::string determinWinnerOfWar();
-    // void setCardScores();
     std::string findMaxScoreCard();
-    // int searchInCardScore(std::string str);
-    //  ::unordered_map<std::string, int> cardsScore;
-    //  int countTabl_zan(int index);
-    //  int countBahar();
-    //  int countShir_dokht();
     int countZemestan(int index);
     int countTabl_zan(int index);
     int countBahar(int index);
     int countShir_dokht(int index);
     int countMatarsak(int index);
     int countAllSpecialCards(int index);
-    // void setStringToSpecialCard();
     void initializeSpecialCards();
     void effectOfMatarsak(Card played, int index);
     int findSelectedCardForMatarsak(std::string, int index);
-    // std ::unordered_map<std::string, int> cardsScore;
-    // void setCardScores();
-    // int searchInCardScore(std::string str);
     bool ifMaxScoreCardIsInHand(int index);
     bool checkWin(int index);
-    void initializeMapInControl();
-    bool checkingTheNeighborhoodOfTwoStates(int index,int first,int second);
+    bool checkingTheNeighborhoodOfTwoStates(int index, int first, int second);
     void displayPlayingCards(int index);
     void displayPlayedCards(int index);
-    bool searchForExistingCards(int index , Card searchingCard);
+    bool searchForExistingCards(int index, Card searchingCard);
     bool searchForExistingStates(std::string);
     bool checkMatarsakPlayed(int index);
     bool checkIfItsTimeToDealHands();
     int lastPlayerWithRemainedCards();
     int findMatarsak(int i);
     void startOfWarMassage();
-    void displayGameAfterHelp();
-  std::string help(std::string);
-  std::string cinTypeOfHelp();
-    
+    std::string help(std::string);
+    std::string cinTypeOfHelp();
+    void run();
+
 private:
     std::vector<Player> players;
-    // std::vector<Player> bazikonha;
     getData identity;
-    // dealingCards playerDeck;
-    // int numberOfPlayers = identity.getPlayerNumber();
     std ::unordered_map<std::string, int> deck;
     std ::vector<Card> allCards;
     Player adam;
-    // Player adam2;
     int randomCard;
     Card playerCard[10];
     int starterPlayer = 0;
@@ -118,12 +83,8 @@ private:
     Card selectedCard;
     std::string cardName;
     int turn = 1;
-    // std::vector<int> scorsAtEndOfWar = {0};
-    // std::vector<Card>allPlayedCards;
     armyCard army;
-    // void initializeSpecialCards();
     std::vector<Special *> specialCards;
-    // std ::unordered_map<std::string, Card> stringToSpecialCard;
     int maxScore = 0;
     int counterNeighbores = 0;
     std::string winnerOfGame;

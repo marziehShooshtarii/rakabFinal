@@ -2,8 +2,6 @@
 #define DATA_H
 
 #include <iostream>
-// #include <vector>
-// #include <string>
 #include "Player.hpp"
 
 class getData {
@@ -31,4 +29,4 @@ class getData {
     int playerNumber;
 };
 
-#endif // !DATA_H
+#endif 

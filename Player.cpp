@@ -1,5 +1,4 @@
 #include "Player.hpp"
-//std::vector<std::string> owenedStates(0);
 Player::Player() {}
 Player::Player(int p_numberOfPlayers)
 {
@@ -85,21 +84,4 @@ void Player::erasePlayedCard(int index)
 {
     playedCardList.erase(playedCardList.begin() + index);
 }
-// void decreaseNumberOfPlayedCards()
-// {
 
-// }
-// int Player ::countTabl_zan()
-// {
-//     for(int i = 0; i < playedCardList.size(); i++)
-//     {
-//         if (playedCardList[i])
-//     }
-//     playedCardList.getPlayedCard().count(playedCardList.begin(),playedCardList.end(),"tabl_zan")
-// }
-// int main ()
-// {
-//     std::vector <Player> adam;
-//     adam.push_back(Player (4)) ;
-//     std::cout << adam[0].getNumberOfPlayer();
-// }

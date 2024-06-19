@@ -1,14 +1,5 @@
-// #include <vector>
 #include <iostream>
 #include "Data.hpp"
-// int getAge(int i)
-//     {
-//         return players[i].getAge();
-//     }
-//     std::string getName(int i)
-//     {
-//         return players[i].getName();
-//     }
 void getData::setPlayerNumber()
 {
     std::cout << "Enter the number of players in the game:" << std::endl;
