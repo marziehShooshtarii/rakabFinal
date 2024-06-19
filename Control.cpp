@@ -15,25 +15,39 @@ void Control::startOfWarMassage()
 }
 void Control::displayStarterPlayer()
 {
-    // startOfWarMassage();
+
     std::cin.ignore();
-    std::cout << identity.getName(starterPlayer) << " please choose the warzone";
+    std::cout << identity.getName(starterPlayer) << " please choose the warzone ";
     std::cin >> warzone;
-    // bool flag=
     while (!searchForExistingStates(warzone))
     {
         displayStarterPlayer();
-        // searchForExistingStates(warzone);
     }
 }
 void Control::displayWarzone()
 {
     std::cout << "the selected warzone is " << warzone << " get ready for a war!!\n";
+    std::cout << "-----------------------------------------------------------------------------------------------" << std::endl;
+}
+// void Control::displayPlayedCards()
+// {
+
+// }
+void Control ::displayOwenedStates()
+{
+    for (int i = 0; i < identity.getPlayerNumber(); i++)
+    {
+        std::cout << "@" << players[i].getName() << " : ";
+        for (int j = 0; j < players[i].getNumberOfOwenedStates(); j++)
+        {
+            std::cout << players[i].getOwenedStates(j);
+        }
+        std::cout << std::endl;
+    }
+    std::cout << "-----------------------------------------------------------------------------------------------" << std::endl;
 }
 int Control::determinMinAge()
 {
-
-    std::cout << "getPlayerNumber ->" << identity.getPlayerNumber() << std::endl;
     int min = identity.getAge(0);
     for (int i = 1; i < identity.getPlayerNumber(); i++)
     {
@@ -42,9 +56,7 @@ int Control::determinMinAge()
             min = identity.getAge(i);
             starterPlayer = i;
         }
-        std::cout << "i ->" << i << std::endl;
     }
-    std::cout << "starterPlayer ->" << starterPlayer << std::endl;
     return starterPlayer;
 }
 
@@ -137,6 +149,7 @@ bool Control::playingInput()
         startOfWarMassage();
         displayStarterPlayer();
         displayWarzone();
+        displayOwenedStates();
         for (int c = 0; c < identity.getPlayerNumber(); c++)
         {
             players[c].setIfPassed(false);
@@ -152,6 +165,9 @@ bool Control::playingInput()
 
                 if (!checkIfCertianPlayerPassed(i))
                 {
+                    for (int d = 0; d < identity.getPlayerNumber(); d++)
+                        displayPlayedCards(d);
+
                     std::cout << players[i].getName() << " it's your turn " << "\n\tplease chose your card from the list or pass:\n " << "\t\n";
                     displayPlayingCards(i);
                     int checkSelectedCard = cinSelectedCard(i);
@@ -160,7 +176,7 @@ bool Control::playingInput()
                     {
 
                         displayPlayingCards(i);
-                        displayPlayedCards(i);
+                        //displayPlayedCards(i);
                     }
                 }
 
@@ -286,8 +302,8 @@ void Control::displayPlayedCards(int index)
 {
     for (int i = 0; i < players[index].getNumberOfPlayedCards(); i++)
     {
-        std::cout << "the cards on the floor: \n"
-                  << players[index].getPlayedCard(i).getName() << std::endl;
+        std::cout <<"->"<<players[index].getName()<< " : "
+                  << players[index].getPlayedCard(i).getName() << "\n\n";
     }
 }
 bool Control::checkIfAllPlayersPassed()
@@ -647,30 +663,5 @@ void Control::run()
     randomCardSet();
     diplayBeggingOfTheGame();
     determinMinAge();
-    // c.displayStarterPlayer();
-    // c.displayWarzone();
     playingInput();
 }
-// int main()
-// {
-//     srand(unsigned(time(NULL)));
-//     Control c;
-//     Zemestan z;
-//     Tabl_zan t;
-//     Bahar b;
-//     Shah_dokht s;
-//     c.run();
-//     // c.initializeMapInControl();
-//     // c.help();
-//     // c.initializeSpecialCards();
-//     // c.validateIdentity();
-//     // // c.setPlayers();
-//     // c.dealingCards();
-//     // c.shuffelingCards();
-//     // c.randomCardSet();
-//     // c.diplayBeggingOfTheGame();
-//     // c.determinMinAge();
-//     // // c.displayStarterPlayer();
-//     // // c.displayWarzone();
-//     // c.playingInput();
-// }
