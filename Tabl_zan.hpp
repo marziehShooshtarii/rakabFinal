@@ -4,16 +4,10 @@
 class Tabl_zan : public Special
 {
 public:
-    virtual int effectOfCard(int score) override 
+    virtual int effectOfCard(int score) override
     {
-        return score*=2;
+        return score *= 2;
     }
-
 };
-
-
-
-
-
 
 #endif

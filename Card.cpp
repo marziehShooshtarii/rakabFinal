@@ -6,7 +6,6 @@ Card::Card(const std::string &p_nameOfCard)
 {
     nameOfCard = p_nameOfCard;
 }
-
 std::string Card::getName()
 {
     return nameOfCard;

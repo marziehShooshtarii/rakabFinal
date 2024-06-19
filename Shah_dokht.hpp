@@ -4,16 +4,10 @@
 class Shah_dokht : public Special
 {
 public:
-    virtual int effectOfCard(int score) override 
+    virtual int effectOfCard(int score) override
     {
-        return score+=10;
+        return score += 10;
     }
-
 };
-
-
-
-
-
 
 #endif

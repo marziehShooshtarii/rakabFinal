@@ -84,4 +84,3 @@ void Player::erasePlayedCard(int index)
 {
     playedCardList.erase(playedCardList.begin() + index);
 }
-

@@ -5,10 +5,9 @@
 class Bahar : public Special
 {
 public:
-
     int effectOfCard(int score)
     {
-        return score+=3;
+        return score += 3;
     }
 };
 

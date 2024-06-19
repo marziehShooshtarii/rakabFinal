@@ -11,6 +11,5 @@ public:
         Card::setCharacter(value);
     }
     virtual int effectOfCard(int score) = 0;
-
 };
 #endif

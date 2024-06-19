@@ -13,7 +13,7 @@ public:
 
 private:
     std::ifstream readHelpFile;
-    std::unordered_map<std::string,std::string> help;
+    std::unordered_map<std::string, std::string> help;
     std::string line;
     std::string key;
     std::string value;

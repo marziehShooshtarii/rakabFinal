@@ -21,10 +21,10 @@ void getData::setData()
             {
                 std::cout << "your age can't be under 0 ; please enter a valid age" << std::endl;
                 std::cin >> playerAge;
-            }    
+            }
             std::cout << "Enter the " << i + 1 << " player chosen color: ";
             std::cin >> playerColor;
-            players.push_back(Player(playerAge, PlayerName, playerColor , false));
+            players.push_back(Player(playerAge, PlayerName, playerColor, false));
         }
     }
     else

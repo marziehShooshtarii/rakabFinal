@@ -7,19 +7,17 @@ class Map
 {
 public:
     Map();
-     bool setMapStates();
+    bool setMapStates();
     void initializeStates();
     int searchInStates(std::string);
     int getNeighborMap(int i, int j);
     bool ifElementExists(std::string str);
 
-
 private:
-std::unordered_map<std::string,int>states;
+    std::unordered_map<std::string, int> states;
 
     bool neighborMap[14][14];
     std ::ifstream readMapFile;
 };
-
 
 #endif

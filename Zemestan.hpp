@@ -4,17 +4,10 @@
 class Zemestan : public Special
 {
 public:
-    virtual int effectOfCard(int score) override 
+    virtual int effectOfCard(int score) override
     {
-        
-        return score=1;
+        return score = 1;
     }
-
 };
-
-
-
-
-
 
 #endif

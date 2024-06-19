@@ -69,7 +69,6 @@ public:
     std::string help(std::string);
     std::string cinTypeOfHelp();
     void displayOwenedStates();
-    //void displayedPlayedCards();
     void run();
 
 private:

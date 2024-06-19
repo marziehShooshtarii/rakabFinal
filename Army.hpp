@@ -4,7 +4,6 @@
 class armyCard : public Card
 {
 public:
-    // armyCard(std::string name);
     void setCharacter(int value) override
     {
         Card::setCharacter(value);
@@ -13,7 +12,6 @@ public:
     {
         return Card::getCharacter();
     }
-    //    void SetNumberOfCard();
-    int increasScore(std::string,int score);
+    int increasScore(std::string, int score);
 };
 #endif

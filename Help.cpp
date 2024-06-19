@@ -6,7 +6,6 @@ Help ::Help()
 }
 bool Help::setHelpOrders()
 {
-
     readHelpFile.open("help.txt", std::ios::in);
     if (!readHelpFile.is_open())
     {
@@ -22,13 +21,11 @@ bool Help::setHelpOrders()
             std::getline(readHelpFile, line);
             help.insert({key, line});
         }
-
     }
- 
+
     return 0;
 }
 std::string Help::searchInHelps(std::string str)
 {
-
     return help.at(str);
 }
