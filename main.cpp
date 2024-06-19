@@ -1,14 +1,26 @@
 #include <iostream>
 #include <time.h>
 #include <stdlib.h>
-#include "dealing.hpp"
-int main ()
+#include "Control.hpp"
+
+int main()
 {
     srand(unsigned(time(NULL)));
-    dealingCards r;
-    r.setDealing();
-    r.shuffelingCards();
-    r.validateIdentity();
-    r.randomCardSet();
-    return 1;
+    Control c;
+    // Tabl_zan t;
+    // Shah_dokht s;
+    c.run();
+    // c.initializeMapInControl();
+    // c.help();
+    // c.initializeSpecialCards();
+    // c.validateIdentity();
+    // // c.setPlayers();
+    // c.dealingCards();
+    // c.shuffelingCards();
+    // c.randomCardSet();
+    // c.diplayBeggingOfTheGame();
+    // c.determinMinAge();
+    // // c.displayStarterPlayer();
+    // // c.displayWarzone();
+    // c.playingInput();
 }
