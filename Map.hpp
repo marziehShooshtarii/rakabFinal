@@ -10,6 +10,11 @@ public:
     //void initializeStates();
     //int searchInStates(std::string);
     //int getNeighborMap(int i, int j);
+    Map()
+    {
+        initializeStates();
+        setMapStates();
+    }
     bool setMapStates()
 {
     readMapFile.open("matrix.txt", std::ios::in);
@@ -71,6 +76,17 @@ int getNeighborMap(int i,int j)
 {
     return neighborMap[i][j];
 }
+bool ifElementExists(std::string str)
+{
+    
+    if (states.find(str)==states.end())
+    {
+        std::cout<<"aaaaaaaaaaa"<<std::endl;
+        return false;
+    }
+    std::cout<<"aaaaaaaaaaa 2"<<std::endl;
+    return true;
+}
 
 private:
 std::unordered_map<std::string,int>states;
@@ -79,5 +95,6 @@ std::unordered_map<std::string,int>states;
     std ::ifstream readMapFile;
     // Player owner;
 };
+
 
 #endif

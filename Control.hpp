@@ -88,10 +88,12 @@ public:
     void displayPlayingCards(int index);
     void displayPlayedCards(int index);
     bool searchForExistingCards(int index , Card searchingCard);
+    bool searchForExistingStates(std::string);
     bool checkMatarsakPlayed(int index);
     bool checkIfItsTimeToDealHands();
     int lastPlayerWithRemainedCards();
     int findMatarsak(int i);
+    void startOfWarMassage();
     
 private:
     std::vector<Player> players;

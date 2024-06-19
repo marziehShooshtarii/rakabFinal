@@ -8,12 +8,24 @@ Control::Control()
     //     players
     // }
 }
+void Control::startOfWarMassage()
+{
+
+    std::cout << "press enter to start the war ";
+}
 void Control::displayStarterPlayer()
 {
-    std::cout << "press enter to start the war ";
+    //startOfWarMassage();
     std::cin.ignore();
     std::cout << identity.getName(starterPlayer) << " please choose the warzone";
     std::cin >> warzone;
+    //bool flag=
+    while(!searchForExistingStates(warzone))
+{
+    displayStarterPlayer();
+    //searchForExistingStates(warzone);
+}
+    
 }
 void Control::displayWarzone()
 {
@@ -148,6 +160,7 @@ bool Control::playingInput()
         // randomCardSet();
         //  std::cout<<"oni ke kharabe 0 - > "<<players[q].getNumberOfOwenedStates()<<std::endl;
         //  std::cin.ignore();
+        startOfWarMassage();
         displayStarterPlayer();
         displayWarzone();
         for (int c = 0; c < identity.getPlayerNumber(); c++)
@@ -289,13 +302,13 @@ bool Control::playingCards(int index, bool checkForMatarsak)
             }
         }
     }
-    else 
+    else
     {
         std::cout << "the choosen card is not your's!\nplease choose a valid card from the list:\n";
         displayPlayingCards(index);
         std::cout << "selected card - > " << selectedCard.getName() << std::endl
                   << "card Name - > " << cardName << std::endl;
-        playingCards(index , cinSelectedCard(index));
+        playingCards(index, cinSelectedCard(index));
     }
     return true;
 }
@@ -477,37 +490,37 @@ std::string Control::determinWinnerOfWar()
     winner = -3;
     for (int i = 0; i < identity.getPlayerNumber(); i++)
     {
-        int repeatForEachCard[4] = {0, countTabl_zan(i), 0, countShir_dokht(i)};
+        int repeatForEachCard[2] = {countTabl_zan(i), countShir_dokht(i)};
         for (int j = 0; j < players[i].getNumberOfPlayedCards(); j++)
         {
 
             scorsAtEndOfWar[i] = army.increasScore(players[i].getPlayedCard(j).getName(), scorsAtEndOfWar[i]);
         }
 
+        if (baharVSzemestan.size() > 0)
+        {
+            if (baharVSzemestan[baharVSzemestan.size() - 1].getName() == "bahar")
+            {
+                Bahar bahar;
+                findMaxScoreCard();
+                if (ifMaxScoreCardIsInHand(i))
+                {
+                    scorsAtEndOfWar[i] = bahar.effectOfCard(maxScore);
+                }
+            }
+            else
+            {
+                for (int r = 0; r < identity.getPlayerNumber(); r++)
+                {
+
+                    scorsAtEndOfWar[r] = players[r].getNumberOfPlayedCards();
+                }
+            }
+        }
         for (int k = 0; k < specialCards.size(); k++)
         {
             std::cout << "k -> " << k << std::endl;
 
-            if (baharVSzemestan.size() > 0)
-            {
-                if (baharVSzemestan[baharVSzemestan.size() - 1].getName() == "bahar")
-                {
-
-                    findMaxScoreCard();
-                    if (ifMaxScoreCardIsInHand(i))
-                    {
-                        scorsAtEndOfWar[i] = specialCards[2]->effectOfCard(maxScore);
-                    }
-                }
-                else
-                {
-                    for (int r = 0; r < identity.getPlayerNumber(); r++)
-                    {
-
-                        scorsAtEndOfWar[r] = players[r].getNumberOfPlayedCards();
-                    }
-                }
-            }
             for (int g = 0; g < repeatForEachCard[k]; g++)
             {
 
@@ -562,14 +575,14 @@ std::string Control::determinWinnerOfWar()
 void Control::initializeSpecialCards()
 {
     // std::cout << "-> inja" << std::endl;
-    Zemestan *z = new Zemestan();
+    // Zemestan *z = new Zemestan();
     Tabl_zan *t = new Tabl_zan();
-    Bahar *b = new Bahar();
+    // Bahar *b = new Bahar();
     Shah_dokht *s = new Shah_dokht();
 
-    specialCards.push_back(z);
+    // specialCards.push_back(z);
     specialCards.push_back(t);
-    specialCards.push_back(b);
+    // specialCards.push_back(b);
     specialCards.push_back(s);
 
     // std::cout << "-> inja" << std::endl;
@@ -633,10 +646,10 @@ bool Control ::checkingTheNeighborhoodOfTwoStates(int index, int first, int seco
     // std::cout << "checkingTheNeighborhoodOfTwoStates 1- >" << std::endl;
     // if (players[index].getNumberOfOwenedStates() > 2)
     // {
-    map.initializeStates();
-    map2.initializeStates();
-    map2.setMapStates();
-    initializeMapInControl();
+    // map.initializeStates();
+    // map2.initializeStates();
+    // map2.setMapStates();
+    // initializeMapInControl();
 
     if (map2.getNeighborMap(map2.searchInStates(players[index].getOwenedStates(first)), map2.searchInStates(players[index].getOwenedStates(second))) == 1)
 
@@ -669,12 +682,12 @@ bool Control ::checkWin(int index)
     // std::cout << "false" << std::endl;
     return false;
 }
-void Control::initializeMapInControl()
-{
-    Map map;
-    map.initializeStates();
-    map.setMapStates();
-}
+// void Control::initializeMapInControl()
+// {
+//     Map map;
+//     map.initializeStates();
+//     map.setMapStates();
+// }
 bool Control::checkIfItsTimeToDealHands()
 {
     int counterFullHands = 0;
@@ -701,6 +714,22 @@ int Control::lastPlayerWithRemainedCards()
         }
     }
 }
+bool Control::searchForExistingStates(std::string warzone)
+{
+    Map mapObj;
+    //mapObj.initializeStates();
+    //mapObj.setMapStates();
+    //initializeMapInControl();
+    if (!mapObj.ifElementExists(warzone))
+    {
+        std::cout << "invalid state.please enter a valid state" << std::endl;
+    //    displayStarterPlayer();
+    //     displayWarzone();
+        return false;
+    }
+    std::cout<<"dardddddddddddddddddddddddddddddddddddddddddddddddddddddd"<<std::endl;
+    return true;
+}
 int main()
 {
     srand(unsigned(time(NULL)));
@@ -709,7 +738,7 @@ int main()
     Tabl_zan t;
     Bahar b;
     Shah_dokht s;
-    c.initializeMapInControl();
+    //c.initializeMapInControl();
     c.initializeSpecialCards();
     c.validateIdentity();
     // c.setPlayers();
