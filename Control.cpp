@@ -15,17 +15,16 @@ void Control::startOfWarMassage()
 }
 void Control::displayStarterPlayer()
 {
-    //startOfWarMassage();
+    // startOfWarMassage();
     std::cin.ignore();
     std::cout << identity.getName(starterPlayer) << " please choose the warzone";
     std::cin >> warzone;
-    //bool flag=
-    while(!searchForExistingStates(warzone))
-{
-    displayStarterPlayer();
-    //searchForExistingStates(warzone);
-}
-    
+    // bool flag=
+    while (!searchForExistingStates(warzone))
+    {
+        displayStarterPlayer();
+        // searchForExistingStates(warzone);
+    }
 }
 void Control::displayWarzone()
 {
@@ -184,9 +183,9 @@ bool Control::playingInput()
                     //     std::cout << (players[i].getPlayerCard(k).getName()) << " ";
                     // }
                     displayPlayingCards(i);
-                    bool checkformatarsak = cinSelectedCard(i);
+                    int checkSelectedCard = cinSelectedCard(i);
 
-                    if (playingCards(i, checkformatarsak))
+                    if (playingCards(i, checkSelectedCard))
                     {
 
                         displayPlayingCards(i);
@@ -203,6 +202,17 @@ bool Control::playingInput()
                         // }
                         displayPlayedCards(i);
                     }
+                    // if (checkSelectedCard == 2)
+                    // {
+                    //     system("CLS");
+                    //     help(cinTypeOfHelp());
+                    //     std::cin.ignore();
+                    //     system("CLS");
+                    //     //cinSelectedCard(i);
+                    //     // displayPlayingCards(i);
+                    //     // displayPlayedCards(i);
+
+                    // }
                 }
                 //}
                 i++;
@@ -271,7 +281,7 @@ void Control::displayPlayingCards(int index)
         std::cout << (players[index].getPlayerCard(k).getName()) << " ";
     }
 }
-bool Control::playingCards(int index, bool checkForMatarsak)
+bool Control::playingCards(int index, int checkSelectedCard)
 {
     if (cardName == "pass")
     {
@@ -279,7 +289,18 @@ bool Control::playingCards(int index, bool checkForMatarsak)
         checkIfCertianPlayerPassed(index);
         return false;
     }
-    if (!checkForMatarsak)
+    if (checkSelectedCard == 2)
+    {
+        
+        system("CLS");
+        help(cinTypeOfHelp());
+        std::cin.ignore();
+        //system("CLS");
+        displayPlayingCards(index);
+        playingCards(index, cinSelectedCard(index));
+        return true;
+    }
+    if (checkSelectedCard != 3)
         return true;
 
     if (searchForExistingCards(index, selectedCard))
@@ -342,20 +363,28 @@ bool Control::checkIfAllPlayersPassed()
     }
     return false;
 }
-bool Control::cinSelectedCard(int index)
+int Control::cinSelectedCard(int index)
 {
     std::cin >> cardName;
     if (cardName == "pass")
     {
         cardName = "pass";
-        return false;
+        return 1;
+    }
+    if (cardName == "help")
+    {
+        // system("CLS");
+        // help(cinTypeOfHelp());
+        // std::cin.ignore();
+        //std::cout<<"hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh"<<std::endl;
+        return 2;
     }
     if (!checkMatarsakPlayed(index))
     {
         selectedCard.setName(cardName);
-        return true;
+        return 3;
     }
-    return false;
+    return 4;
 }
 bool Control::checkMatarsakPlayed(int index)
 {
@@ -654,7 +683,6 @@ int Control ::countMatarsak(int index)
 int Control ::countAllSpecialCards(int index)
 {
     return countBahar(index) + countMatarsak(index) + countShir_dokht(index) + countTabl_zan(index) + countZemestan(index);
-    
 }
 bool Control ::checkingTheNeighborhoodOfTwoStates(int index, int first, int second)
 {
@@ -734,18 +762,38 @@ int Control::lastPlayerWithRemainedCards()
 bool Control::searchForExistingStates(std::string warzone)
 {
     Map mapObj;
-    //mapObj.initializeStates();
-    //mapObj.setMapStates();
-    //initializeMapInControl();
+    // mapObj.initializeStates();
+    // mapObj.setMapStates();
+    // initializeMapInControl();
     if (!mapObj.ifElementExists(warzone))
     {
         std::cout << "invalid state.please enter a valid state" << std::endl;
-    //    displayStarterPlayer();
-    //     displayWarzone();
+        //    displayStarterPlayer();
+        //     displayWarzone();
         return false;
     }
-    std::cout<<"dardddddddddddddddddddddddddddddddddddddddddddddddddddddd"<<std::endl;
+    std::cout << "dardddddddddddddddddddddddddddddddddddddddddddddddddddddd" << std::endl;
     return true;
+}
+// void Control ::displayGameAfterHelp()
+// {
+
+// }
+std::string Control::help(std::string str)
+{
+    Help help;
+    std::cout << str << " : " << help.searchInHelps(str) << std::endl;
+    //return help.searchInHelps(str);
+}
+std::string Control::cinTypeOfHelp()
+{
+    std::string typeOfHelp;
+    std::cout << "if you want general halp about the game enter 'general' and if you want help about a specific special card enter the card's name." << std::endl;
+    std::cin >> typeOfHelp;
+    return typeOfHelp;
+}
+void Control ::displayGameAfterHelp()
+{
 }
 int main()
 {
@@ -755,7 +803,8 @@ int main()
     Tabl_zan t;
     Bahar b;
     Shah_dokht s;
-    //c.initializeMapInControl();
+    // c.initializeMapInControl();
+    // c.help();
     c.initializeSpecialCards();
     c.validateIdentity();
     // c.setPlayers();

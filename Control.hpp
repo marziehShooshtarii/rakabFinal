@@ -14,6 +14,7 @@
 #include "Tabl_zan.hpp"
 #include "Bahar.hpp"
 #include "Shah_dokht.hpp"
+#include "Help.hpp"
 // #include "Dealing.hpp"
 class Control
 {
@@ -56,9 +57,9 @@ public:
     bool winCheck();
     void setPlayers();
     void displayStartOfWar();
-    bool cinSelectedCard(int index);
+    int cinSelectedCard(int index);
     bool playingInput();
-    bool playingCards(int index , bool checkForMatarsak);
+    bool playingCards(int index , int checkForMatarsak);
     bool checkIfAllPlayersPassed();
     bool checkIfCertianPlayerPassed(int index);
     void controlTurn();
@@ -96,6 +97,9 @@ public:
     int lastPlayerWithRemainedCards();
     int findMatarsak(int i);
     void startOfWarMassage();
+    void displayGameAfterHelp();
+  std::string help(std::string);
+  std::string cinTypeOfHelp();
     
 private:
     std::vector<Player> players;
