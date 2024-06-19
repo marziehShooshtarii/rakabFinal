@@ -11,7 +11,7 @@ public:
     void initializeStates();
     int searchInStates(std::string);
     int getNeighborMap(int i, int j);
-    bool Map::ifElementExists(std::string str);
+    bool ifElementExists(std::string str);
 //     Map()
 //     {
 //         initializeStates();

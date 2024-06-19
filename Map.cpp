@@ -1,5 +1,5 @@
 
-//#include <iostream>
+// #include <iostream>
 #include "Map.hpp"
 // bool Map::setMapStates()
 // {
@@ -32,7 +32,7 @@
 // // }
 // void Map::initializeStates()
 // {
-//     states = 
+//     states =
 //     {
 //         {"bella",0},
 //         {"caline",1},
@@ -51,7 +51,6 @@
 
 //     };
 
-
 //}
 // int Map::searchInStates(std::string str)
 // {
@@ -61,10 +60,6 @@
 // {
 //     return neighborMap[i][j];
 // }
-
-
-
-
 
 //     bool setMapStates()
 // {
@@ -91,12 +86,9 @@
 //     return 0;
 // }
 
-
-
-
 // void initializeStates()
 // {
-//     states = 
+//     states =
 //     {
 //         {"bella",0},
 //         {"caline",1},
@@ -115,19 +107,18 @@
 
 //     };
 
-
 // }
 // int Map::searchInStates(std::string str)
 // {
 //     //std::cout <<"states.at(str) - >" << states.at(str) <<std::endl;
 //    return states.at(str);
 // }
-    Map::Map()
-    {
-        initializeStates();
-        setMapStates();
-    }
-    bool Map::setMapStates()
+Map::Map()
+{
+    initializeStates();
+    setMapStates();
+}
+bool Map::setMapStates()
 {
     readMapFile.open("matrix.txt", std::ios::in);
     if (!readMapFile.is_open())
@@ -158,44 +149,42 @@
 // }
 void Map::initializeStates()
 {
-    states = 
-    {
-        {"bella",0},
-        {"caline",1},
-        {"enna",2},
-        {"atela",3},
-        {"dimase",4},
-        {"olivadi",5},
-        {"lia",6},
-        {"armento",7},
-        {"morina",8},
-        {"talmone",9},
-        {"elinia",10},
-        {"rollo",11},
-        {"pladaci",12},
-        {"borge",13},
+    states =
+        {
+            {"bella", 0},
+            {"caline", 1},
+            {"enna", 2},
+            {"atela", 3},
+            {"dimase", 4},
+            {"olivadi", 5},
+            {"lia", 6},
+            {"armento", 7},
+            {"morina", 8},
+            {"talmone", 9},
+            {"elinia", 10},
+            {"rollo", 11},
+            {"pladaci", 12},
+            {"borge", 13},
 
-    };
-
-
+        };
 }
 int Map::searchInStates(std::string str)
 {
-    //std::cout <<"states.at(str) - >" << states.at(str) <<std::endl;
-   return states.at(str);
+    // std::cout <<"states.at(str) - >" << states.at(str) <<std::endl;
+    return states.at(str);
 }
-int Map::getNeighborMap(int i,int j)
+int Map::getNeighborMap(int i, int j)
 {
     return neighborMap[i][j];
 }
 bool Map::ifElementExists(std::string str)
 {
-    
-    if (states.find(str)==states.end())
+
+    if (states.find(str) == states.end())
     {
-        std::cout<<"aaaaaaaaaaa"<<std::endl;
+        std::cout << "aaaaaaaaaaa" << std::endl;
         return false;
     }
-    std::cout<<"aaaaaaaaaaa 2"<<std::endl;
+    std::cout << "aaaaaaaaaaa 2" << std::endl;
     return true;
 }
