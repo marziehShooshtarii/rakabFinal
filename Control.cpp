@@ -62,7 +62,7 @@ void Control::diplayBeggingOfTheGame()
         i++;
         std::cout << std::endl;
         std::cin.ignore();
-         system("CLS");
+        system("CLS");
     }
 }
 void Control::dealingCards()
@@ -112,7 +112,7 @@ void Control::validateIdentity()
 {
     identity.setPlayerNumber();
     identity.setData();
-    system("CLS");
+   system("CLS");
 }
 void Control::shuffelingCards()
 {
@@ -314,16 +314,37 @@ bool Control::checkMatarsakPlayed(int index)
         }
         else
         {
-            std::cout << "please choose the card that you want to get back." << std::endl;
+            std::cout << "please choose the card that you want to get back from the list." << std::endl;
             for (int i = 0; i < players[index].getNumberOfPlayedCards(); i++)
             {
                 std::cout << players[index].getPlayedCard(i).getName() << std::endl;
             }
             std::cin >> cardName;
+            if(checkCardsForMatarsak(index))
+            {
             selectedCardForMatarsak.setName(cardName);
             effectOfMatarsak(selectedCardForMatarsak, index);
+            }
+            else 
+            {
+                std::cout<<"invalid card.";
+                cardName = "matarsak";
+                checkMatarsakPlayed(index);
+            }
+            
         }
         return true;
+    }
+    return false;
+}
+bool Control::checkCardsForMatarsak(int index)
+{
+    for (int i = 0; i < players[index].getNumberOfPlayedCards(); i++)
+    {
+        if (cardName == players[index].getPlayedCard(i).getName())
+        {
+            return true;
+        }
     }
     return false;
 }
@@ -468,7 +489,7 @@ std::string Control::determinWinnerOfWar()
     }
     std::cout << "winner - > " << players[winner].getName() << std::endl;
     std::cin.ignore();
-    system("CLS");
+   system("CLS");
     starterPlayer = winner;
     int temp = winner;
     winner = -3;

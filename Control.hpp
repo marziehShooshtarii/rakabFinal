@@ -69,6 +69,7 @@ public:
     std::string help(std::string);
     std::string cinTypeOfHelp();
     void displayOwenedStates();
+    bool checkCardsForMatarsak(int index);
     void run();
 
 private:
