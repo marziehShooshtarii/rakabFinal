@@ -5,6 +5,7 @@
 class getData
 {
 public:
+    getData();
     int getAge(int i)
     {
         return players[i].getAge();
@@ -20,11 +21,20 @@ public:
     void setData();
     int getPlayerNumber();
     void setPlayerNumber();
+    void selectColorForPleyer();
+    std::string getColorForPlayer(int i);
+    void eraseColorForPlayer(int i);
+    void getPlayerSelectedColor(int i);
+    void setPlayerName(int i);
+    void setPlayerAge(int i);
+    int validateColor(std::string color);
+    void displayColor(int i);
 
 private:
     std::string PlayerName;
     std::string playerColor;
     std::vector<Player> players;
+    std::vector<std::string> colorShow;
     int playerAge;
     int playerNumber;
 };
