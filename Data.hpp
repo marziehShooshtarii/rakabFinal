@@ -25,8 +25,8 @@ public:
     std::string getColorForPlayer(int i);
     void eraseColorForPlayer(int i);
     void getPlayerSelectedColor(int i);
-    void setPlayerName(int i);
-    void setPlayerAge(int i);
+    void setPlayerName();
+    void setAgeOfPlayers();
     int validateColor(std::string color);
     void displayColor(int i);
 

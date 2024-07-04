@@ -18,14 +18,9 @@ void getData::setData()
         for (size_t i = 0; i < playerNumber; i++)
         {
             std::cout << "Enter the " << i + 1 << " player name: ";
-            std::cin >> PlayerName;
+            setPlayerName();
             std::cout << "Enter the " << i + 1 << " player age: ";
-            std::cin >> playerAge;
-            if (playerAge < 0)
-            {
-                std::cout << "your age can't be under 0 ; please enter a valid age" << std::endl;
-                std::cin >> playerAge;
-            }
+            setAgeOfPlayers();
             std::cout << "Enter the " << i + 1 << " player chosen color from the list:\n";
             displayColor(i);
             getPlayerSelectedColor(i);
@@ -39,6 +34,20 @@ void getData::setData()
         setData();
     }
 }
+void getData::setPlayerName()
+{
+    std::cin >> PlayerName;
+}
+void getData::setAgeOfPlayers()
+{
+    std::cin >> playerAge;
+    //validate the age of players
+    if (playerAge <= 0)
+    {
+        std::cout << "your age can't be 0 or under 0 ; please enter a valid age" << std::endl;
+        setAgeOfPlayers();
+    }
+}
 int getData::getPlayerNumber()
 {
     return playerNumber;
@@ -46,10 +55,10 @@ int getData::getPlayerNumber()
 void getData::getPlayerSelectedColor(int i)
 {
     std::cin >> playerColor;
-    int checkColorPosition = validateColor(playerColor); //find the color in the vector
+    int checkColorPosition = validateColor(playerColor); // find the color in the vector
     if (checkColorPosition != -1)
     {
-        eraseColorForPlayer(checkColorPosition);       
+        eraseColorForPlayer(checkColorPosition);
     }
     else if (checkColorPosition == -1)
     {
@@ -68,13 +77,13 @@ void getData::displayColor(int i)
 }
 int getData::validateColor(std::string color)
 {
-    //determin whether the color is valid or not
+    // determin whether the color is valid or not
     for (int i = 0; i < colorShow.size(); i++)
     {
         if (colorShow[i] == color)
             return i;
     }
-    return -1; //used for invalid colors
+    return -1; // used for invalid colors
 }
 void getData::selectColorForPleyer()
 {
