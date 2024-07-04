@@ -62,7 +62,7 @@ void Control::diplayBeggingOfTheGame()
         i++;
         std::cout << std::endl;
         std::cin.ignore();
-        system("CLS");
+         system("CLS");
     }
 }
 void Control::dealingCards()
@@ -373,24 +373,35 @@ std ::string Control::findMaxScoreCard()
 {
     Card card; // for accesing Card member functions
     std ::string maxScoreCardName;
-    card.setCardScores();
+    for (int k = 0; k < identity.getPlayerNumber(); k++)
+    {
+        if (players[k].getNumberOfPlayedCards() != 0)
+        {
+            maxScore = card.searchInCardScore(players[k].getPlayedCard(0).getName());
+            maxScoreCardName = players[k].getPlayedCard(0).getName();
+            break;
+        }
+    }
     for (int j = 0; j < identity.getPlayerNumber(); j++)
     {
         if (players[j].getNumberOfPlayedCards() == 0)
         {
-            return "1";
+            j++;
+            if (j == identity.getPlayerNumber())
+            {
+                return maxScoreCardName;
+            }
         }
-        maxScore = card.searchInCardScore(players[j].getPlayedCard(0).getName());
-        for (int i = 1; i < players[j].getNumberOfPlayedCards(); i++)
+        for (int i = 0; i < players[j].getNumberOfPlayedCards(); i++)
         {
-            if (maxScore > card.searchInCardScore(players[j].getPlayedCard(i).getName()))
+            if (maxScore < card.searchInCardScore(players[j].getPlayedCard(i).getName()))
             {
                 maxScore = card.searchInCardScore(players[j].getPlayedCard(i).getName());
                 maxScoreCardName = players[j].getPlayedCard(i).getName();
             }
         }
     }
-    return "9";
+    return maxScoreCardName;
 }
 bool Control ::ifMaxScoreCardIsInHand(int index)
 {
@@ -453,6 +464,7 @@ std::string Control::determinWinnerOfWar()
             winnerScore = scorsAtEndOfWar[i];
             winner = i;
         }
+
     }
     std::cout << "winner - > " << players[winner].getName() << std::endl;
     std::cin.ignore();

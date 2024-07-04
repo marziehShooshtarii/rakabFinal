@@ -86,7 +86,7 @@ private:
     int turn = 1;
     armyCard army;
     std::vector<Special *> specialCards;
-    int maxScore = 0;
+    int maxScore = -1;
     int counterNeighbores = 0;
     std::string winnerOfGame;
     int winner = -3;
