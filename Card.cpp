@@ -1,10 +1,15 @@
 #include <string>
 #include <iostream>
 #include "Card.hpp"
-Card::Card() {}
+Card::Card() 
+{
+    setCardScores();
+}
 Card::Card(const std::string &p_nameOfCard)
 {
+    setCardScores();
     nameOfCard = p_nameOfCard;
+
 }
 std::string Card::getName()
 {
