@@ -112,7 +112,7 @@ void Control::validateIdentity()
 {
     identity.setPlayerNumber();
     identity.setData();
-   system("CLS");
+    system("CLS");
 }
 void Control::shuffelingCards()
 {
@@ -167,8 +167,8 @@ bool Control::playingInput()
             system("CLS");
             controlTurn();
         }
-        determinWinnerOfWar();
-        players[starterPlayer].setOwenedStates(warzone);
+        if (determinWinnerOfWar())
+            players[starterPlayer].setOwenedStates(warzone);
         if (turn != 1)
         {
             if (checkIfItsTimeToDealHands())
@@ -320,18 +320,17 @@ bool Control::checkMatarsakPlayed(int index)
                 std::cout << players[index].getPlayedCard(i).getName() << std::endl;
             }
             std::cin >> cardName;
-            if(checkCardsForMatarsak(index))
+            if (checkCardsForMatarsak(index))
             {
-            selectedCardForMatarsak.setName(cardName);
-            effectOfMatarsak(selectedCardForMatarsak, index);
+                selectedCardForMatarsak.setName(cardName);
+                effectOfMatarsak(selectedCardForMatarsak, index);
             }
-            else 
+            else
             {
-                std::cout<<"invalid card.";
+                std::cout << "invalid card.";
                 cardName = "matarsak";
                 checkMatarsakPlayed(index);
             }
-            
         }
         return true;
     }
@@ -435,7 +434,7 @@ bool Control ::ifMaxScoreCardIsInHand(int index)
     }
     return false;
 }
-std::string Control::determinWinnerOfWar()
+bool Control::determinWinnerOfWar()
 {
     std::vector<int> scorsAtEndOfWar(identity.getPlayerNumber());
     for (int i = 0; i < identity.getPlayerNumber(); i++)
@@ -443,7 +442,7 @@ std::string Control::determinWinnerOfWar()
         scorsAtEndOfWar[i] = 0;
     }
     int winnerScore = 0;
-    winner = -3;
+    winner = -1;
     for (int i = 0; i < identity.getPlayerNumber(); i++)
     {
         int repeatForEachCard[2] = {countTabl_zan(i), countShir_dokht(i)};
@@ -485,15 +484,28 @@ std::string Control::determinWinnerOfWar()
             winnerScore = scorsAtEndOfWar[i];
             winner = i;
         }
-
+    }
+    int counterWinner = 0;
+    for (int i = 0; i < identity.getPlayerNumber(); i++)
+    {
+        for (int j = i+1 ; j < identity.getPlayerNumber(); j++)
+        {
+            if (scorsAtEndOfWar[i] == scorsAtEndOfWar[j])
+                counterWinner++;
+        }
+    }
+    if (counterWinner >= 1)
+    {
+        std::cout << "there is no winner for this war!! start a new war" << std::endl;
+        return false;
     }
     std::cout << "winner - > " << players[winner].getName() << std::endl;
     std::cin.ignore();
-   system("CLS");
+    system("CLS");
     starterPlayer = winner;
     int temp = winner;
-    winner = -3;
-    return players[temp].getName();
+    winner = -1;
+    return true;
 }
 void Control::initializeSpecialCards()
 {

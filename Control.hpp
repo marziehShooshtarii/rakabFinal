@@ -43,7 +43,7 @@ public:
     bool checkIfAllPlayersPassed();
     bool checkIfCertianPlayerPassed(int index);
     void controlTurn();
-    std::string determinWinnerOfWar();
+    bool determinWinnerOfWar();
     std::string findMaxScoreCard();
     int countZemestan(int index);
     int countTabl_zan(int index);
@@ -90,6 +90,6 @@ private:
     int maxScore = -1;
     int counterNeighbores = 0;
     std::string winnerOfGame;
-    int winner = -3;
+    int winner = -1;
     std::vector<Card> baharVSzemestan;
 };
