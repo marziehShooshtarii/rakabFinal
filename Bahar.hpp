@@ -2,13 +2,17 @@
 #define BAHAR_HPP
 #include <vector>
 #include "Special.hpp"
-class Bahar : public Special
+class Bahar :public Special
 {
 public:
-    int effectOfCard(int score)
-    {
-        return score += 3;
-    }
+    virtual int effectOfCard(std::vector<Card>,int score)override;
+    void maxScoreForBahar(std::string);
+    bool ifMaxScoreCardIsInHand(std::vector<Card>);
+    void baharPlayed();
+private:
+    std::string baharMaxScore;
+    bool checkBaharPlayed = false;
 };
+
 
 #endif
