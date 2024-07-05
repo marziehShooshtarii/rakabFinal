@@ -4,10 +4,8 @@
 class Shah_dokht : public Special
 {
 public:
-    virtual int effectOfCard(int score) override
-    {
-        return score += 10;
-    }
+    virtual int effectOfCard(std::vector<Card>,int score) override;
+    
 };
 
 #endif
