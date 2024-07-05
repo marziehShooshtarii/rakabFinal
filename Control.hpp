@@ -10,22 +10,24 @@
 #include "Card.hpp"
 #include "Army.hpp"
 #include "Special.hpp"
-#include "Zemestan.hpp"
 #include "Tabl_zan.hpp"
 #include "Bahar.hpp"
 #include "Shah_dokht.hpp"
 #include "Help.hpp"
+#include"Shirzan.hpp"
+#include "Zemestan.hpp"
+
 class Control
 {
 public:
     Control();
     ~Control()
     {
-        for (auto p : specialCards)
+        for (auto p : armyAndSpecialCards)
         {
             delete p;
         }
-        specialCards.clear();
+        armyAndSpecialCards.clear();
     }
     void diplayBeggingOfTheGame();
     void dealingCards();
@@ -45,16 +47,16 @@ public:
     void controlTurn();
     bool determinWinnerOfWar();
     std::string findMaxScoreCard();
-    int countZemestan(int index);
-    int countTabl_zan(int index);
-    int countBahar(int index);
-    int countShir_dokht(int index);
-    int countMatarsak(int index);
-    int countAllSpecialCards(int index);
+    // int countZemestan(int index);
+    // int countTabl_zan(int index);
+    // int countBahar(int index);
+    // int countShir_dokht(int index);
+    // int countMatarsak(int index);
+    //int countAllSpecialCards(int index);
     void initializeSpecialCards();
     void effectOfMatarsak(Card played, int index);
     int findSelectedCardForMatarsak(std::string, int index);
-    bool ifMaxScoreCardIsInHand(int index);
+    //bool ifMaxScoreCardIsInHand(int index);
     bool checkWin(int index);
     bool checkingTheNeighborhoodOfTwoStates(int index, int first, int second);
     void displayPlayingCards(int index);
@@ -85,8 +87,8 @@ private:
     Card selectedCard;
     std::string cardName;
     int turn = 1;
-    armyCard army;
-    std::vector<Special *> specialCards;
+    //Army army;
+    std::vector<Card *> armyAndSpecialCards;
     int maxScore = -1;
     int counterNeighbores = 0;
     std::string winnerOfGame;
