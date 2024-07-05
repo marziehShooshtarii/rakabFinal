@@ -15,10 +15,7 @@ std::string Card::getName()
 {
     return nameOfCard;
 }
-void Card::setExplanation(std::string p_description)
-{
-    this->description = p_description;
-}
+
 void Card::setName(std::string p_name)
 {
     this->nameOfCard = p_name;
