@@ -29,16 +29,15 @@ public:
     int getNumberOfPlayedCards();
     int getNumberOfPlayerCards();
     void erasePlayedCard(int index);
+    std::vector<Card>getAllPlayedCards();
 
 private:
     int age;
-    int numberOfPlayers;
     std::vector<Card> playerCardList; // list of the cards each player has got in hand
     std::vector<Card> playedCardList; // list of cards played by the players
     std::vector<std::string> owenedStates;
     std::string name;
     std::string color;
-    std::string card;
     bool ifPassed;
 };
 #endif

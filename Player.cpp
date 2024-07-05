@@ -1,10 +1,10 @@
 #include "Player.hpp"
 Player::Player() {}
-Player::Player(int p_numberOfPlayers)
-{
-    if (p_numberOfPlayers >= 3 && p_numberOfPlayers <= 6)
-        setNumberOfPlayers(p_numberOfPlayers);
-}
+// Player::Player(int p_numberOfPlayers)
+// {
+//     if (p_numberOfPlayers >= 3 && p_numberOfPlayers <= 6)
+//         setNumberOfPlayers(p_numberOfPlayers);
+// }
 Player::Player(int p_age, std::string p_name, std::string p_color, bool P_ifPassed)
 {
     this->age = p_age;
@@ -24,14 +24,7 @@ std::string Player::getColor()
 {
     return color;
 }
-int Player::getNumberOfPlayer()
-{
-    return numberOfPlayers;
-}
-void Player::setNumberOfPlayers(int p_numberOfPlayer)
-{
-    this->numberOfPlayers = p_numberOfPlayer;
-}
+
 Card Player::getPlayerCard(int i)
 {
     return playerCardList[i];
@@ -83,4 +76,8 @@ int Player::getNumberOfPlayerCards()
 void Player::erasePlayedCard(int index)
 {
     playedCardList.erase(playedCardList.begin() + index);
+}
+std::vector<Card> Player::getAllPlayedCards()
+{
+    return playedCardList;
 }
