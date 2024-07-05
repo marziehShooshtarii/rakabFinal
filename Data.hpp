@@ -6,18 +6,9 @@ class getData
 {
 public:
     getData();
-    int getAge(int i)
-    {
-        return players[i].getAge();
-    }
-    std::string getName(int i)
-    {
-        return players[i].getName();
-    }
-    std::string getColor(int i)
-    {
-        return players[i].getColor();
-    }
+    int getAge(int i);
+    std::string getName(int i);
+    std::string getColor(int i);
     void setData();
     int getPlayerNumber();
     void setPlayerNumber();

@@ -41,7 +41,7 @@ void getData::setPlayerName()
 void getData::setAgeOfPlayers()
 {
     std::cin >> playerAge;
-    //validate the age of players
+    // validate the age of players
     if (playerAge <= 0)
     {
         std::cout << "your age can't be 0 or under 0 ; please enter a valid age" << std::endl;
@@ -101,4 +101,16 @@ std::string getData::getColorForPlayer(int i)
 void getData::eraseColorForPlayer(int i)
 {
     colorShow.erase(colorShow.begin() + i);
+}
+int getData::getAge(int i)
+{
+    return players[i].getAge();
+}
+std::string getData::getName(int i)
+{
+    return players[i].getName();
+}
+std::string getData::getColor(int i)
+{
+    return players[i].getColor();
 }
