@@ -6,10 +6,6 @@ class Special : public Card
 {
 private:
 public:
-    void setCharacter(int value) override
-    {
-        Card::setCharacter(value);
-    }
-    virtual int effectOfCard(int score) = 0;
+    virtual int effectOfCard( std::vector<Card>,int score) = 0;
 };
 #endif
