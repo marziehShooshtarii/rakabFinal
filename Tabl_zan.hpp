@@ -4,10 +4,8 @@
 class Tabl_zan : public Special
 {
 public:
-    virtual int effectOfCard(int score) override
-    {
-        return score *= 2;
-    }
+    virtual int effectOfCard(std::vector<Card>,int score) override;
+  
 };
 
 #endif
