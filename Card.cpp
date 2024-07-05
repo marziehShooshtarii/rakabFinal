@@ -49,3 +49,7 @@ int Card::searchInCardScore(std::string str)
 {
     return cardsScore.at(str);
 }
+int Card::effectOfCard(std::vector<Card> playedCards,int score)
+{
+    
+}
