@@ -3,7 +3,7 @@
 bool Zemestan::checkZemestanPlayed(false);
 int Zemestan::effectOfCard(std::vector<Card> cards, int score)
 {
-    std::cout<<"checkZemestanPlayed - >"<<checkZemestanPlayed<<std::endl;
+    std::cout << "checkZemestanPlayed - >" << checkZemestanPlayed << std::endl;
     if (checkZemestanPlayed)
     {
         score = cards.size() - countAllSpecialCards(cards);
@@ -11,9 +11,9 @@ int Zemestan::effectOfCard(std::vector<Card> cards, int score)
     }
     return score;
 }
-void Zemestan:: endOfZemestan()
+void Zemestan::endOfZemestan()
 {
-   Zemestan:: checkZemestanPlayed = false;
+    Zemestan::checkZemestanPlayed = false;
 }
 void Zemestan::zemestanPlayed()
 {
@@ -21,7 +21,6 @@ void Zemestan::zemestanPlayed()
 }
 int Zemestan ::countAllSpecialCards(std::vector<Card> cards)
 {
-    
     return countBahar(cards) + countMatarsak(cards) + countShir_dokht(cards) + countTabl_zan(cards) + countZemestan(cards) + countRish_sefid(cards) + countShirzan(cards) + countParcham_dar(cards);
 }
 int Zemestan ::countTabl_zan(std::vector<Card> cards)
@@ -89,11 +88,9 @@ int Zemestan ::countShirzan(std::vector<Card> cards)
     int counter = 0;
     for (int j = 0; j < cards.size(); j++)
     {
-        // std::cout << "shirzan count -> " << counter << std::endl; 
         if (cards[j].getName() == "shirzan")
         {
             counter++;
-        // std::cout << "shirzan count2 -> " << counter << std::endl; 
         }
     }
     return counter;
