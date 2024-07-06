@@ -73,6 +73,9 @@ void Control::dealingCards()
         {"matarsak", 16},
         {"tabl_zan", 6},
         {"shah_dokht", 3},
+        {"shirzan" , 12},
+        {"parcham_dar" , 3},
+        {"rish_sefid" , 6},
         {"sarbaz_1", 8},
         {"sarbaz_2", 10},
         {"sarbaz_3", 10},
@@ -103,7 +106,7 @@ void Control::randomCardSet()
     {
         for (int i = 0; i < (10 + players[j].getNumberOfOwenedStates()); i++)
         {
-            randomCard = rand() % 89;
+            randomCard = rand() % 110;
             players[j].setPlayerCard(allCards[randomCard]);
         }
     }

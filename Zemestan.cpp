@@ -113,7 +113,7 @@ int Zemestan ::countParcham_dar(std::vector<Card> cards)
     int counter = 0;
     for (int j = 0; j < cards.size(); j++)
     {
-        if (cards[j].getName() == "rish_sefid")
+        if (cards[j].getName() == "parcham_dar")
         {
             counter++;
         }
