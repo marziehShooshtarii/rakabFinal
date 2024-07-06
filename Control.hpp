@@ -5,11 +5,8 @@
 #include <stdlib.h>
 #include <algorithm>
 #include "Map.hpp"
-//#include "Player.hpp"
 #include "Data.hpp"
-//#include "Card.hpp"
 #include "Army.hpp"
-//#include "Special.hpp"
 #include "Tabl_zan.hpp"
 #include "Bahar.hpp"
 #include "Shah_dokht.hpp"
@@ -47,16 +44,9 @@ public:
     void controlTurn();
     bool determinWinnerOfWar();
     std::string findMaxScoreCard();
-    // int countZemestan(int index);
-    // int countTabl_zan(int index);
-    // int countBahar(int index);
-    // int countShir_dokht(int index);
-    // int countMatarsak(int index);
-    //int countAllSpecialCards(int index);
     void initializeSpecialCards();
     void effectOfMatarsak(Card played, int index);
     int findSelectedCardForMatarsak(std::string, int index);
-    //bool ifMaxScoreCardIsInHand(int index);
     bool checkWin(int index);
     bool checkingTheNeighborhoodOfTwoStates(int index, int first, int second);
     void displayPlayingCards(int index);
@@ -72,6 +62,7 @@ public:
     std::string cinTypeOfHelp();
     void displayOwenedStates();
     bool checkCardsForMatarsak(int index);
+    bool checkProcessOfEndingWar();
     void run();
 
 private:
@@ -87,7 +78,6 @@ private:
     Card selectedCard;
     std::string cardName;
     int turn = 1;
-    //Army army;
     std::vector<Card *> armyAndSpecialCards;
     int maxScore = -1;
     int counterNeighbores = 0;

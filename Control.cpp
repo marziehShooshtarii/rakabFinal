@@ -73,9 +73,9 @@ void Control::dealingCards()
         {"matarsak", 16},
         {"tabl_zan", 6},
         {"shah_dokht", 3},
-        {"shirzan" , 12},
-        {"parcham_dar" , 3},
-        {"rish_sefid" , 6},
+        {"shirzan", 12},
+        {"parcham_dar", 3},
+        {"rish_sefid", 6},
         {"sarbaz_1", 8},
         {"sarbaz_2", 10},
         {"sarbaz_3", 10},
@@ -150,12 +150,16 @@ bool Control::playingInput()
                 {
                     for (int d = 0; d < identity.getPlayerNumber(); d++)
                         displayPlayedCards(d);
-
                     std::cout << players[i].getName() << " it's your turn " << "\n\tplease chose your card from the list or pass or ask for help :\n " << "\t\n";
                     displayPlayingCards(i);
                     int checkSelectedCard = cinSelectedCard(i);
-
-                    playingCards(i, checkSelectedCard);
+                    if (checkSelectedCard != 56)
+                        playingCards(i, checkSelectedCard);
+                    else
+                    {
+                        checkProcessOfEndingWar();
+                        return false;
+                    }
                 }
                 i++;
                 std::cout << std::endl;
@@ -170,6 +174,41 @@ bool Control::playingInput()
             // system("CLS");
             controlTurn();
         }
+        checkProcessOfEndingWar();
+    //     if (determinWinnerOfWar())
+    //         players[starterPlayer].setOwenedStates(warzone);
+    //     if (turn != 1)
+    //     {
+    //         if (checkIfItsTimeToDealHands())
+    //         {
+    //             for (int x = 0; x < players[lastPlayerWithRemainedCards()].getNumberOfPlayerCards(); x++)
+    //                 players[lastPlayerWithRemainedCards()].eraseCard(x);
+    //             shuffelingCards();
+    //             randomCardSet();
+    //             for (int t = 0; t < identity.getPlayerNumber(); t++)
+    //                 displayPlayingCards(t);
+    //         }
+    //     }
+    //     for (int s = 0; s < identity.getPlayerNumber(); s++)
+    //     {
+    //         for (int n = 0; n < players[s].getNumberOfPlayedCards(); n++)
+    //         {
+    //             players[s].erasePlayedCard(n);
+    //         }
+    //     }
+    //     for (int q = 0; q < identity.getPlayerNumber(); q++)
+    //     {
+    //         if (players[q].getNumberOfOwenedStates() > 2)
+    //         {
+    //             if (checkWin(q))
+    //                 return true;
+    //         }
+    //     }
+    // }
+}
+}
+bool Control::checkProcessOfEndingWar()
+{
         if (determinWinnerOfWar())
             players[starterPlayer].setOwenedStates(warzone);
         if (turn != 1)
@@ -191,15 +230,17 @@ bool Control::playingInput()
                 players[s].erasePlayedCard(n);
             }
         }
+
         for (int q = 0; q < identity.getPlayerNumber(); q++)
         {
             if (players[q].getNumberOfOwenedStates() > 2)
             {
-                if (checkWin(q))
+                if (checkWin(q)) 
                     return true;
             }
         }
-    }
+    
+
 }
 void Control::displayPlayingCards(int index)
 {
@@ -297,6 +338,10 @@ int Control::cinSelectedCard(int index)
     if (cardName == "help")
     {
         return 2;
+    }
+    if (cardName == "parcham_dar")
+    {
+        return 56;
     }
     if (!checkMatarsakPlayed(index))
     {
