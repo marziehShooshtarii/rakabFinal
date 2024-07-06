@@ -63,6 +63,8 @@ public:
     void displayOwenedStates();
     bool checkCardsForMatarsak(int index);
     bool checkProcessOfEndingWar();
+    bool ifMaxScoreCardIsInHandForRishSefid(std::string,std::vector<Card> playedCards);
+    void indexControlerForPlayers(int& , int &);
     void run();
 
 private:

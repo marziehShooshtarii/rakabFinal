@@ -75,7 +75,7 @@ void Control::dealingCards()
         {"shah_dokht", 3},
         {"shirzan", 12},
         {"parcham_dar", 3},
-        {"rish_sefid", 6},
+        {"rish_sefid", 20},
         {"sarbaz_1", 8},
         {"sarbaz_2", 10},
         {"sarbaz_3", 10},
@@ -133,6 +133,7 @@ bool Control::playingInput()
         displayStarterPlayer();
         displayWarzone();
         displayOwenedStates();
+        int checkSelectedCard = -1; //differentiate from the card played
         for (int c = 0; c < identity.getPlayerNumber(); c++)
         {
             players[c].setIfPassed(false);
@@ -143,104 +144,133 @@ bool Control::playingInput()
         {
             int indexControler = identity.getPlayerNumber();
 
-            for (size_t i = starterPlayer; i < indexControler;)
+            for (int i = starterPlayer; i < indexControler;)
             {
-
+                std::cout << "ghabl if " << std::endl;
+                std::cout << "indexControl -> " << indexControler << std::endl;
+                std::cout << "i -> " << i << std::endl;
+                std::cout << "checkSelectedCard -> " << checkSelectedCard <<std::endl;
                 if (!checkIfCertianPlayerPassed(i))
                 {
+                    std::cout << "avale if " << std::endl;
                     for (int d = 0; d < identity.getPlayerNumber(); d++)
                         displayPlayedCards(d);
                     std::cout << players[i].getName() << " it's your turn " << "\n\tplease chose your card from the list or pass or ask for help :\n " << "\t\n";
                     displayPlayingCards(i);
-                    int checkSelectedCard = cinSelectedCard(i);
+                    checkSelectedCard = cinSelectedCard(i);
+                    std::cout << "checkSelectedCard -> " << checkSelectedCard <<std::endl;
                     if (checkSelectedCard != 56)
+                    {
+                        std::cout << "to ife parchamdar " << std::endl;
                         playingCards(i, checkSelectedCard);
+                        i++;
+                        std::cout << std::endl;
+                        std::cin.ignore();
+                        if (i == identity.getPlayerNumber())
+                        {
+                            i = 0;
+                            indexControler = starterPlayer;
+                        }
+                        // indexControlerForPlayers(i , indexControler);
+                    }
                     else
                     {
                         checkProcessOfEndingWar();
-                        return false;
+                        for (int q = 0; q < identity.getPlayerNumber(); q++)
+                            players[q].setIfPassed(true);
+                        // return false;
                     }
                 }
-                i++;
-                std::cout << std::endl;
-                std::cin.ignore();
-                if (i == identity.getPlayerNumber())
-                {
-                    i = 0;
-                    indexControler = starterPlayer;
-                }
+                // i++;
+                // std::cout << std::endl;
+                // std::cin.ignore();
+                // if (i == identity.getPlayerNumber())
+                // {
+                //     i = 0;
+                //     indexControler = starterPlayer;
+                // }
                 // system("CLS");
             }
             // system("CLS");
             controlTurn();
         }
         checkProcessOfEndingWar();
-    //     if (determinWinnerOfWar())
-    //         players[starterPlayer].setOwenedStates(warzone);
-    //     if (turn != 1)
-    //     {
-    //         if (checkIfItsTimeToDealHands())
-    //         {
-    //             for (int x = 0; x < players[lastPlayerWithRemainedCards()].getNumberOfPlayerCards(); x++)
-    //                 players[lastPlayerWithRemainedCards()].eraseCard(x);
-    //             shuffelingCards();
-    //             randomCardSet();
-    //             for (int t = 0; t < identity.getPlayerNumber(); t++)
-    //                 displayPlayingCards(t);
-    //         }
-    //     }
-    //     for (int s = 0; s < identity.getPlayerNumber(); s++)
-    //     {
-    //         for (int n = 0; n < players[s].getNumberOfPlayedCards(); n++)
-    //         {
-    //             players[s].erasePlayedCard(n);
-    //         }
-    //     }
-    //     for (int q = 0; q < identity.getPlayerNumber(); q++)
-    //     {
-    //         if (players[q].getNumberOfOwenedStates() > 2)
-    //         {
-    //             if (checkWin(q))
-    //                 return true;
-    //         }
-    //     }
-    // }
+        //     if (determinWinnerOfWar())
+        //         players[starterPlayer].setOwenedStates(warzone);
+        //     if (turn != 1)
+        //     {
+        //         if (checkIfItsTimeToDealHands())
+        //         {
+        //             for (int x = 0; x < players[lastPlayerWithRemainedCards()].getNumberOfPlayerCards(); x++)
+        //                 players[lastPlayerWithRemainedCards()].eraseCard(x);
+        //             shuffelingCards();
+        //             randomCardSet();
+        //             for (int t = 0; t < identity.getPlayerNumber(); t++)
+        //                 displayPlayingCards(t);
+        //         }
+        //     }
+        //     for (int s = 0; s < identity.getPlayerNumber(); s++)
+        //     {
+        //         for (int n = 0; n < players[s].getNumberOfPlayedCards(); n++)
+        //         {
+        //             players[s].erasePlayedCard(n);
+        //         }
+        //     }
+        //     for (int q = 0; q < identity.getPlayerNumber(); q++)
+        //     {
+        //         if (players[q].getNumberOfOwenedStates() > 2)
+        //         {
+        //             if (checkWin(q))
+        //                 return true;
+        //         }
+        //     }
+        // }
+    }
 }
+void Control::indexControlerForPlayers(int &i, int &indexControler)
+{
+    i++;
+    std::cout << std::endl;
+    std::cin.ignore();
+    if (i == identity.getPlayerNumber())
+    {
+        i = 0;
+        indexControler = starterPlayer;
+    }
 }
 bool Control::checkProcessOfEndingWar()
 {
-        if (determinWinnerOfWar())
-            players[starterPlayer].setOwenedStates(warzone);
-        if (turn != 1)
+    if (determinWinnerOfWar())
+        players[starterPlayer].setOwenedStates(warzone);
+    if (turn != 1)
+    {
+        if (checkIfItsTimeToDealHands())
         {
-            if (checkIfItsTimeToDealHands())
-            {
-                for (int x = 0; x < players[lastPlayerWithRemainedCards()].getNumberOfPlayerCards(); x++)
-                    players[lastPlayerWithRemainedCards()].eraseCard(x);
-                shuffelingCards();
-                randomCardSet();
-                for (int t = 0; t < identity.getPlayerNumber(); t++)
-                    displayPlayingCards(t);
-            }
+            for (int x = 0; x < players[lastPlayerWithRemainedCards()].getNumberOfPlayerCards(); x++)
+                players[lastPlayerWithRemainedCards()].eraseCard(x);
+            shuffelingCards();
+            randomCardSet();
+            for (int t = 0; t < identity.getPlayerNumber(); t++)
+                displayPlayingCards(t);
         }
-        for (int s = 0; s < identity.getPlayerNumber(); s++)
+    }
+    for (int s = 0; s < identity.getPlayerNumber(); s++)
+    {
+        for (int n = 0; n < players[s].getNumberOfPlayedCards(); n++)
         {
-            for (int n = 0; n < players[s].getNumberOfPlayedCards(); n++)
-            {
-                players[s].erasePlayedCard(n);
-            }
+            std::cout << "erasing the cards -> " << players[s].getPlayedCard(n).getName() << std::endl;
+            players[s].erasePlayedCard(n);
         }
+    }
 
-        for (int q = 0; q < identity.getPlayerNumber(); q++)
+    for (int q = 0; q < identity.getPlayerNumber(); q++)
+    {
+        if (players[q].getNumberOfOwenedStates() > 2)
         {
-            if (players[q].getNumberOfOwenedStates() > 2)
-            {
-                if (checkWin(q)) 
-                    return true;
-            }
+            if (checkWin(q))
+                return true;
         }
-    
-
+    }
 }
 void Control::displayPlayingCards(int index)
 {
@@ -341,6 +371,7 @@ int Control::cinSelectedCard(int index)
     }
     if (cardName == "parcham_dar")
     {
+        std::cout << "parcham dar " << std::endl;
         return 56;
     }
     if (!checkMatarsakPlayed(index))
@@ -480,6 +511,20 @@ bool Control::determinWinnerOfWar()
     }
     int winnerScore = 0;
     winner = -1;
+    for (int g = 0; g < identity.getPlayerNumber(); g++)
+    {
+        if (ifMaxScoreCardIsInHandForRishSefid(findMaxScoreCard(), players[g].getAllPlayedCards()))
+        {
+            for (int k = 0; k < players[g].getNumberOfPlayedCards(); k++)
+            {
+                if (findMaxScoreCard() == players[g].getPlayedCard(k).getName())
+                {
+                    std::cout << "erase card in rishsefid -> " << players[g].getPlayedCard(k).getName() << std::endl;
+                    players[g].erasePlayedCard(k);
+                }
+            }
+        }
+    }
     if (baharVSzemestan.size() > 0)
     {
         if (baharVSzemestan[baharVSzemestan.size() - 1].getName() == "bahar")
@@ -529,6 +574,17 @@ bool Control::determinWinnerOfWar()
     Zemestan z;
     z.endOfZemestan();
     return true;
+}
+bool Control::ifMaxScoreCardIsInHandForRishSefid(std::string rishSefidMaxScore, std::vector<Card> playedCards)
+{
+    for (int i = 0; i < playedCards.size(); i++)
+    {
+        if (rishSefidMaxScore == playedCards[i].getName())
+        {
+            return true;
+        }
+    }
+    return false;
 }
 void Control::initializeSpecialCards()
 {
