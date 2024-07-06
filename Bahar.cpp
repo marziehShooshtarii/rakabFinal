@@ -1,11 +1,11 @@
-#include<iostream>
+#include <iostream>
 #include "Bahar.hpp"
 int Bahar ::effectOfCard(std::vector<Card> cards, int score)
 {
-    if(checkBaharPlayed)
+    if (checkBaharPlayed)
     {
-    if (ifMaxScoreCardIsInHand(cards))
-        score += 3;
+        if (ifMaxScoreCardIsInHand(cards))
+            score += 3;
     }
     checkBaharPlayed = false;
     return score;
@@ -13,7 +13,6 @@ int Bahar ::effectOfCard(std::vector<Card> cards, int score)
 void Bahar::maxScoreForBahar(std::string str)
 {
     baharMaxScore = str; // for accessing max score found in control
-    std::cout<<"baharMaxScore - >  "<<baharMaxScore<<std::endl;
 }
 bool Bahar::ifMaxScoreCardIsInHand(std::vector<Card> cards)
 {
