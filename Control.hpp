@@ -65,6 +65,8 @@ public:
     bool checkProcessOfEndingWar();
     bool ifMaxScoreCardIsInHandForRishSefid(std::string,std::vector<Card> playedCards);
     void indexControlerForPlayers(int& , int &);
+    void rishSefidEffect(std::vector<Card>);
+    bool checkForRishSefid(std::vector <Card>);
     void run();
 
 private:
