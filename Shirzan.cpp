@@ -8,4 +8,5 @@ int Shirzan::effectOfCard(std::vector<Card> cards, int score)
             score++;
         }
     }
+    return score;
 }
