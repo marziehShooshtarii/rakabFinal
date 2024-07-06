@@ -423,17 +423,6 @@ std ::string Control::findMaxScoreCard()
     }
     return maxScoreCardName;
 }
-// bool Control ::ifMaxScoreCardIsInHand(int index)
-// {
-//     for (int i = 0; i < players[index].getNumberOfPlayedCards(); i++)
-//     {
-//         if (findMaxScoreCard() == players[index].getPlayedCard(i).getName())
-//         {
-//             return true;
-//         }
-//     }
-//     return false;
-// }
 bool Control::determinWinnerOfWar()
 {
     std::vector<int> scorsAtEndOfWar(identity.getPlayerNumber());
@@ -447,51 +436,27 @@ bool Control::determinWinnerOfWar()
     {
         if (baharVSzemestan[baharVSzemestan.size() - 1].getName() == "bahar")
         {
-            std::cout << "111111111111111" << std::endl;
             Bahar spring;
-            std::cout << "222222222222222" << std::endl;
             spring.baharPlayed();
-            std::cout << "3333333333333" << std::endl;
-            std::cout << "findMaxScoreCard() - > " << findMaxScoreCard() << std::endl;
             spring.maxScoreForBahar(findMaxScoreCard());
-            std::cout << "444444444444444" << std::endl;
         }
         else
         {
             Zemestan winter;
-            std::cout << "zzzzzzzzzzzzzzzzzz" << std::endl;
             winter.zemestanPlayed();
         }
     }
     for (int i = 0; i < identity.getPlayerNumber(); i++)
     {
-        // int repeatForEachCard[2] = {countTabl_zan(i), countShir_dokht(i)};
-        // for (int j = 0; j < players[i].getNumberOfPlayedCards(); j++)
-        // {
-
-        //     scorsAtEndOfWar[i] = army.increasScore(players[i].getPlayedCard(j).getName(), scorsAtEndOfWar[i]);
-        // }
-    
-    for (int j = 0; j < armyAndSpecialCards.size(); j++)
-    {
-        scorsAtEndOfWar[i] = armyAndSpecialCards[j]->effectOfCard(players[i].getAllPlayedCards(), scorsAtEndOfWar[i]);
-        std::cout << "scorsAtEndOfWar[i]  - > "<<scorsAtEndOfWar[i]  << std::endl;
-        std::cout << "forrrrrrrrrrrrrrrrrrrrrr" << std::endl;
-    }
-    std::cout<<"for tamom shod"<<std::endl;
-    
-    // for (int k = 0; k < armyAndSpecialCards.size(); k++)
-    // {
-    //     for (int g = 0; g < repeatForEachCard[k]; g++)
-    //     {
-    //         scorsAtEndOfWar[i] = armyAndSpecialCards[k]->effectOfCard(players[i].getAllPlayedCards(),scorsAtEndOfWar[i]);
-    //     }
-    // }
-    if (scorsAtEndOfWar[i] > winnerScore)
-    {
-        winnerScore = scorsAtEndOfWar[i];
-        winner = i;
-    }
+        for (int j = 0; j < armyAndSpecialCards.size(); j++)
+        {
+            scorsAtEndOfWar[i] = armyAndSpecialCards[j]->effectOfCard(players[i].getAllPlayedCards(), scorsAtEndOfWar[i]);
+        }
+        if (scorsAtEndOfWar[i] > winnerScore)
+        {
+            winnerScore = scorsAtEndOfWar[i];
+            winner = i;
+        }
     }
     int counterWinner = 0;
     for (int i = 0; i < identity.getPlayerNumber(); i++)
@@ -514,7 +479,7 @@ bool Control::determinWinnerOfWar()
     int temp = winner;
     winner = -1;
     Zemestan z;
-    z.endOfZemestan(); 
+    z.endOfZemestan();
     return true;
 }
 void Control::initializeSpecialCards()
@@ -532,76 +497,10 @@ void Control::initializeSpecialCards()
     armyAndSpecialCards.push_back(shah_dokht);
     armyAndSpecialCards.push_back(shirzan);
 }
-
-// int Control ::countTabl_zan(int index)
-// {
-//     int counter = 0;
-//     for (int j = 0; j < players[index].getNumberOfPlayedCards(); j++)
-//     {
-//         if (players[index].getPlayedCard(j).getName() == "tabl_zan")
-//         {
-//             counter++;
-//         }
-//     }
-//     return counter;
-// }
-// int Control ::countZemestan(int index)
-// {
-//     int counter = 0;
-//     for (int j = 0; j < players[index].getNumberOfPlayedCards(); j++)
-//     {
-//         if (players[index].getPlayedCard(j).getName() == "zemestan")
-//         {
-//             counter++;
-//         }
-//     }
-//     return counter;
-// }
-// int Control ::countBahar(int index)
-// {
-//     int counter = 0;
-//     for (int j = 0; j < players[index].getNumberOfPlayedCards(); j++)
-//     {
-//         if (players[index].getPlayedCard(j).getName() == "bahar")
-//         {
-//             counter++;
-//         }
-//     }
-//     return counter;
-// }
-// int Control ::countShir_dokht(int index)
-// {
-//     int counter = 0;
-//     for (int j = 0; j < players[index].getNumberOfPlayedCards(); j++)
-//     {
-//         if (players[index].getPlayedCard(j).getName() == "shah_dokht")
-//         {
-//             counter++;
-//         }
-//     }
-//     return counter;
-// }
-// int Control ::countMatarsak(int index)
-// {
-//     int counter = 0;
-//     for (int j = 0; j < players[index].getNumberOfPlayedCards(); j++)
-//     {
-//         if (players[index].getPlayedCard(j).getName() == "matarsak")
-//         {
-//             counter++;
-//         }
-//     }
-//     return counter;
-// }
-// int Control ::countAllSpecialCards(int index)
-// {
-//     return countBahar(index) + countMatarsak(index) + countShir_dokht(index) + countTabl_zan(index) + countZemestan(index);
-// }
 bool Control ::checkingTheNeighborhoodOfTwoStates(int index, int first, int second)
 {
     Map map; // for accessing Map's member functions.
-    Map map2;
-    if (map2.getNeighborMap(map2.searchInStates(players[index].getOwenedStates(first)), map2.searchInStates(players[index].getOwenedStates(second))) == 1)
+    if (map.getNeighborMap(map.searchInStates(players[index].getOwenedStates(first)), map.searchInStates(players[index].getOwenedStates(second))) == 1)
     {
         counterNeighbores++;
         return true;

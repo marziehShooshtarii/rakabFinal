@@ -5,11 +5,11 @@
 #include <stdlib.h>
 #include <algorithm>
 #include "Map.hpp"
-#include "Player.hpp"
+//#include "Player.hpp"
 #include "Data.hpp"
-#include "Card.hpp"
+//#include "Card.hpp"
 #include "Army.hpp"
-#include "Special.hpp"
+//#include "Special.hpp"
 #include "Tabl_zan.hpp"
 #include "Bahar.hpp"
 #include "Shah_dokht.hpp"
