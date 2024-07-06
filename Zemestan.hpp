@@ -5,7 +5,7 @@ class Zemestan :public Special
 {
     public:
     virtual int effectOfCard(std::vector<Card>,int score)override;
-    //static void zemestanPlayed();
+    static void zemestanPlayed();
     int countAllSpecialCards(std::vector<Card>);
     int countZemestan(std::vector<Card>);
     int countTabl_zan(std::vector<Card>);
@@ -15,17 +15,9 @@ class Zemestan :public Special
     int countShirzan(std::vector<Card>);
     int countRish_sefid(std::vector<Card>);
     int countParcham_dar(std::vector<Card>);
-   // static void endOfZemestan();
-    static void endOfZemestan()
-{
-    checkZemestanPlayed = false;
-}
-static void zemestanPlayed()
-{
-    checkZemestanPlayed = true;
-}
-    static bool checkZemestanPlayed;
+    static void endOfZemestan();
     private:
+    static bool checkZemestanPlayed;
 };
-bool Zemestan::checkZemestanPlayed  (false);
+
 #endif 

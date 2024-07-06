@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Zemestan.hpp"
+bool Zemestan::checkZemestanPlayed(false);
 int Zemestan::effectOfCard(std::vector<Card> cards, int score)
 {
     std::cout<<"checkZemestanPlayed - >"<<checkZemestanPlayed<<std::endl;
@@ -11,14 +12,14 @@ int Zemestan::effectOfCard(std::vector<Card> cards, int score)
     }
     return score;
 }
-// void Zemestan::endOfZemestan()
-// {
-//     checkZemestanPlayed = false;
-// }
-// void Zemestan::zemestanPlayed()
-// {
-//     checkZemestanPlayed = true;
-// }
+void Zemestan:: endOfZemestan()
+{
+   Zemestan:: checkZemestanPlayed = false;
+}
+void Zemestan::zemestanPlayed()
+{
+    Zemestan::checkZemestanPlayed = true;
+}
 int Zemestan ::countAllSpecialCards(std::vector<Card> cards)
 {
     return countBahar(cards) + countMatarsak(cards) + countShir_dokht(cards) + countTabl_zan(cards) + countZemestan(cards) + countRish_sefid(cards) + countShirzan(cards) + countParcham_dar(cards);
