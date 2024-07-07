@@ -65,9 +65,12 @@ public:
     bool checkProcessOfEndingWar();
     bool ifMaxScoreCardIsInHandForRishSefid(std::string, std::vector<Card> playedCards);
     void rishSefidEffect(std::vector<Card>);
-    bool checkForRishSefid(std::vector<Card>);
+    int checkForRishSefid(std::vector<Card>);
     int shirzanCount(std::vector<Card> playedCardForShirzan);
     bool checkShirzenForCertianPlayer();
+    void choiceForPeaceSign();
+    int findMostRecentPlayedRishSefid();
+    bool checkForPeaceSign();
     void run();
 
 private:
@@ -89,4 +92,7 @@ private:
     std::string winnerOfGame;
     int winner = -1;
     std::vector<Card> baharVSzemestan;
+    std::string peaceSign;
+    int numberOfwars = 0;
+    //std::string playerWhoHasThePeaceSign;
 };

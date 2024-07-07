@@ -8,6 +8,8 @@ void Control::startOfWarMassage()
 }
 void Control::displayStarterPlayer()
 {
+    // if (peaceSign != warzone)
+    // {
     std::cin.ignore();
     std::cout << identity.getName(starterPlayer) << " please choose the warzone ";
     std::cin >> warzone;
@@ -15,6 +17,27 @@ void Control::displayStarterPlayer()
     {
         displayStarterPlayer();
     }
+    checkForPeaceSign();
+    
+    //}
+}
+bool Control::checkForPeaceSign()
+{
+    if (numberOfwars > 0)
+    {
+        if (warzone == peaceSign)
+        {
+            // if (findMostRecentPlayedRishSefid() != starterPlayer)
+            // {
+            std::cout << "you can't choose this state as warzone,the peace sign has been placed in this state.";
+            displayStarterPlayer();
+            // return true;
+            //}
+            return false;
+        }
+        return true;
+    }
+    return true;
 }
 void Control::displayWarzone()
 {
@@ -199,6 +222,7 @@ bool Control::playingInput()
             controlTurn();
         }
         checkProcessOfEndingWar();
+        numberOfwars++;
         //     if (determinWinnerOfWar())
         //         players[starterPlayer].setOwenedStates(warzone);
         //     if (turn != 1)
@@ -258,11 +282,13 @@ bool Control::checkProcessOfEndingWar()
                 displayPlayingCards(t);
         }
     }
+    if (findMostRecentPlayedRishSefid() != -1) // if rish sefid has been played in the current war
+        choiceForPeaceSign();
     for (int s = 0; s < identity.getPlayerNumber(); s++)
     {
         for (int n = 0; n < players[s].getNumberOfPlayedCards(); n++)
         {
-            std::cout << "erasing the cards -> " << players[s].getPlayedCard(n).getName() << std::endl;
+            std::cout << "erasing the cards  inja-> " << players[s].getPlayedCard(n).getName() << std::endl;
             players[s].erasePlayedCard(n);
         }
     }
@@ -275,6 +301,12 @@ bool Control::checkProcessOfEndingWar()
                 return true;
         }
     }
+}
+void Control::choiceForPeaceSign()
+{
+    std::cout << players[findMostRecentPlayedRishSefid()].getName() << " please choose the state you want to place your peace sign on.";
+    std::cin >> peaceSign;
+    // warzone = peaceSign;
 }
 void Control::displayPlayingCards(int index)
 {
@@ -508,7 +540,8 @@ std ::string Control::findMaxScoreCard()
 }
 void Control::rishSefidEffect(std::vector<Card> cardsForRishSefid)
 {
-    if (checkForRishSefid(cardsForRishSefid))
+    std::string maxScoreForRishSefid = findMaxScoreCard();
+    if (checkForRishSefid(cardsForRishSefid) != -1) // in case rish sefid is found in a certain player's hand
     {
         for (int g = 0; g < identity.getPlayerNumber(); g++)
         {
@@ -516,7 +549,7 @@ void Control::rishSefidEffect(std::vector<Card> cardsForRishSefid)
             {
                 for (int k = 0; k < players[g].getNumberOfPlayedCards(); k++)
                 {
-                    if (findMaxScoreCard() == players[g].getPlayedCard(k).getName())
+                    if (maxScoreForRishSefid == players[g].getPlayedCard(k).getName())
                     {
                         std::cout << "erase card in rishsefid -> " << players[g].getPlayedCard(k).getName() << std::endl;
                         players[g].erasePlayedCard(k);
@@ -526,16 +559,40 @@ void Control::rishSefidEffect(std::vector<Card> cardsForRishSefid)
         }
     }
 }
-bool Control::checkForRishSefid(std::vector<Card> playedCardsForRishSefid)
+int Control::findMostRecentPlayedRishSefid()
 {
-    for (int i = 0; i < playedCardsForRishSefid.size(); i++)
+    std::cout << "too findMostRecentPlayedRishSefiddddddddddddddddddddddddddddddd" << std::endl;
+    int mostRecentPlayedRishSefid = checkForRishSefid(players[0].getAllPlayedCards());
+    std::cout << "checkForRishSefid(players[0].getAllPlayedCards()) -> " << checkForRishSefid(players[0].getAllPlayedCards()) << std::endl;
+    int mostRecentPlayerWhoPlayedRishSefid = -1;
+    for (int i = 1; i < identity.getPlayerNumber(); i++)
     {
-        if (playedCardsForRishSefid[i].getName() == "rish_sefid")
+        std::cout << "too for findMostRecentPlayedRishSefid checkForRishSefid(players[i].getAllPlayedCards())- > " << i << "->" << checkForRishSefid(players[i].getAllPlayedCards()) << std::endl;
+        if (checkForRishSefid(players[i].getAllPlayedCards()) > mostRecentPlayedRishSefid)
         {
-            return true;
+            std::cout << "too if findMostRecentPlayedRishSefid - > " << std::endl;
+            mostRecentPlayedRishSefid = checkForRishSefid(players[i].getAllPlayedCards());
+            mostRecentPlayerWhoPlayedRishSefid = i;
         }
     }
-    return false;
+    // if rish sefid has not been played in the current war,this function will return -1
+    std::cout << "mostRecentPlayerWhoPlayedRishSefid - > " << mostRecentPlayerWhoPlayedRishSefid << std::endl;
+    return mostRecentPlayerWhoPlayedRishSefid;
+}
+int Control::checkForRishSefid(std::vector<Card> playedCardsForRishSefid)
+{
+    std::cout << "too in function check for rish sefid" << std::endl;
+    std::cout << "playedCardsForRishSefid.size() - > " << playedCardsForRishSefid.size() << std::endl;
+    for (int i = 0; i < playedCardsForRishSefid.size(); i++)
+    {
+        std::cout << "too for checkForRishSefid" << std::endl;
+        if (playedCardsForRishSefid[i].getName() == "rish_sefid")
+        {
+            std::cout << "too if checkForRishSefid" << std::endl;
+            return i;
+        }
+    }
+    return -1; // in case rish sefid is not found in a certain player's hand
 }
 bool Control::determinWinnerOfWar()
 {
