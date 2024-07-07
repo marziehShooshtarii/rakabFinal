@@ -11,7 +11,7 @@
 #include "Bahar.hpp"
 #include "Shah_dokht.hpp"
 #include "Help.hpp"
-#include"Shirzan.hpp"
+#include "Shirzan.hpp"
 #include "Zemestan.hpp"
 
 class Control
@@ -63,10 +63,11 @@ public:
     void displayOwenedStates();
     bool checkCardsForMatarsak(int index);
     bool checkProcessOfEndingWar();
-    bool ifMaxScoreCardIsInHandForRishSefid(std::string,std::vector<Card> playedCards);
-    void indexControlerForPlayers(int& , int &);
+    bool ifMaxScoreCardIsInHandForRishSefid(std::string, std::vector<Card> playedCards);
     void rishSefidEffect(std::vector<Card>);
-    bool checkForRishSefid(std::vector <Card>);
+    bool checkForRishSefid(std::vector<Card>);
+    int shirzanCount(std::vector<Card> playedCardForShirzan);
+    bool checkShirzenForCertianPlayer();
     void run();
 
 private:

@@ -172,8 +172,8 @@ bool Control::playingInput()
                         checkProcessOfEndingWar();
                         for (int q = 0; q < identity.getPlayerNumber(); q++)
                             players[q].setIfPassed(true);
-                            i = indexControler;
-                            checkParchamDar = false;
+                        i = indexControler;
+                        checkParchamDar = false;
                         // return false;
                     }
                 }
@@ -231,17 +231,17 @@ bool Control::playingInput()
         // }
     }
 }
-void Control::indexControlerForPlayers(int &i, int &indexControler)
-{
-    i++;
-    std::cout << std::endl;
-    std::cin.ignore();
-    if (i == identity.getPlayerNumber())
-    {
-        i = 0;
-        indexControler = starterPlayer;
-    }
-}
+// void Control::indexControlerForPlayers(int &i, int &indexControler)
+// {
+//     i++;
+//     std::cout << std::endl;
+//     std::cin.ignore();
+//     if (i == identity.getPlayerNumber())
+//     {
+//         i = 0;
+//         indexControler = starterPlayer;
+//     }
+// }
 bool Control::checkProcessOfEndingWar()
 {
     if (determinWinnerOfWar())
@@ -546,11 +546,12 @@ bool Control::determinWinnerOfWar()
     }
     int winnerScore = 0;
     winner = -1;
-    // effect of rish_sefid
+    // effect of rish_sefid as the first priority
     for (int q = 0; q < identity.getPlayerNumber(); q++)
     {
         rishSefidEffect(players[q].getAllPlayedCards());
     }
+    // effect of bahar vs zemestan
     std::cout << "after rishsefid effect" << std::endl;
     if (baharVSzemestan.size() > 0)
     {
@@ -599,7 +600,11 @@ bool Control::determinWinnerOfWar()
     std::cout << "winner - > " << players[winner].getName() << std::endl;
     std::cin.ignore();
     // system("CLS");
-    starterPlayer = winner;
+    if (!checkShirzenForCertianPlayer()) // check if the number of shirzan's played is equal
+    {
+        std::cout << "winner-> " << std::endl;
+        starterPlayer = winner;
+    }
     int temp = winner;
     winner = -1;
     Zemestan z;
@@ -659,7 +664,52 @@ bool Control ::checkWin(int index)
     }
     return false;
 }
+int Control::shirzanCount(std::vector<Card> playedCardForShirzan)
+{
+    int counter = 0;
+    for (int i = 0; i < playedCardForShirzan.size(); i++)
+    {
+        if (playedCardForShirzan[i].getName() == "shirzan")
+            counter++;
+    }
+    return counter;
+}
+bool Control::checkShirzenForCertianPlayer()
+{
+    std::vector<int> shirzanCounter(identity.getPlayerNumber());
+    for (int i = 0; i < identity.getPlayerNumber(); i++)
+    {
+        shirzanCounter[i] = 0;
+    }
+    for (int i = 0; i < identity.getPlayerNumber(); i++)
+    {
+        shirzanCounter[i] = shirzanCount(players[i].getAllPlayedCards());
+    }
+    int maxShirzanInHand = shirzanCounter[0];
+    starterPlayer = 0;
+    int counterShirzanScore = 0;
+    for (int i = 1; i < identity.getPlayerNumber(); i++)
+    {
+        if (maxShirzanInHand < shirzanCounter[i])
+        {
+            maxShirzanInHand = shirzanCounter[i];
+            starterPlayer = i;
+        }
+        std::cout << "maxShirzanInHand -> " << maxShirzanInHand << std::endl;
+    }
+    for (int i = 0; i < identity.getPlayerNumber(); i++)
+    {
+        std::cout << "ghabl if mosavi shodan shorzan " << std::endl;
+        if (maxShirzanInHand == shirzanCounter[i])
+            counterShirzanScore++;
+        std::cout << "counterShirzanScore -> " << counterShirzanScore << std::endl;
+    }
+    if (counterShirzanScore > 1)
+        return false;
 
+    std::cout << "starterPlayer -> " << std::endl;
+    return true;
+}
 bool Control::checkIfItsTimeToDealHands()
 {
     int counterFullHands = 0;
