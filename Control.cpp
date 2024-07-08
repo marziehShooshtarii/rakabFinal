@@ -162,22 +162,22 @@ bool Control::playingInput()
 
             for (int i = starterPlayer; i < indexControler;)
             {
-                std::cout << "ghabl if " << std::endl;
-                std::cout << "indexControl -> " << indexControler << std::endl;
-                std::cout << "i -> " << i << std::endl;
-                std::cout << "checkSelectedCard -> " << checkSelectedCard << std::endl;
+                // std::cout << "ghabl if " << std::endl;
+                // std::cout << "indexControl -> " << indexControler << std::endl;
+                // std::cout << "i -> " << i << std::endl;
+                //std::cout << "checkSelectedCard -> " << checkSelectedCard << std::endl;
                 if (!checkIfCertianPlayerPassed(i))
                 {
-                    std::cout << "avale if " << std::endl;
+                    //std::cout << "avale if " << std::endl;
                     for (int d = 0; d < identity.getPlayerNumber(); d++)
                         displayPlayedCards(d);
                     std::cout << players[i].getName() << " it's your turn " << "\n\tplease chose your card from the list or pass or ask for help :\n " << "\t\n";
                     displayPlayingCards(i);
                     checkSelectedCard = cinSelectedCard(i);
-                    std::cout << "checkSelectedCard -> " << checkSelectedCard << std::endl;
+                    //std::cout << "checkSelectedCard -> " << checkSelectedCard << std::endl;
                     if (checkSelectedCard != 56)
                     {
-                        std::cout << "to ife parchamdar " << std::endl;
+                        //std::cout << "to ife parchamdar " << std::endl;
                         playingCards(i, checkSelectedCard);
 
                         // indexControlerForPlayers(i , indexControler);
@@ -505,31 +505,31 @@ void Control::rishSefidEffect(std::vector<Card> cardsForRishSefid)
         }
     }
 }
-int Control::findMostRecentPlayedRishSefid()
-{
-    std::cout << "too findMostRecentPlayedRishSefiddddddddddddddddddddddddddddddd" << std::endl;
-    int mostRecentPlayedRishSefid = checkForRishSefid(players[0].getAllPlayedCards()); // find the order of rish sefid that has been played
-    std::cout << "checkForRishSefid(players[0].getAllPlayedCards()) -> " << checkForRishSefid(players[0].getAllPlayedCards()) << std::endl;
-    int mostRecentPlayerWhoPlayedRishSefid = -1; // the most recent player who has played rish sefid
+// int Control::findMostRecentPlayedRishSefid()
+// {
+//     std::cout << "too findMostRecentPlayedRishSefiddddddddddddddddddddddddddddddd" << std::endl;
+//     int mostRecentPlayedRishSefid = checkForRishSefid(players[0].getAllPlayedCards()); // find the order of rish sefid that has been played
+//     std::cout << "checkForRishSefid(players[0].getAllPlayedCards()) -> " << checkForRishSefid(players[0].getAllPlayedCards()) << std::endl;
+//     int mostRecentPlayerWhoPlayedRishSefid = -1; // the most recent player who has played rish sefid
 
-    for (int i = 1; i < identity.getPlayerNumber(); i++)
-    {
-        std::cout << "too for findMostRecentPlayedRishSefid checkForRishSefid(players[i].getAllPlayedCards())- > " << i << "->" << checkForRishSefid(players[i].getAllPlayedCards()) << std::endl;
-        if (checkForRishSefid(players[i].getAllPlayedCards()) > mostRecentPlayedRishSefid)
-        {
-            std::cout << "too if findMostRecentPlayedRishSefid - > " << std::endl;
-            mostRecentPlayedRishSefid = checkForRishSefid(players[i].getAllPlayedCards());
-            mostRecentPlayerWhoPlayedRishSefid = i;
-        }
-    }
-    // if rish sefid has not been played in the current war,this function will return -1
-    std::cout << "mostRecentPlayerWhoPlayedRishSefid - > " << mostRecentPlayerWhoPlayedRishSefid << std::endl;
-    return mostRecentPlayerWhoPlayedRishSefid;
-}
+//     for (int i = 1; i < identity.getPlayerNumber(); i++)
+//     {
+//         std::cout << "too for findMostRecentPlayedRishSefid checkForRishSefid(players[i].getAllPlayedCards())- > " << i << "->" << checkForRishSefid(players[i].getAllPlayedCards()) << std::endl;
+//         if (checkForRishSefid(players[i].getAllPlayedCards()) > mostRecentPlayedRishSefid)
+//         {
+//             std::cout << "too if findMostRecentPlayedRishSefid - > " << std::endl;
+//             mostRecentPlayedRishSefid = checkForRishSefid(players[i].getAllPlayedCards());
+//             mostRecentPlayerWhoPlayedRishSefid = i;
+//         }
+//     }
+//     // if rish sefid has not been played in the current war,this function will return -1
+//     std::cout << "mostRecentPlayerWhoPlayedRishSefid - > " << mostRecentPlayerWhoPlayedRishSefid << std::endl;
+//     return mostRecentPlayerWhoPlayedRishSefid;
+// }
 int Control::checkForRishSefid(std::vector<Card> playedCardsForRishSefid)
 {
-    std::cout << "too in function check for rish sefid" << std::endl;
-    std::cout << "playedCardsForRishSefid.size() - > " << playedCardsForRishSefid.size() << std::endl;
+    // std::cout << "too in function check for rish sefid" << std::endl;
+    // std::cout << "playedCardsForRishSefid.size() - > " << playedCardsForRishSefid.size() << std::endl;
     for (int i = 0; i < playedCardsForRishSefid.size(); i++)
     {
         std::cout << "too for checkForRishSefid" << std::endl;
