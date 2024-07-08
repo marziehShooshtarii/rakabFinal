@@ -559,13 +559,10 @@ bool Control::determinWinnerOfWar()
     int counterWinner = 0;
     for (int i = 0; i < identity.getPlayerNumber(); i++)
     {
-        for (int j = i + 1; j < identity.getPlayerNumber(); j++)
-        {
-            if (scorsAtEndOfWar[i] == scorsAtEndOfWar[j])
-                counterWinner++;
-        }
+        if (scorsAtEndOfWar[i] == winnerScore)
+            counterWinner++;
     }
-    if (counterWinner >= 1)
+    if (counterWinner > 1)
     {
         std::cout << "there is no winner for this war!! start a new war" << std::endl;
         return false;
