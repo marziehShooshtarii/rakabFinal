@@ -69,8 +69,9 @@ public:
     int shirzanCount(std::vector<Card> playedCardForShirzan);
     bool checkShirzenForCertianPlayer();
     void choiceForPeaceSign();
-    int findMostRecentPlayedRishSefid();
+    //int findMostRecentPlayedRishSefid();
     bool checkForPeaceSign();
+    bool validateSpecialCardsForMatarsak();
     void run();
 
 private:
