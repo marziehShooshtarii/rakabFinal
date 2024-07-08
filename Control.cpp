@@ -159,28 +159,18 @@ bool Control::playingInput()
         while (checkIfAllPlayersPassed())
         {
             int indexControler = identity.getPlayerNumber();
-
             for (int i = starterPlayer; i < indexControler;)
             {
-                // std::cout << "ghabl if " << std::endl;
-                // std::cout << "indexControl -> " << indexControler << std::endl;
-                // std::cout << "i -> " << i << std::endl;
-                // std::cout << "checkSelectedCard -> " << checkSelectedCard << std::endl;
                 if (!checkIfCertianPlayerPassed(i))
                 {
-                    // std::cout << "avale if " << std::endl;
                     for (int d = 0; d < identity.getPlayerNumber(); d++)
                         displayPlayedCards(d);
                     std::cout << players[i].getName() << " it's your turn " << "\n\tplease chose your card from the list or pass or ask for help :\n " << "\t\n";
                     displayPlayingCards(i);
                     checkSelectedCard = cinSelectedCard(i);
-                    // std::cout << "checkSelectedCard -> " << checkSelectedCard << std::endl;
-                    if (checkSelectedCard != 56)
+                    if (checkSelectedCard != 5) // if player has played anything but parcham dar
                     {
-                        // std::cout << "to ife parchamdar " << std::endl;
                         playingCards(i, checkSelectedCard);
-
-                        // indexControlerForPlayers(i , indexControler);
                     }
                     else
                     {
@@ -189,7 +179,6 @@ bool Control::playingInput()
                             players[q].setIfPassed(true);
                         i = indexControler;
                         checkParchamDar = false;
-                        // return false;
                     }
                 }
                 i++;
@@ -226,7 +215,6 @@ bool Control::checkProcessOfEndingWar()
                 displayPlayingCards(t);
         }
     }
-    // if (findMostRecentPlayedRishSefid() != -1)
     if (orderOfRishSefids.size() != 0) // if rish sefid has been played in the current war
         choiceForPeaceSign();
 
@@ -249,7 +237,7 @@ bool Control::checkProcessOfEndingWar()
 }
 void Control::choiceForPeaceSign()
 {
-    std::cout << players[/*findMostRecentPlayedRishSefid()*/ orderOfRishSefids[orderOfRishSefids.size() - 1]].getName() << " please choose the state you want to place your peace sign on.";
+    std::cout << players[orderOfRishSefids[orderOfRishSefids.size() - 1]].getName() << " please choose the state you want to place your peace sign on.";
     std::cin >> peaceSign;
 }
 void Control::displayPlayingCards(int index)
@@ -345,22 +333,21 @@ int Control::cinSelectedCard(int index)
     std::cin >> cardName;
     if (cardName == "pass")
     {
-        cardName = "pass";
+        cardName = "pass"; // if player passed
         return 1;
     }
     if (cardName == "help")
     {
-        return 2;
+        return 2; // if player needs help
     }
     if (cardName == "parcham_dar")
     {
-        std::cout << "parcham dar " << std::endl;
-        return 56;
+        return 5; // if player has played parcham dar
     }
     if (!checkMatarsakPlayed(index))
     {
         selectedCard.setName(cardName);
-        return 3;
+        return 3; // if player has played anything but matarsak
     }
     return 4;
 }
@@ -389,7 +376,6 @@ bool Control::checkMatarsakPlayed(int index)
             }
             else
             {
-                //std::cout << "invalid card."<<std::endl;
                 cardName = "matarsak";
                 checkMatarsakPlayed(index);
             }
@@ -406,13 +392,13 @@ bool Control::checkCardsForMatarsak(int index)
         {
             if (!validateSpecialCardsForMatarsak())
             {
-                std::cout<<"you can't use matarsak on special cards."<<std::endl;
+                std::cout << "you can't use matarsak on special cards." << std::endl;
                 return false;
             }
             return true;
         }
     }
-    std::cout << "invalid card."<<std::endl;
+    std::cout << "invalid card." << std::endl;
     return false;
 }
 bool Control::validateSpecialCardsForMatarsak()
@@ -517,37 +503,12 @@ void Control::rishSefidEffect(std::vector<Card> cardsForRishSefid)
         }
     }
 }
-// int Control::findMostRecentPlayedRishSefid()
-// {
-//     std::cout << "too findMostRecentPlayedRishSefiddddddddddddddddddddddddddddddd" << std::endl;
-//     int mostRecentPlayedRishSefid = checkForRishSefid(players[0].getAllPlayedCards()); // find the order of rish sefid that has been played
-//     std::cout << "checkForRishSefid(players[0].getAllPlayedCards()) -> " << checkForRishSefid(players[0].getAllPlayedCards()) << std::endl;
-//     int mostRecentPlayerWhoPlayedRishSefid = -1; // the most recent player who has played rish sefid
-
-//     for (int i = 1; i < identity.getPlayerNumber(); i++)
-//     {
-//         std::cout << "too for findMostRecentPlayedRishSefid checkForRishSefid(players[i].getAllPlayedCards())- > " << i << "->" << checkForRishSefid(players[i].getAllPlayedCards()) << std::endl;
-//         if (checkForRishSefid(players[i].getAllPlayedCards()) > mostRecentPlayedRishSefid)
-//         {
-//             std::cout << "too if findMostRecentPlayedRishSefid - > " << std::endl;
-//             mostRecentPlayedRishSefid = checkForRishSefid(players[i].getAllPlayedCards());
-//             mostRecentPlayerWhoPlayedRishSefid = i;
-//         }
-//     }
-//     // if rish sefid has not been played in the current war,this function will return -1
-//     std::cout << "mostRecentPlayerWhoPlayedRishSefid - > " << mostRecentPlayerWhoPlayedRishSefid << std::endl;
-//     return mostRecentPlayerWhoPlayedRishSefid;
-// }
 int Control::checkForRishSefid(std::vector<Card> playedCardsForRishSefid)
 {
-    // std::cout << "too in function check for rish sefid" << std::endl;
-    // std::cout << "playedCardsForRishSefid.size() - > " << playedCardsForRishSefid.size() << std::endl;
     for (int i = 0; i < playedCardsForRishSefid.size(); i++)
     {
-        std::cout << "too for checkForRishSefid" << std::endl;
         if (playedCardsForRishSefid[i].getName() == "rish_sefid")
         {
-            std::cout << "too if checkForRishSefid" << std::endl;
             return i;
         }
     }
