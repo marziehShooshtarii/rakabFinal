@@ -78,7 +78,7 @@ private:
     getData identity;
     std ::unordered_map<std::string, int> deck;
     std ::vector<Card> allCards;
-    Player adam;
+    //Player adam;
     int randomCard;
     Card playerCard[10];
     int starterPlayer = 0;
@@ -93,6 +93,6 @@ private:
     int winner = -1;
     std::vector<Card> baharVSzemestan;
     std::string peaceSign;
-    int numberOfwars = 0;
-    //std::string playerWhoHasThePeaceSign;
+    int numberOfwars = 0;// for controling peace sign
+    std::vector<int>orderOfRishSefids;
 };
