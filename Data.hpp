@@ -20,6 +20,7 @@ public:
     void setAgeOfPlayers();
     int validateColor(std::string color);
     void displayColor(int i);
+    void setPlayerNumberForSave(int);
 
 private:
     std::string PlayerName;

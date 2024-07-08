@@ -114,3 +114,7 @@ std::string getData::getColor(int i)
 {
     return players[i].getColor();
 }
+void getData::setPlayerNumberForSave(int numberOfPlayersForSave)
+{
+    playerNumber = numberOfPlayersForSave;
+}
