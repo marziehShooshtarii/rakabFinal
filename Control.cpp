@@ -89,8 +89,8 @@ void Control::dealingCards()
         {"tabl_zan", 6},
         {"shah_dokht", 3},
         {"shirzan", 12},
-        {"parcham_dar", 20},
-        {"rish_sefid", 20},
+        {"parcham_dar", 3},
+        {"rish_sefid", 6},
         {"sarbaz_1", 8},
         {"sarbaz_2", 10},
         {"sarbaz_3", 10},
@@ -485,7 +485,7 @@ std ::string Control::findMaxScoreCard()
 void Control::rishSefidEffect(std::vector<Card> cardsForRishSefid)
 {
     std::string maxScoreForRishSefid = findMaxScoreCard();
-    if (checkForRishSefid(cardsForRishSefid) != -1) // in case rish sefid is found in a certain player's hand
+    if (checkForRishSefid(cardsForRishSefid)) // in case rish sefid is found in a certain player's hand
     {
         for (int g = 0; g < identity.getPlayerNumber(); g++)
         {
@@ -502,16 +502,16 @@ void Control::rishSefidEffect(std::vector<Card> cardsForRishSefid)
         }
     }
 }
-int Control::checkForRishSefid(std::vector<Card> playedCardsForRishSefid)
+bool Control::checkForRishSefid(std::vector<Card> playedCardsForRishSefid)
 {
     for (int i = 0; i < playedCardsForRishSefid.size(); i++)
     {
         if (playedCardsForRishSefid[i].getName() == "rish_sefid")
         {
-            return i;
+            return true;
         }
     }
-    return -1; // in case rish sefid is not found in a certain player's hand
+    return false; // in case rish sefid is not found in a certain player's hand
 }
 bool Control::determinWinnerOfWar()
 {

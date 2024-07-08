@@ -65,7 +65,7 @@ public:
     bool checkProcessOfEndingWar();
     bool ifMaxScoreCardIsInHandForRishSefid(std::string, std::vector<Card> playedCards);
     void rishSefidEffect(std::vector<Card>);
-    int checkForRishSefid(std::vector<Card>);
+    bool checkForRishSefid(std::vector<Card>);
     int shirzanCount(std::vector<Card> playedCardForShirzan);
     bool checkShirzenForCertianPlayer();
     void choiceForPeaceSign();
