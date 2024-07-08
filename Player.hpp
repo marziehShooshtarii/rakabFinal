@@ -30,6 +30,7 @@ public:
     int getNumberOfPlayerCards();
     void erasePlayedCard(int index);
     std::vector<Card>getAllPlayedCards();
+    void eraseAllPlayedCards();
 
 private:
     int age;

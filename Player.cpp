@@ -77,6 +77,10 @@ void Player::erasePlayedCard(int index)
 {
     playedCardList.erase(playedCardList.begin() + index);
 }
+void Player::eraseAllPlayedCards()
+{
+    playedCardList.clear();
+}
 std::vector<Card> Player::getAllPlayedCards()
 {
     return playedCardList;
