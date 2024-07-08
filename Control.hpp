@@ -72,6 +72,14 @@ public:
     //int findMostRecentPlayedRishSefid();
     bool checkForPeaceSign();
     bool validateSpecialCardsForMatarsak();
+    void savePlayerInfo(int index);
+    void savePlayedCardsInfo(int index);
+    void savePlayerCardsInfo(int index);
+    void saveBaharVSZemestan();
+    void saveSigns();
+    void saveStarterPlayerAndSelectedCard();
+    bool allInfo();
+    void menu();
     void run();
 
 private:
@@ -96,4 +104,6 @@ private:
     std::string peaceSign;
     int numberOfwars = 0;// for controling peace sign
     std::vector<int>orderOfRishSefids;
+    std::fstream save;
+    std::string newOrContinue;
 };

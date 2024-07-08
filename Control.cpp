@@ -220,11 +220,14 @@ bool Control::checkProcessOfEndingWar()
 
     for (int s = 0; s < identity.getPlayerNumber(); s++)
     {
-        for (int n = 0; n < players[s].getNumberOfPlayedCards(); n++)
-        {
-            players[s].erasePlayedCard(n);
-        }
+        std::cout<<"players[s].getAllPlayedCards().size() - > "<<players[s].getAllPlayedCards().size()<<std::endl;
+        // for (int n = 0; n < players[s].getAllPlayedCards().size(); n++)
+        // {
+        //     players[s].erasePlayedCard(n);
+        // }
+        players[s].eraseAllPlayedCards();
     }
+    baharVSzemestan.clear();
 
     for (int q = 0; q < identity.getPlayerNumber(); q++)
     {
@@ -249,13 +252,13 @@ void Control::displayPlayingCards(int index)
 }
 bool Control::playingCards(int index, int checkSelectedCard)
 {
-    if (cardName == "pass")//if player has passed 
+    if (cardName == "pass") // if player has passed
     {
         players[index].setIfPassed(true);
         checkIfCertianPlayerPassed(index);
         return false;
     }
-    if (checkSelectedCard == 2)//if player needs help
+    if (checkSelectedCard == 2) // if player needs help
     {
         // system("CLS");
         help(cinTypeOfHelp());
@@ -264,7 +267,12 @@ bool Control::playingCards(int index, int checkSelectedCard)
         playingCards(index, cinSelectedCard(index));
         return true;
     }
-    if (checkSelectedCard != 3)//if player has played matarsak
+    if (checkSelectedCard == 6)
+    {
+        allInfo();
+        exit(0);
+    }
+    if (checkSelectedCard != 3) // if player has played matarsak
         return true;
 
     if (searchForExistingCards(index, selectedCard))
@@ -275,7 +283,7 @@ bool Control::playingCards(int index, int checkSelectedCard)
             {
                 if (selectedCard.getName() == "bahar" || selectedCard.getName() == "zemestan")
                 {
-                    baharVSzemestan.push_back(selectedCard);// for controling the most recent played bahar or zemestan
+                    baharVSzemestan.push_back(selectedCard); // for controling the most recent played bahar or zemestan
                 }
                 if (selectedCard.getName() == "rish_sefid")
                     orderOfRishSefids.push_back(index); // for controling the most recent player who played rish sefid
@@ -342,6 +350,10 @@ int Control::cinSelectedCard(int index)
     if (cardName == "parcham_dar")
     {
         return 5; // if player has played parcham dar
+    }
+    if (cardName == "save")
+    {
+        return 6;// if player wants to save the game
     }
     if (!checkMatarsakPlayed(index))
     {
@@ -578,6 +590,7 @@ bool Control::determinWinnerOfWar()
     winner = -1;
     Zemestan z;
     z.endOfZemestan();
+    //allInfo();
     return true;
 }
 bool Control::ifMaxScoreCardIsInHandForRishSefid(std::string rishSefidMaxScore, std::vector<Card> playedCards)
@@ -724,9 +737,105 @@ std::string Control::cinTypeOfHelp()
     std::cin >> typeOfHelp;
     return typeOfHelp;
 }
+void Control::savePlayerInfo(int index)
+{
+
+    save << players[index].getName() << " " << players[index].getAge() << " " << players[index].getColor() << std::endl;
+    if (players[index].getNumberOfOwenedStates() > 0)
+    {
+        save << "owend_states: ";
+        for (int j = 0; j < players[index].getNumberOfOwenedStates(); j++)
+            save << players[index].getOwenedStates(j) << " ";
+        save << std::endl;
+    }
+}
+void Control::savePlayedCardsInfo(int index)
+{
+    save << "played_cards: ";
+    for (int i = 0; i < players[index].getNumberOfPlayedCards(); i++)
+    {
+        save << players[index].getPlayedCard(i).getName() << " ";
+    }
+    for (int i = 0; i < players[index].getNumberOfPlayedCards(); i++)
+    {
+        std::cout<< players[index].getPlayedCard(i).getName() << " ";
+    }
+    save << std::endl;
+}
+void Control::savePlayerCardsInfo(int index)
+{
+    save << "player_cards: ";
+    for (int i = 0; i < players[index].getNumberOfPlayerCards(); i++)
+    {
+        save << players[index].getPlayerCard(i).getName() << " ";
+    }
+    for (int i = 0; i < players[index].getNumberOfPlayerCards(); i++)
+    {
+        std::cout << players[index].getPlayerCard(i).getName() << " ";
+    }
+    save << std::endl;
+}
+void Control::saveBaharVSZemestan()
+{
+    save << "baharVSzemestan: ";
+    for (int i = 0; i < baharVSzemestan.size(); i++)
+    {
+        save << baharVSzemestan[i].getName() << " ";
+    }
+    save << std::endl;
+}
+void Control::saveSigns()
+{
+    save << "warzone: " << warzone << std::endl
+         << "peace_sign: " << peaceSign << std::endl;
+}
+void Control::saveStarterPlayerAndSelectedCard()
+{
+    save << "starter_player: " << starterPlayer << std::endl
+         << "selected_card: " << selectedCard.getName() << std::endl;
+}
+bool Control::allInfo()
+{
+    std::cout<<"dddddddddddddddddddddddddddddddddddddd"<<std::endl;
+    save.open("save.txt", std::ios::in | std::ios::out);
+    if (!save.is_open())
+    {
+        std ::cerr << "Error opening the file!" << std::endl;
+        return false;
+    }
+    save << identity.getPlayerNumber() << std::endl;
+    std::cout<<"dddddddddddddddddddddddddddddddddddddd 1"<<std::endl;
+    for (int i = 0; i < identity.getPlayerNumber(); i++)
+    {
+    std::cout<<"dddddddddddddddddddddddddddddddddddddd 2"<<std::endl;
+        savePlayerInfo(i);
+    std::cout<<"dddddddddddddddddddddddddddddddddddddd 3"<<std::endl;
+        savePlayerCardsInfo(i);
+    std::cout<<"dddddddddddddddddddddddddddddddddddddd 4"<<std::endl;
+        savePlayedCardsInfo(i);
+    }
+    std::cout<<"dddddddddddddddddddddddddddddddddddddd 5"<<std::endl;
+    saveBaharVSZemestan();
+    std::cout<<"dddddddddddddddddddddddddddddddddddddd 6"<<std::endl;
+    saveSigns();
+    std::cout<<"dddddddddddddddddddddddddddddddddddddd 7"<<std::endl;
+    saveStarterPlayerAndSelectedCard();
+    std::cout<<"dddddddddddddddddddddddddddddddddddddd 8"<<std::endl;
+}
+void Control::menu()
+{
+    std::cout << "do you want to start a new game or continue or previous game ? " << std::endl;
+    std::cin >> newOrContinue;
+    if (newOrContinue == "c")
+    {
+    
+    }
+}
+
 void Control::run()
 {
     initializeSpecialCards();
+
     validateIdentity();
     dealingCards();
     shuffelingCards();
