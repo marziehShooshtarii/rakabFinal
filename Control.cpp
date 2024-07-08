@@ -220,7 +220,7 @@ bool Control::checkProcessOfEndingWar()
 
     for (int s = 0; s < identity.getPlayerNumber(); s++)
     {
-        std::cout<<"players[s].getAllPlayedCards().size() - > "<<players[s].getAllPlayedCards().size()<<std::endl;
+        std::cout << "players[s].getAllPlayedCards().size() - > " << players[s].getAllPlayedCards().size() << std::endl;
         // for (int n = 0; n < players[s].getAllPlayedCards().size(); n++)
         // {
         //     players[s].erasePlayedCard(n);
@@ -269,7 +269,7 @@ bool Control::playingCards(int index, int checkSelectedCard)
     }
     if (checkSelectedCard == 6)
     {
-        allInfo();
+        saveAllInfo();
         exit(0);
     }
     if (checkSelectedCard != 3) // if player has played matarsak
@@ -353,7 +353,7 @@ int Control::cinSelectedCard(int index)
     }
     if (cardName == "save")
     {
-        return 6;// if player wants to save the game
+        return 6; // if player wants to save the game
     }
     if (!checkMatarsakPlayed(index))
     {
@@ -590,7 +590,7 @@ bool Control::determinWinnerOfWar()
     winner = -1;
     Zemestan z;
     z.endOfZemestan();
-    //allInfo();
+    // allInfo();
     return true;
 }
 bool Control::ifMaxScoreCardIsInHandForRishSefid(std::string rishSefidMaxScore, std::vector<Card> playedCards)
@@ -758,7 +758,7 @@ void Control::savePlayedCardsInfo(int index)
     }
     for (int i = 0; i < players[index].getNumberOfPlayedCards(); i++)
     {
-        std::cout<< players[index].getPlayedCard(i).getName() << " ";
+        std::cout << players[index].getPlayedCard(i).getName() << " ";
     }
     save << std::endl;
 }
@@ -794,9 +794,8 @@ void Control::saveStarterPlayerAndSelectedCard()
     save << "starter_player: " << starterPlayer << std::endl
          << "selected_card: " << selectedCard.getName() << std::endl;
 }
-bool Control::allInfo()
+bool Control::saveAllInfo()
 {
-    std::cout<<"dddddddddddddddddddddddddddddddddddddd"<<std::endl;
     save.open("save.txt", std::ios::in | std::ios::out);
     if (!save.is_open())
     {
@@ -804,23 +803,15 @@ bool Control::allInfo()
         return false;
     }
     save << identity.getPlayerNumber() << std::endl;
-    std::cout<<"dddddddddddddddddddddddddddddddddddddd 1"<<std::endl;
     for (int i = 0; i < identity.getPlayerNumber(); i++)
     {
-    std::cout<<"dddddddddddddddddddddddddddddddddddddd 2"<<std::endl;
         savePlayerInfo(i);
-    std::cout<<"dddddddddddddddddddddddddddddddddddddd 3"<<std::endl;
         savePlayerCardsInfo(i);
-    std::cout<<"dddddddddddddddddddddddddddddddddddddd 4"<<std::endl;
         savePlayedCardsInfo(i);
     }
-    std::cout<<"dddddddddddddddddddddddddddddddddddddd 5"<<std::endl;
     saveBaharVSZemestan();
-    std::cout<<"dddddddddddddddddddddddddddddddddddddd 6"<<std::endl;
     saveSigns();
-    std::cout<<"dddddddddddddddddddddddddddddddddddddd 7"<<std::endl;
     saveStarterPlayerAndSelectedCard();
-    std::cout<<"dddddddddddddddddddddddddddddddddddddd 8"<<std::endl;
 }
 void Control::menu()
 {
@@ -828,14 +819,91 @@ void Control::menu()
     std::cin >> newOrContinue;
     if (newOrContinue == "c")
     {
-    
     }
+}
+void Control::saveReadPlayerInfo(int index)
+{
+    int numberOfPlayersForSave;
+    std::string playerName;
+    int playerAge;
+    std::string playerColor;
+    save >> numberOfPlayersForSave >> playerName >> playerAge >> playerColor;
+    std::string stringOwendStates;
+    save >> stringOwendStates;
+    for (int j = 0; j < players[index].getNumberOfOwenedStates(); j++)
+    {
+        save >> stringOwendStates;
+        players[index].setOwenedStates(stringOwendStates);
+    }
+}
+void Control::saveReadPlayedCardsInfo(int index)
+{
+    std::string stringPlayedCards;
+    save >> stringPlayedCards;
+    for (int i = 0; i < players[index].getNumberOfPlayedCards(); i++)
+    {
+        save >> stringPlayedCards;
+        players[index].setPlayedCard(stringPlayedCards);
+    }
+}
+void Control::saveReadPlayerCardsInfo(int index)
+{
+    std::string stringPlayerCards;
+    save >> stringPlayerCards;
+    for (int i = 0; i < players[index].getNumberOfPlayerCards(); i++)
+    {
+        save >> stringPlayerCards;
+        players[index].setPlayerCard(stringPlayerCards);
+    }
+}
+void Control::saveReadBaharVSZemestan()
+{
+    std::string stringBaharVSzemestan;
+    save >> stringBaharVSzemestan;
+    for (int i = 0; i < baharVSzemestan.size(); i++)
+    {
+        save >> stringBaharVSzemestan;
+        baharVSzemestan.push_back(stringBaharVSzemestan);
+    }
+}
+void Control::saveReadSigns()
+{
+    std::string stringWarzone;
+    std::string stringPeaceSign;
+    save >> stringWarzone >> warzone >> stringPeaceSign >> peaceSign;
+}
+void Control::saveReadStarterPlayerAndSelectedCard()
+{
+    std::string stringStarterPlayer;
+    std::string stringSelectedCard;
+    save >> stringStarterPlayer >> starterPlayer >> stringSelectedCard >> stringSelectedCard;
+    selectedCard.setName(stringSelectedCard);
+}
+bool Control::saveReadAllInfo()
+{
+    save.open("save.txt", std::ios::in | std::ios::out);
+    if (!save.is_open())
+    {
+        std ::cerr << "Error opening the file!" << std::endl;
+        return false;
+    }
+    int intPlayerNumber;
+    save >> intPlayerNumber;
+    identity.setPlayerNumberForSave(intPlayerNumber);
+    for (int i = 0; i < identity.getPlayerNumber(); i++)
+    {
+        saveReadPlayerInfo(i);
+        saveReadPlayerCardsInfo(i);
+        saveReadPlayedCardsInfo(i);
+    }
+    saveReadBaharVSZemestan();
+    saveReadSigns();
+    saveReadStarterPlayerAndSelectedCard();
 }
 
 void Control::run()
 {
     initializeSpecialCards();
-
     validateIdentity();
     dealingCards();
     shuffelingCards();

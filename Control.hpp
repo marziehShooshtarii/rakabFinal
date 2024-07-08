@@ -78,8 +78,15 @@ public:
     void saveBaharVSZemestan();
     void saveSigns();
     void saveStarterPlayerAndSelectedCard();
-    bool allInfo();
+    bool saveAllInfo();
     void menu();
+    void saveReadPlayerInfo(int index);
+    void saveReadPlayedCardsInfo(int index);
+    void saveReadPlayerCardsInfo(int index);
+    void saveReadBaharVSZemestan();
+    void saveReadSigns();
+    void saveReadStarterPlayerAndSelectedCard();
+    bool saveReadAllInfo();
     void run();
 
 private:
