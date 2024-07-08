@@ -249,13 +249,13 @@ void Control::displayPlayingCards(int index)
 }
 bool Control::playingCards(int index, int checkSelectedCard)
 {
-    if (cardName == "pass")
+    if (cardName == "pass")//if player has passed 
     {
         players[index].setIfPassed(true);
         checkIfCertianPlayerPassed(index);
         return false;
     }
-    if (checkSelectedCard == 2)
+    if (checkSelectedCard == 2)//if player needs help
     {
         // system("CLS");
         help(cinTypeOfHelp());
@@ -264,7 +264,7 @@ bool Control::playingCards(int index, int checkSelectedCard)
         playingCards(index, cinSelectedCard(index));
         return true;
     }
-    if (checkSelectedCard != 3)
+    if (checkSelectedCard != 3)//if player has played matarsak
         return true;
 
     if (searchForExistingCards(index, selectedCard))
@@ -275,13 +275,12 @@ bool Control::playingCards(int index, int checkSelectedCard)
             {
                 if (selectedCard.getName() == "bahar" || selectedCard.getName() == "zemestan")
                 {
-                    baharVSzemestan.push_back(selectedCard);
+                    baharVSzemestan.push_back(selectedCard);// for controling the most recent played bahar or zemestan
                 }
                 if (selectedCard.getName() == "rish_sefid")
                     orderOfRishSefids.push_back(index); // for controling the most recent player who played rish sefid
                 players[index].setPlayedCard(selectedCard);
                 players[index].eraseCard(h);
-
                 break;
             }
         }
