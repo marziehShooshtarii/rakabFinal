@@ -835,6 +835,7 @@ void Control::saveStarterPlayer(int index)
 }
 bool Control::saveAllInfo(int index)
 {
+    int counter = 1;
     // save.open("save.txt", std::ios::in | std::ios::out);
     for (int i = 0; i < numberOfSavedGames.size(); i++)
     {
@@ -872,7 +873,19 @@ bool Control::saveAllInfo(int index)
             std::cout<<"9999999999999"<<std::endl;
             break;
         }
+        int indexControllerForSave = 4;
+        if (i == indexControllerForSave)
+        {
+            counter--;
+            i = 0;
+        }
+        if (counter==0)
+        {
+            break;
+        }
+        
     }
+    save.close();
 }
 bool Control::isFileEmpty(const std::string &filename)
 {
@@ -894,6 +907,7 @@ bool Control::isFileEmpty(const std::string &filename)
         std::cerr << "Could not open the file!" << std::endl;
         return false;
     }
+    save.close();
     return file.tellg() == 0;
 }
 bool Control::menu()
@@ -1061,6 +1075,7 @@ bool Control::saveReadAllInfo()
     saveReadSigns();
     std::cout << "ghbl played starter player " << std::endl;
     saveReadStarterPlayerAndSelectedCard();
+    save.close();
 }
 void Control::StartNewGame()
 {

@@ -1,0 +1,27 @@
+3
+a 8 red 0
+number_of_owned_states: 0
+owend_states: 
+player_cards_number: 9
+player_cards: parcham_dar shah_dokht matarsak sarbaz_2 parcham_dar shah_dokht shah_dokht sarbaz_3 sarbaz_4 
+played_cards_number: 1
+played_cards: sarbaz_5 
+x 87 green 0
+number_of_owned_states: 0
+owend_states: 
+player_cards_number: 9
+player_cards: sarbaz_10 sarbaz_5 sarbaz_10 rish_sefid matarsak sarbaz_3 shah_dokht matarsak matarsak 
+played_cards_number: 1
+played_cards: sarbaz_6 
+q 25 gray 0
+number_of_owned_states: 0
+owend_states: 
+player_cards_number: 10
+player_cards: parcham_dar tabl_zan shirzan sarbaz_1 matarsak sarbaz_4 sarbaz_6 sarbaz_2 sarbaz_1 sarbaz_10 
+played_cards_number: 0
+played_cards: 
+player_cards_number: 0
+baharVSzemestan: 
+warzone: bella
+peace_sign: 
+starter_player: 2
