@@ -118,3 +118,19 @@ void getData::setPlayerNumberForSave(int numberOfPlayersForSave)
 {
     playerNumber = numberOfPlayersForSave;
 }
+void getData::setPlayerNameForSave(std::string savedName)
+{
+    PlayerName = savedName;
+}
+void getData::setPlayerAgeForSave(int savedAge)
+{
+    playerAge = savedAge;
+}
+void getData::setPlayerColorForSave(std::string savedColor)
+{
+    playerColor = savedColor;
+}
+void getData::setPlayerForSave()
+{
+    players.push_back(Player(playerAge, PlayerName, playerColor, false));
+}
