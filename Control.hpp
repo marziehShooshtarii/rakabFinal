@@ -78,15 +78,19 @@ public:
     void saveBaharVSZemestan();
     void saveSigns();
     void saveStarterPlayerAndSelectedCard();
+    void savePlayerStates(int index);
     bool saveAllInfo();
-    void menu();
+    bool menu();
     void saveReadPlayerInfo(int index);
+    void saveReadPlayerStates(int index);
     void saveReadPlayedCardsInfo(int index);
     void saveReadPlayerCardsInfo(int index);
     void saveReadBaharVSZemestan();
     void saveReadSigns();
     void saveReadStarterPlayerAndSelectedCard();
     bool saveReadAllInfo();
+    bool is_empty(std::fstream& File);
+    void StartNewGame();
     void run();
 
 private:

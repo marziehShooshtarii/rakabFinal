@@ -33,8 +33,12 @@ bool Control::checkForPeaceSign()
 }
 void Control::displayWarzone()
 {
-    std::cout << "the selected warzone is " << warzone << " get ready for a war!!\n";
-    std::cout << "-----------------------------------------------------------------------------------------------" << std::endl;
+    if (newOrContinue == "n")
+        std::cout << "the selected warzone is " << warzone << " get ready for a war!!\n";
+    else if (newOrContinue == "c")
+        std::cout << "the warzone was " << warzone << " get ready for the rest of war!!\n";
+    else
+        std::cout << "-----------------------------------------------------------------------------------------------" << std::endl;
 }
 void Control ::displayOwenedStates()
 {
@@ -66,6 +70,7 @@ void Control::diplayBeggingOfTheGame()
 {
     std::cout << "Are you ready?!\n\tLets start the game\n";
     std::cin.ignore();
+    std::cout << "hhhhhhhhhhhhhhhhhhhhhhhhh" << std::endl;
     for (size_t i = 0; i < identity.getPlayerNumber();)
     {
         std::cout << "player number " << i + 1 << "s turn " << i + 1 << "\n\tpass the laptop to player number " << i + 1 << "\t\n";
@@ -82,6 +87,7 @@ void Control::diplayBeggingOfTheGame()
 }
 void Control::dealingCards()
 {
+    std::cout << "aval deck" << std::endl;
     deck = {
         {"bahar", 3},
         {"zemestan", 3},
@@ -106,6 +112,7 @@ void Control::dealingCards()
             allCards.emplace_back(pair.first);
         }
     }
+    std::cout << "akhar deck" << std::endl;
 }
 void Control::setPlayers()
 {
@@ -117,14 +124,21 @@ void Control::setPlayers()
 void Control::randomCardSet()
 {
     setPlayers();
+    std::cout << "after players" << std::endl;
     for (int j = 0; j < identity.getPlayerNumber(); j++)
     {
         for (int i = 0; i < (10 + players[j].getNumberOfOwenedStates()); i++)
         {
+            std::cout << "identity.getPlayerNumber() -> " << identity.getPlayerNumber() << std::endl;
+            std::cout << "randomCardSet ghabl " << std::endl;
             randomCard = rand() % 110;
+            std::cout << "randomCardSet bad " << std::endl;
+            std::cout << "randomCard " << randomCard << std::endl;
             players[j].setPlayerCard(allCards[randomCard]);
         }
+        std::cout << "bad for aval " << std::endl;
     }
+    std::cout << "bad for dovoom " << std::endl;
 }
 void Control::validateIdentity()
 {
@@ -144,15 +158,21 @@ bool Control::playingInput()
 {
     while (1)
     {
-        startOfWarMassage();
-        displayStarterPlayer();
+        if (newOrContinue == "n")
+        {
+            startOfWarMassage();
+            displayStarterPlayer();
+        }
         displayWarzone();
         displayOwenedStates();
         bool checkParchamDar = true;
         int checkSelectedCard = -1; // differentiate from the card played
-        for (int c = 0; c < identity.getPlayerNumber(); c++)
+        if (newOrContinue == "n")
         {
-            players[c].setIfPassed(false);
+            for (int c = 0; c < identity.getPlayerNumber(); c++)
+            {
+                players[c].setIfPassed(false);
+            }
         }
         winner = -3;
 
@@ -740,17 +760,23 @@ std::string Control::cinTypeOfHelp()
 void Control::savePlayerInfo(int index)
 {
 
-    save << players[index].getName() << " " << players[index].getAge() << " " << players[index].getColor() << std::endl;
-    if (players[index].getNumberOfOwenedStates() > 0)
-    {
-        save << "owend_states: ";
+    save << players[index].getName() << " " << players[index].getAge() << " " << players[index].getColor() << " " << players[index].getIfPassed() << std::endl;
+}
+void Control::savePlayerStates(int index)
+{
+    save<< "number_of_owned_states: " << players[index].getNumberOfOwenedStates() << std::endl;
+    save << "owend_states: ";
+    // if (players[index].getNumberOfOwenedStates() > 0)
+    // {
+    //     // save<< "numberOfOwenedStates: " << players[index].getNumberOfOwenedStates() <<std::endl;
         for (int j = 0; j < players[index].getNumberOfOwenedStates(); j++)
             save << players[index].getOwenedStates(j) << " ";
         save << std::endl;
-    }
+    // }
 }
 void Control::savePlayedCardsInfo(int index)
 {
+    save << "played_cards_number: " << players[index].getNumberOfPlayedCards() << std::endl;
     save << "played_cards: ";
     for (int i = 0; i < players[index].getNumberOfPlayedCards(); i++)
     {
@@ -764,6 +790,7 @@ void Control::savePlayedCardsInfo(int index)
 }
 void Control::savePlayerCardsInfo(int index)
 {
+    save << "player_cards_number: " << players[index].getNumberOfPlayerCards() << std::endl;
     save << "player_cards: ";
     for (int i = 0; i < players[index].getNumberOfPlayerCards(); i++)
     {
@@ -777,6 +804,7 @@ void Control::savePlayerCardsInfo(int index)
 }
 void Control::saveBaharVSZemestan()
 {
+    save << "player_cards_number: " << baharVSzemestan.size() << std::endl;
     save << "baharVSzemestan: ";
     for (int i = 0; i < baharVSzemestan.size(); i++)
     {
@@ -806,6 +834,7 @@ bool Control::saveAllInfo()
     for (int i = 0; i < identity.getPlayerNumber(); i++)
     {
         savePlayerInfo(i);
+        savePlayerStates(i);
         savePlayerCardsInfo(i);
         savePlayedCardsInfo(i);
     }
@@ -813,24 +842,66 @@ bool Control::saveAllInfo()
     saveSigns();
     saveStarterPlayerAndSelectedCard();
 }
-void Control::menu()
+bool Control::is_empty(std::fstream &File)
+{
+    return File.peek() == std::fstream::traits_type::eof();
+}
+bool Control::menu()
 {
     std::cout << "do you want to start a new game or continue or previous game ? " << std::endl;
     std::cin >> newOrContinue;
     if (newOrContinue == "c")
     {
+        // std::cout << "if c " << std::endl;
+        // if (is_empty(save))
+        // {
+        //     std::cout << "No previous game found." << std::endl;
+        //     menu();
+        // }
+        // else
+        saveReadAllInfo();
     }
+    else if (newOrContinue == "n")
+    {
+        StartNewGame();
+    }
+    else
+        return true;
 }
 void Control::saveReadPlayerInfo(int index)
 {
-    int numberOfPlayersForSave;
+    // int numberOfPlayersForSave;
+    std::cout << "number of players " << identity.getPlayerNumber() << std::endl;
     std::string playerName;
     int playerAge;
     std::string playerColor;
-    save >> numberOfPlayersForSave >> playerName >> playerAge >> playerColor;
-    std::string stringOwendStates;
+    bool playerPosotion;
+    save >> playerName >> playerAge >> playerColor >> playerPosotion;
+    std::cout << "name of players- > " << playerName << std::endl;
+    std::cout << "age of players- > " << playerAge << std::endl;
+    std::cout << "color of players -> " << playerColor << std::endl;
+    std::cout << "pass of players - > " << playerPosotion << std::endl;
+    std::cout << "after of players" << std::endl;
+    identity.setPlayerNameForSave(playerName);
+    identity.setPlayerAgeForSave(playerAge);
+    identity.setPlayerColorForSave(playerColor);
+    identity.setPlayerForSave();
+    players.push_back(Player(identity.getAge(index), identity.getName(index), identity.getColor(index), playerPosotion));
+    std::cout << "name identity of players- > " << identity.getName(index) << std::endl;
+    std::cout << "age identity of players - > " << identity.getAge(index) << std::endl;
+    std::cout << "color identity of players -> " << identity.getColor(index) << std::endl;
+    std::cout << "akhar identity of players" << std::endl;
+}
+void Control::saveReadPlayerStates(int index)
+{
+    std::string stringOwendStates; // string persisting the states
+    std::string stringNumberOfStates; //get the string containing the number of
+    int numberOfStates;
+    save >> stringNumberOfStates >> numberOfStates;
     save >> stringOwendStates;
-    for (int j = 0; j < players[index].getNumberOfOwenedStates(); j++)
+    // save >> numberOfStates;
+    // players[index].setOwenedStates(numberOfStates);
+    for (int j = 0; j < numberOfStates; j++)
     {
         save >> stringOwendStates;
         players[index].setOwenedStates(stringOwendStates);
@@ -838,19 +909,30 @@ void Control::saveReadPlayerInfo(int index)
 }
 void Control::saveReadPlayedCardsInfo(int index)
 {
-    std::string stringPlayedCards;
+    std::string stringPlayedCards, stringNumberOfCards;
+    int numberOfPlayedCards;
+    std::cout << "number of played cards: " << numberOfPlayedCards << std::endl;
+    save >> stringNumberOfCards >> numberOfPlayedCards;
     save >> stringPlayedCards;
-    for (int i = 0; i < players[index].getNumberOfPlayedCards(); i++)
+    std::cout << "string of played cards: " << stringPlayedCards << std::endl;
+    for (int i = 0; i < numberOfPlayedCards; i++)
     {
         save >> stringPlayedCards;
+        std::cout << "played card " << i << stringPlayedCards << std::endl;
         players[index].setPlayedCard(stringPlayedCards);
+        // std::cout << "players[index].getPlayedCard() -> " << players[index].getPlayedCard(i).getName()<< std::endl;
     }
 }
 void Control::saveReadPlayerCardsInfo(int index)
 {
-    std::string stringPlayerCards;
+    std::string stringPlayerCards, stringNumbrOfCards;
+    int numberOfCards;
+    save >> stringNumbrOfCards;
+    save >> numberOfCards;
+    std::cout << "number of player cards: " << numberOfCards << std::endl;
     save >> stringPlayerCards;
-    for (int i = 0; i < players[index].getNumberOfPlayerCards(); i++)
+    std::cout << "string of player cards: " << stringPlayerCards << std::endl;
+    for (int i = 0; i < numberOfCards; i++)
     {
         save >> stringPlayerCards;
         players[index].setPlayerCard(stringPlayerCards);
@@ -858,9 +940,12 @@ void Control::saveReadPlayerCardsInfo(int index)
 }
 void Control::saveReadBaharVSZemestan()
 {
-    std::string stringBaharVSzemestan;
+    std::string stringBaharVSzemestan;           // get the string representing the order of the cards
+    std::string stringBaharVSzemestanCardsCount; // get the description which contains number of cards
+    int baharVSzemestanCardsCount;
+    save >> stringBaharVSzemestanCardsCount >> baharVSzemestanCardsCount;
     save >> stringBaharVSzemestan;
-    for (int i = 0; i < baharVSzemestan.size(); i++)
+    for (int i = 0; i < baharVSzemestanCardsCount; i++)
     {
         save >> stringBaharVSzemestan;
         baharVSzemestan.push_back(stringBaharVSzemestan);
@@ -871,6 +956,7 @@ void Control::saveReadSigns()
     std::string stringWarzone;
     std::string stringPeaceSign;
     save >> stringWarzone >> warzone >> stringPeaceSign >> peaceSign;
+    std::cout << "warzone -> " << warzone << "peacesign -> " << peaceSign << std::endl;
 }
 void Control::saveReadStarterPlayerAndSelectedCard()
 {
@@ -887,28 +973,48 @@ bool Control::saveReadAllInfo()
         std ::cerr << "Error opening the file!" << std::endl;
         return false;
     }
+    std::cout << "bad file khondan " << std::endl;
     int intPlayerNumber;
     save >> intPlayerNumber;
+    // std::cout << "bad tedad bazikon khondan " << std::endl;
     identity.setPlayerNumberForSave(intPlayerNumber);
+    std::cout << "identity.getPlayerNumberForSave -> " << identity.getPlayerNumber() << std::endl;
     for (int i = 0; i < identity.getPlayerNumber(); i++)
     {
+        // std::cout << "ghabl player info " << std::endl;
         saveReadPlayerInfo(i);
+        saveReadPlayerStates(i);
+        // std::cout << "ghabl player card " << std::endl;
         saveReadPlayerCardsInfo(i);
+        // std::cout << "ghabl played card " << std::endl;
         saveReadPlayedCardsInfo(i);
+        std::cout << "player " << i << "tamoom shod\n\n" << std::endl;
     }
+    std::cout << "ghbl played bahar " << std::endl;
     saveReadBaharVSZemestan();
+    std::cout << "ghbl played signs " << std::endl;
     saveReadSigns();
+    std::cout << "ghbl played starter player " << std::endl;
     saveReadStarterPlayerAndSelectedCard();
 }
-
-void Control::run()
+void Control::StartNewGame()
 {
-    initializeSpecialCards();
+    // std::cout << "ghabl validate " << std::endl;
     validateIdentity();
+    // std::cout << "ghabl dealing " << std::endl;
     dealingCards();
+    // std::cout << "ghabl shuffle" << std::endl;
     shuffelingCards();
+    // std::cout << "ghabl random" << std::endl;
     randomCardSet();
     diplayBeggingOfTheGame();
     determinMinAge();
+    // std::cout << "bad random function" << std::endl;
+}
+void Control::run()
+{
+    initializeSpecialCards();
+    menu();
+    std::cout << "after menu " << std::endl;
     playingInput();
 }
