@@ -1,18 +1,1 @@
-3
-ben 65 red
-player_cards: shirzan zemestan rish_sefid rish_sefid sarbaz_10 shirzan shirzan shirzan sarbaz_5 
-played_cards: sarbaz_1 
-naz 74 gray
-player_cards: sarbaz_4 matarsak sarbaz_10 matarsak shirzan zemestan sarbaz_1 matarsak sarbaz_3 
-played_cards: sarbaz_2 
-a 98 blue
-player_cards: parcham_dar sarbaz_2 sarbaz_1 rish_sefid matarsak sarbaz_1 sarbaz_3 sarbaz_2 sarbaz_2 
-played_cards: sarbaz_3 
-baharVSzemestan: 
-warzone: lia
-peace_sign: 
-starter_player: 0
-selected_card: sarbaz_3
 
-
-emestan
