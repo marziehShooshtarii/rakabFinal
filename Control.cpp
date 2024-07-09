@@ -846,18 +846,24 @@ bool Control::saveAllInfo(int index)
 }
 bool Control::isFileEmpty(const std::string &filename)
 {
-    std::ifstream file(filename);
-    if (!file.is_open())
-    {
+    //
+    // if (!file.is_open())
+    // {
+    //     std::cerr << "Could not open the file!" << std::endl;
+    //     return false;
+    // }
+
+    // char c;
+    // file.get(c);
+    // bool d = c == file.eof();
+    // std::cout << d << std::endl; 
+    // return c == file.eof();
+ std::ifstream file(filename, std::ios::in | std::ios::ate);
+    if (!file.is_open()) {
         std::cerr << "Could not open the file!" << std::endl;
         return false;
     }
-
-    char c;
-    file.get(c);
-    bool d = c == file.eof();
-    std::cout << d << std::endl; 
-    return c == file.eof();
+    return file.tellg() == 0;
 }
 bool Control::menu()
 {
@@ -865,13 +871,13 @@ bool Control::menu()
     std::cin >> newOrContinue;
     if (newOrContinue == "c")
     {
-        // std::cout << "if c " << std::endl;
-        // if (isFileEmpty("save.txt"))
-        // {
-        //     std::cout << "No previous game found." << std::endl;
-        //     menu();
-        // }
-        // else
+        std::cout << "if c " << std::endl;
+        if (isFileEmpty("save.txt")==1)//if tellg == 0 is true 
+        {
+            std::cout << "No previous game found." << std::endl;
+            menu();
+        }
+        else
         saveReadAllInfo();
     }
     else if (newOrContinue == "n")
