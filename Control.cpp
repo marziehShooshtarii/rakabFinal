@@ -223,7 +223,7 @@ bool Control::checkProcessOfEndingWar()
 {
     if (determinWinnerOfWar())
         players[winner].setOwenedStates(warzone);
-    winner = -1;    
+    winner = -1;
     if (turn != 1)
     {
         if (checkIfItsTimeToDealHands())
@@ -766,14 +766,14 @@ void Control::savePlayerInfo(int index)
 }
 void Control::savePlayerStates(int index)
 {
-    save<< "number_of_owned_states: " << players[index].getNumberOfOwenedStates() << std::endl;
+    save << "number_of_owned_states: " << players[index].getNumberOfOwenedStates() << std::endl;
     save << "owend_states: ";
     // if (players[index].getNumberOfOwenedStates() > 0)
     // {
     //     // save<< "numberOfOwenedStates: " << players[index].getNumberOfOwenedStates() <<std::endl;
-        for (int j = 0; j < players[index].getNumberOfOwenedStates(); j++)
-            save << players[index].getOwenedStates(j) << " ";
-        save << std::endl;
+    for (int j = 0; j < players[index].getNumberOfOwenedStates(); j++)
+        save << players[index].getOwenedStates(j) << " ";
+    save << std::endl;
     // }
 }
 void Control::savePlayedCardsInfo(int index)
@@ -844,17 +844,20 @@ bool Control::saveAllInfo(int index)
     saveSigns();
     saveStarterPlayer(index);
 }
-bool Control::is_empty(std::fstream &File)
+bool Control::isFileEmpty(const std::string &filename)
 {
-    bool empty = save.peek() == EOF;
-    std::cout << "empty -> " << empty <<std::endl;
-    return empty;
-    // std::ifstream in ("save.txt");
-    // if (in.is_open())
-    // {
-    //     in.seekg(0 , std::ios::end);
-    // }
-    // return File.peek() == std::fstream::traits_type::eof();
+    std::ifstream file(filename);
+    if (!file.is_open())
+    {
+        std::cerr << "Could not open the file!" << std::endl;
+        return false;
+    }
+
+    char c;
+    file.get(c);
+    bool d = c == file.eof();
+    std::cout << d << std::endl; 
+    return c == file.eof();
 }
 bool Control::menu()
 {
@@ -863,7 +866,7 @@ bool Control::menu()
     if (newOrContinue == "c")
     {
         // std::cout << "if c " << std::endl;
-        // if (is_empty(save))
+        // if (isFileEmpty("save.txt"))
         // {
         //     std::cout << "No previous game found." << std::endl;
         //     menu();
@@ -904,8 +907,8 @@ void Control::saveReadPlayerInfo(int index)
 }
 void Control::saveReadPlayerStates(int index)
 {
-    std::string stringOwendStates; // string persisting the states
-    std::string stringNumberOfStates; //get the string containing the number of
+    std::string stringOwendStates;    // string persisting the states
+    std::string stringNumberOfStates; // get the string containing the number of
     int numberOfStates;
     save >> stringNumberOfStates >> numberOfStates;
     save >> stringOwendStates;
@@ -996,7 +999,8 @@ bool Control::saveReadAllInfo()
         saveReadPlayerCardsInfo(i);
         // std::cout << "ghabl played card " << std::endl;
         saveReadPlayedCardsInfo(i);
-        std::cout << "player " << i << "tamoom shod\n\n" << std::endl;
+        std::cout << "player " << i << "tamoom shod\n\n"
+                  << std::endl;
     }
     std::cout << "ghbl played bahar " << std::endl;
     saveReadBaharVSZemestan();

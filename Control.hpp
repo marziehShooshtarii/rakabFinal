@@ -20,6 +20,7 @@ public:
     Control();
     ~Control()
     {
+        save.close();
         for (auto p : armyAndSpecialCards)
         {
             delete p;
@@ -69,7 +70,6 @@ public:
     int shirzanCount(std::vector<Card> playedCardForShirzan);
     bool checkShirzenForCertianPlayer();
     void choiceForPeaceSign();
-    //int findMostRecentPlayedRishSefid();
     bool checkForPeaceSign();
     bool validateSpecialCardsForMatarsak();
     void savePlayerInfo(int index);
@@ -89,7 +89,8 @@ public:
     void saveReadSigns();
     void saveReadStarterPlayerAndSelectedCard();
     bool saveReadAllInfo();
-    bool is_empty(std::fstream& File);
+    // bool is_empty(std::fstream& File);
+    bool isFileEmpty(const std::string &filename);
     void StartNewGame();
     void run();
 
@@ -98,7 +99,6 @@ private:
     getData identity;
     std ::unordered_map<std::string, int> deck;
     std ::vector<Card> allCards;
-    //Player adam;
     int randomCard;
     Card playerCard[10];
     int starterPlayer = 0;
@@ -110,11 +110,12 @@ private:
     int maxScore = -1;
     int counterNeighbores = 0;
     std::string winnerOfGame;
-    int winner = -1;
+    int winner = -1; //can't be the numbers which may be the player's order
     std::vector<Card> baharVSzemestan;
     std::string peaceSign;
     int numberOfwars = 0;// for controling peace sign
     std::vector<int>orderOfRishSefids;
     std::fstream save;
     std::string newOrContinue;
+    std::vector <std::string> numberOfSavedGames; //having more than one saved game
 };
