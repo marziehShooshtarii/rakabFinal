@@ -222,7 +222,8 @@ bool Control::playingInput()
 bool Control::checkProcessOfEndingWar()
 {
     if (determinWinnerOfWar())
-        players[starterPlayer].setOwenedStates(warzone);
+        players[winner].setOwenedStates(warzone);
+    winner = -1;    
     if (turn != 1)
     {
         if (checkIfItsTimeToDealHands())
@@ -289,7 +290,7 @@ bool Control::playingCards(int index, int checkSelectedCard)
     }
     if (checkSelectedCard == 6)
     {
-        saveAllInfo();
+        saveAllInfo(index);
         exit(0);
     }
     if (checkSelectedCard != 3) // if player has played matarsak
@@ -603,11 +604,12 @@ bool Control::determinWinnerOfWar()
     // system("CLS");
     if (!checkShirzenForCertianPlayer()) // check if the number of shirzan's played is equal
     {
-        std::cout << "winner-> " << std::endl;
         starterPlayer = winner;
+        std::cout << "starter player - > " << starterPlayer << std::endl;
     }
     int temp = winner;
-    winner = -1;
+    // winner = -1;
+    newOrContinue = "n";
     Zemestan z;
     z.endOfZemestan();
     // allInfo();
@@ -817,12 +819,12 @@ void Control::saveSigns()
     save << "warzone: " << warzone << std::endl
          << "peace_sign: " << peaceSign << std::endl;
 }
-void Control::saveStarterPlayerAndSelectedCard()
+void Control::saveStarterPlayer(int index)
 {
-    save << "starter_player: " << starterPlayer << std::endl
-         << "selected_card: " << selectedCard.getName() << std::endl;
+    starterPlayer = index;
+    save << "starter_player: " << starterPlayer << std::endl;
 }
-bool Control::saveAllInfo()
+bool Control::saveAllInfo(int index)
 {
     save.open("save.txt", std::ios::in | std::ios::out);
     if (!save.is_open())
@@ -840,11 +842,19 @@ bool Control::saveAllInfo()
     }
     saveBaharVSZemestan();
     saveSigns();
-    saveStarterPlayerAndSelectedCard();
+    saveStarterPlayer(index);
 }
 bool Control::is_empty(std::fstream &File)
 {
-    return File.peek() == std::fstream::traits_type::eof();
+    bool empty = save.peek() == EOF;
+    std::cout << "empty -> " << empty <<std::endl;
+    return empty;
+    // std::ifstream in ("save.txt");
+    // if (in.is_open())
+    // {
+    //     in.seekg(0 , std::ios::end);
+    // }
+    // return File.peek() == std::fstream::traits_type::eof();
 }
 bool Control::menu()
 {
@@ -961,9 +971,7 @@ void Control::saveReadSigns()
 void Control::saveReadStarterPlayerAndSelectedCard()
 {
     std::string stringStarterPlayer;
-    std::string stringSelectedCard;
-    save >> stringStarterPlayer >> starterPlayer >> stringSelectedCard >> stringSelectedCard;
-    selectedCard.setName(stringSelectedCard);
+    save >> stringStarterPlayer >> starterPlayer;
 }
 bool Control::saveReadAllInfo()
 {
@@ -1015,6 +1023,5 @@ void Control::run()
 {
     initializeSpecialCards();
     menu();
-    std::cout << "after menu " << std::endl;
     playingInput();
 }

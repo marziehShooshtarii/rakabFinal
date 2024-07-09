@@ -77,9 +77,9 @@ public:
     void savePlayerCardsInfo(int index);
     void saveBaharVSZemestan();
     void saveSigns();
-    void saveStarterPlayerAndSelectedCard();
+    void saveStarterPlayer(int);
     void savePlayerStates(int index);
-    bool saveAllInfo();
+    bool saveAllInfo(int);
     bool menu();
     void saveReadPlayerInfo(int index);
     void saveReadPlayerStates(int index);
