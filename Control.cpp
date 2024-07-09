@@ -1,7 +1,10 @@
 #include <unistd.h>
 #include "Control.hpp"
 
-Control::Control() {}
+Control::Control()
+{
+    initializingNumberOfSavedGames();
+}
 void Control::startOfWarMassage()
 {
     std::cout << "press enter to start the war ";
@@ -761,8 +764,14 @@ std::string Control::cinTypeOfHelp()
 }
 void Control::savePlayerInfo(int index)
 {
+    // for (int i = 0; i < numberOfSavedGames.size(); i++)
+    // {
+    //     if (isFileEmpty(numberOfSavedGames[i]) == 1) // if file is empty
+    //     {
 
     save << players[index].getName() << " " << players[index].getAge() << " " << players[index].getColor() << " " << players[index].getIfPassed() << std::endl;
+    //     }
+    // }
 }
 void Control::savePlayerStates(int index)
 {
@@ -826,23 +835,44 @@ void Control::saveStarterPlayer(int index)
 }
 bool Control::saveAllInfo(int index)
 {
-    save.open("save.txt", std::ios::in | std::ios::out);
-    if (!save.is_open())
+    // save.open("save.txt", std::ios::in | std::ios::out);
+    for (int i = 0; i < numberOfSavedGames.size(); i++)
     {
-        std ::cerr << "Error opening the file!" << std::endl;
-        return false;
+        std::cout << "i - > " << i << std::endl;
+
+        if (isFileEmpty(numberOfSavedGames[i]) == 1) // if file is empty
+        {
+            std::cout << "file if empty" << std::endl;
+            std::cout << "numberOfSavedGames[i] - > " << numberOfSavedGames[i] << std::endl;
+            save.open(numberOfSavedGames[i], std::ios::in | std::ios::out);
+            if (!save.is_open())
+            {
+                std ::cerr << "Error opening the file!" << std::endl;
+                return false;
+            }
+            std::cout<<"1111111111111111111111"<<std::endl;
+            save << identity.getPlayerNumber() << std::endl;
+            for (int i = 0; i < identity.getPlayerNumber(); i++)
+            {
+            std::cout<<"22222222222222"<<std::endl;
+                savePlayerInfo(i);
+            std::cout<<"33333333333333"<<std::endl;
+                savePlayerStates(i);
+            std::cout<<"44444444444444"<<std::endl;
+                savePlayerCardsInfo(i);
+            std::cout<<"55555555555555"<<std::endl;
+                savePlayedCardsInfo(i);
+            std::cout<<"66666666666666666"<<std::endl;
+            }
+            saveBaharVSZemestan();
+            std::cout<<"77777777777777"<<std::endl;
+            saveSigns();
+            std::cout<<"888888888888888"<<std::endl;
+            saveStarterPlayer(index);
+            std::cout<<"9999999999999"<<std::endl;
+            break;
+        }
     }
-    save << identity.getPlayerNumber() << std::endl;
-    for (int i = 0; i < identity.getPlayerNumber(); i++)
-    {
-        savePlayerInfo(i);
-        savePlayerStates(i);
-        savePlayerCardsInfo(i);
-        savePlayedCardsInfo(i);
-    }
-    saveBaharVSZemestan();
-    saveSigns();
-    saveStarterPlayer(index);
 }
 bool Control::isFileEmpty(const std::string &filename)
 {
@@ -856,10 +886,11 @@ bool Control::isFileEmpty(const std::string &filename)
     // char c;
     // file.get(c);
     // bool d = c == file.eof();
-    // std::cout << d << std::endl; 
+    // std::cout << d << std::endl;
     // return c == file.eof();
- std::ifstream file(filename, std::ios::in | std::ios::ate);
-    if (!file.is_open()) {
+    std::ifstream file(filename, std::ios::in | std::ios::ate);
+    if (!file.is_open())
+    {
         std::cerr << "Could not open the file!" << std::endl;
         return false;
     }
@@ -872,13 +903,16 @@ bool Control::menu()
     if (newOrContinue == "c")
     {
         std::cout << "if c " << std::endl;
-        if (isFileEmpty("save.txt")==1)//if tellg == 0 is true 
-        {
-            std::cout << "No previous game found." << std::endl;
-            menu();
-        }
-        else
+        //::cout << " "
+        // if (isFileEmpty("save.txt") == 1) // if tellg == 0 is true
+        // {
+        //     std::cout << "No previous game found." << std::endl;
+        //     menu();
+        // }
+        determinNumberOfSavedGame();
         saveReadAllInfo();
+        // else
+        //     saveReadAllInfo();
     }
     else if (newOrContinue == "n")
     {
@@ -886,6 +920,18 @@ bool Control::menu()
     }
     else
         return true;
+}
+bool Control::determinNumberOfSavedGame()
+{
+    std::cout << "please enter the number of the saved game you want to continue." << std::endl;
+    std::cin >> whichSavedGame;
+    if (isFileEmpty(numberOfSavedGames[whichSavedGame - 1]) == 1) // if tellg == 0 is true meaning the file is empty.
+    {
+        std::cout << "No saved game found." << std::endl;
+        menu();
+        // return false;
+    }
+    // return true;
 }
 void Control::saveReadPlayerInfo(int index)
 {
@@ -984,7 +1030,7 @@ void Control::saveReadStarterPlayerAndSelectedCard()
 }
 bool Control::saveReadAllInfo()
 {
-    save.open("save.txt", std::ios::in | std::ios::out);
+    save.open(numberOfSavedGames[whichSavedGame - 1], std::ios::in | std::ios::out);
     if (!save.is_open())
     {
         std ::cerr << "Error opening the file!" << std::endl;
@@ -998,12 +1044,13 @@ bool Control::saveReadAllInfo()
     std::cout << "identity.getPlayerNumberForSave -> " << identity.getPlayerNumber() << std::endl;
     for (int i = 0; i < identity.getPlayerNumber(); i++)
     {
-        // std::cout << "ghabl player info " << std::endl;
+        std::cout << "ghabl player info " << std::endl;
         saveReadPlayerInfo(i);
+        std::cout << "bad player info " << std::endl;
         saveReadPlayerStates(i);
-        // std::cout << "ghabl player card " << std::endl;
+        std::cout << "ghabl player card " << std::endl;
         saveReadPlayerCardsInfo(i);
-        // std::cout << "ghabl played card " << std::endl;
+        std::cout << "ghabl played card " << std::endl;
         saveReadPlayedCardsInfo(i);
         std::cout << "player " << i << "tamoom shod\n\n"
                   << std::endl;
@@ -1028,6 +1075,14 @@ void Control::StartNewGame()
     diplayBeggingOfTheGame();
     determinMinAge();
     // std::cout << "bad random function" << std::endl;
+}
+void Control::initializingNumberOfSavedGames()
+{
+    numberOfSavedGames.push_back("save.txt");
+    numberOfSavedGames.push_back("save2.txt");
+    numberOfSavedGames.push_back("save3.txt");
+    numberOfSavedGames.push_back("save4.txt");
+    numberOfSavedGames.push_back("save5.txt");
 }
 void Control::run()
 {

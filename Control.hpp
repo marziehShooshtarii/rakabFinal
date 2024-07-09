@@ -92,6 +92,8 @@ public:
     // bool is_empty(std::fstream& File);
     bool isFileEmpty(const std::string &filename);
     void StartNewGame();
+    void initializingNumberOfSavedGames();
+    bool determinNumberOfSavedGame();
     void run();
 
 private:
@@ -118,4 +120,5 @@ private:
     std::fstream save;
     std::string newOrContinue;
     std::vector <std::string> numberOfSavedGames; //having more than one saved game
+    int whichSavedGame;
 };
