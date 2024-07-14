@@ -1,6 +1,6 @@
 #include <unistd.h>
 #include "Control.hpp"
-
+#include <filesystem>
 Control::Control()
 {
     initializingNumberOfSavedGames();
@@ -839,7 +839,11 @@ bool Control::saveAllInfo(int index)
     for (int i = 0; i < numberOfSavedGames.size(); i++)
     {
         std::cout << "i - > " << i << std::endl;
-
+//   if (!std::filesystem::exists(save))
+//     {
+//         /// NOTE: if file save folder isn't available this will create it
+//         std::filesystem::create_directory(save);
+//     }
         if (isFileEmpty(numberOfSavedGames[i]) == 1) // if file is empty
         {
             std::cout << "file if empty" << std::endl;
