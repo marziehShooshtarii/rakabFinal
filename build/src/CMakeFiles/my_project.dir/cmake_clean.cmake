@@ -1,0 +1,41 @@
+file(REMOVE_RECURSE
+  "../bin/my_project.exe"
+  "../bin/my_project.exe.manifest"
+  "../bin/my_project.pdb"
+  "CMakeFiles/my_project.dir/Army.cpp.obj"
+  "CMakeFiles/my_project.dir/Army.cpp.obj.d"
+  "CMakeFiles/my_project.dir/Bahar.cpp.obj"
+  "CMakeFiles/my_project.dir/Bahar.cpp.obj.d"
+  "CMakeFiles/my_project.dir/Card.cpp.obj"
+  "CMakeFiles/my_project.dir/Card.cpp.obj.d"
+  "CMakeFiles/my_project.dir/Control.cpp.obj"
+  "CMakeFiles/my_project.dir/Control.cpp.obj.d"
+  "CMakeFiles/my_project.dir/Data.cpp.obj"
+  "CMakeFiles/my_project.dir/Data.cpp.obj.d"
+  "CMakeFiles/my_project.dir/Help.cpp.obj"
+  "CMakeFiles/my_project.dir/Help.cpp.obj.d"
+  "CMakeFiles/my_project.dir/Map.cpp.obj"
+  "CMakeFiles/my_project.dir/Map.cpp.obj.d"
+  "CMakeFiles/my_project.dir/Player.cpp.obj"
+  "CMakeFiles/my_project.dir/Player.cpp.obj.d"
+  "CMakeFiles/my_project.dir/Rish_sefid.cpp.obj"
+  "CMakeFiles/my_project.dir/Rish_sefid.cpp.obj.d"
+  "CMakeFiles/my_project.dir/Shah_dohkt.cpp.obj"
+  "CMakeFiles/my_project.dir/Shah_dohkt.cpp.obj.d"
+  "CMakeFiles/my_project.dir/Shirzan.cpp.obj"
+  "CMakeFiles/my_project.dir/Shirzan.cpp.obj.d"
+  "CMakeFiles/my_project.dir/Special.cpp.obj"
+  "CMakeFiles/my_project.dir/Special.cpp.obj.d"
+  "CMakeFiles/my_project.dir/Tabl_zan.cpp.obj"
+  "CMakeFiles/my_project.dir/Tabl_zan.cpp.obj.d"
+  "CMakeFiles/my_project.dir/Zemestan.cpp.obj"
+  "CMakeFiles/my_project.dir/Zemestan.cpp.obj.d"
+  "CMakeFiles/my_project.dir/main.cpp.obj"
+  "CMakeFiles/my_project.dir/main.cpp.obj.d"
+  "libmy_project.dll.a"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang CXX)
+  include(CMakeFiles/my_project.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()

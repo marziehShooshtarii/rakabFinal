@@ -1,0 +1,41 @@
+file(REMOVE_RECURSE
+  "../bin/rakab.exe"
+  "../bin/rakab.exe.manifest"
+  "../bin/rakab.pdb"
+  "CMakeFiles/rakab.dir/Army.cpp.obj"
+  "CMakeFiles/rakab.dir/Army.cpp.obj.d"
+  "CMakeFiles/rakab.dir/Bahar.cpp.obj"
+  "CMakeFiles/rakab.dir/Bahar.cpp.obj.d"
+  "CMakeFiles/rakab.dir/Card.cpp.obj"
+  "CMakeFiles/rakab.dir/Card.cpp.obj.d"
+  "CMakeFiles/rakab.dir/Control.cpp.obj"
+  "CMakeFiles/rakab.dir/Control.cpp.obj.d"
+  "CMakeFiles/rakab.dir/Data.cpp.obj"
+  "CMakeFiles/rakab.dir/Data.cpp.obj.d"
+  "CMakeFiles/rakab.dir/Help.cpp.obj"
+  "CMakeFiles/rakab.dir/Help.cpp.obj.d"
+  "CMakeFiles/rakab.dir/Map.cpp.obj"
+  "CMakeFiles/rakab.dir/Map.cpp.obj.d"
+  "CMakeFiles/rakab.dir/Player.cpp.obj"
+  "CMakeFiles/rakab.dir/Player.cpp.obj.d"
+  "CMakeFiles/rakab.dir/Rish_sefid.cpp.obj"
+  "CMakeFiles/rakab.dir/Rish_sefid.cpp.obj.d"
+  "CMakeFiles/rakab.dir/Shah_dohkt.cpp.obj"
+  "CMakeFiles/rakab.dir/Shah_dohkt.cpp.obj.d"
+  "CMakeFiles/rakab.dir/Shirzan.cpp.obj"
+  "CMakeFiles/rakab.dir/Shirzan.cpp.obj.d"
+  "CMakeFiles/rakab.dir/Special.cpp.obj"
+  "CMakeFiles/rakab.dir/Special.cpp.obj.d"
+  "CMakeFiles/rakab.dir/Tabl_zan.cpp.obj"
+  "CMakeFiles/rakab.dir/Tabl_zan.cpp.obj.d"
+  "CMakeFiles/rakab.dir/Zemestan.cpp.obj"
+  "CMakeFiles/rakab.dir/Zemestan.cpp.obj.d"
+  "CMakeFiles/rakab.dir/main.cpp.obj"
+  "CMakeFiles/rakab.dir/main.cpp.obj.d"
+  "librakab.dll.a"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang CXX)
+  include(CMakeFiles/rakab.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()

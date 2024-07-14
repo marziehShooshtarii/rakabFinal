@@ -1,0 +1,92 @@
+[
+{
+  "directory": "C:/rakabFinal/build/src",
+  "command": "C:\\ProgramData\\chocolatey\\bin\\c++.exe  @CMakeFiles/rakab.dir/includes_CXX.rsp -std=gnu++20 -o CMakeFiles\\rakab.dir\\Army.cpp.obj -c C:\\rakabFinal\\src\\Army.cpp",
+  "file": "C:/rakabFinal/src/Army.cpp",
+  "output": "src/CMakeFiles/rakab.dir/Army.cpp.obj"
+},
+{
+  "directory": "C:/rakabFinal/build/src",
+  "command": "C:\\ProgramData\\chocolatey\\bin\\c++.exe  @CMakeFiles/rakab.dir/includes_CXX.rsp -std=gnu++20 -o CMakeFiles\\rakab.dir\\Bahar.cpp.obj -c C:\\rakabFinal\\src\\Bahar.cpp",
+  "file": "C:/rakabFinal/src/Bahar.cpp",
+  "output": "src/CMakeFiles/rakab.dir/Bahar.cpp.obj"
+},
+{
+  "directory": "C:/rakabFinal/build/src",
+  "command": "C:\\ProgramData\\chocolatey\\bin\\c++.exe  @CMakeFiles/rakab.dir/includes_CXX.rsp -std=gnu++20 -o CMakeFiles\\rakab.dir\\Zemestan.cpp.obj -c C:\\rakabFinal\\src\\Zemestan.cpp",
+  "file": "C:/rakabFinal/src/Zemestan.cpp",
+  "output": "src/CMakeFiles/rakab.dir/Zemestan.cpp.obj"
+},
+{
+  "directory": "C:/rakabFinal/build/src",
+  "command": "C:\\ProgramData\\chocolatey\\bin\\c++.exe  @CMakeFiles/rakab.dir/includes_CXX.rsp -std=gnu++20 -o CMakeFiles\\rakab.dir\\Card.cpp.obj -c C:\\rakabFinal\\src\\Card.cpp",
+  "file": "C:/rakabFinal/src/Card.cpp",
+  "output": "src/CMakeFiles/rakab.dir/Card.cpp.obj"
+},
+{
+  "directory": "C:/rakabFinal/build/src",
+  "command": "C:\\ProgramData\\chocolatey\\bin\\c++.exe  @CMakeFiles/rakab.dir/includes_CXX.rsp -std=gnu++20 -o CMakeFiles\\rakab.dir\\Control.cpp.obj -c C:\\rakabFinal\\src\\Control.cpp",
+  "file": "C:/rakabFinal/src/Control.cpp",
+  "output": "src/CMakeFiles/rakab.dir/Control.cpp.obj"
+},
+{
+  "directory": "C:/rakabFinal/build/src",
+  "command": "C:\\ProgramData\\chocolatey\\bin\\c++.exe  @CMakeFiles/rakab.dir/includes_CXX.rsp -std=gnu++20 -o CMakeFiles\\rakab.dir\\Data.cpp.obj -c C:\\rakabFinal\\src\\Data.cpp",
+  "file": "C:/rakabFinal/src/Data.cpp",
+  "output": "src/CMakeFiles/rakab.dir/Data.cpp.obj"
+},
+{
+  "directory": "C:/rakabFinal/build/src",
+  "command": "C:\\ProgramData\\chocolatey\\bin\\c++.exe  @CMakeFiles/rakab.dir/includes_CXX.rsp -std=gnu++20 -o CMakeFiles\\rakab.dir\\Help.cpp.obj -c C:\\rakabFinal\\src\\Help.cpp",
+  "file": "C:/rakabFinal/src/Help.cpp",
+  "output": "src/CMakeFiles/rakab.dir/Help.cpp.obj"
+},
+{
+  "directory": "C:/rakabFinal/build/src",
+  "command": "C:\\ProgramData\\chocolatey\\bin\\c++.exe  @CMakeFiles/rakab.dir/includes_CXX.rsp -std=gnu++20 -o CMakeFiles\\rakab.dir\\main.cpp.obj -c C:\\rakabFinal\\src\\main.cpp",
+  "file": "C:/rakabFinal/src/main.cpp",
+  "output": "src/CMakeFiles/rakab.dir/main.cpp.obj"
+},
+{
+  "directory": "C:/rakabFinal/build/src",
+  "command": "C:\\ProgramData\\chocolatey\\bin\\c++.exe  @CMakeFiles/rakab.dir/includes_CXX.rsp -std=gnu++20 -o CMakeFiles\\rakab.dir\\Map.cpp.obj -c C:\\rakabFinal\\src\\Map.cpp",
+  "file": "C:/rakabFinal/src/Map.cpp",
+  "output": "src/CMakeFiles/rakab.dir/Map.cpp.obj"
+},
+{
+  "directory": "C:/rakabFinal/build/src",
+  "command": "C:\\ProgramData\\chocolatey\\bin\\c++.exe  @CMakeFiles/rakab.dir/includes_CXX.rsp -std=gnu++20 -o CMakeFiles\\rakab.dir\\Player.cpp.obj -c C:\\rakabFinal\\src\\Player.cpp",
+  "file": "C:/rakabFinal/src/Player.cpp",
+  "output": "src/CMakeFiles/rakab.dir/Player.cpp.obj"
+},
+{
+  "directory": "C:/rakabFinal/build/src",
+  "command": "C:\\ProgramData\\chocolatey\\bin\\c++.exe  @CMakeFiles/rakab.dir/includes_CXX.rsp -std=gnu++20 -o CMakeFiles\\rakab.dir\\Rish_sefid.cpp.obj -c C:\\rakabFinal\\src\\Rish_sefid.cpp",
+  "file": "C:/rakabFinal/src/Rish_sefid.cpp",
+  "output": "src/CMakeFiles/rakab.dir/Rish_sefid.cpp.obj"
+},
+{
+  "directory": "C:/rakabFinal/build/src",
+  "command": "C:\\ProgramData\\chocolatey\\bin\\c++.exe  @CMakeFiles/rakab.dir/includes_CXX.rsp -std=gnu++20 -o CMakeFiles\\rakab.dir\\Shah_dohkt.cpp.obj -c C:\\rakabFinal\\src\\Shah_dohkt.cpp",
+  "file": "C:/rakabFinal/src/Shah_dohkt.cpp",
+  "output": "src/CMakeFiles/rakab.dir/Shah_dohkt.cpp.obj"
+},
+{
+  "directory": "C:/rakabFinal/build/src",
+  "command": "C:\\ProgramData\\chocolatey\\bin\\c++.exe  @CMakeFiles/rakab.dir/includes_CXX.rsp -std=gnu++20 -o CMakeFiles\\rakab.dir\\Shirzan.cpp.obj -c C:\\rakabFinal\\src\\Shirzan.cpp",
+  "file": "C:/rakabFinal/src/Shirzan.cpp",
+  "output": "src/CMakeFiles/rakab.dir/Shirzan.cpp.obj"
+},
+{
+  "directory": "C:/rakabFinal/build/src",
+  "command": "C:\\ProgramData\\chocolatey\\bin\\c++.exe  @CMakeFiles/rakab.dir/includes_CXX.rsp -std=gnu++20 -o CMakeFiles\\rakab.dir\\Special.cpp.obj -c C:\\rakabFinal\\src\\Special.cpp",
+  "file": "C:/rakabFinal/src/Special.cpp",
+  "output": "src/CMakeFiles/rakab.dir/Special.cpp.obj"
+},
+{
+  "directory": "C:/rakabFinal/build/src",
+  "command": "C:\\ProgramData\\chocolatey\\bin\\c++.exe  @CMakeFiles/rakab.dir/includes_CXX.rsp -std=gnu++20 -o CMakeFiles\\rakab.dir\\Tabl_zan.cpp.obj -c C:\\rakabFinal\\src\\Tabl_zan.cpp",
+  "file": "C:/rakabFinal/src/Tabl_zan.cpp",
+  "output": "src/CMakeFiles/rakab.dir/Tabl_zan.cpp.obj"
+}
+]
