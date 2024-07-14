@@ -1,3 +1,0 @@
-"C:\Program Files\CMake\bin\cmake.exe" -E rm -f CMakeFiles\my_project.dir/objects.a
-C:\ProgramData\chocolatey\bin\ar.exe qc CMakeFiles\my_project.dir/objects.a @CMakeFiles\my_project.dir\objects1.rsp
-C:\w64devkit\bin\g++.exe -Wl,--whole-archive CMakeFiles\my_project.dir/objects.a -Wl,--no-whole-archive -o ..\bin\my_project.exe -Wl,--out-implib,libmy_project.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\my_project.dir\linkLibs.rsp
