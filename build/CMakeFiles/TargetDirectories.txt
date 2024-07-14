@@ -1,5 +1,0 @@
-C:/rakabFinal/build/CMakeFiles/edit_cache.dir
-C:/rakabFinal/build/CMakeFiles/rebuild_cache.dir
-C:/rakabFinal/build/src/CMakeFiles/my_project.dir
-C:/rakabFinal/build/src/CMakeFiles/edit_cache.dir
-C:/rakabFinal/build/src/CMakeFiles/rebuild_cache.dir
