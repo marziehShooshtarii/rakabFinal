@@ -10,8 +10,8 @@ Rectangle rect{windowHeight / 2 - 100, windowHeight / 2 - 50, 200, 100};
 bool ifPressed(Vector2 mousePos, bool mousePressed);
 int main()
 {
+    std::cout << "test" << std::endl;
     InitWindow(windowWidth, windowHeight, "game");
-
     SetTargetFPS(60);
     Font font = LoadFont("../assets/KaushanScript-Regular.ttf");
     Texture2D background = LoadTexture("../assets/tunel for menu.png");
