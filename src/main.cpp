@@ -2,12 +2,13 @@
 #include <time.h>
 #include <stdlib.h>
 #include "Control.hpp"
-#include "raylib.h"
+//#include "raylib.h"
 
 int windowWidth = 600;
 int windowHeight = 800;
 Rectangle rect{windowHeight / 2 - 100, windowHeight / 2 - 50, 200, 100};
 bool ifPressed(Vector2 mousePos, bool mousePressed);
+Font fontMenu = LoadFont("../assets/KaushanScript-Regular.ttf");
 int main()
 {
     std::cout << "test" << std::endl;
@@ -35,6 +36,13 @@ int main()
     }
     UnloadTexture(background);
     CloseWindow();
+    //  UI ui;
+    // //ui.displayMenuBackground();
+    // std::cout<<"c1"<<std::endl;
+    // ui.menuGameLoop();
+    // std::cout<<"c2"<<std::endl;
+    // //ui.unloadingTexture();
+    // std::cout<<"c3"<<std::endl;
     // srand(unsigned(time(NULL)));
     // Control c;
     // c.run();

@@ -159,7 +159,7 @@ void Control::displayStartOfWar()
 }
 bool Control::playingInput()
 {
-        std::cout << "safewe" << std::endl;
+    std::cout << "safewe" << std::endl;
     while (1)
     {
         if (newOrContinue == "n")
@@ -839,11 +839,11 @@ bool Control::saveAllInfo(int index)
     for (int i = 0; i < numberOfSavedGames.size(); i++)
     {
         std::cout << "i - > " << i << std::endl;
-//   if (!std::filesystem::exists(save))
-//     {
-//         /// NOTE: if file save folder isn't available this will create it
-//         std::filesystem::create_directory(save);
-//     }
+        //   if (!std::filesystem::exists(save))
+        //     {
+        //         /// NOTE: if file save folder isn't available this will create it
+        //         std::filesystem::create_directory(save);
+        //     }
         if (isFileEmpty(numberOfSavedGames[i]) == 1) // if file is empty
         {
             std::cout << "file if empty" << std::endl;
@@ -854,26 +854,26 @@ bool Control::saveAllInfo(int index)
                 std ::cerr << "Error opening the file!" << std::endl;
                 return false;
             }
-            std::cout<<"1111111111111111111111"<<std::endl;
+            std::cout << "1111111111111111111111" << std::endl;
             save << identity.getPlayerNumber() << std::endl;
             for (int i = 0; i < identity.getPlayerNumber(); i++)
             {
-            std::cout<<"22222222222222"<<std::endl;
+                std::cout << "22222222222222" << std::endl;
                 savePlayerInfo(i);
-            std::cout<<"33333333333333"<<std::endl;
+                std::cout << "33333333333333" << std::endl;
                 savePlayerStates(i);
-            std::cout<<"44444444444444"<<std::endl;
+                std::cout << "44444444444444" << std::endl;
                 savePlayerCardsInfo(i);
-            std::cout<<"55555555555555"<<std::endl;
+                std::cout << "55555555555555" << std::endl;
                 savePlayedCardsInfo(i);
-            std::cout<<"66666666666666666"<<std::endl;
+                std::cout << "66666666666666666" << std::endl;
             }
             saveBaharVSZemestan();
-            std::cout<<"77777777777777"<<std::endl;
+            std::cout << "77777777777777" << std::endl;
             saveSigns();
-            std::cout<<"888888888888888"<<std::endl;
+            std::cout << "888888888888888" << std::endl;
             saveStarterPlayer(index);
-            std::cout<<"9999999999999"<<std::endl;
+            std::cout << "9999999999999" << std::endl;
             break;
         }
     }
@@ -902,31 +902,38 @@ bool Control::isFileEmpty(const std::string &filename)
 }
 void Control::menu()
 {
-    std::cout << "do you want to start a new game or continue or previous game ? " << std::endl;
-    std::cin >> newOrContinue;
-    if (newOrContinue == "c")
-    {
-        std::cout << "if c " << std::endl;
-        //::cout << " "
-        // if (isFileEmpty("save.txt") == 1) // if tellg == 0 is true
-        // {
-        //     std::cout << "No previous game found." << std::endl;
-        //     menu();
-        // }
-        determinNumberOfSavedGame();
-        saveReadAllInfo();
-        std::cout << "IN menu!!!!!!!!!!!!!!!!!!!!!!!!!!" << std::endl;
-        // else
-        //     saveReadAllInfo();
-    }
-    else if (newOrContinue == "n")
-    {
-        StartNewGame();
-    }
-    else
-        return;
-    
-    std::cout << "Exit Menu" << std::endl;
+    // std::cout << "do you want to start a new game or continue or previous game ? " << std::endl;
+    // std::cin >> newOrContinue;
+    // if (newOrContinue == "c")
+    // {
+    //     std::cout << "if c " << std::endl;
+    //     //::cout << " "
+    //     // if (isFileEmpty("save.txt") == 1) // if tellg == 0 is true
+    //     // {
+    //     //     std::cout << "No previous game found." << std::endl;
+    //     //     menu();
+    //     // }
+    //     determinNumberOfSavedGame();
+    //     saveReadAllInfo();
+    //     std::cout << "IN menu!!!!!!!!!!!!!!!!!!!!!!!!!!" << std::endl;
+    //     // else
+    //     //     saveReadAllInfo();
+    // UI ui;
+    // //ui.displayMenuBackground();
+    // std::cout<<"c1"<<std::endl;
+    // ui.menuGameLoop();
+    // std::cout<<"c2"<<std::endl;
+    // //ui.unloadingTexture();
+    // std::cout<<"c3"<<std::endl;
+    // }
+    // else if (newOrContinue == "n")
+    // {
+    //     StartNewGame();
+    // }
+    // else
+    //     return;
+
+    // std::cout << "Exit Menu" << std::endl;
 }
 bool Control::determinNumberOfSavedGame()
 {
@@ -1095,6 +1102,6 @@ void Control::run()
 {
     initializeSpecialCards();
     menu();
-            std::cout << "safewe" << std::endl;
+    std::cout << "safewe" << std::endl;
     playingInput();
 }

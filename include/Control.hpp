@@ -13,6 +13,7 @@
 #include "Help.hpp"
 #include "Shirzan.hpp"
 #include "Zemestan.hpp"
+#include "UI.hpp"
 
 class Control
 {
