@@ -19,6 +19,7 @@ int main()
 
     while (WindowShouldClose() == false)
     {
+        //gggg
         Vector2 mousePssition = GetMousePosition();
         bool mousePressed = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
         if (ifPressed(mousePssition,mousePressed))
