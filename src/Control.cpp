@@ -921,7 +921,7 @@ void Control::menu()
     UI ui;
     //ui.displayMenuBackground();
     std::cout<<"c1"<<std::endl;
-    // ui.menuGameLoop();
+    ui.menuGameLoop();
     std::cout<<"c2"<<std::endl;
     ui.unloadingTexture();
     std::cout<<"c3"<<std::endl;

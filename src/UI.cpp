@@ -45,9 +45,9 @@
 UI::UI()
 {
 
-    InitWindow(windowWidth, windowHeight, "naz");
+    InitWindow(windowWidth, windowHeight, "game");
     std::cout << "88888777" << std::endl;
-    Font fontMenu = LoadFont("../assets/KaushanScript-Regular.ttf");
+    fontMenu = LoadFont("C:\rakabFinal\assets\KaushanScript-Regular.ttf");
     // initializeFontMenu();
     initializeBackgroundMenu();
     std::cout << "7777" << std::endl;
@@ -83,7 +83,7 @@ void UI::displayMenuBackground()
 
     // Vector2 position;
 }
-void UI::menuGameLoop(Font fontMenu)
+void UI::menuGameLoop()
 {
 
     SetTargetFPS(60);
@@ -127,7 +127,7 @@ void UI::unloadingTexture()
 // }
 void UI::initializeBackgroundMenu()
 {
-    backgroundMenu = LoadTexture("C:\rakabFinal\assets\tunel for menu.png");
+    backgroundMenu = LoadTexture("D:\adavanced\rakab\rakabFinal\assets\tunel for menu.png");
 }
 void UI::initializeButtons()
 {
