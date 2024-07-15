@@ -15,9 +15,9 @@ public:
     //bool ifPressed(Vector2 mousePos, bool mousePressed);
     void drawRectUI();
     void displayMenuBackground();
-    void menuGameLoop();
+    void menuGameLoop(Font );
     void unloadingTexture();
-    void initializeFontMenu();
+    // void initializeFontMenu();
     void initializeBackgroundMenu();
     void initializeButtons();
 private:
@@ -25,7 +25,7 @@ private:
     int windowWidth = 600;
     int windowHeight = 800;
     Rectangle rect;
-    Font fontMenu;
+    // Font fontMenu;
     Texture2D backgroundMenu;
     Button menuButtons[4];
     // bool ifPressed(Vector2 mousePos, bool mousePressed);

@@ -918,13 +918,13 @@ void Control::menu()
     //     std::cout << "IN menu!!!!!!!!!!!!!!!!!!!!!!!!!!" << std::endl;
     //     // else
     //     //     saveReadAllInfo();
-    // UI ui;
-    // //ui.displayMenuBackground();
-    // std::cout<<"c1"<<std::endl;
+    UI ui;
+    //ui.displayMenuBackground();
+    std::cout<<"c1"<<std::endl;
     // ui.menuGameLoop();
-    // std::cout<<"c2"<<std::endl;
-    // //ui.unloadingTexture();
-    // std::cout<<"c3"<<std::endl;
+    std::cout<<"c2"<<std::endl;
+    ui.unloadingTexture();
+    std::cout<<"c3"<<std::endl;
     // }
     // else if (newOrContinue == "n")
     // {
