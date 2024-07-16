@@ -13,7 +13,7 @@ UI::UI()
     std::cout << "7777" << std::endl;
     // initializRec();
     initializeButtons();
-   // menuGameLoop();
+    // menuGameLoop();
     SetTargetFPS(60);
 }
 void UI::initializRec()
@@ -36,28 +36,49 @@ void UI::displayMenuBackground()
 
     // Vector2 position;
 }
-void UI::menuGameLoop()
+std::string UI::menuGameLoop()
 {
 
     // while (WindowShouldClose() == false)
     // {
-        Vector2 mousePssition = GetMousePosition();
-        bool mousePressed = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
-        for (int j = 0; j < 4; j++)
-        {
-            if (menuButtons[j].ifPressed(mousePssition, mousePressed))
-            {
-                std::cout << "new game" << std::endl;
-            }
-        }
+    Vector2 mousePssition = GetMousePosition();
+    bool mousePressed = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
+    // for (int j = 0; j < 4; j++)
+    // {
+    // if (menuButtons[j].ifPressed(mousePssition, mousePressed))
+    // {
+    //     std::cout << "new game" << std::endl;
+    // }
+    if (menuButtons[0].ifPressed(mousePssition, mousePressed))
+    {
+        std::cout << "new game" << std::endl;
+        return "new";
+    }
+    if (menuButtons[1].ifPressed(mousePssition, mousePressed))
+    {
+        std::cout << "load" << std::endl;
+        return "load";
+    }
+    if (menuButtons[2].ifPressed(mousePssition, mousePressed))
+    {
+        std::cout << "help" << std::endl;
+        return "help";
+    }
+    if (menuButtons[3].ifPressed(mousePssition, mousePressed))
+    {
+        std::cout << "exit" << std::endl;
+        return "exit";
+    }
+    // }
 
-        BeginDrawing();
-        ClearBackground(WHITE);
-        DrawTexture(backgroundMenu, 0, 0, WHITE);
-        for (int i = 0; i < 4; i++)
-            DrawTextEx(fontMenu, menuButtons[i].title, (Vector2){menuButtons[i].getRectangle().x + 10, menuButtons[i].getRectangle().y + 10}, fontMenu.baseSize, 1, WHITE);
-        // drawRectUI();
-        EndDrawing();
+    BeginDrawing();
+    ClearBackground(WHITE);
+    DrawTexture(backgroundMenu, 0, 0, WHITE);
+    for (int i = 0; i < 4; i++)
+        DrawTextEx(fontMenu, menuButtons[i].title, (Vector2){menuButtons[i].getRectangle().x + 10, menuButtons[i].getRectangle().y + 10}, fontMenu.baseSize, 1, WHITE);
+    // drawRectUI();
+    EndDrawing();
+    return "kooft";
     //}
 }
 

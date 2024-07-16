@@ -15,7 +15,7 @@ public:
     //bool ifPressed(Vector2 mousePos, bool mousePressed);
     void drawRectUI();
     void displayMenuBackground();
-    void menuGameLoop();
+    std::string menuGameLoop();
     void unloadingTexture();
     // void initializeFontMenu();
     void initializeBackgroundMenu();

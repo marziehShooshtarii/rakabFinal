@@ -921,9 +921,20 @@ void Control::menu()
     UI ui;
     // ui.displayMenuBackground();
     std::cout << "c1" << std::endl;
-    while (WindowShouldClose() == false)
+    bool exitGame = true;
+    while (WindowShouldClose() == false && exitGame == true)
     {
-        ui.menuGameLoop();
+        // for (int i = 0; i < 1; i++)
+        newOrContinue = ui.menuGameLoop();
+        if (newOrContinue == "new")
+            exitGame = false;
+        if (newOrContinue == "load")
+            exitGame = false;
+        if (newOrContinue == "help")
+            exitGame = false;
+        if (newOrContinue == "exit")
+            exitGame = false;
+        // break;
     }
     std::cout << "c2" << std::endl;
     ui.unloadingTexture();
