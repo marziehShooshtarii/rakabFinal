@@ -21,6 +21,8 @@ public:
     void initializeBackgroundMenu();
     void initializeButtons();
     void displayIdentityMenu();
+    void displayPlayerNumberButton();
+    void initializePlayerNumberButton();
 private:
     const char* menuButtonsTitle[4];
     int windowWidth = 600;
@@ -30,6 +32,7 @@ private:
     Texture2D backgroundMenu;//menu background
     Texture2D backgroundIdentityMenu;//identity menu background
     Button menuButtons[4];//buttons displayed in the menu
+    Button playerNumberButtons[3];//buttons for selecting player number
     // bool ifPressed(Vector2 mousePos, bool mousePressed);
 
     // std::cout << "test" << std::endl;

@@ -913,7 +913,12 @@ void Control::menu()
         // for (int i = 0; i < 1; i++)
         newOrContinue = ui.menuGameLoop();
         if (newOrContinue == "n")
+        {
+            std::cout << "display " << std::endl;
+            ui.displayPlayerNumberButton();
+            std::cout << "after display " << std::endl;
             exitGame = false;
+        }
         if (newOrContinue == "c")
             exitGame = false;
         if (newOrContinue == "help")
@@ -923,7 +928,6 @@ void Control::menu()
         // break;
     }
     std::cout << "c2" << std::endl;
-    ui.unloadingTexture();
     std::cout << "c3" << std::endl;
     if (newOrContinue == "c")
     {
@@ -942,10 +946,12 @@ void Control::menu()
     }
     else if (newOrContinue == "n")
     {
+        // ui.displayPlayerNumberButton();
         StartNewGame();
     }
-    else
-        return;
+    ui.unloadingTexture();
+    // else
+    //     return;
 
     // std::cout << "Exit Menu" << std::endl;
 }

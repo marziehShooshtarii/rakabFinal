@@ -13,6 +13,7 @@ UI::UI()
     std::cout << "7777" << std::endl;
     // initializRec();
     initializeButtons();
+    initializePlayerNumberButton();
     // menuGameLoop();
     SetTargetFPS(60);
 }
@@ -52,12 +53,12 @@ std::string UI::menuGameLoop()
     if (menuButtons[0].ifPressed(mousePssition, mousePressed))
     {
         std::cout << "new game" << std::endl;
-        return "n";//new game
+        return "n"; // new game
     }
     if (menuButtons[1].ifPressed(mousePssition, mousePressed))
     {
         std::cout << "load" << std::endl;
-        return "c";//continue previous game
+        return "c"; // continue previous game
     }
     if (menuButtons[2].ifPressed(mousePssition, mousePressed))
     {
@@ -75,7 +76,7 @@ std::string UI::menuGameLoop()
     ClearBackground(WHITE);
     DrawTexture(backgroundMenu, 0, 0, WHITE);
     for (int i = 0; i < 4; i++)
-        DrawTextEx(fontMenu, menuButtons[i].title, (Vector2){menuButtons[i].getRectangle().x + 10, menuButtons[i].getRectangle().y + 10}, fontMenu.baseSize, 1, WHITE);
+        DrawTextEx(fontMenu, menuButtons[i].title, (Vector2){menuButtons[i].getRectangle().x + 10, menuButtons[i].getRectangle().y + 10}, fontMenu.baseSize, 1, RED);
     // drawRectUI();
     EndDrawing();
     return "kooft";
@@ -102,6 +103,26 @@ void UI::initializeButtons()
     menuButtons[1] = (Button){(Rectangle){50, 220, 120, 50}, "load game", false};
     menuButtons[2] = (Button){(Rectangle){50, 290, 120, 50}, "help", false};
     menuButtons[3] = (Button){(Rectangle){50, 360, 120, 50}, "exit", false};
+}
+
+void UI::displayPlayerNumberButton()
+{
+    BeginDrawing();
+    ClearBackground(WHITE);
+    std::cout << "cout 1" << std::endl;
+    for (int i = 0; i < 3; i++)
+    {
+        DrawTextEx(fontMenu, playerNumberButtons[i].title, (Vector2){playerNumberButtons[i].getRectangle().x + 10, playerNumberButtons[i].getRectangle().y + 10}, fontMenu.baseSize, 1, RED);
+        std::cout << "playerNumber" << std::endl;
+    }
+    EndDrawing();
+}
+
+void UI::initializePlayerNumberButton()
+{
+    playerNumberButtons[0] = (Button){(Rectangle){50, 220, 120, 50}, "choose the player numbers:", false};
+    playerNumberButtons[1] = (Button){(Rectangle){50, 290, 120, 50}, "3 players", false};
+    playerNumberButtons[2] = (Button){(Rectangle){50, 360, 120, 50}, "4 players", false};
 }
 
 // void UI::displayIdentityMenu()
