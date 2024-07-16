@@ -11,9 +11,10 @@ UI::UI()
     // initializeFontMenu();
     // initializeBackgroundMenu();
     std::cout << "7777" << std::endl;
-    //initializRec();
+    // initializRec();
     initializeButtons();
-    menuGameLoop();
+   // menuGameLoop();
+    SetTargetFPS(60);
 }
 void UI::initializRec()
 {
@@ -38,9 +39,8 @@ void UI::displayMenuBackground()
 void UI::menuGameLoop()
 {
 
-    SetTargetFPS(60);
-    while (WindowShouldClose() == false)
-    {
+    // while (WindowShouldClose() == false)
+    // {
         Vector2 mousePssition = GetMousePosition();
         bool mousePressed = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
         for (int j = 0; j < 4; j++)
@@ -49,19 +49,16 @@ void UI::menuGameLoop()
             {
                 std::cout << "new game" << std::endl;
             }
-
         }
 
         BeginDrawing();
         ClearBackground(WHITE);
         DrawTexture(backgroundMenu, 0, 0, WHITE);
         for (int i = 0; i < 4; i++)
-            DrawTextEx(fontMenu, menuButtons[i].title, (Vector2){menuButtons[i].getRectangle().x + 10, menuButtons[i].getRectangle().y + 10}, fontMenu.baseSize, 1, RED);
+            DrawTextEx(fontMenu, menuButtons[i].title, (Vector2){menuButtons[i].getRectangle().x + 10, menuButtons[i].getRectangle().y + 10}, fontMenu.baseSize, 1, WHITE);
         // drawRectUI();
         EndDrawing();
-    }
-        UnloadFont(fontMenu);
-        UnloadTexture(backgroundMenu);
+    //}
 }
 
 UI::~UI()
@@ -70,6 +67,7 @@ UI::~UI()
 }
 void UI::unloadingTexture()
 {
+    UnloadFont(fontMenu);
     UnloadTexture(backgroundMenu);
 }
 
