@@ -52,12 +52,12 @@ std::string UI::menuGameLoop()
     if (menuButtons[0].ifPressed(mousePssition, mousePressed))
     {
         std::cout << "new game" << std::endl;
-        return "new";
+        return "n";//new game
     }
     if (menuButtons[1].ifPressed(mousePssition, mousePressed))
     {
         std::cout << "load" << std::endl;
-        return "load";
+        return "c";//continue previous game
     }
     if (menuButtons[2].ifPressed(mousePssition, mousePressed))
     {

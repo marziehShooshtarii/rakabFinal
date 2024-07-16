@@ -904,20 +904,6 @@ void Control::menu()
 {
     // std::cout << "do you want to start a new game or continue or previous game ? " << std::endl;
     // std::cin >> newOrContinue;
-    // if (newOrContinue == "c")
-    // {
-    //     std::cout << "if c " << std::endl;
-    //     //::cout << " "
-    //     // if (isFileEmpty("save.txt") == 1) // if tellg == 0 is true
-    //     // {
-    //     //     std::cout << "No previous game found." << std::endl;
-    //     //     menu();
-    //     // }
-    //     determinNumberOfSavedGame();
-    //     saveReadAllInfo();
-    //     std::cout << "IN menu!!!!!!!!!!!!!!!!!!!!!!!!!!" << std::endl;
-    //     // else
-    //     //     saveReadAllInfo();
     UI ui;
     // ui.displayMenuBackground();
     std::cout << "c1" << std::endl;
@@ -926,9 +912,9 @@ void Control::menu()
     {
         // for (int i = 0; i < 1; i++)
         newOrContinue = ui.menuGameLoop();
-        if (newOrContinue == "new")
+        if (newOrContinue == "n")
             exitGame = false;
-        if (newOrContinue == "load")
+        if (newOrContinue == "c")
             exitGame = false;
         if (newOrContinue == "help")
             exitGame = false;
@@ -939,13 +925,27 @@ void Control::menu()
     std::cout << "c2" << std::endl;
     ui.unloadingTexture();
     std::cout << "c3" << std::endl;
-    // }
-    // else if (newOrContinue == "n")
-    // {
-    //     StartNewGame();
-    // }
-    // else
-    //     return;
+    if (newOrContinue == "c")
+    {
+        std::cout << "if c " << std::endl;
+        //::cout << " "
+        // if (isFileEmpty("save.txt") == 1) // if tellg == 0 is true
+        // {
+        //     std::cout << "No previous game found." << std::endl;
+        //     menu();
+        // }
+        determinNumberOfSavedGame();
+        saveReadAllInfo();
+        std::cout << "IN menu!!!!!!!!!!!!!!!!!!!!!!!!!!" << std::endl;
+        // else
+        //     saveReadAllInfo();
+    }
+    else if (newOrContinue == "n")
+    {
+        StartNewGame();
+    }
+    else
+        return;
 
     // std::cout << "Exit Menu" << std::endl;
 }
