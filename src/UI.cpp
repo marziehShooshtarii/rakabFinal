@@ -7,7 +7,7 @@ UI::UI()
     InitWindow(windowWidth, windowHeight, "game");
     std::cout << "88888777" << std::endl;
     fontMenu = LoadFont("../assets/KaushanScript-Regular.ttf");
-    backgroundMenu = LoadTexture("../assets/t.png");
+    backgroundMenu = LoadTexture("../assets/background1.png");
     // initializeFontMenu();
     // initializeBackgroundMenu();
     std::cout << "7777" << std::endl;
@@ -104,7 +104,7 @@ void UI::initializeButtons()
     menuButtons[3] = (Button){(Rectangle){50, 360, 120, 50}, "exit", false};
 }
 
-void UI::displayIdentityMenu()
-{
-    backgroundIdentityMenu = LoadTexture("../assets/t.png");
-}
+// void UI::displayIdentityMenu()
+// {
+//     backgroundIdentityMenu = LoadTexture("../assets/t.png");
+// }
