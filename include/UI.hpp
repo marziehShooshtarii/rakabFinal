@@ -20,14 +20,16 @@ public:
     // void initializeFontMenu();
     void initializeBackgroundMenu();
     void initializeButtons();
+    void displayIdentityMenu();
 private:
     const char* menuButtonsTitle[4];
     int windowWidth = 600;
     int windowHeight = 800;
     Rectangle rect;
-    Font fontMenu;
-    Texture2D backgroundMenu;
-    Button menuButtons[4];
+    Font fontMenu;//first menu font
+    Texture2D backgroundMenu;//menu background
+    Texture2D backgroundIdentityMenu;//identity menu background
+    Button menuButtons[4];//buttons displayed in the menu
     // bool ifPressed(Vector2 mousePos, bool mousePressed);
 
     // std::cout << "test" << std::endl;

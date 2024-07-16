@@ -103,3 +103,8 @@ void UI::initializeButtons()
     menuButtons[2] = (Button){(Rectangle){50, 290, 120, 50}, "help", false};
     menuButtons[3] = (Button){(Rectangle){50, 360, 120, 50}, "exit", false};
 }
+
+void UI::displayIdentityMenu()
+{
+    backgroundIdentityMenu = LoadTexture("../assets/t.png");
+}
