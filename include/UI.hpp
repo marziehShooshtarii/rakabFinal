@@ -20,12 +20,12 @@ public:
     // void initializeFontMenu();
     void initializeBackgroundMenu();
     void initializeButtons();
-    void displayIdentityMenu();
+    void initializeIdentityMenu();
     void displayPlayerNumberButton();
     void initializePlayerNumberButton();
 private:
     const char* menuButtonsTitle[4];
-    int windowWidth = 600;
+    int windowWidth = 1200;
     int windowHeight = 800;
     Rectangle rect;
     Font fontMenu;//first menu font
