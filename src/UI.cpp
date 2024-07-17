@@ -7,7 +7,8 @@ UI::UI()
     InitWindow(windowWidth, windowHeight, "game");
     std::cout << "88888777" << std::endl;
     fontMenu = LoadFont("../assets/KaushanScript-Regular.ttf");
-    backgroundMenu = LoadTexture("../assets/background1.png");
+    backgroundMenu = LoadTexture("../assets/b1.png");
+    backgroundIdentityMenu = LoadTexture("../assets/b2_5.png");
     // initializeFontMenu();
     // initializeBackgroundMenu();
     std::cout << "7777" << std::endl;
@@ -79,7 +80,7 @@ std::string UI::menuGameLoop()
         DrawTextEx(fontMenu, menuButtons[i].title, (Vector2){menuButtons[i].getRectangle().x + 10, menuButtons[i].getRectangle().y + 10}, fontMenu.baseSize, 1, RED);
     // drawRectUI();
     EndDrawing();
-    return "kooft";
+    return "a";
     //}
 }
 
@@ -91,6 +92,7 @@ void UI::unloadingTexture()
 {
     UnloadFont(fontMenu);
     UnloadTexture(backgroundMenu);
+    UnloadTexture(backgroundIdentityMenu);
 }
 
 void UI::initializeBackgroundMenu()
@@ -109,6 +111,7 @@ void UI::displayPlayerNumberButton()
 {
     BeginDrawing();
     ClearBackground(WHITE);
+    DrawTexture(backgroundIdentityMenu, 0, 0, WHITE);
     std::cout << "cout 1" << std::endl;
     for (int i = 0; i < 3; i++)
     {
@@ -125,7 +128,7 @@ void UI::initializePlayerNumberButton()
     playerNumberButtons[2] = (Button){(Rectangle){50, 360, 120, 50}, "4 players", false};
 }
 
-// void UI::displayIdentityMenu()
-// {
-//     backgroundIdentityMenu = LoadTexture("../assets/t.png");
-// }
+void UI::initializeIdentityMenu()
+{
+    backgroundIdentityMenu = LoadTexture("../assets/b2_5.png");
+}

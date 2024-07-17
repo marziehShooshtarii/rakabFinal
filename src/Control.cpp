@@ -908,8 +908,10 @@ void Control::menu()
     // ui.displayMenuBackground();
     std::cout << "c1" << std::endl;
     bool exitGame = true;
+    
     while (WindowShouldClose() == false && exitGame == true)
     {
+        
         // for (int i = 0; i < 1; i++)
         newOrContinue = ui.menuGameLoop();
         if (newOrContinue == "n")
