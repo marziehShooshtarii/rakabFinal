@@ -908,16 +908,28 @@ void Control::menu()
     // ui.displayMenuBackground();
     std::cout << "c1" << std::endl;
     bool exitGame = true;
-    
-    while (WindowShouldClose() == false && exitGame == true)
+    bool exitPrevious = true;
+    while (WindowShouldClose() == false && exitGame == true /*&& exitPrevious == true*/)
     {
-        
+
         // for (int i = 0; i < 1; i++)
         newOrContinue = ui.menuGameLoop();
         if (newOrContinue == "n")
         {
             std::cout << "display " << std::endl;
-            ui.displayPlayerNumberButton();
+            int uiNumberPlayers = ui.displayPlayerNumberButton();
+            if (uiNumberPlayers == 3)
+            {
+                std::cout << "uiNumberPlayers -> " << uiNumberPlayers << std::endl;
+                exitPrevious = false ;
+            exitGame = false;
+            }
+            if (uiNumberPlayers == 4)
+            {
+                std::cout << "uiNumberPlayers -> " << uiNumberPlayers << std::endl;
+                exitPrevious = false;
+            exitGame = false;
+            }
             std::cout << "after display " << std::endl;
             exitGame = false;
         }
@@ -948,7 +960,19 @@ void Control::menu()
     }
     else if (newOrContinue == "n")
     {
-        // ui.displayPlayerNumberButton();
+        // int uiNumberPlayers = ui.displayPlayerNumberButton();
+        // if (uiNumberPlayers == 3)
+        // {
+        //     std::cout << "uiNumberPlayers -> " << uiNumberPlayers << std::endl;
+        //     exitPrevious = false;
+        //     // exitGame = false;
+        // }
+        // if (uiNumberPlayers == 4)
+        // {
+        //     std::cout << "uiNumberPlayers -> " << uiNumberPlayers << std::endl;
+        //     exitPrevious = false;
+        //     // exitGame = false;
+        // }
         StartNewGame();
     }
     ui.unloadingTexture();

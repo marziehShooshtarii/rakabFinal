@@ -14,7 +14,7 @@ UI::UI()
     std::cout << "7777" << std::endl;
     // initializRec();
     initializeButtons();
-    initializePlayerNumberButton();
+    // initializePlayerNumberButton();
     // menuGameLoop();
     SetTargetFPS(60);
 }
@@ -107,8 +107,22 @@ void UI::initializeButtons()
     menuButtons[3] = (Button){(Rectangle){50, 360, 120, 50}, "exit", false};
 }
 
-void UI::displayPlayerNumberButton()
+int UI::displayPlayerNumberButton()
 {
+    initializePlayerNumberButton();
+    Vector2 mousePssitionIdentity = GetMousePosition();
+    bool mousePressedIdentity = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
+    std::cout << "1111111111" << std::endl;
+    if (playerNumberButtons[1].ifPressed(mousePssitionIdentity, mousePressedIdentity))
+    {
+        std::cout << "player 3" << std::endl;
+        return 3; // number of players
+    }
+    if (playerNumberButtons[2].ifPressed(mousePssitionIdentity, mousePressedIdentity))
+    {
+        std::cout << "player 4" << std::endl;
+        return 4; // number of players
+    }
     BeginDrawing();
     ClearBackground(WHITE);
     DrawTexture(backgroundIdentityMenu, 0, 0, WHITE);
@@ -119,6 +133,7 @@ void UI::displayPlayerNumberButton()
         std::cout << "playerNumber" << std::endl;
     }
     EndDrawing();
+    return -1;//anything execpt the player numbers
 }
 
 void UI::initializePlayerNumberButton()

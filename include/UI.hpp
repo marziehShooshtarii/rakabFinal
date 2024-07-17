@@ -21,12 +21,14 @@ public:
     void initializeBackgroundMenu();
     void initializeButtons();
     void initializeIdentityMenu();
-    void displayPlayerNumberButton();
+    int displayPlayerNumberButton();
     void initializePlayerNumberButton();
 private:
     const char* menuButtonsTitle[4];
     int windowWidth = 1200;
     int windowHeight = 800;
+    // Vector2 mousePssition;//find the mouse position
+    // bool mousePressed;//check if mouse is pressed
     Rectangle rect;
     Font fontMenu;//first menu font
     Texture2D backgroundMenu;//menu background
