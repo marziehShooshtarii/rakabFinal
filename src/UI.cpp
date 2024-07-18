@@ -8,7 +8,7 @@ UI::UI()
     std::cout << "88888777" << std::endl;
     fontMenu = LoadFont("../assets/KaushanScript-Regular.ttf");
     backgroundMenu = LoadTexture("../assets/b1.png");
-    backgroundIdentityMenu = LoadTexture("../assets/b2_5.png");
+    backgroundIdentityMenu = LoadTexture("../assets/b_6.png");
     // initializeFontMenu();
     // initializeBackgroundMenu();
     std::cout << "7777" << std::endl;
@@ -112,6 +112,7 @@ int UI::displayPlayerNumberButton()
     initializePlayerNumberButton();
     Vector2 mousePssitionIdentity = GetMousePosition();
     bool mousePressedIdentity = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
+    std::cout << mousePressedIdentity << std::endl;
     std::cout << "1111111111" << std::endl;
     if (playerNumberButtons[1].ifPressed(mousePssitionIdentity, mousePressedIdentity))
     {
@@ -145,5 +146,5 @@ void UI::initializePlayerNumberButton()
 
 void UI::initializeIdentityMenu()
 {
-    backgroundIdentityMenu = LoadTexture("../assets/b2_5.png");
+    backgroundIdentityMenu = LoadTexture("../assets/b_6.png");
 }
