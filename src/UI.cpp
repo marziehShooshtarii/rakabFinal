@@ -51,31 +51,33 @@ std::string UI::menuGameLoop()
     // {
     //     std::cout << "new game" << std::endl;
     // }
-    if (CheckCollisionPointRec(mousePssition, menuButtons[0].getRectangle()))
-        menuButtons[0].setStatus(true);
-    else
-        menuButtons[0].setStatus(false);
-
-    if (menuButtons[0].ifPressed(mousePssition, mousePressed))
-    {
-        std::cout << "new game" << std::endl;
-        return "n"; // new game
-    }
-    if (menuButtons[1].ifPressed(mousePssition, mousePressed))
-    {
-        std::cout << "load" << std::endl;
-        return "c"; // continue previous game
-    }
-    if (menuButtons[2].ifPressed(mousePssition, mousePressed))
-    {
-        std::cout << "help" << std::endl;
-        return "help";
-    }
-    if (menuButtons[3].ifPressed(mousePssition, mousePressed))
-    {
-        std::cout << "exit" << std::endl;
-        return "exit";
-    }
+    // if (CheckCollisionPointRec(mousePssition, menuButtons[0].getRectangle()))
+    //     menuButtons[0].setStatus(true);
+    // else
+    //     menuButtons[0].setStatus(false);
+    // for (int i = 0; i < 4; i++)
+    // {
+        if (menuButtons[0].ifPressed(mousePssition, mousePressed))
+        {
+            std::cout << "new game" << std::endl;
+            return "n"; // new game
+        }
+        if (menuButtons[1].ifPressed(mousePssition, mousePressed))
+        {
+            std::cout << "load" << std::endl;
+            return "c"; // continue previous game
+        }
+        if (menuButtons[2].ifPressed(mousePssition, mousePressed))
+        {
+            std::cout << "help" << std::endl;
+            return "help";
+        }
+        if (menuButtons[3].ifPressed(mousePssition, mousePressed))
+        {
+            std::cout << "exit" << std::endl;
+            return "exit";
+        }
+    // }
     // }
 
     BeginDrawing();
@@ -128,16 +130,19 @@ int UI::displayPlayerNumberButton()
     bool mousePressedIdentity = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
     std::cout << mousePressedIdentity << std::endl;
     std::cout << "1111111111" << std::endl;
-    if (playerNumberButtons[1].ifPressed(mousePssitionIdentity, mousePressedIdentity))
-    {
-        std::cout << "player 3" << std::endl;
-        return 3; // number of players
-    }
-    if (playerNumberButtons[2].ifPressed(mousePssitionIdentity, mousePressedIdentity))
-    {
-        std::cout << "player 4" << std::endl;
-        return 4; // number of players
-    }
+    // for (int i = 0; i < 4; i++)
+    // {
+        if (playerNumberButtons[1].ifPressed(mousePssitionIdentity, mousePressedIdentity))
+        {
+            std::cout << "player 3" << std::endl;
+            return 3; // number of players
+        }
+        if (playerNumberButtons[2].ifPressed(mousePssitionIdentity, mousePressedIdentity))
+        {
+            std::cout << "player 4" << std::endl;
+            return 4; // number of players
+        }
+    // }
     BeginDrawing();
     ClearBackground(WHITE);
     DrawTexture(backgroundIdentityMenu, 0, 0, WHITE);
