@@ -22,6 +22,10 @@ bool Button::getStatus()
 {
     return status;
 }
+void Button::setStatus(bool s)
+{
+    status = s;
+}
 Button::Button()
 {
 }

@@ -9,6 +9,7 @@ class Button
     bool ifPressed(Vector2 mousePos, bool mousePressed);
     Rectangle getRectangle();
     bool getStatus();
+    void setStatus(bool);
     const char* title;
 private:
     //Vector2 possition;

@@ -51,6 +51,11 @@ std::string UI::menuGameLoop()
     // {
     //     std::cout << "new game" << std::endl;
     // }
+    if (CheckCollisionPointRec(mousePssition, menuButtons[0].getRectangle()))
+        menuButtons[0].setStatus(true);
+    else
+        menuButtons[0].setStatus(false);
+
     if (menuButtons[0].ifPressed(mousePssition, mousePressed))
     {
         std::cout << "new game" << std::endl;
@@ -77,7 +82,16 @@ std::string UI::menuGameLoop()
     ClearBackground(WHITE);
     DrawTexture(backgroundMenu, 0, 0, WHITE);
     for (int i = 0; i < 4; i++)
-        DrawTextEx(fontMenu, menuButtons[i].title, (Vector2){menuButtons[i].getRectangle().x + 10, menuButtons[i].getRectangle().y + 10}, fontMenu.baseSize, 1, RED);
+    {
+        Color selectedColor = WHITE;
+        if (menuButtons[i].getStatus())
+        {
+            selectedColor = WHITE;
+        }
+        else
+            selectedColor = RED;
+        DrawTextEx(fontMenu, menuButtons[i].title, (Vector2){menuButtons[i].getRectangle().x + 10, menuButtons[i].getRectangle().y + 10}, fontMenu.baseSize, 1, selectedColor);
+    }
     // drawRectUI();
     EndDrawing();
     return "a";
@@ -134,7 +148,7 @@ int UI::displayPlayerNumberButton()
         std::cout << "playerNumber" << std::endl;
     }
     EndDrawing();
-    return -1;//anything execpt the player numbers
+    return -1; // anything execpt the player numbers
 }
 
 void UI::initializePlayerNumberButton()
