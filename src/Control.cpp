@@ -909,26 +909,26 @@ void Control::menu()
     std::cout << "c1" << std::endl;
     bool exitGame = true;
     bool exitPrevious = true;
+    newOrContinue = ui.menuGameLoop();
+    int uiNumberPlayers = ui.displayPlayerNumberButton();
     while (WindowShouldClose() == false && exitGame == true /*&& exitPrevious == true*/)
     {
-
         // for (int i = 0; i < 1; i++)
-        newOrContinue = ui.menuGameLoop();
         if (newOrContinue == "n")
         {
             std::cout << "display " << std::endl;
-            int uiNumberPlayers = ui.displayPlayerNumberButton();
+            identity.setPlayerNumberForSave(uiNumberPlayers);
             if (uiNumberPlayers == 3)
             {
                 std::cout << "uiNumberPlayers -> " << uiNumberPlayers << std::endl;
-                exitPrevious = false ;
-            exitGame = false;
+                exitPrevious = false;
+                exitGame = false;
             }
             if (uiNumberPlayers == 4)
             {
                 std::cout << "uiNumberPlayers -> " << uiNumberPlayers << std::endl;
                 exitPrevious = false;
-            exitGame = false;
+                exitGame = false;
             }
             std::cout << "after display " << std::endl;
             exitGame = false;
@@ -939,14 +939,12 @@ void Control::menu()
             exitGame = false;
         if (newOrContinue == "exit")
             exitGame = false;
-        // break;
     }
     std::cout << "c2" << std::endl;
     std::cout << "c3" << std::endl;
     if (newOrContinue == "c")
     {
         std::cout << "if c " << std::endl;
-        //::cout << " "
         // if (isFileEmpty("save.txt") == 1) // if tellg == 0 is true
         // {
         //     std::cout << "No previous game found." << std::endl;
