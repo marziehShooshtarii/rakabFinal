@@ -1,8 +1,10 @@
 #ifndef UI_HPP
 #define UI_HPP
 #include <string>
+#include <vector>
 #include "raylib.h"
 #include "Button.hpp"
+#include "uiInput.hpp"
 // #define windowWidth = 600
 // #define windowHeight = 800
 //Font fontMenu = LoadFont("C:\rakabFinal\assets\KaushanScript-Regular.ttf");
@@ -23,6 +25,7 @@ public:
     void initializeIdentityMenu();
     int displayPlayerNumberButton();
     void initializePlayerNumberButton();
+    void Textbox();
 private:
     const char* menuButtonsTitle[4];
     int windowWidth = 1200;
@@ -35,6 +38,8 @@ private:
     Texture2D backgroundIdentityMenu;//identity menu background
     Button menuButtons[4];//buttons displayed in the menu
     Button playerNumberButtons[3];//buttons for selecting player number
+    // std::string UIPlayerName;
+    // std::vector <std::string> allUIPlayerNames;
     // bool ifPressed(Vector2 mousePos, bool mousePressed);
 
     // std::cout << "test" << std::endl;

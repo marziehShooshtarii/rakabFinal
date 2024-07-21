@@ -182,3 +182,38 @@ void UI::initializeIdentityMenu()
 {
     backgroundIdentityMenu = LoadTexture("../assets/b_6.png");
 }
+// void UI::inputNumberOfPlayers()
+// {
+//     bool mouseOnText
+// }
+void UI::Textbox()
+{
+    uiInput input;
+    while(1)
+    {
+        bool mouseOnText = false;
+        if (CheckCollisionPointRec(GetMousePosition(), input.getTextBoxRec()))
+        {
+            mouseOnText = true;
+        }
+        else 
+        {
+            mouseOnText = false;
+        }
+        // if (mouseOnText)
+        // {
+        //     SetMouseCursor(MOUSE_CURSOR_IBEAM);
+        //     int key = GetKeyPressed();
+        //              if ((key >= 32) && (key <= 125))
+        //         {
+        //             [allUIPlayerNames/*letterCount*/] = (char)key;
+        //             allUIPlayerNames[/*letterCount*/+1] = '\0';
+        //             allUIPlayerNames++;
+        //         }
+
+        //         key = GetCharPressed();
+        //     }
+            
+        // }
+    }
+}
