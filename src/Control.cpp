@@ -911,7 +911,8 @@ void Control::menu()
     bool exitPrevious = true;
     newOrContinue = ui.menuGameLoop();
     int uiNumberPlayers = ui.displayPlayerNumberButton();
-    ui.Textbox();
+   // ui.Textbox();
+
     while (WindowShouldClose() == false && exitGame == true /*&& exitPrevious == true*/)
     {
         // for (int i = 0; i < 1; i++)
@@ -922,6 +923,11 @@ void Control::menu()
             if (uiNumberPlayers == 3)
             {
                 std::cout << "uiNumberPlayers -> " << uiNumberPlayers << std::endl;
+                for (int i = 0; i < 3; i++)
+                {
+                    std::cout << "for text box" << std::endl;
+                    ui.Textbox();
+                }
                 exitPrevious = false;
                 exitGame = false;
             }
