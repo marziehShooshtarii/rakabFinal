@@ -12,6 +12,7 @@ public:
     void initializeTextBoxRec();
     void setUIPlayerName(int index,char);
     char* getFullName();
+    void resetInput();
 private :
     char UIPlayerName[50];
     std::vector <char> allUIPlayerNames;
