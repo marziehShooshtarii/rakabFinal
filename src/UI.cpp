@@ -211,7 +211,7 @@ void UI::Textbox()
         if (mouseOnText)
         {
             SetMouseCursor(MOUSE_CURSOR_IBEAM);
-            int key = GetKeyPressed();
+            int key = GetCharPressed();
                 int counter = 0;    
             while (key > 0)
             {
