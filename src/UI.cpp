@@ -193,6 +193,12 @@ void UI::Textbox()
     int framesCounter = 0;
     while (1)
     {
+        input.initializeTextBoxRec();
+        char playerName[50];
+        for (int i = 0; i < 50; i++)
+        {
+            playerName[i] = input.getUIPlayerName(i);
+        }
         bool mouseOnText = false;
         if (CheckCollisionPointRec(GetMousePosition(), input.getTextBoxRec()))
         {
@@ -206,14 +212,19 @@ void UI::Textbox()
         {
             SetMouseCursor(MOUSE_CURSOR_IBEAM);
             int key = GetKeyPressed();
+                int counter = 0;    
             while (key > 0)
             {
-
-                if ((key >= 32) && (key <= 125))
+                counter++;
+                if ((key >= 32) && (key <= 125) && (letterCount < 50))
                 {
+                    std::cout << "0 " << (char)key << std::endl;
                     input.setUIPlayerName(letterCount, (char)key);
+                    std::cout << "one " << (char)key << std::endl;
                     input.setUIPlayerName(letterCount + 1, '\0');
+                    std::cout << "tow " << (char)key << std::endl;
                     letterCount++;
+                    std::cout << letterCount << std::endl;
                 }
 
                 key = GetCharPressed();
@@ -223,7 +234,7 @@ void UI::Textbox()
                 letterCount--;
                 if (letterCount < 0)
                     letterCount = 0;
-                input.setUIPlayerName(letterCount,'\0');
+                input.setUIPlayerName(letterCount, '\0');
             }
         }
         else
@@ -233,5 +244,35 @@ void UI::Textbox()
             framesCounter++;
         else
             framesCounter = 0;
+        BeginDrawing();
+
+        ClearBackground(RAYWHITE);
+        DrawTextEx(fontMenu, "PLACE MOUSE OVER INPUT BOX!", (Vector2){240, 140}, fontMenu.baseSize, 1, RED);
+
+        DrawRectangleRec(input.getTextBoxRec(), LIGHTGRAY);
+        if (mouseOnText)
+            // DrawRectangle((int)input.getTextBoxRec().x,(int)input.getTextBoxRec().y,(int)input.getTextBoxRec().width, (int)input.getTextBoxRec().height, RED);
+            DrawRectangleLines((int)input.getTextBoxRec().x, (int)input.getTextBoxRec().y, (int)input.getTextBoxRec().width, (int)input.getTextBoxRec().height, RED);
+        else
+            DrawRectangleLines((int)input.getTextBoxRec().x, (int)input.getTextBoxRec().y, (int)input.getTextBoxRec().width, (int)input.getTextBoxRec().height, MAROON);
+        // DrawTextEx(fontMenu, "", (Vector2){(float)input.getTextBoxRec().x + 5, (float)input.getTextBoxRec().y + 8}, fontMenu.baseSize, 1, RED);
+        // DrawText(input.getFullName(), (int)input.getTextBoxRec().x + 5, (int)input.getTextBoxRec().y + 8, 40, MAROON);
+        DrawTextEx(fontMenu,input.getFullName(),(Vector2){ (float)input.getTextBoxRec().x + 5, (float)input.getTextBoxRec().y + 8}, fontMenu.baseSize,1, DARKGRAY);
+        DrawTextEx(fontMenu,TextFormat("player name: %i/%i", letterCount, 50),(Vector2){ 315, 250}, fontMenu.baseSize,1, DARKGRAY);
+        // DrawText(TextFormat("player name: %i/%i", letterCount, 50), 315, 250, 20, DARKGRAY);
+
+        if (mouseOnText)
+        {
+            if (letterCount < 50)
+            {
+                // Draw blinking underscore char
+                if (((framesCounter / 20) % 2) == 0)
+                    DrawText("_", (int)input.getTextBoxRec().x + 8 + MeasureText(playerName, 40), (int)input.getTextBoxRec().y + 12, 40, WHITE);
+            }
+            else
+                DrawText("Press BACKSPACE to delete chars...", 230, 300, 20, GRAY);
+        }
+
+        EndDrawing();
     }
 }

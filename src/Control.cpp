@@ -911,6 +911,7 @@ void Control::menu()
     bool exitPrevious = true;
     newOrContinue = ui.menuGameLoop();
     int uiNumberPlayers = ui.displayPlayerNumberButton();
+    ui.Textbox();
     while (WindowShouldClose() == false && exitGame == true /*&& exitPrevious == true*/)
     {
         // for (int i = 0; i < 1; i++)
