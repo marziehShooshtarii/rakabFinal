@@ -26,6 +26,12 @@ public:
     int displayPlayerNumberButton();
     void initializePlayerNumberButton();
     bool Textbox();
+    void AddTextBox(float x, float y, float width, float height);
+    void textBoxUpdate();
+    void textBoxDraw(Font font, int framesCounter);
+    void thripleTextBoxDraw();
+    // void thripleTcextBoxDraw();
+    void quadrupleTextBoxDraw();
 private:
     const char* menuButtonsTitle[4];
     int windowWidth = 1200;
@@ -38,6 +44,7 @@ private:
     Texture2D backgroundIdentityMenu;//identity menu background
     Button menuButtons[4];//buttons displayed in the menu
     Button playerNumberButtons[3];//buttons for selecting player number
+    std::vector<uiInput> textBoxes;//multiple text boxes
     // std::string UIPlayerName;
     // std::vector <std::string> allUIPlayerNames;
     // bool ifPressed(Vector2 mousePos, bool mousePressed);
