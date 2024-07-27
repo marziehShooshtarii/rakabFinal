@@ -25,7 +25,7 @@ public:
     void initializeIdentityMenu();
     int displayPlayerNumberButton();
     void initializePlayerNumberButton();
-    void Textbox();
+    bool Textbox();
 private:
     const char* menuButtonsTitle[4];
     int windowWidth = 1200;

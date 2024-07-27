@@ -186,7 +186,7 @@ void UI::initializeIdentityMenu()
 // {
 //     bool mouseOnText
 // }
-void UI::Textbox()
+bool UI::Textbox()
 {
     uiInput input;
     int letterCount = 0;
@@ -210,12 +210,16 @@ void UI::Textbox()
         }
         if (mouseOnText)
         {
+            std::cout << "02222222222222" << std::endl;
             SetMouseCursor(MOUSE_CURSOR_IBEAM);
+            std::cout<<"get key pressed "<<GetCharPressed()<<std::endl;
             int key = GetCharPressed();
-                int counter = 0;    
+            int counter = 0;
             while (key > 0)
             {
+            std::cout << "011111111111111111" << std::endl;
                 counter++;
+            std::cout << "033333333333" << std::endl;
                 if ((key >= 32) && (key <= 125) && (letterCount < 50))
                 {
                     std::cout << "0 " << (char)key << std::endl;
@@ -235,6 +239,18 @@ void UI::Textbox()
                 if (letterCount < 0)
                     letterCount = 0;
                 input.setUIPlayerName(letterCount, '\0');
+            }
+            if (IsKeyPressed(KEY_ENTER)) {
+                // Handle Enter key press (e.g., submit input)
+                std::cout << "Enter key pressed. Submitting input: " << input.getFullName() << std::endl;
+                // Reset the input
+                input.resetInput();
+                letterCount = 0;
+            }
+            if (IsKeyPressed(KEY_ENTER))
+            {
+                ClearBackground(WHITE);
+                return true;
             }
         }
         else
@@ -257,8 +273,8 @@ void UI::Textbox()
             DrawRectangleLines((int)input.getTextBoxRec().x, (int)input.getTextBoxRec().y, (int)input.getTextBoxRec().width, (int)input.getTextBoxRec().height, MAROON);
         // DrawTextEx(fontMenu, "", (Vector2){(float)input.getTextBoxRec().x + 5, (float)input.getTextBoxRec().y + 8}, fontMenu.baseSize, 1, RED);
         // DrawText(input.getFullName(), (int)input.getTextBoxRec().x + 5, (int)input.getTextBoxRec().y + 8, 40, MAROON);
-        DrawTextEx(fontMenu,input.getFullName(),(Vector2){ (float)input.getTextBoxRec().x + 5, (float)input.getTextBoxRec().y + 8}, fontMenu.baseSize,1, DARKGRAY);
-        DrawTextEx(fontMenu,TextFormat("player name: %i/%i", letterCount, 50),(Vector2){ 315, 250}, fontMenu.baseSize,1, DARKGRAY);
+        DrawTextEx(fontMenu, input.getFullName(), (Vector2){(float)input.getTextBoxRec().x + 5, (float)input.getTextBoxRec().y + 8}, fontMenu.baseSize, 1, DARKGRAY);
+        DrawTextEx(fontMenu, TextFormat("player name: %i/%i", letterCount, 50), (Vector2){315, 250}, fontMenu.baseSize, 1, DARKGRAY);
         // DrawText(TextFormat("player name: %i/%i", letterCount, 50), 315, 250, 20, DARKGRAY);
 
         if (mouseOnText)
