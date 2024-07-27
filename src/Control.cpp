@@ -911,8 +911,7 @@ void Control::menu()
     bool exitPrevious = true;
     newOrContinue = ui.menuGameLoop();
     int uiNumberPlayers = ui.displayPlayerNumberButton();
-   // ui.Textbox();
-
+    // ui.Textbox();
     while (WindowShouldClose() == false && exitGame == true /*&& exitPrevious == true*/)
     {
         // for (int i = 0; i < 1; i++)
@@ -922,17 +921,19 @@ void Control::menu()
             identity.setPlayerNumberForSave(uiNumberPlayers);
             if (uiNumberPlayers == 3)
             {
+                ui.thripleTextBoxDraw();
                 std::cout << "uiNumberPlayers -> " << uiNumberPlayers << std::endl;
                 for (int i = 0; i < 3; i++)
                 {
                     std::cout << "for text box" << std::endl;
-                    ui.Textbox();
+                    // ui.Textbox();
                 }
                 exitPrevious = false;
                 exitGame = false;
             }
             if (uiNumberPlayers == 4)
             {
+                ui.quadrupleTextBoxDraw();
                 std::cout << "uiNumberPlayers -> " << uiNumberPlayers << std::endl;
                 exitPrevious = false;
                 exitGame = false;
