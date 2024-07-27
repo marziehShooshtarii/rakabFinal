@@ -13,9 +13,14 @@ std::vector <char> uiInput::getAllUIPlayerNames()
 }
 void uiInput::initializeTextBoxRec()
 {
-    textBoxRec = {100,220,250,50};
+    textBoxRec = {300,200,250,50};
 }
 void uiInput::setUIPlayerName(int index,char playerName)
 {
     UIPlayerName[index] = playerName;
+}
+
+char* uiInput::getFullName()
+{
+    return UIPlayerName;
 }
