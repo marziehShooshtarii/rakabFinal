@@ -186,7 +186,7 @@ void UI::initializeIdentityMenu()
 // {
 //     bool mouseOnText
 // }
-bool UI::Textbox()
+/*bool UI::Textbox()
 {
     uiInput input;
     int letterCount = 0;
@@ -212,14 +212,14 @@ bool UI::Textbox()
         {
             std::cout << "02222222222222" << std::endl;
             SetMouseCursor(MOUSE_CURSOR_IBEAM);
-            std::cout<<"get key pressed "<<GetCharPressed()<<std::endl;
+            std::cout << "get key pressed " << GetCharPressed() << std::endl;
             int key = GetCharPressed();
             int counter = 0;
             while (key > 0)
             {
-            std::cout << "011111111111111111" << std::endl;
+                std::cout << "011111111111111111" << std::endl;
                 counter++;
-            std::cout << "033333333333" << std::endl;
+                std::cout << "033333333333" << std::endl;
                 if ((key >= 32) && (key <= 125) && (letterCount < 50))
                 {
                     std::cout << "0 " << (char)key << std::endl;
@@ -240,7 +240,8 @@ bool UI::Textbox()
                     letterCount = 0;
                 input.setUIPlayerName(letterCount, '\0');
             }
-            if (IsKeyPressed(KEY_ENTER)) {
+            if (IsKeyPressed(KEY_ENTER))
+            {
                 std::cout << "Enter key pressed" << input.getFullName() << std::endl;
                 input.resetInput();
                 letterCount = 0;
@@ -286,6 +287,76 @@ bool UI::Textbox()
             else
                 DrawText("Press BACKSPACE to delete chars...", 230, 300, 20, GRAY);
         }
+
+        EndDrawing();
+    }
+}*/
+void UI::AddTextBox(float x, float y, float width, float height)
+{
+    textBoxes.emplace_back(x, y, width, height);
+}
+void UI::textBoxUpdate()
+{
+    Vector2 mousePoint = GetMousePosition();
+
+    for (auto &textBox : textBoxes)
+    {
+        textBox.IsMouseOnText(mousePoint);
+        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+        {
+            textBox.SetActive(textBox.IsMouseOnText(mousePoint));
+        }
+        textBox.Update();
+    }
+}
+void UI::textBoxDraw(Font font, int framesCounter)
+{
+    for (auto &textBox : textBoxes)
+    {
+        textBox.Draw(font, framesCounter);
+    }
+}
+
+void UI::thripleTextBoxDraw()
+{
+    AddTextBox(100, 100, 200, 50);
+    AddTextBox(100, 200, 200, 50);
+    AddTextBox(100, 300, 200, 50);
+    int framesCounter = 0;
+    while (1)
+    {
+        framesCounter++;
+
+        textBoxUpdate();
+
+        BeginDrawing();
+        ClearBackground(RAYWHITE);
+
+        DrawTextEx(fontMenu, "Input TextBoxes:", (Vector2){100, 50}, fontMenu.baseSize, 1, BLACK);
+        textBoxDraw(fontMenu, framesCounter);
+
+        EndDrawing();
+    }
+}
+
+void UI::quadrupleTextBoxDraw()
+{
+    AddTextBox(100, 100, 200, 50);
+    AddTextBox(100, 200, 200, 50);
+    AddTextBox(100, 300, 200, 50);
+    AddTextBox(100, 400, 200, 50);
+    int framesCounter = 0;
+    while (1)
+    {
+        framesCounter++;
+
+        textBoxUpdate();
+
+        BeginDrawing();
+        ClearBackground(RAYWHITE);
+
+        DrawTextEx(fontMenu, "Input TextBoxes:", (Vector2){100, 50}, fontMenu.baseSize, 1, BLACK);
+        textBoxDraw(fontMenu, framesCounter);
 
         EndDrawing();
     }
