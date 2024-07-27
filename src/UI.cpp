@@ -41,24 +41,24 @@ void UI::displayMenuBackground()
 std::string UI::menuGameLoop()
 {
 
-    while(1)
+    while (1)
     {
-    // while (WindowShouldClose() == false)
-    // {
-    Vector2 mousePssition = GetMousePosition();
-    bool mousePressed = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
-    // for (int j = 0; j < 4; j++)
-    // {
-    // if (menuButtons[j].ifPressed(mousePssition, mousePressed))
-    // {
-    //     std::cout << "new game" << std::endl;
-    // }
-    // if (CheckCollisionPointRec(mousePssition, menuButtons[0].getRectangle()))
-    //     menuButtons[0].setStatus(true);
-    // else
-    //     menuButtons[0].setStatus(false);
-    // for (int i = 0; i < 4; i++)
-    // {
+        // while (WindowShouldClose() == false)
+        // {
+        Vector2 mousePssition = GetMousePosition();
+        bool mousePressed = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
+        // for (int j = 0; j < 4; j++)
+        // {
+        // if (menuButtons[j].ifPressed(mousePssition, mousePressed))
+        // {
+        //     std::cout << "new game" << std::endl;
+        // }
+        // if (CheckCollisionPointRec(mousePssition, menuButtons[0].getRectangle()))
+        //     menuButtons[0].setStatus(true);
+        // else
+        //     menuButtons[0].setStatus(false);
+        // for (int i = 0; i < 4; i++)
+        // {
         if (menuButtons[0].ifPressed(mousePssition, mousePressed))
         {
             std::cout << "new game" << std::endl;
@@ -79,26 +79,26 @@ std::string UI::menuGameLoop()
             std::cout << "exit" << std::endl;
             return "exit";
         }
-    // }
-    // }
+        // }
+        // }
 
-    BeginDrawing();
-    ClearBackground(WHITE);
-    DrawTexture(backgroundMenu, 0, 0, WHITE);
-    for (int i = 0; i < 4; i++)
-    {
-        Color selectedColor = WHITE;
-        if (menuButtons[i].getStatus())
+        BeginDrawing();
+        ClearBackground(WHITE);
+        DrawTexture(backgroundMenu, 0, 0, WHITE);
+        for (int i = 0; i < 4; i++)
         {
-            selectedColor = WHITE;
+            Color selectedColor = WHITE;
+            if (menuButtons[i].getStatus())
+            {
+                selectedColor = WHITE;
+            }
+            else
+                selectedColor = RED;
+            DrawTextEx(fontMenu, menuButtons[i].title, (Vector2){menuButtons[i].getRectangle().x + 10, menuButtons[i].getRectangle().y + 10}, fontMenu.baseSize, 1, selectedColor);
         }
-        else
-            selectedColor = RED;
-        DrawTextEx(fontMenu, menuButtons[i].title, (Vector2){menuButtons[i].getRectangle().x + 10, menuButtons[i].getRectangle().y + 10}, fontMenu.baseSize, 1, selectedColor);
+        // drawRectUI();
+        EndDrawing();
     }
-    // drawRectUI();
-    EndDrawing();
-}
     return "a";
     //}
 }
@@ -129,14 +129,14 @@ void UI::initializeButtons()
 int UI::displayPlayerNumberButton()
 {
     initializePlayerNumberButton();
-    while(1)
+    while (1)
     {
-    Vector2 mousePssitionIdentity = GetMousePosition();
-    bool mousePressedIdentity = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
-    std::cout << mousePressedIdentity << std::endl;
-    std::cout << "1111111111" << std::endl;
-    // for (int i = 0; i < 4; i++)
-    // {
+        Vector2 mousePssitionIdentity = GetMousePosition();
+        bool mousePressedIdentity = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
+        std::cout << mousePressedIdentity << std::endl;
+        std::cout << "1111111111" << std::endl;
+        // for (int i = 0; i < 4; i++)
+        // {
         if (playerNumberButtons[1].ifPressed(mousePssitionIdentity, mousePressedIdentity))
         {
             std::cout << "player 3" << std::endl;
@@ -147,26 +147,26 @@ int UI::displayPlayerNumberButton()
             std::cout << "player 4" << std::endl;
             return 4; // number of players
         }
-    // }
-    BeginDrawing();
-    ClearBackground(WHITE);
-    DrawTexture(backgroundIdentityMenu, 0, 0, WHITE);
-    std::cout << "cout 1" << std::endl;
-    for (int idx = 1; idx < 3; ++idx)
-    {
-        Color selectedColor = WHITE;
-        if (CheckCollisionPointRec(mousePssitionIdentity, playerNumberButtons[idx].getRectangle()))
+        // }
+        BeginDrawing();
+        ClearBackground(WHITE);
+        DrawTexture(backgroundIdentityMenu, 0, 0, WHITE);
+        std::cout << "cout 1" << std::endl;
+        for (int idx = 1; idx < 3; ++idx)
         {
-            selectedColor = WHITE;
-        }
-        else
-        {
-            selectedColor = RED;
-        }
+            Color selectedColor = WHITE;
+            if (CheckCollisionPointRec(mousePssitionIdentity, playerNumberButtons[idx].getRectangle()))
+            {
+                selectedColor = WHITE;
+            }
+            else
+            {
+                selectedColor = RED;
+            }
 
-        DrawTextEx(fontMenu, this->playerNumberButtons[idx].title, (Vector2){this->playerNumberButtons[idx].getRectangle().x + 10, this->playerNumberButtons[idx].getRectangle().y + 10}, fontMenu.baseSize, 1, selectedColor);
-    }
-    EndDrawing();
+            DrawTextEx(fontMenu, this->playerNumberButtons[idx].title, (Vector2){this->playerNumberButtons[idx].getRectangle().x + 10, this->playerNumberButtons[idx].getRectangle().y + 10}, fontMenu.baseSize, 1, selectedColor);
+        }
+        EndDrawing();
     }
     return -1; // anything execpt the player numbers
 }
@@ -189,31 +189,49 @@ void UI::initializeIdentityMenu()
 void UI::Textbox()
 {
     uiInput input;
-    while(1)
+    int letterCount = 0;
+    int framesCounter = 0;
+    while (1)
     {
         bool mouseOnText = false;
         if (CheckCollisionPointRec(GetMousePosition(), input.getTextBoxRec()))
         {
             mouseOnText = true;
         }
-        else 
+        else
         {
             mouseOnText = false;
         }
-        // if (mouseOnText)
-        // {
-        //     SetMouseCursor(MOUSE_CURSOR_IBEAM);
-        //     int key = GetKeyPressed();
-        //              if ((key >= 32) && (key <= 125))
-        //         {
-        //             [allUIPlayerNames/*letterCount*/] = (char)key;
-        //             allUIPlayerNames[/*letterCount*/+1] = '\0';
-        //             allUIPlayerNames++;
-        //         }
+        if (mouseOnText)
+        {
+            SetMouseCursor(MOUSE_CURSOR_IBEAM);
+            int key = GetKeyPressed();
+            while (key > 0)
+            {
 
-        //         key = GetCharPressed();
-        //     }
-            
-        // }
+                if ((key >= 32) && (key <= 125))
+                {
+                    input.setUIPlayerName(letterCount, (char)key);
+                    input.setUIPlayerName(letterCount + 1, '\0');
+                    letterCount++;
+                }
+
+                key = GetCharPressed();
+            }
+            if (IsKeyPressed(KEY_BACKSPACE))
+            {
+                letterCount--;
+                if (letterCount < 0)
+                    letterCount = 0;
+                input.setUIPlayerName(letterCount,'\0');
+            }
+        }
+        else
+            SetMouseCursor(MOUSE_CURSOR_DEFAULT);
+
+        if (mouseOnText)
+            framesCounter++;
+        else
+            framesCounter = 0;
     }
 }

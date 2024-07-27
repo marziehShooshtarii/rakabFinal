@@ -3,15 +3,19 @@ Rectangle uiInput::getTextBoxRec()
 {
     return textBoxRec;
 }
-std::string uiInput::getUIPlayerName()
+char uiInput::getUIPlayerName(int index)
 {
-    return UIPlayerName;
+    return UIPlayerName[index];
 }
-std::vector <std::string> uiInput::getAllUIPlayerNames()
+std::vector <char> uiInput::getAllUIPlayerNames()
 {
     return allUIPlayerNames;
 }
 void uiInput::initializeTextBoxRec()
 {
     textBoxRec = {100,220,250,50};
+}
+void uiInput::setUIPlayerName(int index,char playerName)
+{
+    UIPlayerName[index] = playerName;
 }

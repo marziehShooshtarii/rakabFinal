@@ -6,14 +6,15 @@
 class uiInput
 {
 private :
-    std::string UIPlayerName;
-    std::vector <std::string> allUIPlayerNames;
+    char UIPlayerName[50];
+    std::vector <char> allUIPlayerNames;
     Rectangle textBoxRec;
 public:
-    std::string getUIPlayerName();
-    std::vector <std::string> getAllUIPlayerNames();
+    char getUIPlayerName(int index);
+    std::vector <char> getAllUIPlayerNames();
     Rectangle getTextBoxRec();
     void initializeTextBoxRec();
+    void setUIPlayerName(int index,char);
 
 };
 #endif 
