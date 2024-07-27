@@ -241,9 +241,7 @@ bool UI::Textbox()
                 input.setUIPlayerName(letterCount, '\0');
             }
             if (IsKeyPressed(KEY_ENTER)) {
-                // Handle Enter key press (e.g., submit input)
-                std::cout << "Enter key pressed. Submitting input: " << input.getFullName() << std::endl;
-                // Reset the input
+                std::cout << "Enter key pressed" << input.getFullName() << std::endl;
                 input.resetInput();
                 letterCount = 0;
             }
