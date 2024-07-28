@@ -331,7 +331,7 @@ void UI::thripleTextBoxDraw()
 
         BeginDrawing();
         ClearBackground(RAYWHITE);
-
+        DrawTexture(backgroundIdentityMenu, 0, 0, WHITE);
         DrawTextEx(fontMenu, "Input TextBoxes:", (Vector2){100, 50}, fontMenu.baseSize, 1, BLACK);
         textBoxDraw(fontMenu, framesCounter);
 
@@ -354,7 +354,7 @@ void UI::quadrupleTextBoxDraw()
 
         BeginDrawing();
         ClearBackground(RAYWHITE);
-
+        DrawTexture(backgroundIdentityMenu, 0, 0, WHITE);
         DrawTextEx(fontMenu, "Input TextBoxes:", (Vector2){100, 50}, fontMenu.baseSize, 1, BLACK);
         textBoxDraw(fontMenu, framesCounter);
 
