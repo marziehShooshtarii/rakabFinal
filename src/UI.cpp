@@ -322,6 +322,9 @@ void UI::thripleTextBoxDraw()
     AddTextBox(100, 100, 200, 50);
     AddTextBox(100, 200, 200, 50);
     AddTextBox(100, 300, 200, 50);
+    AddTextBox(500, 100, 200, 50);
+    AddTextBox(500, 200, 200, 50);
+    AddTextBox(500, 300, 200, 50);
     int framesCounter = 0;
     while (1)
     {
@@ -332,7 +335,8 @@ void UI::thripleTextBoxDraw()
         BeginDrawing();
         ClearBackground(RAYWHITE);
         DrawTexture(backgroundIdentityMenu, 0, 0, WHITE);
-        DrawTextEx(fontMenu, "Input TextBoxes:", (Vector2){100, 50}, fontMenu.baseSize, 1, BLACK);
+        DrawTextEx(fontMenu, "please enter your names:", (Vector2){100, 50}, fontMenu.baseSize, 1, BLACK);
+        DrawTextEx(fontMenu, "please enter your ages:", (Vector2){500, 50}, fontMenu.baseSize, 1, BLACK);
         textBoxDraw(fontMenu, framesCounter);
 
         EndDrawing();
@@ -345,6 +349,11 @@ void UI::quadrupleTextBoxDraw()
     AddTextBox(100, 200, 200, 50);
     AddTextBox(100, 300, 200, 50);
     AddTextBox(100, 400, 200, 50);
+    AddTextBox(500, 100, 200, 50);
+    AddTextBox(500, 200, 200, 50);
+    AddTextBox(500, 300, 200, 50);
+    AddTextBox(500, 400, 200, 50);
+
     int framesCounter = 0;
     while (1)
     {
@@ -355,7 +364,8 @@ void UI::quadrupleTextBoxDraw()
         BeginDrawing();
         ClearBackground(RAYWHITE);
         DrawTexture(backgroundIdentityMenu, 0, 0, WHITE);
-        DrawTextEx(fontMenu, "Input TextBoxes:", (Vector2){100, 50}, fontMenu.baseSize, 1, BLACK);
+        DrawTextEx(fontMenu, "please enter your names:", (Vector2){100, 50}, fontMenu.baseSize, 1, BLACK);
+        DrawTextEx(fontMenu, "please enter your ages:", (Vector2){500, 50}, fontMenu.baseSize, 1, BLACK);
         textBoxDraw(fontMenu, framesCounter);
 
         EndDrawing();
