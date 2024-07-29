@@ -33,6 +33,8 @@
 // }
 #include <raylib.h>
 #include <string>
+#include <iostream>
+#include <vector>
 #include "uiInput.hpp"
 uiInput::uiInput(float x, float y, float width, float height)
 {
@@ -93,13 +95,21 @@ bool uiInput::IsMouseOnText(Vector2 mousePoint)
 }
 void uiInput::transferPlayerNameToVector()
 {
-    for (int i = 0; text[i] != '\0'; i++ )
-    {
-        textBoxName[i] = text[i];
-    }
+    std::cout << "--------------------------------" << std::endl;
+    // for (int h = 0; h < text[h] != '\0'; h++)
+    // {
+    //     std::cout << text[h] << std::endl;
+    // }
+    textBoxName.insert(textBoxName.end(), std::begin(text), std::end(text) - 1);// -1 to avoid copying the null terminator
+    // for (int h = 0; h < textBoxName.size(); h++)
+    // {
+    //     std::cout << textBoxName[h] << std::endl;
+    // }
+    
 }
 
 std::vector<char> uiInput::getTextBoxName()
 {
+    // std::vector<char> textBoxNames(std::begin(text), std::end(text) - 1); // -1 to avoid copying the null terminator
     return textBoxName;
 }
