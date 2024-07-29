@@ -1,3 +1,4 @@
+#include <cstring>
 // #include "uiInput.hpp"
 // Rectangle uiInput::getTextBoxRec()
 // {
@@ -96,16 +97,18 @@ bool uiInput::IsMouseOnText(Vector2 mousePoint)
 void uiInput::transferPlayerNameToVector()
 {
     std::cout << "--------------------------------" << std::endl;
-    // for (int h = 0; h < text[h] != '\0'; h++)
+    // for (int h = 0; h < strlen(text); h++)
     // {
-    //     std::cout << text[h] << std::endl;
+    //     textBoxName[h] = text[h];
     // }
-    textBoxName.insert(textBoxName.end(), std::begin(text), std::end(text) - 1);// -1 to avoid copying the null terminator
+    // std::cout<<std::strlen(text)<<"string"<<std::endl;
+    //  std::cout << textBoxName.size()<<"  ghabl textBoxName.size()" <<std::endl;
+     textBoxName.insert(textBoxName.end(), text, text + letterCount);// -1 to avoid copying the null terminator
+    std::cout << textBoxName.size() << " textBoxName.size()" << std::endl;
     // for (int h = 0; h < textBoxName.size(); h++)
     // {
     //     std::cout << textBoxName[h] << std::endl;
     // }
-    
 }
 
 std::vector<char> uiInput::getTextBoxName()
