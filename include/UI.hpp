@@ -35,6 +35,8 @@ public:
     std::vector <char> getNamesFromUI(int index);
     void initializeConfirmPlayerDataButton();
     bool displayConfirmPlayerDataButton();
+    std::vector <char> getAgeFromUI(int index);
+    void controlTransitionVectors(int);
 private:
     const char* menuButtonsTitle[4];
     int windowWidth = 1200;

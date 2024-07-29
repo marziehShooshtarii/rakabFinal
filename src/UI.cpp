@@ -218,6 +218,7 @@ bool UI::displayConfirmPlayerDataButton()
     return false;
 }
 
+
 void UI::initializeIdentityMenu()
 {
     backgroundIdentityMenu = LoadTexture("../assets/b_6.png");
@@ -454,4 +455,15 @@ std::vector<char> UI::getNamesFromUI(int playerIndex)
     textBoxes[playerIndex].transferPlayerNameToVector();
     std::cout << "textBoxes[playerIndex].getTextBoxName(). -> " << textBoxes[playerIndex].getTextBoxName().size() << std::endl;
     return textBoxes[playerIndex].getTextBoxName();
+}
+
+std::vector<char> UI::getAgeFromUI(int playerAgeIndex)
+{
+    textBoxes[playerAgeIndex].transferPlayerNameToVector();
+    return textBoxes[playerAgeIndex].getTextBoxName();
+}
+
+void UI::controlTransitionVectors(int playerTextBoxIndex)
+{
+    textBoxes[playerTextBoxIndex].transferPlayerNameToVector();
 }
