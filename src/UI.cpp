@@ -357,7 +357,7 @@ void UI::textBoxDraw(Font font, int framesCounter)
     }
 }
 
-void UI::thripleTextBoxDraw()
+bool UI::thripleTextBoxDraw()
 {
     AddTextBox(100, 100, 200, 50);
     AddTextBox(100, 200, 200, 50);
@@ -366,19 +366,40 @@ void UI::thripleTextBoxDraw()
     AddTextBox(500, 200, 200, 50);
     AddTextBox(500, 300, 200, 50);
     int framesCounter = 0;
+initializeConfirmPlayerDataButton();
     while (1)
     {
         framesCounter++;
 
         textBoxUpdate();
+ 
+        Vector2 mousePssitionIdentity = GetMousePosition();
+        bool mousePressedIdentity = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
+        std::cout << mousePressedIdentity << std::endl;
 
+        if (confirmPlayerData.ifPressed(mousePssitionIdentity, mousePressedIdentity))
+        {
+            return true;
+        }
         BeginDrawing();
         ClearBackground(RAYWHITE);
         DrawTexture(backgroundIdentityMenu, 0, 0, WHITE);
         DrawTextEx(fontMenu, "please enter your names:", (Vector2){100, 50}, fontMenu.baseSize, 1, BLACK);
         DrawTextEx(fontMenu, "please enter your ages:", (Vector2){500, 50}, fontMenu.baseSize, 1, BLACK);
         textBoxDraw(fontMenu, framesCounter);
-       displayConfirmPlayerDataButton();
+        Color selectedColor = WHITE;
+            if (CheckCollisionPointRec(mousePssitionIdentity, confirmPlayerData.getRectangle()))
+            {
+                selectedColor = WHITE;
+            }
+            else
+            {
+                selectedColor = RED;
+            }
+
+            DrawTextEx(fontMenu, this->confirmPlayerData.title, (Vector2){this->confirmPlayerData.getRectangle().x + 10, this->confirmPlayerData.getRectangle().y + 10}, fontMenu.baseSize, 1, selectedColor);
+            std::cout <<"tah displayConfirmPlayerDataButton"<<std::endl;
+       //displayConfirmPlayerDataButton();
         EndDrawing();
     }
 }

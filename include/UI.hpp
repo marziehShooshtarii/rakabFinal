@@ -29,7 +29,7 @@ public:
     void AddTextBox(float x, float y, float width, float height);
     void textBoxUpdate();
     void textBoxDraw(Font font, int framesCounter);
-    void thripleTextBoxDraw();
+    bool thripleTextBoxDraw();
     // void thripleTcextBoxDraw();
     void quadrupleTextBoxDraw();
     std::vector <char> getNamesFromUI(int index);
