@@ -900,6 +900,15 @@ bool Control::isFileEmpty(const std::string &filename)
     }
     return file.tellg() == 0;
 }
+void Control::setNameForUI(std::vector<char> names)
+{
+    std::string tempNames;
+    for (int i = 0; i < names.size(); i++)
+    {
+        tempNames += names[i];
+    }
+    identity.setPlayerNameForUI(tempNames);
+}
 void Control::menu()
 {
     // std::cout << "do you want to start a new game or continue or previous game ? " << std::endl;
@@ -925,8 +934,10 @@ void Control::menu()
                 std::cout << "uiNumberPlayers -> " << uiNumberPlayers << std::endl;
                 for (int i = 0; i < 3; i++)
                 {
+                    setNameForUI(ui.getNamesFromUI(i));
                     std::cout << "for text box" << std::endl;
                     // ui.Textbox();
+                    std::cout<<"karaye ajib - > "<<identity.getPlayerNameForUI()<<std::endl;
                 }
                 exitPrevious = false;
                 exitGame = false;
