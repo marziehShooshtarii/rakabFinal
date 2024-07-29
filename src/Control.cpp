@@ -903,10 +903,13 @@ bool Control::isFileEmpty(const std::string &filename)
 void Control::setNameForUI(std::vector<char> names)
 {
     std::string tempNames;
+    std::cout << "size -> " << names.size() << std::endl;
     for (int i = 0; i < names.size(); i++)
     {
+        std::cout << "name -> " << names[i] << std::endl;
         tempNames += names[i];
     }
+    std::cout << "tempNames -> " << tempNames << std::endl;
     identity.setPlayerNameForUI(tempNames);
 }
 void Control::menu()
@@ -935,18 +938,27 @@ void Control::menu()
                 for (int i = 0; i < 3; i++)
                 {
                     setNameForUI(ui.getNamesFromUI(i));
+                    std::cout << "size vector ui -> " << ui.getNamesFromUI(i).size() << std::endl;
                     std::cout << "for text box" << std::endl;
                     // ui.Textbox();
-                    std::cout<<"karaye ajib - > "<<identity.getPlayerNameForUI()<<std::endl;
+                    std::cout << "karaye ajib - > " << identity.getPlayerNameForUI() << std::endl;
                 }
-                exitPrevious = false;
+                // exitPrevious = false;
                 exitGame = false;
             }
             if (uiNumberPlayers == 4)
             {
                 ui.quadrupleTextBoxDraw();
                 std::cout << "uiNumberPlayers -> " << uiNumberPlayers << std::endl;
-                exitPrevious = false;
+                for (int i = 0; i < 4; i++)
+                {
+                    setNameForUI(ui.getNamesFromUI(i));
+                    std::cout << "size vector ui -> " << ui.getNamesFromUI(i).size() << std::endl;
+                    std::cout << "for text box" << std::endl;
+                    // ui.Textbox();
+                    std::cout << "karaye ajib - > " << identity.getPlayerNameForUI() << std::endl;
+                }
+                // exitPrevious = false;
                 exitGame = false;
             }
             std::cout << "after display " << std::endl;
