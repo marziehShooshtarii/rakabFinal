@@ -36,6 +36,7 @@
 #include <string>
 #include <iostream>
 #include <vector>
+#include <cstdlib>
 #include "uiInput.hpp"
 uiInput::uiInput(float x, float y, float width, float height)
 {
@@ -134,4 +135,12 @@ void uiInput::convertTextToString()
 std::string uiInput::getTextBoxStringName()
 {
     return nameConversion;
+}
+void uiInput::convertAgeToInteger()
+{
+    ageConversion = std::atoi(text);
+}
+int uiInput::getTextBoxIntAge()
+{
+    return ageConversion;
 }

@@ -16,8 +16,9 @@ public:
     void resetTarsferedVector();
     void convertTextToString();
     std::string getTextBoxStringName();
+    void convertAgeToInteger();
+    int getTextBoxIntAge();
     char *getFullName();
-    std::string nameConversion;
     // char getUIPlayerName(int index);
     // std::vector <char> getAllUIPlayerNames();
     // Rectangle getTextBoxRec();
@@ -36,5 +37,7 @@ private:
     bool mouseOnText;
     bool active;
     std::vector<char> textBoxName;
+    std::string nameConversion;//converting player name to string
+    int ageConversion;//converting player age to integer
 };
 #endif
