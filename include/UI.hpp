@@ -32,6 +32,9 @@ public:
     void thripleTextBoxDraw();
     // void thripleTcextBoxDraw();
     void quadrupleTextBoxDraw();
+    std::vector <char> getNamesFromUI(int index);
+    void initializeConfirmPlayerDataButton();
+    bool displayConfirmPlayerDataButton();
 private:
     const char* menuButtonsTitle[4];
     int windowWidth = 1200;
@@ -45,6 +48,8 @@ private:
     Button menuButtons[4];//buttons displayed in the menu
     Button playerNumberButtons[3];//buttons for selecting player number
     std::vector<uiInput> textBoxes;//multiple text boxes
+    Button confirmPlayerData; //for confiming data by players
+    Rectangle rectConfirmPlayerData;
     // std::string UIPlayerName;
     // std::vector <std::string> allUIPlayerNames;
     // bool ifPressed(Vector2 mousePos, bool mousePressed);

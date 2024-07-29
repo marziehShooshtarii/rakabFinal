@@ -178,6 +178,46 @@ void UI::initializePlayerNumberButton()
     playerNumberButtons[2] = (Button){(Rectangle){50, 360, 120, 50}, "4 players", false};
 }
 
+void UI::initializeConfirmPlayerDataButton()
+{
+    rectConfirmPlayerData = {500, 900, 200, 100};
+    confirmPlayerData = (Button){(Rectangle){500,900,200,100},"press this button to confirm your data",false};
+}
+bool UI::displayConfirmPlayerDataButton()
+{
+    initializeConfirmPlayerDataButton();
+    // while (1)
+    // {
+        Vector2 mousePssitionIdentity = GetMousePosition();
+        bool mousePressedIdentity = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
+        std::cout << mousePressedIdentity << std::endl;
+
+        if (confirmPlayerData.ifPressed(mousePssitionIdentity, mousePressedIdentity))
+        {
+            return true;
+        }
+    
+        //BeginDrawing();
+       // ClearBackground(WHITE);
+        //DrawTexture(backgroundIdentityMenu, 0, 0, WHITE);
+    
+            Color selectedColor = WHITE;
+            if (CheckCollisionPointRec(mousePssitionIdentity, confirmPlayerData.getRectangle()))
+            {
+                selectedColor = WHITE;
+            }
+            else
+            {
+                selectedColor = RED;
+            }
+
+            DrawTextEx(fontMenu, this->confirmPlayerData.title, (Vector2){this->confirmPlayerData.getRectangle().x + 10, this->confirmPlayerData.getRectangle().y + 10}, fontMenu.baseSize, 1, selectedColor);
+            std::cout <<"tah displayConfirmPlayerDataButton"<<std::endl;
+        //EndDrawing();
+   // }
+    return false;
+}
+
 void UI::initializeIdentityMenu()
 {
     backgroundIdentityMenu = LoadTexture("../assets/b_6.png");
@@ -338,7 +378,7 @@ void UI::thripleTextBoxDraw()
         DrawTextEx(fontMenu, "please enter your names:", (Vector2){100, 50}, fontMenu.baseSize, 1, BLACK);
         DrawTextEx(fontMenu, "please enter your ages:", (Vector2){500, 50}, fontMenu.baseSize, 1, BLACK);
         textBoxDraw(fontMenu, framesCounter);
-
+       displayConfirmPlayerDataButton();
         EndDrawing();
     }
 }
@@ -371,3 +411,9 @@ void UI::quadrupleTextBoxDraw()
         EndDrawing();
     }
 }
+
+std::vector<char> UI::getNamesFromUI(int playerIndex)
+{
+    return textBoxes[playerIndex].getTextBoxName();
+}
+
