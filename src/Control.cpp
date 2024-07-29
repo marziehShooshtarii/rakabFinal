@@ -963,20 +963,21 @@ void Control::menu()
                     ui.thripleTextBoxDraw();
                     std::cout << "for text box" << i << std::endl;
                     identity.setPlayerNameForSave(ui.getPlayerNameFromUI(i));
+                    identity.setPlayerAgeForSave(ui.getPlayerAgeFromUI(i));
                     // setNameForUI(ui.getNamesFromUI(i));
                     // setNameFromUI(ui.getFullNameFromUI(i));
                     // setNameFromUI(ui.thripleTextBoxDraw(i));
                     // ui.controlTransitionVectors(i);
                     // setAgeForUI(ui.getAgeFromUI(i + 3));
                     // ui.controlTransitionVectors(i + 3);
-                    std::cout << "size vector ui -> " << ui.getNamesFromUI(i).size() << std::endl;
+                    // std::cout << "size vector ui -> " << ui.getNamesFromUI(i).size() << std::endl;
                     std::cout << "karaye ajib - > " << i << identity.getPlayerNameForUI() << std::endl;
+                    std::cout << "karaye ajib2 - > " << i << identity.getPlayerAgeForUI() << std::endl;
                     // std::cout << "size vector ui for age -> " << ui.getAgeFromUI(i).size() << std::endl;
                     // ui.Textbox();
                 }
                 for (int i = 0; i < 3; i++)
                 {
-                    std::cout << "karaye ajib2 - > " << i << identity.getPlayerAgeForUI() << std::endl;
                 }
                 // exitPrevious = false;
                 exitGame = false;
@@ -987,8 +988,8 @@ void Control::menu()
                 std::cout << "uiNumberPlayers -> " << uiNumberPlayers << std::endl;
                 for (int i = 0; i < 4; i++)
                 {
-                    setNameForUI(ui.getNamesFromUI(i));
-                    std::cout << "size vector ui -> " << ui.getNamesFromUI(i).size() << std::endl;
+                    // setNameForUI(ui.getNamesFromUI(i));
+                    // std::cout << "size vector ui -> " << ui.getNamesFromUI(i).size() << std::endl;
                     std::cout << "for text box" << std::endl;
                     // ui.Textbox();
                     std::cout << "karaye ajib - > " << identity.getPlayerNameForUI() << std::endl;
