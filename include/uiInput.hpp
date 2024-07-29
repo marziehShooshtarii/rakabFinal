@@ -13,6 +13,7 @@ public:
     bool IsMouseOnText(Vector2 mousePoint);
     void transferPlayerNameToVector();
     std::vector <char> getTextBoxName();
+    void resetTarsferedVector();
     // char getUIPlayerName(int index);
     // std::vector <char> getAllUIPlayerNames();
     // Rectangle getTextBoxRec();

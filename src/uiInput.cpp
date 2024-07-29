@@ -113,3 +113,8 @@ std::vector<char> uiInput::getTextBoxName()
     // std::vector<char> textBoxNames(std::begin(text), std::end(text) - 1); // -1 to avoid copying the null terminator
     return textBoxName;
 }
+
+void uiInput::resetTarsferedVector()
+{
+    textBoxName.clear();
+}
