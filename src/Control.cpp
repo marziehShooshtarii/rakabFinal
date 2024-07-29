@@ -963,7 +963,7 @@ void Control::menu()
                     ui.thripleTextBoxDraw();
                     std::cout << "for text box" << i << std::endl;
                     identity.setPlayerNameForSave(ui.getPlayerNameFromUI(i));
-                    identity.setPlayerAgeForSave(ui.getPlayerAgeFromUI(i));
+                    identity.setPlayerAgeForSave(ui.getPlayerAgeFromUI(i+3));
                     // setNameForUI(ui.getNamesFromUI(i));
                     // setNameFromUI(ui.getFullNameFromUI(i));
                     // setNameFromUI(ui.thripleTextBoxDraw(i));
