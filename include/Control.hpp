@@ -95,6 +95,7 @@ public:
     void StartNewGame();
     void initializingNumberOfSavedGames();
     bool determinNumberOfSavedGame();
+    void setNameForUI(std::vector<char>);
     void run();
 
 private:
