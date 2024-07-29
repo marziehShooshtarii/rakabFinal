@@ -912,11 +912,23 @@ void Control::setNameForUI(std::vector<char> names)
     std::cout << "tempNames -> " << tempNames << std::endl;
     identity.setPlayerNameForUI(tempNames);
 }
+void Control::setAgeForUI(std::vector<char> age)
+{
+    int tempAge;
+    char Age[age.size()];
+    std::cout << "size -> " << age.size() << std::endl;
+    for (int i = 0; i < age.size(); i++)
+    {
+       Age[i]= age[i];
+    }
+    tempAge = std::atoi(Age);
+    std::cout << "tempAge -> " << tempAge << std::endl;
+    identity.setPlayerAgeForUI(tempAge);
+}
 void Control::menu()
 {
     // std::cout << "do you want to start a new game or continue or previous game ? " << std::endl;
     // std::cin >> newOrContinue;
-    UI ui;
     // ui.displayMenuBackground();
     std::cout << "c1" << std::endl;
     bool exitGame = true;
@@ -938,10 +950,19 @@ void Control::menu()
                 for (int i = 0; i < 3; i++)
                 {
                     setNameForUI(ui.getNamesFromUI(i));
+                    ui.controlTransitionVectors(i);
+                    setAgeForUI(ui.getAgeFromUI(i + 3));
+                    ui.controlTransitionVectors(i + 3);
                     std::cout << "size vector ui -> " << ui.getNamesFromUI(i).size() << std::endl;
+                    std::cout << "size vector ui for age -> " << ui.getAgeFromUI(i).size() << std::endl;
                     std::cout << "for text box" << std::endl;
                     // ui.Textbox();
-                    std::cout << "karaye ajib - > " << identity.getPlayerNameForUI() << std::endl;
+                }
+                for (int i=0 ; i < 3 ; i++)
+                {
+                    std::cout << "karaye ajib - > "  << i << identity.getPlayerNameForUI() << std::endl;
+                    std::cout << "karaye ajib2 - > " << i << identity.getPlayerAgeForUI() << std::endl;
+                    
                 }
                 // exitPrevious = false;
                 exitGame = false;

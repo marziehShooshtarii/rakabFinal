@@ -96,6 +96,7 @@ public:
     void initializingNumberOfSavedGames();
     bool determinNumberOfSavedGame();
     void setNameForUI(std::vector<char>);
+    void setAgeForUI(std::vector<char>);
     void run();
 
 private:
@@ -123,4 +124,5 @@ private:
     std::string newOrContinue;
     std::vector <std::string> numberOfSavedGames; //having more than one saved game
     int whichSavedGame;
+    UI ui;
 };
