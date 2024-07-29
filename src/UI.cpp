@@ -181,40 +181,40 @@ void UI::initializePlayerNumberButton()
 void UI::initializeConfirmPlayerDataButton()
 {
     rectConfirmPlayerData = {500, 900, 200, 100};
-    confirmPlayerData = (Button){(Rectangle){500,900,200,100},"press this button to confirm your data",false};
+    confirmPlayerData = (Button){(Rectangle){300, 400, 120, 50}, "confirm your data", false};
 }
 bool UI::displayConfirmPlayerDataButton()
 {
     initializeConfirmPlayerDataButton();
     // while (1)
     // {
-        Vector2 mousePssitionIdentity = GetMousePosition();
-        bool mousePressedIdentity = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
-        std::cout << mousePressedIdentity << std::endl;
+    Vector2 mousePssitionIdentity = GetMousePosition();
+    bool mousePressedIdentity = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
+    std::cout << mousePressedIdentity << std::endl;
 
-        if (confirmPlayerData.ifPressed(mousePssitionIdentity, mousePressedIdentity))
-        {
-            return true;
-        }
-    
-        //BeginDrawing();
-       // ClearBackground(WHITE);
-        //DrawTexture(backgroundIdentityMenu, 0, 0, WHITE);
-    
-            Color selectedColor = WHITE;
-            if (CheckCollisionPointRec(mousePssitionIdentity, confirmPlayerData.getRectangle()))
-            {
-                selectedColor = WHITE;
-            }
-            else
-            {
-                selectedColor = RED;
-            }
+    if (confirmPlayerData.ifPressed(mousePssitionIdentity, mousePressedIdentity))
+    {
+        return true;
+    }
 
-            DrawTextEx(fontMenu, this->confirmPlayerData.title, (Vector2){this->confirmPlayerData.getRectangle().x + 10, this->confirmPlayerData.getRectangle().y + 10}, fontMenu.baseSize, 1, selectedColor);
-            std::cout <<"tah displayConfirmPlayerDataButton"<<std::endl;
-        //EndDrawing();
-   // }
+    // BeginDrawing();
+    // ClearBackground(WHITE);
+    // DrawTexture(backgroundIdentityMenu, 0, 0, WHITE);
+
+    Color selectedColor = WHITE;
+    if (CheckCollisionPointRec(mousePssitionIdentity, confirmPlayerData.getRectangle()))
+    {
+        selectedColor = WHITE;
+    }
+    else
+    {
+        selectedColor = RED;
+    }
+
+    DrawTextEx(fontMenu, this->confirmPlayerData.title, (Vector2){this->confirmPlayerData.getRectangle().x + 10, this->confirmPlayerData.getRectangle().y + 10}, fontMenu.baseSize, 1, selectedColor);
+    std::cout << "tah displayConfirmPlayerDataButton" << std::endl;
+    // EndDrawing();
+    // }
     return false;
 }
 
@@ -366,18 +366,17 @@ bool UI::thripleTextBoxDraw()
     AddTextBox(500, 200, 200, 50);
     AddTextBox(500, 300, 200, 50);
     int framesCounter = 0;
-initializeConfirmPlayerDataButton();
+    initializeConfirmPlayerDataButton();
     while (1)
     {
         framesCounter++;
 
         textBoxUpdate();
- 
-        Vector2 mousePssitionIdentity = GetMousePosition();
-        bool mousePressedIdentity = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
-        std::cout << mousePressedIdentity << std::endl;
+        Vector2 mousePssitionConfirmation = GetMousePosition();
+        bool mousePressedConfirmation = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
+        // std::cout << mousePressedComfermation << std::endl;
 
-        if (confirmPlayerData.ifPressed(mousePssitionIdentity, mousePressedIdentity))
+        if (confirmPlayerData.ifPressed(mousePssitionConfirmation, mousePressedConfirmation))
         {
             return true;
         }
@@ -388,23 +387,21 @@ initializeConfirmPlayerDataButton();
         DrawTextEx(fontMenu, "please enter your ages:", (Vector2){500, 50}, fontMenu.baseSize, 1, BLACK);
         textBoxDraw(fontMenu, framesCounter);
         Color selectedColor = WHITE;
-            if (CheckCollisionPointRec(mousePssitionIdentity, confirmPlayerData.getRectangle()))
-            {
-                selectedColor = WHITE;
-            }
-            else
-            {
-                selectedColor = RED;
-            }
+        if (CheckCollisionPointRec(mousePssitionConfirmation, confirmPlayerData.getRectangle()))
+        {
+            selectedColor = WHITE;
+        }
+        else
+        {
+            selectedColor = RED;
+        }
 
-            DrawTextEx(fontMenu, this->confirmPlayerData.title, (Vector2){this->confirmPlayerData.getRectangle().x + 10, this->confirmPlayerData.getRectangle().y + 10}, fontMenu.baseSize, 1, selectedColor);
-            std::cout <<"tah displayConfirmPlayerDataButton"<<std::endl;
-       //displayConfirmPlayerDataButton();
+        DrawTextEx(fontMenu, this->confirmPlayerData.title, (Vector2){this->confirmPlayerData.getRectangle().x + 10, this->confirmPlayerData.getRectangle().y + 10}, fontMenu.baseSize, 1, selectedColor);
+        std::cout << "tah displayConfirmPlayerDataButton" << std::endl;
         EndDrawing();
     }
 }
-
-void UI::quadrupleTextBoxDraw()
+bool UI::quadrupleTextBoxDraw()
 {
     AddTextBox(100, 100, 200, 50);
     AddTextBox(100, 200, 200, 50);
@@ -416,11 +413,20 @@ void UI::quadrupleTextBoxDraw()
     AddTextBox(500, 400, 200, 50);
 
     int framesCounter = 0;
+    initializeConfirmPlayerDataButton();
     while (1)
     {
         framesCounter++;
 
         textBoxUpdate();
+        Vector2 mousePssitionConfirmation = GetMousePosition();
+        bool mousePressedConfirmation = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
+        // std::cout << mousePressedComfermation << std::endl;
+
+        if (confirmPlayerData.ifPressed(mousePssitionConfirmation, mousePressedConfirmation))
+        {
+            return true;
+        }
 
         BeginDrawing();
         ClearBackground(RAYWHITE);
@@ -428,13 +434,24 @@ void UI::quadrupleTextBoxDraw()
         DrawTextEx(fontMenu, "please enter your names:", (Vector2){100, 50}, fontMenu.baseSize, 1, BLACK);
         DrawTextEx(fontMenu, "please enter your ages:", (Vector2){500, 50}, fontMenu.baseSize, 1, BLACK);
         textBoxDraw(fontMenu, framesCounter);
+        Color selectedColor = WHITE;
+        if (CheckCollisionPointRec(mousePssitionConfirmation, confirmPlayerData.getRectangle()))
+        {
+            selectedColor = WHITE;
+        }
+        else
+        {
+            selectedColor = RED;
+        }
 
+        DrawTextEx(fontMenu, this->confirmPlayerData.title, (Vector2){this->confirmPlayerData.getRectangle().x + 10, this->confirmPlayerData.getRectangle().y + 10}, fontMenu.baseSize, 1, selectedColor);
         EndDrawing();
     }
 }
 
 std::vector<char> UI::getNamesFromUI(int playerIndex)
 {
+    textBoxes[playerIndex].transferPlayerNameToVector();
+    std::cout << "textBoxes[playerIndex].getTextBoxName(). -> " << textBoxes[playerIndex].getTextBoxName().size() << std::endl;
     return textBoxes[playerIndex].getTextBoxName();
 }
-
