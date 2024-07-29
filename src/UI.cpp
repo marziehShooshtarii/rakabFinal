@@ -178,46 +178,55 @@ void UI::initializePlayerNumberButton()
     playerNumberButtons[2] = (Button){(Rectangle){50, 360, 120, 50}, "4 players", false};
 }
 
-void UI::initializeConfirmPlayerDataButton()
+void UI::initializeThripleConfirmPlayerDataButton()
 {
-    rectConfirmPlayerData = {500, 900, 200, 100};
-    confirmPlayerData = (Button){(Rectangle){600, 350, 120, 50}, "confirm your data", false};
+    // rectConfirmPlayerData = {500, 900, 200, 100};
+    thripleConfirmPlayerData[0] = (Button){(Rectangle){600, 150, 120, 50}, "confirm", false};
+    thripleConfirmPlayerData[1] = (Button){(Rectangle){600, 250, 120, 50}, "confirm", false};
+    thripleConfirmPlayerData[2] = (Button){(Rectangle){600, 350, 120, 50}, "confirm", false};
 }
-bool UI::displayConfirmPlayerDataButton()
-{
-    initializeConfirmPlayerDataButton();
-    // while (1)
-    // {
-    Vector2 mousePssitionIdentity = GetMousePosition();
-    bool mousePressedIdentity = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
-    std::cout << mousePressedIdentity << std::endl;
+// bool UI::displayConfirmPlayerDataButton()
+// {
+//     initializeThripleConfirmPlayerDataButton();
+//     // while (1)
+//     // {
+//     Vector2 mousePssitionIdentity = GetMousePosition();
+//     bool mousePressedIdentity = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
+//     std::cout << mousePressedIdentity << std::endl;
 
-    if (confirmPlayerData.ifPressed(mousePssitionIdentity, mousePressedIdentity))
-    {
-        return true;
-    }
+//     if (thripleConfirmPlayerData[0].ifPressed(mousePssitionIdentity, mousePressedIdentity))
+//     {
+//         return true;
+//     }
+//     if (thripleConfirmPlayerData[1].ifPressed(mousePssitionIdentity, mousePressedIdentity))
+//     {
+//         return true;
+//     }
+//     if (thripleConfirmPlayerData[2].ifPressed(mousePssitionIdentity, mousePressedIdentity))
+//     {
+//         return true;
+//     }
 
-    // BeginDrawing();
-    // ClearBackground(WHITE);
-    // DrawTexture(backgroundIdentityMenu, 0, 0, WHITE);
+//     // BeginDrawing();
+//     // ClearBackground(WHITE);
+//     // DrawTexture(backgroundIdentityMenu, 0, 0, WHITE);
 
-    Color selectedColor = WHITE;
-    if (CheckCollisionPointRec(mousePssitionIdentity, confirmPlayerData.getRectangle()))
-    {
-        selectedColor = WHITE;
-    }
-    else
-    {
-        selectedColor = RED;
-    }
+//     Color selectedColor = WHITE;
+//     if (CheckCollisionPointRec(mousePssitionIdentity, thripleConfirmPlayerData[0].getRectangle()))
+//     {
+//         selectedColor = WHITE;
+//     }
+//     else
+//     {
+//         selectedColor = RED;
+//     }
 
-    DrawTextEx(fontMenu, this->confirmPlayerData.title, (Vector2){this->confirmPlayerData.getRectangle().x + 10, this->confirmPlayerData.getRectangle().y + 10}, fontMenu.baseSize, 1, selectedColor);
-    std::cout << "tah displayConfirmPlayerDataButton" << std::endl;
-    // EndDrawing();
-    // }
-    return false;
-}
-
+//     DrawTextEx(fontMenu, this->thripleConfirmPlayerData[0].title, (Vector2){this->thripleConfirmPlayerData[0].getRectangle().x + 10, this->thripleConfirmPlayerData[0].getRectangle().y + 10}, fontMenu.baseSize, 1, selectedColor);
+//     std::cout << "tah displayConfirmPlayerDataButton" << std::endl;
+//     // EndDrawing();
+//     // }
+//     return false;
+// }
 
 void UI::initializeIdentityMenu()
 {
@@ -367,7 +376,7 @@ bool UI::thripleTextBoxDraw()
     AddTextBox(500, 200, 100, 50);
     AddTextBox(500, 300, 100, 50);
     int framesCounter = 0;
-    initializeConfirmPlayerDataButton();
+    initializeThripleConfirmPlayerDataButton();
     while (1)
     {
         framesCounter++;
@@ -377,7 +386,15 @@ bool UI::thripleTextBoxDraw()
         bool mousePressedConfirmation = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
         // std::cout << mousePressedComfermation << std::endl;
 
-        if (confirmPlayerData.ifPressed(mousePssitionConfirmation, mousePressedConfirmation))
+        if (thripleConfirmPlayerData[0].ifPressed(mousePssitionConfirmation, mousePressedConfirmation))
+        {
+            return true;
+        }
+        if (thripleConfirmPlayerData[1].ifPressed(mousePssitionConfirmation, mousePressedConfirmation))
+        {
+            return true;
+        }
+        if (thripleConfirmPlayerData[2].ifPressed(mousePssitionConfirmation, mousePressedConfirmation))
         {
             return true;
         }
@@ -387,17 +404,21 @@ bool UI::thripleTextBoxDraw()
         DrawTextEx(fontMenu, "please enter your names:", (Vector2){100, 50}, fontMenu.baseSize, 1, BLACK);
         DrawTextEx(fontMenu, "please enter your ages:", (Vector2){450, 50}, fontMenu.baseSize, 1, BLACK);
         textBoxDraw(fontMenu, framesCounter);
-        Color selectedColor = WHITE;
-        if (CheckCollisionPointRec(mousePssitionConfirmation, confirmPlayerData.getRectangle()))
+        for (int index = 0; index < 3; index++)
         {
-            selectedColor = WHITE;
+            Color selectedColor = WHITE;
+            if (CheckCollisionPointRec(mousePssitionConfirmation, thripleConfirmPlayerData[index].getRectangle()))
+            {
+                selectedColor = WHITE;
+            }
+            else
+            {
+                selectedColor = RED;
+            }
+            DrawTextEx(fontMenu, this->thripleConfirmPlayerData[index].title, (Vector2){this->thripleConfirmPlayerData[index].getRectangle().x + 10, this->thripleConfirmPlayerData[index].getRectangle().y + 10}, fontMenu.baseSize, 1, selectedColor);
         }
-        else
-        {
-            selectedColor = RED;
-        }
-
-        DrawTextEx(fontMenu, this->confirmPlayerData.title, (Vector2){this->confirmPlayerData.getRectangle().x + 10, this->confirmPlayerData.getRectangle().y + 10}, fontMenu.baseSize, 1, selectedColor);
+        // DrawTextEx(fontMenu, this->thripleConfirmPlayerData[1].title, (Vector2){this->thripleConfirmPlayerData[1].getRectangle().x + 10, this->thripleConfirmPlayerData[1].getRectangle().y + 10}, fontMenu.baseSize, 1, selectedColor);
+        // DrawTextEx(fontMenu, this->thripleConfirmPlayerData[2].title, (Vector2){this->thripleConfirmPlayerData[2].getRectangle().x + 10, this->thripleConfirmPlayerData[2].getRectangle().y + 10}, fontMenu.baseSize, 1, selectedColor);
         std::cout << "tah displayConfirmPlayerDataButton" << std::endl;
         EndDrawing();
     }
@@ -414,7 +435,7 @@ bool UI::quadrupleTextBoxDraw()
     AddTextBox(500, 400, 200, 50);
 
     int framesCounter = 0;
-    initializeConfirmPlayerDataButton();
+    // initializeQuadrupleConfirmPlayerDataButton();
     while (1)
     {
         framesCounter++;
@@ -424,7 +445,7 @@ bool UI::quadrupleTextBoxDraw()
         bool mousePressedConfirmation = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
         // std::cout << mousePressedComfermation << std::endl;
 
-        if (confirmPlayerData.ifPressed(mousePssitionConfirmation, mousePressedConfirmation))
+        if (quadrupleConfirmPlayerData[0].ifPressed(mousePssitionConfirmation, mousePressedConfirmation))
         {
             return true;
         }
@@ -436,7 +457,7 @@ bool UI::quadrupleTextBoxDraw()
         DrawTextEx(fontMenu, "please enter your ages:", (Vector2){500, 50}, fontMenu.baseSize, 1, BLACK);
         textBoxDraw(fontMenu, framesCounter);
         Color selectedColor = WHITE;
-        if (CheckCollisionPointRec(mousePssitionConfirmation, confirmPlayerData.getRectangle()))
+        if (CheckCollisionPointRec(mousePssitionConfirmation, quadrupleConfirmPlayerData[0].getRectangle()))
         {
             selectedColor = WHITE;
         }
@@ -445,7 +466,7 @@ bool UI::quadrupleTextBoxDraw()
             selectedColor = RED;
         }
 
-        DrawTextEx(fontMenu, this->confirmPlayerData.title, (Vector2){this->confirmPlayerData.getRectangle().x + 10, this->confirmPlayerData.getRectangle().y + 10}, fontMenu.baseSize, 1, selectedColor);
+        DrawTextEx(fontMenu, this->quadrupleConfirmPlayerData[0].title, (Vector2){this->quadrupleConfirmPlayerData[0].getRectangle().x + 10, this->quadrupleConfirmPlayerData[0].getRectangle().y + 10}, fontMenu.baseSize, 1, selectedColor);
         EndDrawing();
     }
 }

@@ -33,8 +33,9 @@ public:
     // bool confirmButton();
     bool quadrupleTextBoxDraw();
     std::vector <char> getNamesFromUI(int index);
-    void initializeConfirmPlayerDataButton();
-    bool displayConfirmPlayerDataButton();
+    void initializeThripleConfirmPlayerDataButton();
+    void initializeQuadrupleConfirmPlayerDataButton();
+    // bool displayConfirmPlayerDataButton();
     std::vector <char> getAgeFromUI(int index);
     void controlTransitionVectors(int);
 private:
@@ -50,7 +51,8 @@ private:
     Button menuButtons[4];//buttons displayed in the menu
     Button playerNumberButtons[3];//buttons for selecting player number
     std::vector<uiInput> textBoxes;//multiple text boxes
-    Button confirmPlayerData; //for confiming data by players
+    Button thripleConfirmPlayerData[3]; //for confiming data by 3 players
+    Button quadrupleConfirmPlayerData[4]; //for confiming data by 4 players
     Rectangle rectConfirmPlayerData;
     // std::string UIPlayerName;
     // std::vector <std::string> allUIPlayerNames;
