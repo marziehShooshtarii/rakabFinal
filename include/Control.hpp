@@ -97,6 +97,7 @@ public:
     bool determinNumberOfSavedGame();
     void setNameForUI(std::vector<char>);
     void setAgeForUI(std::vector<char>);
+    void setNameFromUI(char names[]);
     void run();
 
 private:
