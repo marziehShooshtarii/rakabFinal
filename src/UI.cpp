@@ -181,7 +181,7 @@ void UI::initializePlayerNumberButton()
 void UI::initializeConfirmPlayerDataButton()
 {
     rectConfirmPlayerData = {500, 900, 200, 100};
-    confirmPlayerData = (Button){(Rectangle){300, 400, 120, 50}, "confirm your data", false};
+    confirmPlayerData = (Button){(Rectangle){600, 350, 120, 50}, "confirm your data", false};
 }
 bool UI::displayConfirmPlayerDataButton()
 {
@@ -363,9 +363,9 @@ bool UI::thripleTextBoxDraw()
     AddTextBox(100, 100, 200, 50);
     AddTextBox(100, 200, 200, 50);
     AddTextBox(100, 300, 200, 50);
-    AddTextBox(500, 100, 200, 50);
-    AddTextBox(500, 200, 200, 50);
-    AddTextBox(500, 300, 200, 50);
+    AddTextBox(500, 100, 100, 50);
+    AddTextBox(500, 200, 100, 50);
+    AddTextBox(500, 300, 100, 50);
     int framesCounter = 0;
     initializeConfirmPlayerDataButton();
     while (1)
@@ -385,7 +385,7 @@ bool UI::thripleTextBoxDraw()
         ClearBackground(RAYWHITE);
         DrawTexture(backgroundIdentityMenu, 0, 0, WHITE);
         DrawTextEx(fontMenu, "please enter your names:", (Vector2){100, 50}, fontMenu.baseSize, 1, BLACK);
-        DrawTextEx(fontMenu, "please enter your ages:", (Vector2){500, 50}, fontMenu.baseSize, 1, BLACK);
+        DrawTextEx(fontMenu, "please enter your ages:", (Vector2){450, 50}, fontMenu.baseSize, 1, BLACK);
         textBoxDraw(fontMenu, framesCounter);
         Color selectedColor = WHITE;
         if (CheckCollisionPointRec(mousePssitionConfirmation, confirmPlayerData.getRectangle()))
