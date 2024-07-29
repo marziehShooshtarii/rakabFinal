@@ -30,8 +30,8 @@ public:
     void textBoxUpdate();
     void textBoxDraw(Font font, int framesCounter);
     bool thripleTextBoxDraw();
-    // void thripleTcextBoxDraw();
-    void quadrupleTextBoxDraw();
+    // bool confirmButton();
+    bool quadrupleTextBoxDraw();
     std::vector <char> getNamesFromUI(int index);
     void initializeConfirmPlayerDataButton();
     bool displayConfirmPlayerDataButton();
