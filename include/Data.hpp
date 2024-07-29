@@ -25,6 +25,9 @@ public:
     void setPlayerAgeForSave(int savedAge);
     void setPlayerColorForSave(std::string savedColor);
     void setPlayerForSave();
+    void setPlayerNameForUI(std::string);
+    std::string getPlayerNameForUI();
+
 
 private:
     std::string PlayerName;
