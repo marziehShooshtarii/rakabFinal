@@ -14,12 +14,15 @@ public:
     void transferPlayerNameToVector();
     std::vector <char> getTextBoxName();
     void resetTarsferedVector();
+    void convertTextToString();
+    std::string getTextBoxStringName();
+    char *getFullName();
+    std::string nameConversion;
     // char getUIPlayerName(int index);
     // std::vector <char> getAllUIPlayerNames();
     // Rectangle getTextBoxRec();
     // void initializeTextBoxRec();
     // void setUIPlayerName(int index,char);
-    // char* getFullName();
     // void resetInput();
     // private :
     // char UIPlayerName[50];

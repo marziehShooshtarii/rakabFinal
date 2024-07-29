@@ -117,7 +117,21 @@ std::vector<char> uiInput::getTextBoxName()
     return textBoxName;
 }
 
-void uiInput::resetTarsferedVector()
+// void uiInput::resetTarsferedVector()
+// {
+//     textBoxName.clear();
+// }
+
+void uiInput::convertTextToString()
 {
-    textBoxName.clear();
+    for (int i = 0; i < strlen(text); i++)
+    {
+        std::cout << "name -> " << text[i] << std::endl;
+        nameConversion += text[i];
+    }
+    std::cout << "tempNames -> " << nameConversion << std::endl;
+}
+std::string uiInput::getTextBoxStringName()
+{
+    return nameConversion;
 }
