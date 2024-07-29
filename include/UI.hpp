@@ -41,6 +41,8 @@ public:
     void controlTransitionVectors(int);
     std::string getPlayerNameFromUI(int playerTextBoxIndex);
 
+    int getPlayerAgeFromUI(int playerAgeIndex);
+
 private:
     const char* menuButtonsTitle[4];
     int windowWidth = 1200;
