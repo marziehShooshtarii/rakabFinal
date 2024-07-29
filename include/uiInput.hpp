@@ -11,6 +11,8 @@ public:
     void Draw(Font font, int framesCounter);
     void SetActive(bool isActive);
     bool IsMouseOnText(Vector2 mousePoint);
+    void transferPlayerNameToVector();
+    std::vector <char> getTextBoxName();
     // char getUIPlayerName(int index);
     // std::vector <char> getAllUIPlayerNames();
     // Rectangle getTextBoxRec();
@@ -18,7 +20,7 @@ public:
     // void setUIPlayerName(int index,char);
     // char* getFullName();
     // void resetInput();
-// private :
+    // private :
     // char UIPlayerName[50];
     // std::vector <char> allUIPlayerNames;
     // Rectangle textBoxRec;
@@ -29,6 +31,6 @@ private:
     int letterCount;
     bool mouseOnText;
     bool active;
-
+    std::vector<char> textBoxName;
 };
-#endif 
+#endif

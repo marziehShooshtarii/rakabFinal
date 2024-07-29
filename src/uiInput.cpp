@@ -91,3 +91,15 @@ bool uiInput::IsMouseOnText(Vector2 mousePoint)
     mouseOnText = CheckCollisionPointRec(mousePoint, textBox);
     return mouseOnText;
 }
+void uiInput::transferPlayerNameToVector()
+{
+    for (int i = 0; text[i] != '\0'; i++ )
+    {
+        textBoxName[i] = text[i];
+    }
+}
+
+std::vector<char> uiInput::getTextBoxName()
+{
+    return textBoxName;
+}
