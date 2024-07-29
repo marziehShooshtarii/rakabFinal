@@ -385,7 +385,7 @@ bool UI::thripleTextBoxDraw()
         Vector2 mousePssitionConfirmation = GetMousePosition();
         bool mousePressedConfirmation = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
         // std::cout << mousePressedComfermation << std::endl;
-
+// std::cout <<playerIndex << "playerIndex" << std::endl;
         if (thripleConfirmPlayerData[0].ifPressed(mousePssitionConfirmation, mousePressedConfirmation))
         {
             return true;
@@ -471,12 +471,17 @@ bool UI::quadrupleTextBoxDraw()
     }
 }
 
-std::vector<char> UI::getNamesFromUI(int playerIndex)
-{
-    textBoxes[playerIndex].transferPlayerNameToVector();
-    std::cout << "textBoxes[playerIndex].getTextBoxName(). -> " << textBoxes[playerIndex].getTextBoxName().size() << std::endl;
-    return textBoxes[playerIndex].getTextBoxName();
-}
+// std::vector<char> UI::getNamesFromUI(int playerIndex)
+// {
+//     textBoxes[playerIndex].transferPlayerNameToVector();
+//     std::cout << "textBoxes[playerIndex].getTextBoxName(). -> " << textBoxes[playerIndex].getTextBoxName().size() << std::endl;
+//     return textBoxes[playerIndex].getTextBoxName();
+// }
+
+// char * UI::getFullNameFromUI(int index)
+// {
+//     return textBoxes[index].getFullName();
+// }
 
 std::vector<char> UI::getAgeFromUI(int playerAgeIndex)
 {
@@ -487,4 +492,9 @@ std::vector<char> UI::getAgeFromUI(int playerAgeIndex)
 void UI::controlTransitionVectors(int playerTextBoxIndex)
 {
     textBoxes[playerTextBoxIndex].transferPlayerNameToVector();
+}
+std::string UI::getPlayerNameFromUI(int playerTextBoxIndex)
+{
+    textBoxes[playerTextBoxIndex].convertTextToString(); //char array has been converted to string in uiInput
+    return textBoxes[playerTextBoxIndex].getTextBoxStringName();
 }

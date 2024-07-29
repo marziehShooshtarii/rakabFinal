@@ -36,8 +36,11 @@ public:
     void initializeThripleConfirmPlayerDataButton();
     void initializeQuadrupleConfirmPlayerDataButton();
     // bool displayConfirmPlayerDataButton();
+    char * getFullNameFromUI(int index);
     std::vector <char> getAgeFromUI(int index);
     void controlTransitionVectors(int);
+    std::string getPlayerNameFromUI(int playerTextBoxIndex);
+
 private:
     const char* menuButtonsTitle[4];
     int windowWidth = 1200;
