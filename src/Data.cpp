@@ -144,3 +144,12 @@ std::string getData::getPlayerNameForUI()
 {
     return PlayerName;
 }
+void getData::setPlayerAgeForUI(int UIplayerAge)
+{
+    playerAge = UIplayerAge;
+}
+
+int getData::getPlayerAgeForUI()
+{
+    return playerAge;
+}
