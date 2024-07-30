@@ -7,6 +7,8 @@ UI::UI()
     InitWindow(windowWidth, windowHeight, "game");
     std::cout << "88888777" << std::endl;
     fontMenu = LoadFont("../assets/KaushanScript-Regular.ttf");
+    gameFont = LoadFont("../assets/Future-TimeSplitters.otf");
+    inputFont = LoadFont("../assets/SF-Atarian-System-Bold-Italic.ttf");
     backgroundMenu = LoadTexture("../assets/b1.png");
     backgroundIdentityMenu = LoadTexture("../assets/b_6.png");
     // initializeFontMenu();
@@ -110,6 +112,7 @@ UI::~UI()
 void UI::unloadingTexture()
 {
     UnloadFont(fontMenu);
+    UnloadFont(gameFont);
     UnloadTexture(backgroundMenu);
     UnloadTexture(backgroundIdentityMenu);
 }
@@ -402,13 +405,14 @@ bool UI::thripleTextBoxDraw()
         // {
         //     return true;
         // }
+        Color textColor = {249, 105, 14 , 225}; // color Ecstasy created
         BeginDrawing();
         ClearBackground(RAYWHITE);
         DrawTexture(backgroundIdentityMenu, 0, 0, WHITE);
-        DrawTextEx(fontMenu, "please enter your names:", (Vector2){100, 50}, fontMenu.baseSize, 1, BLACK);
-        DrawTextEx(fontMenu, "please enter your ages:", (Vector2){450, 50}, fontMenu.baseSize, 1, BLACK);
-        DrawTextEx(fontMenu, "please enter your color:", (Vector2){750, 50}, fontMenu.baseSize, 1, BLACK);
-        textBoxDraw(fontMenu, framesCounter);
+        DrawTextEx(gameFont, "please enter your names:", (Vector2){100, 50}, gameFont.baseSize, 1, textColor);
+        DrawTextEx(gameFont, "please enter your ages:", (Vector2){450, 50}, gameFont.baseSize, 1, textColor);
+        DrawTextEx(gameFont, "please enter your color:", (Vector2){750, 50}, gameFont.baseSize, 1, textColor);
+        textBoxDraw(inputFont, framesCounter);
         // for (int index = 0; index < 3; index++)
         // {
             Color selectedColor = WHITE;
@@ -418,13 +422,13 @@ bool UI::thripleTextBoxDraw()
             }
             else
             {
-                selectedColor = RED;
+                selectedColor = /*RED*/{242, 120 ,75 ,225};//Crusta color created
             }
-            DrawTextEx(fontMenu, this->ConfirmPlayerData.title, (Vector2){this->ConfirmPlayerData.getRectangle().x + 10, this->ConfirmPlayerData.getRectangle().y + 10}, fontMenu.baseSize, 1, selectedColor);
+            DrawTextEx(gameFont, this->ConfirmPlayerData.title, (Vector2){this->ConfirmPlayerData.getRectangle().x + 10, this->ConfirmPlayerData.getRectangle().y + 10}, fontMenu.baseSize, 1, selectedColor);
         // }
         // DrawTextEx(fontMenu, this->ConfirmPlayerData[1].title, (Vector2){this->ConfirmPlayerData[1].getRectangle().x + 10, this->ConfirmPlayerData[1].getRectangle().y + 10}, fontMenu.baseSize, 1, selectedColor);
         // DrawTextEx(fontMenu, this->ConfirmPlayerData[2].title, (Vector2){this->ConfirmPlayerData[2].getRectangle().x + 10, this->ConfirmPlayerData[2].getRectangle().y + 10}, fontMenu.baseSize, 1, selectedColor);
-        std::cout << "tah displayConfirmPlayerDataButton" << std::endl;
+        // std::cout << "tah displayConfirmPlayerDataButton" << std::endl;
         EndDrawing();
     }
 }
@@ -458,14 +462,14 @@ bool UI::quadrupleTextBoxDraw()
         {
             return true;
         }
-
+        Color textColor = {249, 105, 14 , 225}; // color Ecstasy created
         BeginDrawing();
         ClearBackground(RAYWHITE);
         DrawTexture(backgroundIdentityMenu, 0, 0, WHITE);
-        DrawTextEx(fontMenu, "please enter your names:", (Vector2){100, 50}, fontMenu.baseSize, 1, BLACK);
-        DrawTextEx(fontMenu, "please enter your ages:", (Vector2){500, 50}, fontMenu.baseSize, 1, BLACK);
-        DrawTextEx(fontMenu, "please enter your color:", (Vector2){800, 50}, fontMenu.baseSize, 1, BLACK);
-        textBoxDraw(fontMenu, framesCounter);
+        DrawTextEx(gameFont, "please enter your names:", (Vector2){100, 50}, gameFont.baseSize, 1, textColor);
+        DrawTextEx(gameFont, "please enter your ages:", (Vector2){470, 50}, gameFont.baseSize, 1, textColor);
+        DrawTextEx(gameFont, "please enter your color:", (Vector2){800, 50}, gameFont.baseSize, 1, textColor);
+        textBoxDraw(inputFont, framesCounter);
         Color selectedColor = WHITE;
         if (CheckCollisionPointRec(mousePssitionConfirmation, ConfirmPlayerData.getRectangle()))
         {
@@ -473,10 +477,10 @@ bool UI::quadrupleTextBoxDraw()
         }
         else
         {
-            selectedColor = RED;
+            selectedColor = {242, 120 ,75 ,225};//Crusta color created
         }
 
-        DrawTextEx(fontMenu, this->ConfirmPlayerData.title, (Vector2){this->ConfirmPlayerData.getRectangle().x + 10, this->ConfirmPlayerData.getRectangle().y + 10}, fontMenu.baseSize, 1, selectedColor);
+        DrawTextEx(gameFont, this->ConfirmPlayerData.title, (Vector2){this->ConfirmPlayerData.getRectangle().x + 10, this->ConfirmPlayerData.getRectangle().y + 10}, fontMenu.baseSize, 1, selectedColor);
         EndDrawing();
     }
 }

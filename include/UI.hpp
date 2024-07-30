@@ -51,6 +51,8 @@ private:
     // bool mousePressed;//check if mouse is pressed
     Rectangle rect;
     Font fontMenu;//first menu font
+    Font gameFont;//the game font
+    Font inputFont;//font used for user input
     Texture2D backgroundMenu;//menu background
     Texture2D backgroundIdentityMenu;//identity menu background
     Button menuButtons[4];//buttons displayed in the menu
