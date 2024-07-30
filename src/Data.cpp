@@ -135,19 +135,19 @@ void getData::setPlayerForSave()
     players.push_back(Player(playerAge, PlayerName, playerColor, false));
 }
 
-void getData::setPlayerNameForUI(std::string UIplayerName)
-{
-    PlayerName = UIplayerName;
-}
+// void getData::setPlayerNameForUI(std::string UIplayerName)
+// {
+//     PlayerName = UIplayerName;
+// }
 
 std::string getData::getPlayerNameForUI()
 {
     return PlayerName;
 }
-void getData::setPlayerAgeForUI(int UIplayerAge)
-{
-    playerAge = UIplayerAge;
-}
+// void getData::setPlayerAgeForUI(int UIplayerAge)
+// {
+//     playerAge = UIplayerAge;
+// }
 
 int getData::getPlayerAgeForUI()
 {
