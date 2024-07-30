@@ -212,19 +212,19 @@ void UI::initializeWarzoneButton(float x, float y, float width, float hight)
 int UI::displayWarzoneButton()
 {
     initializeWarzoneButton(50, 50, 120, 50);
-        int i = 0;
+    
     while (1)
     {
         Vector2 mousePssitionIdentity = GetMousePosition();
         bool mousePressedIdentity = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
         std::cout << mousePressedIdentity << std::endl;
         std::cout << "1111111111" << std::endl;
-        for (; i < 4; i++)
+        for (int i = 0; i < 15; i++)
         {
             if (UIwarzone[i].ifPressed(mousePssitionIdentity, mousePressedIdentity))
             {
                 std::cout << "warzone selected" << std::endl;
-                break; // number of the selected warzone according to states in Map.cpp
+                return i; // number of the selected warzone according to states in Map.cpp
             }
         }
         BeginDrawing();
@@ -247,7 +247,7 @@ int UI::displayWarzoneButton()
         }
         EndDrawing();
     }
-    return i; 
+    return -1; 
 }
 void UI::initializePlayerNumberButton()
 {
