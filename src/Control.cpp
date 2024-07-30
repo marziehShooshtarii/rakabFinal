@@ -985,6 +985,7 @@ void Control::menu()
                     std::cout << "karaye ajib4 - > " << i << identity.getColor(i) << std::endl;
                 }
                 // exitPrevious = false;
+                ui.displayWarzoneButton();
                 exitGame = false;
             }
             if (uiNumberPlayers == 4)
