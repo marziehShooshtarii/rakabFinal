@@ -75,14 +75,15 @@ void uiInput::Update()
 
 void uiInput::Draw(Font font, int framesCounter)
 {
-    DrawRectangleRec(textBox, LIGHTGRAY);
-    DrawRectangleLines((int)textBox.x, (int)textBox.y, (int)textBox.width, (int)textBox.height, (mouseOnText) ? RED : MAROON);
-    DrawTextEx(font, text, (Vector2){textBox.x + 5, textBox.y + 8}, font.baseSize, 1, DARKGRAY);
+    Color selectedColor = {50, 180, 180, 225};
+    DrawRectangleRec(textBox, {20, 205, 200 , 225});
+    DrawRectangleLines((int)textBox.x, (int)textBox.y, (int)textBox.width, (int)textBox.height, (mouseOnText) ? selectedColor : DARKGRAY);
+    DrawTextEx(font, text, (Vector2){textBox.x + 5, textBox.y + 8}, font.baseSize, 1, BLACK);
 
     if (mouseOnText && active && (letterCount < MAX_INPUT_CHARS))
     {
         if (((framesCounter / 20) % 2) == 0)
-            DrawText("_", (int)textBox.x + 8 + MeasureText(text, font.baseSize), (int)textBox.y + 12, font.baseSize, DARKGRAY);
+            DrawText("_", (int)textBox.x + 8 + MeasureText(text, font.baseSize), (int)textBox.y + 12, font.baseSize, BLACK);
     }
 }
 
@@ -104,7 +105,7 @@ void uiInput::transferPlayerNameToVector()
     // }
     // std::cout<<std::strlen(text)<<"string"<<std::endl;
     //  std::cout << textBoxName.size()<<"  ghabl textBoxName.size()" <<std::endl;
-     textBoxName.insert(textBoxName.end(), text, text + letterCount);// -1 to avoid copying the null terminator
+    textBoxName.insert(textBoxName.end(), text, text + letterCount); // -1 to avoid copying the null terminator
     std::cout << textBoxName.size() << " textBoxName.size()" << std::endl;
     // for (int h = 0; h < textBoxName.size(); h++)
     // {
