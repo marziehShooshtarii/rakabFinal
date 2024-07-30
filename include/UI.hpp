@@ -42,7 +42,9 @@ public:
     std::string getPlayerNameAndColorFromUI(int playerTextBoxIndex);
 
     int getPlayerAgeFromUI(int playerAgeIndex);
-
+    int displayWarzoneButton();
+    void initializeWarzoneButton(float x, float y, float width, float hight);
+    void initializeWarzoneMap();
 private:
     const char* menuButtonsTitle[4];
     int windowWidth = 1200;
@@ -61,6 +63,8 @@ private:
     Button ConfirmPlayerData; //for confiming data by 3 players
     Button quadrupleConfirmPlayerData; //for confiming data by 4 players
     Rectangle rectConfirmPlayerData;
+    Button UIwarzone[15];//according to states in Map.cpp
+    Texture2D backgroundWarzoneMap;
     // std::string UIPlayerName;
     // std::vector <std::string> allUIPlayerNames;
     // bool ifPressed(Vector2 mousePos, bool mousePressed);

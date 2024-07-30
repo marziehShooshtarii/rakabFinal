@@ -11,6 +11,8 @@ UI::UI()
     inputFont = LoadFont("../assets/SF-Atarian-System-Bold-Italic.ttf");
     backgroundMenu = LoadTexture("../assets/b1.png");
     backgroundIdentityMenu = LoadTexture("../assets/b_6.png");
+    backgroundWarzoneMap = LoadTexture("../assets/map3.png");
+
     // initializeFontMenu();
     // initializeBackgroundMenu();
     std::cout << "7777" << std::endl;
@@ -173,7 +175,80 @@ int UI::displayPlayerNumberButton()
     }
     return -1; // anything execpt the player numbers
 }
+void UI::initializeWarzoneButton(float x, float y, float width, float hight)
+{
 
+    //UIwarzone[0] = (Button){(Rectangle){100 + x, y, width, hight}, "test2", false}; // talmone
+    // for (int i = 0; i < 4; i++)
+    //     UIwarzone[i] = (Button){(Rectangle){(i * 200) + x, y, width, hight}, "test1", false}; // elinia, rollo, pladaci, bella
+    UIwarzone[0] = (Button){(Rectangle){30 + x, 50 + y, width, hight}, "elinia", false}; // elinia
+    UIwarzone[1] = (Button){(Rectangle){300 + x, 30 + y, width, hight}, "rollo", false}; // rollo
+    UIwarzone[2] = (Button){(Rectangle){680 + x, 50 + y, width, hight}, "pladaci", false}; // pladaci
+    UIwarzone[3] = (Button){(Rectangle){880 + x, 30 + y, width, hight}, "bella", false}; // bella
+    UIwarzone[4] = (Button){(Rectangle){220 + x, 130 + y, width, hight}, "talmone", false}; // talmone
+    UIwarzone[5] = (Button){(Rectangle){550 + x, 200 + y, width, hight}, "morina", false}; // morina
+    UIwarzone[6] = (Button){(Rectangle){910 + x, 200 + y, width, hight}, "calline", false}; // calline
+    UIwarzone[7] = (Button){(Rectangle){700 + x, 270 + y, width, hight}, "borge", false}; // borge
+    
+    UIwarzone[8] = (Button){(Rectangle){400 + x, 450 + y, width, hight}, "armento", false}; // armento
+    UIwarzone[9] = (Button){(Rectangle){900 + x, 400 + y, width, hight}, "enna", false}; // enna
+    UIwarzone[10] = (Button){(Rectangle){550 + x, 550 + y, width, hight}, "olivadi", false}; // olivadi
+    UIwarzone[11] = (Button){(Rectangle){710 + x, 520 + y, width, hight}, "dimase", false}; // dimase
+    UIwarzone[12] = (Button){(Rectangle){940 + x, 550 + y, width, hight}, "atela", false}; // atela
+
+    //UIwarzone[10] = (Button){(Rectangle){850 + x, 550 + y, width, hight}, "test6", false}; // atela
+    // for (int i = 9; i < 11; i++)
+    //     UIwarzone[i] = (Button){(Rectangle){((i - 9) * 100) + x, 400 + y, width, hight}, "test", false};
+    // for (int i = 10; i < 13; i++)
+    //     UIwarzone[i] = (Button){(Rectangle){((i - 5) * 100) + x, 550 + y, width, hight}, "test7", false}; // olivadi, dimase, atela
+    // for (int i = 14; i < 15; i++)
+    //     UIwarzone[i] = (Button){(Rectangle){((i - 14) * 100) + x, 400 + y, width, hight}, "test", false};
+    UIwarzone[13] = (Button){(Rectangle){400 + x, 640 + y, width, hight}, "lia", false};
+    UIwarzone[14] = (Button){(Rectangle){700 + x, 640 + y, width, hight}, "alora", false};
+    //UIwarzone[15] = (Button){(Rectangle){600 + x, 500 + y, width, hight}, "test9", false};
+    // for (int i = 0; i < 15; i++)
+    //     UIwarzone[i] = (Button){(Rectangle){(i * 100) + x, y, width, hight}, "test", false};
+}
+int UI::displayWarzoneButton()
+{
+    initializeWarzoneButton(50, 50, 120, 50);
+        int i = 0;
+    while (1)
+    {
+        Vector2 mousePssitionIdentity = GetMousePosition();
+        bool mousePressedIdentity = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
+        std::cout << mousePressedIdentity << std::endl;
+        std::cout << "1111111111" << std::endl;
+        for (; i < 4; i++)
+        {
+            if (UIwarzone[i].ifPressed(mousePssitionIdentity, mousePressedIdentity))
+            {
+                std::cout << "warzone selected" << std::endl;
+                break; // number of the selected warzone according to states in Map.cpp
+            }
+        }
+        BeginDrawing();
+        ClearBackground(WHITE);
+        DrawTexture(backgroundWarzoneMap, 0, 0, WHITE);
+        std::cout << "cout 1" << std::endl;
+        for (int idx = 0; idx < 15; ++idx)
+        {
+            Color selectedColor = WHITE;
+            if (CheckCollisionPointRec(mousePssitionIdentity, UIwarzone[idx].getRectangle()))
+            {
+                selectedColor = WHITE;
+            }
+            else
+            {
+                selectedColor = RED;
+            }
+
+            DrawTextEx(fontMenu, this->UIwarzone[idx].title, (Vector2){this->UIwarzone[idx].getRectangle().x + 10, this->UIwarzone[idx].getRectangle().y + 10}, fontMenu.baseSize, 1, selectedColor);
+        }
+        EndDrawing();
+    }
+    return i; 
+}
 void UI::initializePlayerNumberButton()
 {
     playerNumberButtons[0] = (Button){(Rectangle){50, 220, 120, 50}, "choose the player numbers:", false};
@@ -181,7 +256,7 @@ void UI::initializePlayerNumberButton()
     playerNumberButtons[2] = (Button){(Rectangle){50, 360, 120, 50}, "4 players", false};
 }
 
-void UI::initializeConfirmPlayerDataButton(float x , float y , float width , float hight)
+void UI::initializeConfirmPlayerDataButton(float x, float y, float width, float hight)
 {
     // rectConfirmPlayerData = {500, 900, 200, 100};
     // ConfirmPlayerData = (Button){(Rectangle){950, 350, 180, 50}, "confirm", false};
@@ -235,6 +310,10 @@ void UI::initializeConfirmPlayerDataButton(float x , float y , float width , flo
 void UI::initializeIdentityMenu()
 {
     backgroundIdentityMenu = LoadTexture("../assets/b_6.png");
+}
+void UI::initializeWarzoneMap()
+{
+    backgroundWarzoneMap = LoadTexture("../assets/map2.png");
 }
 // void UI::inputNumberOfPlayers()
 // {
@@ -375,13 +454,13 @@ bool UI::thripleTextBoxDraw()
 {
     AddTextBox(100, 100, 200, 50);
     AddTextBox(100, 200, 200, 50);
-    AddTextBox(100, 300, 200, 50);//three text boxes for player names
+    AddTextBox(100, 300, 200, 50); // three text boxes for player names
     AddTextBox(500, 100, 100, 50);
     AddTextBox(500, 200, 100, 50);
-    AddTextBox(500, 300, 100, 50);//three text boxs for player ages
+    AddTextBox(500, 300, 100, 50); // three text boxs for player ages
     AddTextBox(770, 100, 165, 50);
     AddTextBox(770, 200, 165, 50);
-    AddTextBox(770, 300, 165, 50);//three text boxs for player selected color
+    AddTextBox(770, 300, 165, 50); // three text boxs for player selected color
     int framesCounter = 0;
     initializeConfirmPlayerDataButton(950, 350, 180, 50);
     while (1)
@@ -392,7 +471,7 @@ bool UI::thripleTextBoxDraw()
         Vector2 mousePssitionConfirmation = GetMousePosition();
         bool mousePressedConfirmation = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
         // std::cout << mousePressedComfermation << std::endl;
-// std::cout <<playerIndex << "playerIndex" << std::endl;
+        // std::cout <<playerIndex << "playerIndex" << std::endl;
         if (ConfirmPlayerData.ifPressed(mousePssitionConfirmation, mousePressedConfirmation))
         {
             return true;
@@ -405,7 +484,7 @@ bool UI::thripleTextBoxDraw()
         // {
         //     return true;
         // }
-        Color textColor = {249, 105, 14 , 225}; // color Ecstasy created
+        Color textColor = {249, 105, 14, 225}; // color Ecstasy created
         BeginDrawing();
         ClearBackground(RAYWHITE);
         DrawTexture(backgroundIdentityMenu, 0, 0, WHITE);
@@ -415,16 +494,16 @@ bool UI::thripleTextBoxDraw()
         textBoxDraw(inputFont, framesCounter);
         // for (int index = 0; index < 3; index++)
         // {
-            Color selectedColor = WHITE;
-            if (CheckCollisionPointRec(mousePssitionConfirmation, ConfirmPlayerData.getRectangle()))
-            {
-                selectedColor = WHITE;
-            }
-            else
-            {
-                selectedColor = /*RED*/{242, 120 ,75 ,225};//Crusta color created
-            }
-            DrawTextEx(gameFont, this->ConfirmPlayerData.title, (Vector2){this->ConfirmPlayerData.getRectangle().x + 10, this->ConfirmPlayerData.getRectangle().y + 10}, fontMenu.baseSize, 1, selectedColor);
+        Color selectedColor = WHITE;
+        if (CheckCollisionPointRec(mousePssitionConfirmation, ConfirmPlayerData.getRectangle()))
+        {
+            selectedColor = WHITE;
+        }
+        else
+        {
+            selectedColor = /*RED*/ {242, 120, 75, 225}; // Crusta color created
+        }
+        DrawTextEx(gameFont, this->ConfirmPlayerData.title, (Vector2){this->ConfirmPlayerData.getRectangle().x + 10, this->ConfirmPlayerData.getRectangle().y + 10}, fontMenu.baseSize, 1, selectedColor);
         // }
         // DrawTextEx(fontMenu, this->ConfirmPlayerData[1].title, (Vector2){this->ConfirmPlayerData[1].getRectangle().x + 10, this->ConfirmPlayerData[1].getRectangle().y + 10}, fontMenu.baseSize, 1, selectedColor);
         // DrawTextEx(fontMenu, this->ConfirmPlayerData[2].title, (Vector2){this->ConfirmPlayerData[2].getRectangle().x + 10, this->ConfirmPlayerData[2].getRectangle().y + 10}, fontMenu.baseSize, 1, selectedColor);
@@ -437,15 +516,15 @@ bool UI::quadrupleTextBoxDraw()
     AddTextBox(100, 100, 200, 50);
     AddTextBox(100, 200, 200, 50);
     AddTextBox(100, 300, 200, 50);
-    AddTextBox(100, 400, 200, 50);//four text boxs for player's names
+    AddTextBox(100, 400, 200, 50); // four text boxs for player's names
     AddTextBox(500, 100, 100, 50);
     AddTextBox(500, 200, 100, 50);
     AddTextBox(500, 300, 100, 50);
-    AddTextBox(500, 400, 100, 50);//four text boxs for player's ages
+    AddTextBox(500, 400, 100, 50); // four text boxs for player's ages
     AddTextBox(760, 100, 200, 50);
     AddTextBox(760, 200, 200, 50);
     AddTextBox(760, 300, 200, 50);
-    AddTextBox(760, 400, 200, 50);//four text boxs for player's selected colors
+    AddTextBox(760, 400, 200, 50); // four text boxs for player's selected colors
 
     int framesCounter = 0;
     initializeConfirmPlayerDataButton(950, 450, 180, 50);
@@ -462,7 +541,7 @@ bool UI::quadrupleTextBoxDraw()
         {
             return true;
         }
-        Color textColor = {249, 105, 14 , 225}; // color Ecstasy created
+        Color textColor = {249, 105, 14, 225}; // color Ecstasy created
         BeginDrawing();
         ClearBackground(RAYWHITE);
         DrawTexture(backgroundIdentityMenu, 0, 0, WHITE);
@@ -477,7 +556,7 @@ bool UI::quadrupleTextBoxDraw()
         }
         else
         {
-            selectedColor = {242, 120 ,75 ,225};//Crusta color created
+            selectedColor = {242, 120, 75, 225}; // Crusta color created
         }
 
         DrawTextEx(gameFont, this->ConfirmPlayerData.title, (Vector2){this->ConfirmPlayerData.getRectangle().x + 10, this->ConfirmPlayerData.getRectangle().y + 10}, fontMenu.baseSize, 1, selectedColor);
@@ -509,11 +588,11 @@ void UI::controlTransitionVectors(int playerTextBoxIndex)
 }
 std::string UI::getPlayerNameAndColorFromUI(int playerTextBoxIndex)
 {
-    textBoxes[playerTextBoxIndex].convertTextToString(); //char array has been converted to string in uiInput
+    textBoxes[playerTextBoxIndex].convertTextToString(); // char array has been converted to string in uiInput
     return textBoxes[playerTextBoxIndex].getTextBoxStringName();
 }
 int UI::getPlayerAgeFromUI(int playerAgeIndex)
 {
-    textBoxes[playerAgeIndex].convertAgeToInteger();//char array has been converted to integer in uiInput
+    textBoxes[playerAgeIndex].convertAgeToInteger(); // char array has been converted to integer in uiInput
     return textBoxes[playerAgeIndex].getTextBoxIntAge();
 }
