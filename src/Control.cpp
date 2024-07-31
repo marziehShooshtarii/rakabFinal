@@ -985,6 +985,7 @@ void Control::menu()
                     std::cout << "karaye ajib4 - > " << i << identity.getName(i) << std::endl;
                     std::cout << "karaye ajib4 - > " << i << identity.getColor(i) << std::endl;
                 }
+                ui.displayMap();
                 // exitPrevious = false;
                 setWarzone(mapForUI.findKey(ui.displayWarzoneButton())); // setting warzone based on UI output
                 std ::cout << "test" << std::endl;
