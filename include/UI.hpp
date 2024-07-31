@@ -42,10 +42,10 @@ public:
     std::string getPlayerNameAndColorFromUI(int playerTextBoxIndex);
 
     int getPlayerAgeFromUI(int playerAgeIndex);
-    int displayWarzoneButton();
+    int displayWarzoneButton(std::string);
     void initializeWarzoneButton(float x, float y, float width, float hight);
     void initializeWarzoneMap();
-    void displayMap(std::string);
+    bool displayMap(std::string);
 private:
     const char* menuButtonsTitle[4];
     int windowWidth = 1200;
