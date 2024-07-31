@@ -985,9 +985,10 @@ void Control::menu()
                     std::cout << "karaye ajib4 - > " << i << identity.getName(i) << std::endl;
                     std::cout << "karaye ajib4 - > " << i << identity.getColor(i) << std::endl;
                 }
-                ui.displayMap(identity.getName(determinMinAge()));
+                // ui.displayMap(identity.getName(determinMinAge()));
                 // exitPrevious = false;
-                setWarzone(mapForUI.findKey(ui.displayWarzoneButton())); // setting warzone based on UI output
+                std::cout << "salam" << std::endl;
+                setWarzone(mapForUI.findKey(ui.displayWarzoneButton(identity.getName(determinMinAge())))); // setting warzone based on UI output
                 std ::cout << "test" << std::endl;
                 exitGame = false;
             }
