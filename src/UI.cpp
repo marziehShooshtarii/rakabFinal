@@ -181,20 +181,22 @@ void UI::initializeWarzoneButton(float x, float y, float width, float hight)
     //UIwarzone[0] = (Button){(Rectangle){100 + x, y, width, hight}, "test2", false}; // talmone
     // for (int i = 0; i < 4; i++)
     //     UIwarzone[i] = (Button){(Rectangle){(i * 200) + x, y, width, hight}, "test1", false}; // elinia, rollo, pladaci, bella
-    UIwarzone[0] = (Button){(Rectangle){30 + x, 50 + y, width, hight}, "", false}; // elinia
-    UIwarzone[1] = (Button){(Rectangle){300 + x, 30 + y, width, hight}, "", false}; // rollo
-    UIwarzone[2] = (Button){(Rectangle){680 + x, 50 + y, width, hight}, "", false}; // pladaci
-    UIwarzone[3] = (Button){(Rectangle){880 + x, 30 + y, width, hight}, "", false}; // bella
-    UIwarzone[4] = (Button){(Rectangle){220 + x, 130 + y, width, hight}, "", false}; // talmone
-    UIwarzone[5] = (Button){(Rectangle){550 + x, 200 + y, width, hight}, "", false}; // morina
-    UIwarzone[6] = (Button){(Rectangle){910 + x, 200 + y, width, hight}, "", false}; // calline
-    UIwarzone[7] = (Button){(Rectangle){700 + x, 270 + y, width, hight}, "", false}; // borge
+    UIwarzone[0] = (Button){(Rectangle){880 + x, 30 + y, width, hight}, "", false}; // bella
+    UIwarzone[1] = (Button){(Rectangle){910 + x, 200 + y, width, hight}, "", false}; // calline
+    UIwarzone[2] = (Button){(Rectangle){900 + x, 400 + y, width, hight}, "", false}; // enna
+    UIwarzone[3] = (Button){(Rectangle){940 + x, 550 + y, width, hight}, "", false}; // atela
+    UIwarzone[4] = (Button){(Rectangle){710 + x, 520 + y, width, hight}, "", false}; // dimase
+    UIwarzone[5] = (Button){(Rectangle){550 + x, 550 + y, width, hight}, "", false}; // olivadi
+    UIwarzone[6] = (Button){(Rectangle){400 + x, 640 + y, width, hight}, "", false};// lia
+    UIwarzone[7] = (Button){(Rectangle){400 + x, 450 + y, width, hight}, "", false}; // armento
+    UIwarzone[8] = (Button){(Rectangle){550 + x, 200 + y, width, hight}, "", false}; // morina
+    UIwarzone[9] = (Button){(Rectangle){220 + x, 130 + y, width, hight}, "", false}; // talmone
+    UIwarzone[10] = (Button){(Rectangle){30 + x, 50 + y, width, hight}, "", false}; // elinia
+    UIwarzone[11] = (Button){(Rectangle){300 + x, 30 + y, width, hight}, "", false}; // rollo
+    UIwarzone[12] = (Button){(Rectangle){680 + x, 50 + y, width, hight}, "", false}; // pladaci
+    UIwarzone[13] = (Button){(Rectangle){700 + x, 270 + y, width, hight}, "", false}; // borge
+    UIwarzone[14] = (Button){(Rectangle){700 + x, 640 + y, width, hight}, "", false};// alora
     
-    UIwarzone[8] = (Button){(Rectangle){400 + x, 450 + y, width, hight}, "", false}; // armento
-    UIwarzone[9] = (Button){(Rectangle){900 + x, 400 + y, width, hight}, "", false}; // enna
-    UIwarzone[10] = (Button){(Rectangle){550 + x, 550 + y, width, hight}, "", false}; // olivadi
-    UIwarzone[11] = (Button){(Rectangle){710 + x, 520 + y, width, hight}, "", false}; // dimase
-    UIwarzone[12] = (Button){(Rectangle){940 + x, 550 + y, width, hight}, "", false}; // atela
 
     //UIwarzone[10] = (Button){(Rectangle){850 + x, 550 + y, width, hight}, "test6", false}; // atela
     // for (int i = 9; i < 11; i++)
@@ -203,8 +205,6 @@ void UI::initializeWarzoneButton(float x, float y, float width, float hight)
     //     UIwarzone[i] = (Button){(Rectangle){((i - 5) * 100) + x, 550 + y, width, hight}, "test7", false}; // olivadi, dimase, atela
     // for (int i = 14; i < 15; i++)
     //     UIwarzone[i] = (Button){(Rectangle){((i - 14) * 100) + x, 400 + y, width, hight}, "test", false};
-    UIwarzone[13] = (Button){(Rectangle){400 + x, 640 + y, width, hight}, "", false};// lia
-    UIwarzone[14] = (Button){(Rectangle){700 + x, 640 + y, width, hight}, "", false};// alora
     //UIwarzone[15] = (Button){(Rectangle){600 + x, 500 + y, width, hight}, "test9", false};
     // for (int i = 0; i < 15; i++)
     //     UIwarzone[i] = (Button){(Rectangle){(i * 100) + x, y, width, hight}, "test", false};
@@ -223,7 +223,7 @@ int UI::displayWarzoneButton()
         {
             if (UIwarzone[i].ifPressed(mousePssitionIdentity, mousePressedIdentity))
             {
-                std::cout << "warzone selected" << std::endl;
+                std::cout << "warzone selected - > "<< i << std::endl;
                 return i; // number of the selected warzone according to states in Map.cpp
             }
         }
