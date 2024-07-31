@@ -45,6 +45,7 @@ public:
     int displayWarzoneButton();
     void initializeWarzoneButton(float x, float y, float width, float hight);
     void initializeWarzoneMap();
+    void displayMap();
 private:
     const char* menuButtonsTitle[4];
     int windowWidth = 1200;
@@ -65,6 +66,7 @@ private:
     Rectangle rectConfirmPlayerData;
     Button UIwarzone[15];//according to states in Map.cpp
     Texture2D backgroundWarzoneMap;
+    Texture2D foregroundWarzoneMap;
     // std::string UIPlayerName;
     // std::vector <std::string> allUIPlayerNames;
     // bool ifPressed(Vector2 mousePos, bool mousePressed);

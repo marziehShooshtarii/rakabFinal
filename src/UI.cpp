@@ -11,7 +11,8 @@ UI::UI()
     inputFont = LoadFont("../assets/SF-Atarian-System-Bold-Italic.ttf");
     backgroundMenu = LoadTexture("../assets/b1.png");
     backgroundIdentityMenu = LoadTexture("../assets/b_6.png");
-    backgroundWarzoneMap = LoadTexture("../assets/map3.png");
+    backgroundWarzoneMap = LoadTexture("../assets/b2_2.png");
+    foregroundWarzoneMap = LoadTexture("../assets/foreground_map.png");
 
     // initializeFontMenu();
     // initializeBackgroundMenu();
@@ -117,6 +118,8 @@ void UI::unloadingTexture()
     UnloadFont(gameFont);
     UnloadTexture(backgroundMenu);
     UnloadTexture(backgroundIdentityMenu);
+    UnloadTexture(backgroundWarzoneMap);
+    UnloadTexture(foregroundWarzoneMap);
 }
 
 void UI::initializeBackgroundMenu()
@@ -314,6 +317,21 @@ void UI::initializeIdentityMenu()
 void UI::initializeWarzoneMap()
 {
     backgroundWarzoneMap = LoadTexture("../assets/map2.png");
+}
+void UI::displayMap()
+{
+    while (1)
+    {
+        BeginDrawing();
+
+        ClearBackground(RAYWHITE);
+
+        DrawTexture(backgroundWarzoneMap, 0, 0, WHITE);
+        DrawTextureRec(foregroundWarzoneMap, { 0, 0, (float)foregroundWarzoneMap.width, (float)foregroundWarzoneMap.height }, { 190, 150 }, WHITE);
+        DrawText("please choose the warzone from the map below",100,50,40,WHITE);
+        EndDrawing();
+    }
+    
 }
 // void UI::inputNumberOfPlayers()
 // {
