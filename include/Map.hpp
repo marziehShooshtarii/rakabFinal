@@ -16,7 +16,7 @@ public:
 private:
     std::unordered_map<std::string, int> states;
 
-    bool neighborMap[14][14];
+    bool neighborMap[15][15];
     std ::ifstream readMapFile;
 };
 
