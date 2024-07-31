@@ -12,6 +12,7 @@ public:
     int searchInStates(std::string);
     int getNeighborMap(int i, int j);
     bool ifElementExists(std::string str);
+    std::string findKey(int value);
 
 private:
     std::unordered_map<std::string, int> states;
