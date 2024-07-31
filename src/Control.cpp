@@ -942,6 +942,7 @@ void Control::menu()
     // std::cout << "do you want to start a new game or continue or previous game ? " << std::endl;
     // std::cin >> newOrContinue;
     // ui.displayMenuBackground();
+    Map mapForUI;
     std::cout << "c1" << std::endl;
     bool exitGame = true;
     bool exitPrevious = true;
@@ -985,7 +986,8 @@ void Control::menu()
                     std::cout << "karaye ajib4 - > " << i << identity.getColor(i) << std::endl;
                 }
                 // exitPrevious = false;
-                ui.displayWarzoneButton();
+                std ::cout << "mapForUI.findKey(ui.displayWarzoneButton()) - > " << mapForUI.findKey(ui.displayWarzoneButton()) << std::endl;
+                std :: cout << "test"<<std::endl;
                 exitGame = false;
             }
             if (uiNumberPlayers == 4)
