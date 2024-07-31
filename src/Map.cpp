@@ -1,3 +1,4 @@
+#include <bits/stdc++.h>
 #include "Map.hpp"
 Map::Map()
 {
@@ -53,6 +54,7 @@ int Map::getNeighborMap(int i, int j)
 {
     return neighborMap[i][j];
 }
+
 bool Map::ifElementExists(std::string str)
 {
 
@@ -61,4 +63,31 @@ bool Map::ifElementExists(std::string str)
         return false;
     }
     return true;
+}
+
+std::string Map::findKey(int value)
+{
+    std::cout << value << std::endl;
+    std::cout << "inja" << std::endl;
+    std::string_view key;
+    auto it = states.begin();
+     //auto it = std::find_if(states.begin(),states.end(),[&key](const auto& value){return value.first == key;});
+    std::cout << "inja2" << std::endl;
+    std::cout << it->second<<std::endl;
+    while (it != states.end())
+    {
+
+        std::cout << "inja3" << std::endl;
+        std::cout << it->second <<std::endl;
+        if (it->second == value)
+        {
+            std::cout << "inja4" << std::endl;
+            std::cout<<"mohem - >>>>> "<<it->first<<std::endl;
+            return it->first;
+        }
+        std::cout << "inja5" << std::endl;
+    std::cout << value << std::endl;
+    it++;
+    }
+    std::cout << "inja6" << std::endl;
 }
