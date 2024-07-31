@@ -12,9 +12,9 @@ bool Map::setMapStates()
         std ::cerr << "Error opening the file!" << std::endl;
         return 1;
     }
-    for (int i = 0; i < 14; i++)
+    for (int i = 0; i < 15; i++)
     {
-        for (int j = 0; j < 14; j++)
+        for (int j = 0; j < 15; j++)
         {
             readMapFile >> neighborMap[i][j];
         }
@@ -41,6 +41,7 @@ void Map::initializeStates()
             {"rollo", 11},
             {"pladaci", 12},
             {"borge", 13},
+            {"alora", 14},
 
         };
 }
