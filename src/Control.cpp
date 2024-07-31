@@ -986,8 +986,8 @@ void Control::menu()
                     std::cout << "karaye ajib4 - > " << i << identity.getColor(i) << std::endl;
                 }
                 // exitPrevious = false;
-                std ::cout << "mapForUI.findKey(ui.displayWarzoneButton()) - > " << mapForUI.findKey(ui.displayWarzoneButton()) << std::endl;
-                std :: cout << "test"<<std::endl;
+                setWarzone(mapForUI.findKey(ui.displayWarzoneButton())); // setting warzone based on UI output
+                std ::cout << "test" << std::endl;
                 exitGame = false;
             }
             if (uiNumberPlayers == 4)
@@ -1224,6 +1224,10 @@ void Control::initializingNumberOfSavedGames()
     numberOfSavedGames.push_back("save3.txt");
     numberOfSavedGames.push_back("save4.txt");
     numberOfSavedGames.push_back("save5.txt");
+}
+void Control::setWarzone(std::string stateName)
+{
+    warzone = stateName;
 }
 void Control::run()
 {

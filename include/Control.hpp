@@ -98,6 +98,7 @@ public:
     void setNameForUI(std::vector<char>);
     void setAgeForUI(std::vector<char>);
     void setNameFromUI(char names[]);
+    void setWarzone(std::string);
     void run();
 
 private:
