@@ -45,7 +45,7 @@ public:
     int displayWarzoneButton();
     void initializeWarzoneButton(float x, float y, float width, float hight);
     void initializeWarzoneMap();
-    void displayMap();
+    void displayMap(std::string);
 private:
     const char* menuButtonsTitle[4];
     int windowWidth = 1200;

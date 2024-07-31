@@ -181,41 +181,40 @@ int UI::displayPlayerNumberButton()
 void UI::initializeWarzoneButton(float x, float y, float width, float hight)
 {
 
-    //UIwarzone[0] = (Button){(Rectangle){100 + x, y, width, hight}, "test2", false}; // talmone
-    // for (int i = 0; i < 4; i++)
-    //     UIwarzone[i] = (Button){(Rectangle){(i * 200) + x, y, width, hight}, "test1", false}; // elinia, rollo, pladaci, bella
-    UIwarzone[0] = (Button){(Rectangle){880 + x, 30 + y, width, hight}, "", false}; // bella
-    UIwarzone[1] = (Button){(Rectangle){910 + x, 200 + y, width, hight}, "", false}; // calline
-    UIwarzone[2] = (Button){(Rectangle){900 + x, 400 + y, width, hight}, "", false}; // enna
-    UIwarzone[3] = (Button){(Rectangle){940 + x, 550 + y, width, hight}, "", false}; // atela
-    UIwarzone[4] = (Button){(Rectangle){710 + x, 520 + y, width, hight}, "", false}; // dimase
-    UIwarzone[5] = (Button){(Rectangle){550 + x, 550 + y, width, hight}, "", false}; // olivadi
-    UIwarzone[6] = (Button){(Rectangle){400 + x, 640 + y, width, hight}, "", false};// lia
-    UIwarzone[7] = (Button){(Rectangle){400 + x, 450 + y, width, hight}, "", false}; // armento
-    UIwarzone[8] = (Button){(Rectangle){550 + x, 200 + y, width, hight}, "", false}; // morina
-    UIwarzone[9] = (Button){(Rectangle){220 + x, 130 + y, width, hight}, "", false}; // talmone
-    UIwarzone[10] = (Button){(Rectangle){30 + x, 50 + y, width, hight}, "", false}; // elinia
-    UIwarzone[11] = (Button){(Rectangle){300 + x, 30 + y, width, hight}, "", false}; // rollo
-    UIwarzone[12] = (Button){(Rectangle){680 + x, 50 + y, width, hight}, "", false}; // pladaci
+    // UIwarzone[0] = (Button){(Rectangle){100 + x, y, width, hight}, "test2", false}; // talmone
+    //  for (int i = 0; i < 4; i++)
+    //      UIwarzone[i] = (Button){(Rectangle){(i * 200) + x, y, width, hight}, "test1", false}; // elinia, rollo, pladaci, bella
+    UIwarzone[0] = (Button){(Rectangle){880 + x, 30 + y, width, hight}, "", false};   // bella
+    UIwarzone[1] = (Button){(Rectangle){910 + x, 200 + y, width, hight}, "", false};  // calline
+    UIwarzone[2] = (Button){(Rectangle){900 + x, 400 + y, width, hight}, "", false};  // enna
+    UIwarzone[3] = (Button){(Rectangle){940 + x, 550 + y, width, hight}, "", false};  // atela
+    UIwarzone[4] = (Button){(Rectangle){710 + x, 520 + y, width, hight}, "", false};  // dimase
+    UIwarzone[5] = (Button){(Rectangle){550 + x, 550 + y, width, hight}, "", false};  // olivadi
+    UIwarzone[6] = (Button){(Rectangle){400 + x, 640 + y, width, hight}, "", false};  // lia
+    UIwarzone[7] = (Button){(Rectangle){400 + x, 450 + y, width, hight}, "", false};  // armento
+    UIwarzone[8] = (Button){(Rectangle){550 + x, 200 + y, width, hight}, "", false};  // morina
+    UIwarzone[9] = (Button){(Rectangle){220 + x, 130 + y, width, hight}, "", false};  // talmone
+    UIwarzone[10] = (Button){(Rectangle){30 + x, 50 + y, width, hight}, "", false};   // elinia
+    UIwarzone[11] = (Button){(Rectangle){300 + x, 30 + y, width, hight}, "", false};  // rollo
+    UIwarzone[12] = (Button){(Rectangle){680 + x, 50 + y, width, hight}, "", false};  // pladaci
     UIwarzone[13] = (Button){(Rectangle){700 + x, 270 + y, width, hight}, "", false}; // borge
-    UIwarzone[14] = (Button){(Rectangle){700 + x, 640 + y, width, hight}, "", false};// alora
-    
+    UIwarzone[14] = (Button){(Rectangle){700 + x, 640 + y, width, hight}, "", false}; // alora
 
-    //UIwarzone[10] = (Button){(Rectangle){850 + x, 550 + y, width, hight}, "test6", false}; // atela
-    // for (int i = 9; i < 11; i++)
-    //     UIwarzone[i] = (Button){(Rectangle){((i - 9) * 100) + x, 400 + y, width, hight}, "test", false};
-    // for (int i = 10; i < 13; i++)
-    //     UIwarzone[i] = (Button){(Rectangle){((i - 5) * 100) + x, 550 + y, width, hight}, "test7", false}; // olivadi, dimase, atela
-    // for (int i = 14; i < 15; i++)
-    //     UIwarzone[i] = (Button){(Rectangle){((i - 14) * 100) + x, 400 + y, width, hight}, "test", false};
-    //UIwarzone[15] = (Button){(Rectangle){600 + x, 500 + y, width, hight}, "test9", false};
-    // for (int i = 0; i < 15; i++)
-    //     UIwarzone[i] = (Button){(Rectangle){(i * 100) + x, y, width, hight}, "test", false};
+    // UIwarzone[10] = (Button){(Rectangle){850 + x, 550 + y, width, hight}, "test6", false}; // atela
+    //  for (int i = 9; i < 11; i++)
+    //      UIwarzone[i] = (Button){(Rectangle){((i - 9) * 100) + x, 400 + y, width, hight}, "test", false};
+    //  for (int i = 10; i < 13; i++)
+    //      UIwarzone[i] = (Button){(Rectangle){((i - 5) * 100) + x, 550 + y, width, hight}, "test7", false}; // olivadi, dimase, atela
+    //  for (int i = 14; i < 15; i++)
+    //      UIwarzone[i] = (Button){(Rectangle){((i - 14) * 100) + x, 400 + y, width, hight}, "test", false};
+    // UIwarzone[15] = (Button){(Rectangle){600 + x, 500 + y, width, hight}, "test9", false};
+    //  for (int i = 0; i < 15; i++)
+    //      UIwarzone[i] = (Button){(Rectangle){(i * 100) + x, y, width, hight}, "test", false};
 }
 int UI::displayWarzoneButton()
 {
     initializeWarzoneButton(50, 50, 120, 50);
-    
+
     while (1)
     {
         Vector2 mousePssitionIdentity = GetMousePosition();
@@ -226,7 +225,7 @@ int UI::displayWarzoneButton()
         {
             if (UIwarzone[i].ifPressed(mousePssitionIdentity, mousePressedIdentity))
             {
-                std::cout << "warzone selected - > "<< i << std::endl;
+                std::cout << "warzone selected - > " << i << std::endl;
                 return i; // number of the selected warzone according to states in Map.cpp
             }
         }
@@ -250,7 +249,7 @@ int UI::displayWarzoneButton()
         }
         EndDrawing();
     }
-    return -1; 
+    return -1;
 }
 void UI::initializePlayerNumberButton()
 {
@@ -318,20 +317,23 @@ void UI::initializeWarzoneMap()
 {
     backgroundWarzoneMap = LoadTexture("../assets/map2.png");
 }
-void UI::displayMap()
+void UI::displayMap(std::string str)
 {
-    while (1)
+    
+    const char * playerWhoChoosesWarzone = str.c_str();
+        while (1)
     {
         BeginDrawing();
 
         ClearBackground(RAYWHITE);
 
         DrawTexture(backgroundWarzoneMap, 0, 0, WHITE);
-        DrawTextureRec(foregroundWarzoneMap, { 0, 0, (float)foregroundWarzoneMap.width, (float)foregroundWarzoneMap.height }, { 190, 150 }, WHITE);
-        DrawText("please choose the warzone from the map below",100,50,40,WHITE);
+        DrawTextureRec(foregroundWarzoneMap, {0, 0, (float)foregroundWarzoneMap.width, (float)foregroundWarzoneMap.height}, {190, 150}, WHITE);
+        DrawText("starter player: ", 100 , 15, 40, WHITE);
+        DrawText(playerWhoChoosesWarzone, 500, 15, 40, WHITE);
+        DrawText("please choose the warzone from the map below", 100, 50, 40, WHITE);
         EndDrawing();
     }
-    
 }
 // void UI::inputNumberOfPlayers()
 // {
