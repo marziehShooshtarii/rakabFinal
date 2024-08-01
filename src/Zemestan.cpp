@@ -6,7 +6,8 @@ int Zemestan::effectOfCard(std::vector<Card> cards, int score)
     std::cout << "checkZemestanPlayed - >" << checkZemestanPlayed << std::endl;
     if (checkZemestanPlayed)
     {
-        score = cards.size() - countAllSpecialCards(cards);
+        // score = cards.size() - countAllSpecialCards(cards); //winter effect for the past
+        score = score / 2 ;//recent winter effect
         std::cout << "score dar zemestan - >" << score << std::endl;
     }
     return score;
