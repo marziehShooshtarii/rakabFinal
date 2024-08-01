@@ -6,7 +6,8 @@ int Tabl_zan::effectOfCard(std::vector<Card>cards ,int score)
     {
         if (cards[i].getName() == "tabl_zan")
         {
-            score*=2;
+            // score *= 2;//pervios tablzan effect
+            score *= 1.5;//recent tablzan effect 
         
         }
     }
