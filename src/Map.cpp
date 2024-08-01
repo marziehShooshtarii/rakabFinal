@@ -30,11 +30,11 @@ void Map::initializeStates()
         {
             {"bella", 0},
             {"caline", 1},
-            {"enna", 2},
+            {"lia", 2}, // the state's position is changed
             {"atela", 3},
             {"dimase", 4},
             {"olivadi", 5},
-            {"lia", 6},
+            {"enna", 6}, // the state's position is changed
             {"armento", 7},
             {"morina", 8},
             {"talmone", 9},
@@ -42,7 +42,7 @@ void Map::initializeStates()
             {"rollo", 11},
             {"pladaci", 12},
             {"borge", 13},
-            {"alora", 14},
+            {"alora", 14}, // new state added
 
         };
 }
@@ -71,23 +71,23 @@ std::string Map::findKey(int value)
     std::cout << "inja" << std::endl;
     std::string_view key;
     auto it = states.begin();
-     //auto it = std::find_if(states.begin(),states.end(),[&key](const auto& value){return value.first == key;});
+    // auto it = std::find_if(states.begin(),states.end(),[&key](const auto& value){return value.first == key;});
     std::cout << "inja2" << std::endl;
-    std::cout << it->second<<std::endl;
+    std::cout << it->second << std::endl;
     while (it != states.end())
     {
 
         std::cout << "inja3" << std::endl;
-        std::cout << it->second <<std::endl;
+        std::cout << it->second << std::endl;
         if (it->second == value)
         {
             std::cout << "inja4" << std::endl;
-            std::cout<<"mohem - >>>>> "<<it->first<<std::endl;
+            std::cout << "mohem - >>>>> " << it->first << std::endl;
             return it->first;
         }
         std::cout << "inja5" << std::endl;
-    std::cout << value << std::endl;
-    it++;
+        std::cout << value << std::endl;
+        it++;
     }
     std::cout << "inja6" << std::endl;
 }
