@@ -992,6 +992,7 @@ void Control::menu()
                 std::cout << "salam" << std::endl;
                 setWarzone(mapForUI.findKey(ui.displayWarzoneButton(identity.getName(determinMinAge())))); // setting warzone based on UI output
                 std ::cout << "test" << std::endl;
+                ui.displayCharectersAndNames(identity.getName(0),identity.getName(1),identity.getName(2));
                 exitGame = false;
             }
             if (uiNumberPlayers == 4)
