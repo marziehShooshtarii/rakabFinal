@@ -949,6 +949,7 @@ void Control::menu()
     newOrContinue = ui.menuGameLoop();
     int uiNumberPlayers = ui.displayPlayerNumberButton();
     // ui.Textbox();
+    //ui.renderTextureForWarzoneMap();
     while (WindowShouldClose() == false && exitGame == true /*&& exitPrevious == true*/)
     {
         // for (int i = 0; i < 1; i++)
@@ -985,7 +986,8 @@ void Control::menu()
                     std::cout << "karaye ajib4 - > " << i << identity.getName(i) << std::endl;
                     std::cout << "karaye ajib4 - > " << i << identity.getColor(i) << std::endl;
                 }
-                // ui.displayMap(identity.getName(determinMinAge()));
+                ui.displayMap(identity.getName(determinMinAge()));
+                
                 // exitPrevious = false;
                 std::cout << "salam" << std::endl;
                 setWarzone(mapForUI.findKey(ui.displayWarzoneButton(identity.getName(determinMinAge())))); // setting warzone based on UI output
