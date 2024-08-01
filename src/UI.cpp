@@ -13,6 +13,7 @@ UI::UI()
     backgroundIdentityMenu = LoadTexture("../assets/b_6.png");
     backgroundWarzoneMap = LoadTexture("../assets/warzone_map.png");
     charectersAndNames = LoadTexture("../assets/c1.png");
+    selectedWarzoneBackground = LoadTexture("../assets/selected_warzone2.png");
     // foregroundWarzoneMap = LoadTexture("../assets/foreground_map.png");
 
     // initializeFontMenu();
@@ -353,6 +354,22 @@ void UI::initializeNextButton(float x, float y, float width, float hight)
 {
     next = (Button){(Rectangle){x, y, width, hight}, "next", false};
 }
+bool UI::displaySelectedWarzone(std::string UIWarzone)
+{
+    const char *selectedUIWarzone = UIWarzone.c_str();
+    while (1)
+    {
+        BeginDrawing();
+        ClearBackground(RAYWHITE);
+        DrawTexture(selectedWarzoneBackground, 0, 0, WHITE);
+        DrawText("warzone : ", 80, 200, 40, BLACK);
+        DrawText(selectedUIWarzone, 280, 200, 40, BLACK);
+        DrawText("get ready for war!!!", 80, 235, 40, BLACK);
+        EndDrawing();
+        return 1;
+    }
+    return false;
+}
 bool UI::displayCharectersAndNames(std::string name1, std::string name2, std::string name3)
 {
     initializeNextButton(1100, 680, 120, 50);
@@ -394,7 +411,6 @@ bool UI::displayCharectersAndNames(std::string name1, std::string name2, std::st
 
         EndDrawing();
     }
-
 }
 // void UI::inputNumberOfPlayers()
 // {

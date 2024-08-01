@@ -49,6 +49,7 @@ public:
     void renderTextureForWarzoneMap();
     bool displayCharectersAndNames(std::string, std::string,std::string);
     void initializeNextButton(float x, float y, float width, float hight);
+    bool displaySelectedWarzone(std::string);
 private:
     const char* menuButtonsTitle[4];
     int windowWidth = 1200;
@@ -72,6 +73,7 @@ private:
     Texture2D foregroundWarzoneMap;
     Button next;// for moving to the next step of the game
     Texture2D charectersAndNames; // for introducing charecters with their names
+    Texture2D selectedWarzoneBackground; // for announcing the selected warzone
     // std::string UIPlayerName;
     // std::vector <std::string> allUIPlayerNames;
     // bool ifPressed(Vector2 mousePos, bool mousePressed);
