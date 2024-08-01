@@ -14,6 +14,10 @@ void Control::displayStarterPlayer()
     std::cin.ignore();
     std::cout << identity.getName(starterPlayer) << " please choose the warzone ";
     std::cin >> warzone;
+    std::cout << identity.getName(starterPlayer) << " please choose the good luck number: ";
+    std::cin >> goodLuckNumber;
+    std::cout << identity.getName(starterPlayer) << " please choose the bad luck number: ";
+    std::cin >> badLuckNumber;
     while (!searchForExistingStates(warzone))
     {
         displayStarterPlayer();
@@ -73,7 +77,6 @@ void Control::diplayBeggingOfTheGame()
 {
     std::cout << "Are you ready?!\n\tLets start the game\n";
     std::cin.ignore();
-    std::cout << "hhhhhhhhhhhhhhhhhhhhhhhhh" << std::endl;
     for (size_t i = 0; i < identity.getPlayerNumber();)
     {
         std::cout << "player number " << i + 1 << "s turn " << i + 1 << "\n\tpass the laptop to player number " << i + 1 << "\t\n";
@@ -585,6 +588,14 @@ bool Control::determinWinnerOfWar()
             scorsAtEndOfWar[i] = armyAndSpecialCards[j]->effectOfCard(players[i].getAllPlayedCards(), scorsAtEndOfWar[i]);
             // std::cout << "score -> " << scorsAtEndOfWar[i] << std::endl;
         }
+        for (int k = 0; k < identity.getPlayerNumber(); k++)
+        {
+            if (scorsAtEndOfWar[k] % goodLuckNumber == 0)
+                scorsAtEndOfWar[k] *= 2;
+                
+            if (scorsAtEndOfWar[k] % goodLuckNumber == 0)
+                scorsAtEndOfWar[k] = -1;//the player can't be the winner anyway
+        }
         if (scorsAtEndOfWar[i] > winnerScore)
         {
             winnerScore = scorsAtEndOfWar[i];
@@ -603,6 +614,8 @@ bool Control::determinWinnerOfWar()
         return false;
     }
     std::cout << "winner - > " << players[winner].getName() << std::endl;
+    for (int d = 0; d < identity.getPlayerNumber(); d++)
+        std::cout << identity.getName(d) << " -> " << scorsAtEndOfWar[d] << std::endl;
     std::cin.ignore();
     // system("CLS");
     if (!checkShirzenForCertianPlayer()) // check if the number of shirzan's played is equal
@@ -640,8 +653,8 @@ void Control::initializeSpecialCards()
     armyAndSpecialCards.push_back(army);
     armyAndSpecialCards.push_back(zemestan);
     armyAndSpecialCards.push_back(tabl_zan);
-    armyAndSpecialCards.push_back(bahar);
     armyAndSpecialCards.push_back(shah_dokht);
+    armyAndSpecialCards.push_back(bahar); // recent spring effect
     armyAndSpecialCards.push_back(shirzan);
 }
 bool Control ::checkingTheNeighborhoodOfTwoStates(int index, int first, int second)
@@ -949,7 +962,7 @@ void Control::menu()
     newOrContinue = ui.menuGameLoop();
     int uiNumberPlayers = ui.displayPlayerNumberButton();
     // ui.Textbox();
-    //ui.renderTextureForWarzoneMap();
+    // ui.renderTextureForWarzoneMap();
     while (WindowShouldClose() == false && exitGame == true /*&& exitPrevious == true*/)
     {
         // for (int i = 0; i < 1; i++)
@@ -987,12 +1000,13 @@ void Control::menu()
                     std::cout << "karaye ajib4 - > " << i << identity.getColor(i) << std::endl;
                 }
                 ui.displayMap(identity.getName(determinMinAge()));
-                
+
                 // exitPrevious = false;
                 std::cout << "salam" << std::endl;
                 setWarzone(mapForUI.findKey(ui.displayWarzoneButton(identity.getName(determinMinAge())))); // setting warzone based on UI output
                 std ::cout << "test" << std::endl;
-                ui.displayCharectersAndNames(identity.getName(0),identity.getName(1),identity.getName(2));
+                ui.getLuckNumbers(identity.getName(starterPlayer));
+                ui.displayCharectersAndNames(identity.getName(0), identity.getName(1), identity.getName(2));
                 ui.displaySelectedWarzone(warzone);
                 exitGame = false;
             }

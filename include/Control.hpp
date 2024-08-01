@@ -127,4 +127,6 @@ private:
     std::vector <std::string> numberOfSavedGames; //having more than one saved game
     int whichSavedGame;
     UI ui;
+    int goodLuckNumber;
+    int badLuckNumber;
 };
