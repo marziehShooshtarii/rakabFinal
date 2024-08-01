@@ -978,7 +978,7 @@ void Control::menu()
                     ui.thripleTextBoxDraw();
                     std::cout << "for text box" << i << std::endl;
                     identity.setPlayerNameForSave(ui.getPlayerNameAndColorFromUI(i));
-                    identity.setPlayerAgeForSave(ui.getPlayerAgeFromUI(i + 3));
+                    identity.setPlayerAgeForSave(ui.getPlayerAgeAndLuckFromUI(i + 3));
                     identity.setPlayerColorForSave(ui.getPlayerNameAndColorFromUI(i + 6));
                     identity.setPlayerForSave();
                     // setNameForUI(ui.getNamesFromUI(i));
@@ -1006,6 +1006,8 @@ void Control::menu()
                 setWarzone(mapForUI.findKey(ui.displayWarzoneButton(identity.getName(determinMinAge())))); // setting warzone based on UI output
                 std ::cout << "test" << std::endl;
                 ui.getLuckNumbers(identity.getName(starterPlayer));
+                goodLuckNumber = ui.getPlayerAgeAndLuckFromUI(0);
+                badLuckNumber = ui.getPlayerAgeAndLuckFromUI(1);
                 ui.displayCharectersAndNames(identity.getName(0), identity.getName(1), identity.getName(2));
                 ui.displaySelectedWarzone(warzone);
                 exitGame = false;
@@ -1017,7 +1019,7 @@ void Control::menu()
                 for (int i = 0; i < 4; i++)
                 {
                     identity.setPlayerNameForSave(ui.getPlayerNameAndColorFromUI(i));
-                    identity.setPlayerAgeForSave(ui.getPlayerAgeFromUI(i + 4));
+                    identity.setPlayerAgeForSave(ui.getPlayerAgeAndLuckFromUI(i + 4));
                     identity.setPlayerColorForSave(ui.getPlayerNameAndColorFromUI(i + 8));
                     identity.setPlayerForSave();
                     std::cout << "for text box" << std::endl;
@@ -1033,6 +1035,8 @@ void Control::menu()
                 // exitPrevious = false;
                 exitGame = false;
             }
+                std::cout << "good luck -> " << goodLuckNumber << std::endl;
+                std::cout << "bad luck -> " << badLuckNumber << std::endl;
             std::cout << "after display " << std::endl;
             exitGame = false;
         }
