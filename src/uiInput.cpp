@@ -38,6 +38,9 @@
 #include <vector>
 #include <cstdlib>
 #include "uiInput.hpp"
+uiInput::uiInput(){
+    
+}
 uiInput::uiInput(float x, float y, float width, float height)
 {
     textBox = {x, y, width, height};
@@ -47,6 +50,7 @@ uiInput::uiInput(float x, float y, float width, float height)
     mouseOnText = false;
 }
 
+uiInput::~uiInput(){}
 void uiInput::Update()
 {
     if (active)
@@ -115,14 +119,8 @@ void uiInput::transferPlayerNameToVector()
 
 std::vector<char> uiInput::getTextBoxName()
 {
-    // std::vector<char> textBoxNames(std::begin(text), std::end(text) - 1); // -1 to avoid copying the null terminator
     return textBoxName;
 }
-
-// void uiInput::resetTarsferedVector()
-// {
-//     textBoxName.clear();
-// }
 
 void uiInput::convertTextToString()
 {
@@ -137,11 +135,11 @@ std::string uiInput::getTextBoxStringName()
 {
     return nameConversion;
 }
-void uiInput::convertAgeToInteger()
+void uiInput::convertNumberToInteger()
 {
     ageConversion = std::atoi(text);
 }
-int uiInput::getTextBoxIntAge()
+int uiInput::getTextBoxIntNumber()
 {
     return ageConversion;
 }

@@ -7,6 +7,8 @@ class uiInput
 {
 public:
     uiInput(float x, float y, float width, float height);
+    uiInput();
+    ~uiInput();
     void Update();
     void Draw(Font font, int framesCounter);
     void SetActive(bool isActive);
@@ -16,8 +18,8 @@ public:
     void resetTarsferedVector();
     void convertTextToString();
     std::string getTextBoxStringName();
-    void convertAgeToInteger();
-    int getTextBoxIntAge();
+    void convertNumberToInteger();
+    int getTextBoxIntNumber();
     char *getFullName();
     // char getUIPlayerName(int index);
     // std::vector <char> getAllUIPlayerNames();
