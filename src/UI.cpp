@@ -786,8 +786,8 @@ std::string UI::getPlayerNameAndColorFromUI(int playerTextBoxIndex)
     textBoxes[playerTextBoxIndex].convertTextToString(); // char array has been converted to string in uiInput
     return textBoxes[playerTextBoxIndex].getTextBoxStringName();
 }
-int UI::getPlayerAgeFromUI(int playerAgeIndex)
+int UI::getPlayerAgeAndLuckFromUI(int playerAgeIndex)
 {
-    textBoxes[playerAgeIndex].convertAgeToInteger(); // char array has been converted to integer in uiInput
-    return textBoxes[playerAgeIndex].getTextBoxIntAge();
+    textBoxes[playerAgeIndex].convertNumberToInteger(); // char array has been converted to integer in uiInput
+    return textBoxes[playerAgeIndex].getTextBoxIntNumber();
 }
