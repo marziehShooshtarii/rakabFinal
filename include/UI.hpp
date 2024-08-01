@@ -46,6 +46,7 @@ public:
     void initializeWarzoneButton(float x, float y, float width, float hight);
     void initializeWarzoneMap();
     bool displayMap(std::string);
+    void renderTextureForWarzoneMap();
 private:
     const char* menuButtonsTitle[4];
     int windowWidth = 1200;

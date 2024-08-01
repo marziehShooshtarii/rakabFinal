@@ -11,7 +11,7 @@ UI::UI()
     inputFont = LoadFont("../assets/SF-Atarian-System-Bold-Italic.ttf");
     backgroundMenu = LoadTexture("../assets/b1.png");
     backgroundIdentityMenu = LoadTexture("../assets/b_6.png");
-    backgroundWarzoneMap = LoadTexture("../assets/b2_2.png");
+    backgroundWarzoneMap = LoadTexture("../assets/warzone_map.png");
     foregroundWarzoneMap = LoadTexture("../assets/foreground_map.png");
 
     // initializeFontMenu();
@@ -211,10 +211,15 @@ void UI::initializeWarzoneButton(float x, float y, float width, float hight)
     //  for (int i = 0; i < 15; i++)
     //      UIwarzone[i] = (Button){(Rectangle){(i * 100) + x, y, width, hight}, "test", false};
 }
+void UI::renderTextureForWarzoneMap()
+{
+        RenderTexture2D target = LoadRenderTexture(windowWidth, windowHeight);
+        BeginTextureMode(target); // Start drawing to the render texture
+        ClearBackground(RAYWHITE); // Clear the render texture with white
+}
 int UI::displayWarzoneButton(std::string starterPlayer)
 {
     initializeWarzoneButton(50, 50, 120, 50);
-
     while (1)
     {
         Vector2 mousePssitionIdentity = GetMousePosition();
@@ -229,34 +234,11 @@ int UI::displayWarzoneButton(std::string starterPlayer)
                 return i; // number of the selected warzone according to states in Map.cpp
             }
         }
-        // BeginDrawing();
-        // ClearBackground(WHITE);
-        // DrawTexture(foregroundWarzoneMap, 0, 0, WHITE);
-        // std::cout << "cout 1" << std::endl;
-        // EndDrawing();
-        // for (int idx = 0; idx < 15; ++idx)
-        // {
-        //     Color selectedColor = WHITE;
-        //     if (CheckCollisionPointRec(mousePssitionIdentity, UIwarzone[idx].getRectangle()))
-        //     {
-        //         selectedColor = WHITE;
-        //     }
-        //     else
-        //     {
-        //         selectedColor = RED;
-        //     }
 
-        //     DrawTextEx(fontMenu, this->UIwarzone[idx].title, (Vector2){this->UIwarzone[idx].getRectangle().x + 10, this->UIwarzone[idx].getRectangle().y + 10}, fontMenu.baseSize, 1, selectedColor);
-        // }
-        // RenderTexture2D()
-        RenderTexture2D target = LoadRenderTexture(windowWidth, windowHeight);
-        BeginTextureMode(target); // Start drawing to the render texture
-        ClearBackground(RAYWHITE); // Clear the render texture with white
-
-        // Draw the base texture and map
-        displayMap(starterPlayer);
-
-        //Draw the buttons
+        BeginDrawing();
+        DrawTexture(backgroundWarzoneMap, 0, 0, WHITE);
+        //displayMap(starterPlayer);
+        ClearBackground(RAYWHITE);
         for (int idx = 0; idx < 15; ++idx)
         {
             std::cout << "to for " << std::endl;
@@ -274,15 +256,14 @@ int UI::displayWarzoneButton(std::string starterPlayer)
             std::cout << "tah for " << std::endl;
         }
 
-        EndTextureMode(); // Stop drawing to the render texture
+        //EndTextureMode(); // Stop drawing to the render texture
 
         // Draw the render texture to the screen
-        BeginDrawing();
-        ClearBackground(RAYWHITE);
-        DrawTextureRec(target.texture, (Rectangle){ 0, 0, (float)target.texture.width, (float)-target.texture.height }, (Vector2){ 0, 0 }, WHITE);
+        //DrawTextureRec(target.texture, (Rectangle){ 0, 0, (float)target.texture.width, (float)-target.texture.height }, (Vector2){ 0, 0 }, WHITE);
         EndDrawing();
     }
     return -1;
+    
 }
 void UI::initializePlayerNumberButton()
 {
@@ -354,19 +335,19 @@ bool UI::displayMap(std::string str)
 {
 
     const char *playerWhoChoosesWarzone = str.c_str();
-    // while (1)
-    // {
-        // BeginDrawing();
-        // ClearBackground(RAYWHITE);
+    while (1)
+    {
+        BeginDrawing();
+        ClearBackground(RAYWHITE);
 
-        DrawTexture(backgroundWarzoneMap, 0, 0, WHITE);
-        DrawTextureRec(foregroundWarzoneMap, {0, 0, (float)foregroundWarzoneMap.width, (float)foregroundWarzoneMap.height}, {190, 150}, WHITE);
+        // DrawTexture(backgroundWarzoneMap, 0, 0, WHITE);
+        // DrawTextureRec(foregroundWarzoneMap, {0, 0, (float)foregroundWarzoneMap.width, (float)foregroundWarzoneMap.height}, {190, 150}, WHITE);
         DrawText("starter player: ", 100, 15, 40, WHITE);
         DrawText(playerWhoChoosesWarzone, 500, 15, 40, WHITE);
         DrawText("please choose the warzone from the map below", 100, 50, 40, WHITE);
-        // EndDrawing();
+         EndDrawing();
         return 1;
-    // }
+     }
 }
 // void UI::inputNumberOfPlayers()
 // {
