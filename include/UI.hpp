@@ -47,6 +47,8 @@ public:
     void initializeWarzoneMap();
     bool displayMap(std::string);
     void renderTextureForWarzoneMap();
+    bool displayCharectersAndNames(std::string, std::string,std::string);
+    void initializeNextButton(float x, float y, float width, float hight);
 private:
     const char* menuButtonsTitle[4];
     int windowWidth = 1200;
@@ -68,6 +70,8 @@ private:
     Button UIwarzone[15];//according to states in Map.cpp
     Texture2D backgroundWarzoneMap;
     Texture2D foregroundWarzoneMap;
+    Button next;// for moving to the next step of the game
+    Texture2D charectersAndNames; // for introducing charecters with their names
     // std::string UIPlayerName;
     // std::vector <std::string> allUIPlayerNames;
     // bool ifPressed(Vector2 mousePos, bool mousePressed);
