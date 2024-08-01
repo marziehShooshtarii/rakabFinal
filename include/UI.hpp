@@ -56,7 +56,6 @@ public:
     bool displayGameDeck();
     void initializeCharacterNumber();
     bool getLuckNumbers(std::string);
-    int getLuckNumbersFromUI();
 private:
     const char* menuButtonsTitle[4];
     int windowWidth = 1200;
@@ -83,7 +82,7 @@ private:
     Texture2D selectedWarzoneBackground; // for announcing the selected warzone
     Texture2D gameTable;//table background during the game
     std::unordered_map <int,Texture2D> characterNumber;
-    uiInput UILuckNumber;//needed to get the luckNumber 
+    // uiInput UILuckNumber;//needed to get the luckNumber 
     // std::string UIPlayerName;
     // std::vector <std::string> allUIPlayerNames;
     // bool ifPressed(Vector2 mousePos, bool mousePressed);
