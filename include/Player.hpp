@@ -1,5 +1,6 @@
 #ifndef PLAYER_HPP
 #define PLAYER_HPP
+#include "raylib.h"
 #include <iostream>
 #include <string>
 #include <vector>
@@ -31,6 +32,7 @@ public:
     void erasePlayedCard(int index);
     std::vector<Card>getAllPlayedCards();
     void eraseAllPlayedCards();
+    void setCharacter(Texture2D);
 
 private:
     int age;
@@ -40,5 +42,6 @@ private:
     std::string name;
     std::string color;
     bool ifPassed;
+    Texture2D character;// for connecting UI character to each player
 };
 #endif

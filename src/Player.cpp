@@ -11,6 +11,7 @@ Player::Player(int p_age, std::string p_name, std::string p_color, bool P_ifPass
     this->color = p_color;
     this->name = p_name;
     this->ifPassed = P_ifPassed;
+    
 }
 int Player::getAge()
 {
@@ -80,6 +81,10 @@ void Player::erasePlayedCard(int index)
 void Player::eraseAllPlayedCards()
 {
     playedCardList.clear();
+}
+void Player::setCharacter(Texture2D UICharacter)
+{
+    character = UICharacter;
 }
 std::vector<Card> Player::getAllPlayedCards()
 {

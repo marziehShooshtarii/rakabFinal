@@ -14,6 +14,8 @@ UI::UI()
     backgroundWarzoneMap = LoadTexture("../assets/warzone_map.png");
     charectersAndNames = LoadTexture("../assets/c1.png");
     selectedWarzoneBackground = LoadTexture("../assets/selected_warzone2.png");
+    Texture2D gameTable = LoadTexture("../assets/game_background.png");
+
     // foregroundWarzoneMap = LoadTexture("../assets/foreground_map.png");
 
     // initializeFontMenu();
@@ -370,6 +372,43 @@ bool UI::displaySelectedWarzone(std::string UIWarzone)
     }
     return false;
 }
+bool UI::displayGameDeck()
+{
+    while (1)
+    {
+        BeginDrawing();
+        ClearBackground(RAYWHITE);
+        DrawTexture(gameTable, 0, 0, WHITE);
+        
+        EndDrawing();
+        return 1;
+    }
+    return false;
+}
+
+void UI::initializeCharacterNumber()
+{
+    characterNumber =
+        {
+            {"bella", 0},
+            {"caline", 1},
+            {"enna", 2},
+            {"atela", 3},
+            {"dimase", 4},
+            {"olivadi", 5},
+            {"lia", 6},
+            {"armento", 7},
+            {"morina", 8},
+            {"talmone", 9},
+            {"elinia", 10},
+            {"rollo", 11},
+            {"pladaci", 12},
+            {"borge", 13},
+            {"alora", 14},
+
+        };
+}
+
 bool UI::displayCharectersAndNames(std::string name1, std::string name2, std::string name3)
 {
     initializeNextButton(1100, 680, 120, 50);

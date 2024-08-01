@@ -2,6 +2,7 @@
 #define UI_HPP
 #include <string>
 #include <vector>
+#include <unordered_map>
 #include "raylib.h"
 #include "Button.hpp"
 #include "uiInput.hpp"
@@ -50,6 +51,8 @@ public:
     bool displayCharectersAndNames(std::string, std::string,std::string);
     void initializeNextButton(float x, float y, float width, float hight);
     bool displaySelectedWarzone(std::string);
+    bool displayGameDeck();
+    void initializeCharacterNumber();
 private:
     const char* menuButtonsTitle[4];
     int windowWidth = 1200;
@@ -74,6 +77,8 @@ private:
     Button next;// for moving to the next step of the game
     Texture2D charectersAndNames; // for introducing charecters with their names
     Texture2D selectedWarzoneBackground; // for announcing the selected warzone
+    Texture2D gameTable;//table background during the game
+    std::unordered_map <int,Texture2D> characterNumber;
     // std::string UIPlayerName;
     // std::vector <std::string> allUIPlayerNames;
     // bool ifPressed(Vector2 mousePos, bool mousePressed);
