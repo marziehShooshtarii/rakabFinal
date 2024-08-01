@@ -125,7 +125,13 @@ void UI::unloadingTexture()
     UnloadTexture(backgroundWarzoneMap);
     UnloadTexture(foregroundWarzoneMap);
 }
-
+// void UI::unloadTextBox()
+// {
+//     for (int i= 0 ; i < textBoxes.size(); i++)
+//     {
+        
+//     }
+// }
 void UI::initializeBackgroundMenu()
 {
     // backgroundMenu = LoadTexture("../assets/t.png");
@@ -379,7 +385,7 @@ bool UI::displayGameDeck()
         BeginDrawing();
         ClearBackground(RAYWHITE);
         DrawTexture(gameTable, 0, 0, WHITE);
-        
+
         EndDrawing();
         return 1;
     }
@@ -390,21 +396,21 @@ void UI::initializeCharacterNumber()
 {
     characterNumber =
         {
-            {"bella", 0},
-            {"caline", 1},
-            {"enna", 2},
-            {"atela", 3},
-            {"dimase", 4},
-            {"olivadi", 5},
-            {"lia", 6},
-            {"armento", 7},
-            {"morina", 8},
-            {"talmone", 9},
-            {"elinia", 10},
-            {"rollo", 11},
-            {"pladaci", 12},
-            {"borge", 13},
-            {"alora", 14},
+            // {"bella", 0},
+            // {"caline", 1},
+            // {"enna", 2},
+            // {"atela", 3},
+            // {"dimase", 4},
+            // {"olivadi", 5},
+            // {"lia", 6},
+            // {"armento", 7},
+            // {"morina", 8},
+            // {"talmone", 9},
+            // {"elinia", 10},
+            // {"rollo", 11},
+            // {"pladaci", 12},
+            // {"borge", 13},
+            // {"alora", 14},
 
         };
 }
@@ -560,6 +566,10 @@ bool UI::displayCharectersAndNames(std::string name1, std::string name2, std::st
         EndDrawing();
     }
 }*/
+void UI::clearTextBox()
+{
+    textBoxes.clear();
+}
 void UI::AddTextBox(float x, float y, float width, float height)
 {
     textBoxes.emplace_back(x, y, width, height);
@@ -586,6 +596,55 @@ void UI::textBoxDraw(Font font, int framesCounter)
     }
 }
 
+bool UI::getLuckNumbers(std::string starterPlayer)
+{
+    clearTextBox();
+    AddTextBox(180, 140, 100, 80);
+    AddTextBox(500, 140, 100, 80);
+    int framesCounter = 0;
+    initializeConfirmPlayerDataButton(610, 200, 180, 50);
+    const char *playerToStartWar = starterPlayer.c_str();
+    while (1)
+    {
+        framesCounter++;
+        textBoxUpdate();
+        Vector2 mousePssitionConfirmation = GetMousePosition();
+        bool mousePressedConfirmation = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
+        if (ConfirmPlayerData.ifPressed(mousePssitionConfirmation, mousePressedConfirmation))
+        {
+            return true;
+        }
+        Color textColor = {249, 105, 14, 225}; // color Ecstasy created
+        BeginDrawing();
+        ClearBackground(RAYWHITE);
+        DrawTexture(backgroundIdentityMenu, 0, 0, WHITE);
+        // DrawText(playerToStartWar, 100, 50, 50, WHITE);
+        // DrawText("you are the starter.", 100, 50, 50, WHITE);
+        DrawTextEx(gameFont, playerToStartWar, (Vector2){100, 50}, gameFont.baseSize, 1, textColor);
+        DrawTextEx(gameFont, "you are the starter.", (Vector2){145, 50}, gameFont.baseSize, 1, textColor);
+        DrawTextEx(gameFont, "please enter the good luck number:", (Vector2){100, 100}, gameFont.baseSize, 1, textColor);
+        DrawTextEx(gameFont, "please enter your bad luck number:", (Vector2){450, 100}, gameFont.baseSize, 1, textColor);
+        // DrawTextEx(gameFont, "please enter your color:", (Vector2){750, 50}, gameFont.baseSize, 1, textColor);
+        textBoxDraw(inputFont, framesCounter);
+        // for (int index = 0; index < 3; index++)
+        // {
+        Color selectedColor = WHITE;
+        if (CheckCollisionPointRec(mousePssitionConfirmation, ConfirmPlayerData.getRectangle()))
+        {
+            selectedColor = WHITE;
+        }
+        else
+        {
+            selectedColor = /*RED*/ {242, 120, 75, 225}; // Crusta color created
+        }
+        DrawTextEx(gameFont, this->ConfirmPlayerData.title, (Vector2){this->ConfirmPlayerData.getRectangle().x + 10, this->ConfirmPlayerData.getRectangle().y + 10}, fontMenu.baseSize, 1, selectedColor);
+        // }
+        // DrawTextEx(fontMenu, this->ConfirmPlayerData[1].title, (Vector2){this->ConfirmPlayerData[1].getRectangle().x + 10, this->ConfirmPlayerData[1].getRectangle().y + 10}, fontMenu.baseSize, 1, selectedColor);
+        // DrawTextEx(fontMenu, this->ConfirmPlayerData[2].title, (Vector2){this->ConfirmPlayerData[2].getRectangle().x + 10, this->ConfirmPlayerData[2].getRectangle().y + 10}, fontMenu.baseSize, 1, selectedColor);
+        // std::cout << "tah displayConfirmPlayerDataButton" << std::endl;
+        EndDrawing();
+    }
+}
 bool UI::thripleTextBoxDraw()
 {
     AddTextBox(100, 100, 200, 50);

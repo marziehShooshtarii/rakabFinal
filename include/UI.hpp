@@ -20,13 +20,15 @@ public:
     void displayMenuBackground();
     std::string menuGameLoop();
     void unloadingTexture();
+    void unloadTextBox();
     // void initializeFontMenu();
     void initializeBackgroundMenu();
     void initializeButtons();
     void initializeIdentityMenu();
     int displayPlayerNumberButton();
     void initializePlayerNumberButton();
-    bool Textbox();
+    void clearTextBox();
+    // bool Textbox();
     void AddTextBox(float x, float y, float width, float height);
     void textBoxUpdate();
     void textBoxDraw(Font font, int framesCounter);
@@ -53,6 +55,7 @@ public:
     bool displaySelectedWarzone(std::string);
     bool displayGameDeck();
     void initializeCharacterNumber();
+    bool getLuckNumbers(std::string);
 private:
     const char* menuButtonsTitle[4];
     int windowWidth = 1200;
