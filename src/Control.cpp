@@ -133,8 +133,8 @@ void Control::randomCardSet()
     setPlayers();
     std::cout << "after players" << std::endl;
     std::cout << "identity.getPlayerNumber() -> " << identity.getPlayerNumber() << std::endl;
-    std::cout<<"player name - > " <<players[0].getName()<<std::endl;
-    std::cout << "size vector owened states - > "<<players[0].getNumberOfOwenedStates()<<std::endl;
+    std::cout << "player name - > " << players[0].getName() << std::endl;
+    std::cout << "size vector owened states - > " << players[0].getNumberOfOwenedStates() << std::endl;
 
     // if (fistWarOfGame)
     // {
@@ -977,9 +977,9 @@ void Control::menu()
     ifCardsAreSet = false;
     newOrContinue = ui.menuGameLoop();
     int uiNumberPlayers = ui.displayPlayerNumberButton();
-    ui.initializeCardTextureAndName();
-    //ui.renderTextureForCharacterOnGame();
-    // StartNewGame();
+    // ui.initializeCardTextureAndName();
+    // ui.renderTextureForCharacterOnGame();
+    //  StartNewGame();
 
     // ui.Textbox();
     // ui.renderTextureForWarzoneMap();
@@ -1038,9 +1038,9 @@ void Control::menu()
                 StartNewGame();
                 // diplayBeggingOfTheGame();
                 std::cout << "ghable playingInput" << std::endl;
-               // playingInput();
+                // playingInput();
                 std::cout << "ghable findTexture" << std::endl;
-                //for (int k = 0; k < identity.getPlayerNumber(); k++)
+                // for (int k = 0; k < identity.getPlayerNumber(); k++)
                 ui.findTexture(players[0].getAllPlayerCards());
                 std::cout << "bade findTexture" << std::endl;
 
@@ -1100,23 +1100,23 @@ void Control::menu()
         // else
         //     saveReadAllInfo();
     }
-    else if (newOrContinue == "n")
-    {
-        // int uiNumberPlayers = ui.displayPlayerNumberButton();
-        // if (uiNumberPlayers == 3)
-        // {
-        //     std::cout << "uiNumberPlayers -> " << uiNumberPlayers << std::endl;
-        //     exitPrevious = false;
-        //     // exitGame = false;
-        // }
-        // if (uiNumberPlayers == 4)
-        // {
-        //     std::cout << "uiNumberPlayers -> " << uiNumberPlayers << std::endl;
-        //     exitPrevious = false;
-        //     // exitGame = false;
-        // }
-        StartNewGame();
-    }
+    // else if (newOrContinue == "n")
+    // {
+    //     // int uiNumberPlayers = ui.displayPlayerNumberButton();
+    //     // if (uiNumberPlayers == 3)
+    //     // {
+    //     //     std::cout << "uiNumberPlayers -> " << uiNumberPlayers << std::endl;
+    //     //     exitPrevious = false;
+    //     //     // exitGame = false;
+    //     // }
+    //     // if (uiNumberPlayers == 4)
+    //     // {
+    //     //     std::cout << "uiNumberPlayers -> " << uiNumberPlayers << std::endl;
+    //     //     exitPrevious = false;
+    //     //     // exitGame = false;
+    //     // }
+    //     StartNewGame();
+    // }
     ui.unloadingTexture();
     // else
     //     return;
@@ -1266,20 +1266,22 @@ void Control::saveReadAllInfo()
 }
 void Control::StartNewGame()
 {
-    // std::cout << "ghabl validate " << std::endl;
-    // validateIdentity();
-     std::cout << "ghabl dealing " << std::endl;
-    dealingCards();
-     std::cout << "ghabl shuffle" << std::endl;
-    shuffelingCards();
-     std::cout << "ghabl random" << std::endl;
     if (!ifCardsAreSet)
+    {
+        // std::cout << "ghabl validate " << std::endl;
+        // validateIdentity();
+        std::cout << "ghabl dealing " << std::endl;
+        dealingCards();
+        std::cout << "ghabl shuffle" << std::endl;
+        shuffelingCards();
+        std::cout << "ghabl random" << std::endl;
         randomCardSet();
-    std::cout << "ghable randomCardSet" <<std::endl;
-    //diplayBeggingOfTheGame();
-    std::cout << "ghable determinMinAge" <<std::endl;
-    determinMinAge();
-    std::cout << "bad random function" << std::endl;
+        std::cout << "ghable randomCardSet" << std::endl;
+        // diplayBeggingOfTheGame();
+        std::cout << "ghable determinMinAge" << std::endl;
+        determinMinAge();
+        std::cout << "bad random function" << std::endl;
+    }
 }
 void Control::initializingNumberOfSavedGames()
 {

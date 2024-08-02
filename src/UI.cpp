@@ -36,6 +36,7 @@ UI::UI()
     cards[14] = LoadTexture("../assets/s10.png");
 
     renderTextureForGameTable = LoadRenderTexture(character1.width, character1.height);
+    initializeCardTextureAndName();
 
     // temp = LoadImage("../assets/gt1.png");          // Load image
     // ImageFlipVertical(&temp);                       // Flip image vertically
@@ -440,7 +441,8 @@ bool UI::renderTextureForCharacterOnGame()
         std::cout << "aval3 renderTextureForCharacterOnGame" << std::endl;
         DrawTexture(character1, 0, 0, WHITE);
         std::cout << "aval4 renderTextureForCharacterOnGame" << std::endl;
-        for (int i = 0; i < 4; i++)
+        std::cout << "playerCardForUI.size " <<playerCardForUI.size()<<std::endl;
+        for (int i = 0; i < 10; i++)
             DrawTexture(playerCardForUI[i], (i * 100) + 400, 610, WHITE);
         std::cout << "aval5 renderTextureForCharacterOnGame" << std::endl;
         EndTextureMode();
@@ -475,16 +477,20 @@ void UI::initializeCardTextureAndName()
 
 void UI::findTexture(std::vector<Card> cardsForUI)
 {
+
     std::cout << "aval findTexture" << std::endl;
     std::cout << "cardsForUI.size " << cardsForUI.size() << std::endl;
-    for (int i = 0; i < cardsForUI.size(); i++)
-    {
+    // for (int i = 0; i < cardsForUI.size(); i++)
+    // {
 
         std::cout << "to for find" << std::endl;
-        std::cout <<"cardsForUI[i].getName()" << cardsForUI[i].getName() << std::endl;
-        playerCardForUI[i] = UIcardName.at(cardsForUI[i].getName());
+        //std::cout << "cardsForUI[i].getName()" << cardsForUI[i].getName() << std::endl;
+        std::cout << "playerCardForUI.size " << playerCardForUI.size() << std::endl;
+
+        playerCardForUI.push_back(cards[0]);
+        //playerCardForUI.emplace_back(UIcardName.at(cardsForUI[i].getName()));
         std::cout << "to for find2" << std::endl;
-    }
+    //}
     std::cout << "akhar findTexture" << std::endl;
 
     // return UIcardName.at(cardsForUI[cardIndex].getName());
