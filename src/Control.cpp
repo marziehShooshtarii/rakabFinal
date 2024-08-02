@@ -977,7 +977,7 @@ void Control::menu()
     ifCardsAreSet = false;
     newOrContinue = ui.menuGameLoop();
     int uiNumberPlayers = ui.displayPlayerNumberButton();
-    // ui.initializeCardTextureAndName();
+    ui.initializeCardTextureAndName();
     // ui.renderTextureForCharacterOnGame();
     //  StartNewGame();
 
@@ -1035,7 +1035,8 @@ void Control::menu()
                 // dealingCards();
                 // shuffelingCards();
                 // randomCardSet();
-                StartNewGame();
+                if (!ifCardsAreSet)
+                    StartNewGame();
                 // diplayBeggingOfTheGame();
                 std::cout << "ghable playingInput" << std::endl;
                 // playingInput();
@@ -1047,7 +1048,7 @@ void Control::menu()
                 ui.renderTextureForCharacterOnGame();
                 std::cout << "bade renderTextureForCharacterOnGame" << std::endl;
 
-                exitGame = false;
+                // exitGame = false;
             }
             if (uiNumberPlayers == 4)
             {
@@ -1070,12 +1071,12 @@ void Control::menu()
                     std::cout << "karaye ajib4 - > " << i << identity.getColor(i) << std::endl;
                 }
                 // exitPrevious = false;
-                exitGame = false;
+                // exitGame = false;
             }
             std::cout << "good luck -> " << goodLuckNumber << std::endl;
             std::cout << "bad luck -> " << badLuckNumber << std::endl;
             std::cout << "after display " << std::endl;
-            exitGame = false;
+            // exitGame = false;
         }
         if (newOrContinue == "c")
             exitGame = false;
