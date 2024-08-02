@@ -86,6 +86,10 @@ void Player::setCharacter(Texture2D UICharacter)
 {
     character = UICharacter;
 }
+std::vector<Card> Player::getAllPlayerCards()
+{
+    return playerCardList;
+}
 std::vector<Card> Player::getAllPlayedCards()
 {
     return playedCardList;

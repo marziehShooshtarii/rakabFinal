@@ -33,6 +33,7 @@ public:
     std::vector<Card>getAllPlayedCards();
     void eraseAllPlayedCards();
     void setCharacter(Texture2D);
+    std::vector<Card> getAllPlayerCards();
 
 private:
     int age;
