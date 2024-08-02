@@ -977,7 +977,8 @@ void Control::menu()
     ifCardsAreSet = false;
     newOrContinue = ui.menuGameLoop();
     int uiNumberPlayers = ui.displayPlayerNumberButton();
-    ui.renderTextureForCharacterOnGame();
+    ui.initializeCardTextureAndName();
+    //ui.renderTextureForCharacterOnGame();
     // StartNewGame();
 
     // ui.Textbox();
@@ -1036,7 +1037,16 @@ void Control::menu()
                 // randomCardSet();
                 StartNewGame();
                 // diplayBeggingOfTheGame();
-                playingInput();
+                std::cout << "ghable playingInput" << std::endl;
+               // playingInput();
+                std::cout << "ghable findTexture" << std::endl;
+                //for (int k = 0; k < identity.getPlayerNumber(); k++)
+                ui.findTexture(players[0].getAllPlayerCards());
+                std::cout << "bade findTexture" << std::endl;
+
+                ui.renderTextureForCharacterOnGame();
+                std::cout << "bade renderTextureForCharacterOnGame" << std::endl;
+
                 exitGame = false;
             }
             if (uiNumberPlayers == 4)
@@ -1258,16 +1268,18 @@ void Control::StartNewGame()
 {
     // std::cout << "ghabl validate " << std::endl;
     // validateIdentity();
-    // std::cout << "ghabl dealing " << std::endl;
+     std::cout << "ghabl dealing " << std::endl;
     dealingCards();
-    // std::cout << "ghabl shuffle" << std::endl;
+     std::cout << "ghabl shuffle" << std::endl;
     shuffelingCards();
-    // std::cout << "ghabl random" << std::endl;
+     std::cout << "ghabl random" << std::endl;
     if (!ifCardsAreSet)
         randomCardSet();
-    diplayBeggingOfTheGame();
+    std::cout << "ghable randomCardSet" <<std::endl;
+    //diplayBeggingOfTheGame();
+    std::cout << "ghable determinMinAge" <<std::endl;
     determinMinAge();
-    // std::cout << "bad random function" << std::endl;
+    std::cout << "bad random function" << std::endl;
 }
 void Control::initializingNumberOfSavedGames()
 {

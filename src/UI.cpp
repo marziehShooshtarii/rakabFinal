@@ -20,6 +20,20 @@ UI::UI()
     character3 = LoadTexture("../assets/gt3.png");
     character4 = LoadTexture("../assets/gt4.png");
     cards[0] = LoadTexture("../assets/bahar.png");
+    cards[1] = LoadTexture("../assets/zemestan.png");
+    cards[2] = LoadTexture("../assets/matarsak.png");
+    cards[3] = LoadTexture("../assets/tabl_zan.png");
+    cards[4] = LoadTexture("../assets/shah_dokht.png");
+    cards[5] = LoadTexture("../assets/shirzan.png");
+    cards[6] = LoadTexture("../assets/rish_sefid.png");
+    cards[7] = LoadTexture("../assets/parcham_dar.png");
+    cards[8] = LoadTexture("../assets/s1.png");
+    cards[9] = LoadTexture("../assets/s2.png");
+    cards[10] = LoadTexture("../assets/s3.png");
+    cards[11] = LoadTexture("../assets/s4.png");
+    cards[12] = LoadTexture("../assets/s5.png");
+    cards[13] = LoadTexture("../assets/s6.png");
+    cards[14] = LoadTexture("../assets/s10.png");
 
     renderTextureForGameTable = LoadRenderTexture(character1.width, character1.height);
 
@@ -144,6 +158,7 @@ void UI::unloadingTexture()
     UnloadTexture(character2);
     UnloadTexture(character3);
     UnloadTexture(character4);
+
     // UnloadRenderTexture(renderTextureForGameTable);
 }
 // void UI::unloadTextBox()
@@ -414,36 +429,65 @@ bool UI::displayGameTable()
     return false;
 }
 
-void UI::renderTextureForCharacterOnGame()
+bool UI::renderTextureForCharacterOnGame()
 {
-    BeginTextureMode(renderTextureForGameTable);
-    ClearBackground(BLANK);
-    DrawTexture(character1, 0, 0, WHITE);
-    DrawTexture(cards[0], 400, 610, WHITE);
-    EndTextureMode();
+    while (1)
+    {
+        std::cout << "aval renderTextureForCharacterOnGame" << std::endl;
+        BeginTextureMode(renderTextureForGameTable);
+        std::cout << "aval2 renderTextureForCharacterOnGame" << std::endl;
+        ClearBackground(BLANK);
+        std::cout << "aval3 renderTextureForCharacterOnGame" << std::endl;
+        DrawTexture(character1, 0, 0, WHITE);
+        std::cout << "aval4 renderTextureForCharacterOnGame" << std::endl;
+        for (int i = 0; i < 4; i++)
+            DrawTexture(playerCardForUI[i], (i * 100) + 400, 610, WHITE);
+        std::cout << "aval5 renderTextureForCharacterOnGame" << std::endl;
+        EndTextureMode();
+        std::cout << "aval6 renderTextureForCharacterOnGame" << std::endl;
+        return 1;
+    }
+    return false;
 }
 
 void UI::initializeCardTextureAndName()
 {
     UIcardName =
         {
-            {
-                {"bahar", cards[0]},
-                // {"zemestan", cards[1]},
-                // {"matarsak", cards[2]},
-                // {"tabl_zan", cards[3]},
-                // {"shah_dokht", cards[4]},
-                // {"shirzan", cards[5]},
-                // {"rish_sefid", cards[6]},
-                // {"parcham_dar", cards[7]},
-                // {"sarbaz_1", cards[8]},
-                // {"sarbaz_2", cards[9]},
-                // {"sarbaz_3", cards[10]},
-                // {"sarbaz_4", cards[11]},
-                // {"sarbaz_5", cards[12]},
-                // {"sarbaz_6", cards[13]},
-                // {"sarbaz_10", cards[14]},
-            }};
+            {"bahar", cards[0]},
+            {"zemestan", cards[1]},
+            {"matarsak", cards[2]},
+            {"tabl_zan", cards[3]},
+            {"shah_dokht", cards[4]},
+            {"shirzan", cards[5]},
+            {"rish_sefid", cards[6]},
+            {"parcham_dar", cards[7]},
+            {"sarbaz_1", cards[8]},
+            {"sarbaz_2", cards[9]},
+            {"sarbaz_3", cards[10]},
+            {"sarbaz_4", cards[11]},
+            {"sarbaz_5", cards[12]},
+            {"sarbaz_6", cards[13]},
+            {"sarbaz_10", cards[14]},
+
+        };
+}
+
+void UI::findTexture(std::vector<Card> cardsForUI)
+{
+    std::cout << "aval findTexture" << std::endl;
+    std::cout << "cardsForUI.size " << cardsForUI.size() << std::endl;
+    for (int i = 0; i < cardsForUI.size(); i++)
+    {
+
+        std::cout << "to for find" << std::endl;
+        std::cout <<"cardsForUI[i].getName()" << cardsForUI[i].getName() << std::endl;
+        playerCardForUI[i] = UIcardName.at(cardsForUI[i].getName());
+        std::cout << "to for find2" << std::endl;
+    }
+    std::cout << "akhar findTexture" << std::endl;
+
+    // return UIcardName.at(cardsForUI[cardIndex].getName());
 }
 
 void UI::initializeCharacterNumber()

@@ -6,6 +6,7 @@
 #include "raylib.h"
 #include "Button.hpp"
 #include "uiInput.hpp"
+#include "Card.hpp"
 // #define windowWidth = 600
 // #define windowHeight = 800
 //Font fontMenu = LoadFont("C:\rakabFinal\assets\KaushanScript-Regular.ttf");
@@ -57,8 +58,9 @@ public:
     void initializeCharacterNumber();
     bool getLuckNumbers(std::string);
     bool displayGameTable();
-    void renderTextureForCharacterOnGame();
+    bool renderTextureForCharacterOnGame();
     void initializeCardTextureAndName();
+    void findTexture(std::vector<Card>);
 private:
     const char* menuButtonsTitle[4];
     int windowWidth = 1200;
@@ -93,6 +95,7 @@ private:
     RenderTexture2D renderTextureForGameTable;
     Texture2D cards[15];
     Image temp;
+    std::vector <Texture2D> playerCardForUI;
     // uiInput UILuckNumber;//needed to get the luckNumber 
     // std::string UIPlayerName;
     // std::vector <std::string> allUIPlayerNames;
