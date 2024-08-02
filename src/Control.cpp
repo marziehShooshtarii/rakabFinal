@@ -975,7 +975,6 @@ void Control::menu()
     bool exitGame = true;
     bool exitPrevious = true;
     ifCardsAreSet = false;
-    fistWarOfGame = true;
     newOrContinue = ui.menuGameLoop();
     int uiNumberPlayers = ui.displayPlayerNumberButton();
     ui.renderTextureForCharacterOnGame();
