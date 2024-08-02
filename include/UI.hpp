@@ -58,6 +58,7 @@ public:
     bool getLuckNumbers(std::string);
     bool displayGameTable();
     void renderTextureForCharacterOnGame();
+    void initializeCardTextureAndName();
 private:
     const char* menuButtonsTitle[4];
     int windowWidth = 1200;
@@ -84,11 +85,14 @@ private:
     Texture2D selectedWarzoneBackground; // for announcing the selected warzone
     Texture2D gameTable;//table background during the game
     std::unordered_map <int,Texture2D> characterNumber;
+    std::unordered_map <std::string,Texture2D> UIcardName;
     Texture2D character1;
     Texture2D character2;
     Texture2D character3;
     Texture2D character4;
     RenderTexture2D renderTextureForGameTable;
+    Texture2D cards[15];
+    Image temp;
     // uiInput UILuckNumber;//needed to get the luckNumber 
     // std::string UIPlayerName;
     // std::vector <std::string> allUIPlayerNames;

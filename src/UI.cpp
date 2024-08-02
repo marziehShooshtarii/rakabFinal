@@ -15,14 +15,19 @@ UI::UI()
     charectersAndNames = LoadTexture("../assets/c1.png");
     selectedWarzoneBackground = LoadTexture("../assets/selected_warzone2.png");
     gameTable = LoadTexture("../assets/game_background.png");
-    character1  = LoadTexture("../assets/gt1.png");
-    character2  = LoadTexture("../assets/gt2.png");
-    character3  = LoadTexture("../assets/gt3.png");
-    character4  = LoadTexture("../assets/gt4.png");
-   // renderTextureForGameTable = LoadRenderTexture(gameTable.width,gameTable.height);
-    
+    character1 = LoadTexture("../assets/gt1.png");
+    character2 = LoadTexture("../assets/gt2.png");
+    character3 = LoadTexture("../assets/gt3.png");
+    character4 = LoadTexture("../assets/gt4.png");
+    cards[0] = LoadTexture("../assets/bahar.png");
 
-    // foregroundWarzoneMap = LoadTexture("../assets/foreground_map.png");
+    renderTextureForGameTable = LoadRenderTexture(character1.width, character1.height);
+
+    // temp = LoadImage("../assets/gt1.png");          // Load image
+    // ImageFlipVertical(&temp);                       // Flip image vertically
+    // Texture2D texture = LoadTextureFromImage(temp); // Load texture from image
+    // UnloadImage(temp);                              // Unload image from RAM
+    //  foregroundWarzoneMap = LoadTexture("../assets/foreground_map.png");
 
     // initializeFontMenu();
     // initializeBackgroundMenu();
@@ -131,7 +136,7 @@ void UI::unloadingTexture()
     UnloadTexture(backgroundMenu);
     UnloadTexture(backgroundIdentityMenu);
     UnloadTexture(backgroundWarzoneMap);
-    //UnloadTexture(foregroundWarzoneMap);
+    // UnloadTexture(foregroundWarzoneMap);
     UnloadTexture(charectersAndNames);
     UnloadTexture(selectedWarzoneBackground);
     UnloadTexture(gameTable);
@@ -139,15 +144,13 @@ void UI::unloadingTexture()
     UnloadTexture(character2);
     UnloadTexture(character3);
     UnloadTexture(character4);
-    //UnloadRenderTexture(renderTextureForGameTable);
-
-    
+    // UnloadRenderTexture(renderTextureForGameTable);
 }
 // void UI::unloadTextBox()
 // {
 //     for (int i= 0 ; i < textBoxes.size(); i++)
 //     {
-        
+
 //     }
 // }
 void UI::initializeBackgroundMenu()
@@ -402,8 +405,8 @@ bool UI::displayGameTable()
     {
         BeginDrawing();
         ClearBackground(RAYWHITE);
-        DrawTexture(character1, 0, 0, WHITE);
-        //DrawTexture(renderTextureForGameTable.texture, windowWidth/2 - renderTextureForGameTable.texture.width / 2, windowWidth / 2 - renderTextureForGameTable.texture.height / 2, WHITE);
+        // DrawTexture(character1, 0, 0, WHITE);
+        DrawTextureRec(renderTextureForGameTable.texture, (Rectangle){0, 0, (float)renderTextureForGameTable.texture.width, (float)-renderTextureForGameTable.texture.height}, Vector2{0, 0}, WHITE);
 
         EndDrawing();
         return 1;
@@ -415,10 +418,32 @@ void UI::renderTextureForCharacterOnGame()
 {
     BeginTextureMode(renderTextureForGameTable);
     ClearBackground(BLANK);
-    DrawTexture(gameTable ,0 ,0,WHITE);
-    DrawTexture(character1 ,0 ,0,WHITE);
+    DrawTexture(character1, 0, 0, WHITE);
+    DrawTexture(cards[0], 400, 610, WHITE);
     EndTextureMode();
-    
+}
+
+void UI::initializeCardTextureAndName()
+{
+    UIcardName =
+        {
+            {
+                {"bahar", cards[0]},
+                // {"zemestan", cards[1]},
+                // {"matarsak", cards[2]},
+                // {"tabl_zan", cards[3]},
+                // {"shah_dokht", cards[4]},
+                // {"shirzan", cards[5]},
+                // {"rish_sefid", cards[6]},
+                // {"parcham_dar", cards[7]},
+                // {"sarbaz_1", cards[8]},
+                // {"sarbaz_2", cards[9]},
+                // {"sarbaz_3", cards[10]},
+                // {"sarbaz_4", cards[11]},
+                // {"sarbaz_5", cards[12]},
+                // {"sarbaz_6", cards[13]},
+                // {"sarbaz_10", cards[14]},
+            }};
 }
 
 void UI::initializeCharacterNumber()
