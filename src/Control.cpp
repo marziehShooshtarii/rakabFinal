@@ -961,6 +961,7 @@ void Control::menu()
     bool exitPrevious = true;
     newOrContinue = ui.menuGameLoop();
     int uiNumberPlayers = ui.displayPlayerNumberButton();
+    //ui.renderTextureForCharacterOnGame();
     // ui.Textbox();
     // ui.renderTextureForWarzoneMap();
     while (WindowShouldClose() == false && exitGame == true /*&& exitPrevious == true*/)
@@ -1010,6 +1011,7 @@ void Control::menu()
                 badLuckNumber = ui.getPlayerAgeAndLuckFromUI(1);
                 ui.displayCharectersAndNames(identity.getName(0), identity.getName(1), identity.getName(2));
                 ui.displaySelectedWarzone(warzone);
+                ui.displayGameTable();
                 exitGame = false;
             }
             if (uiNumberPlayers == 4)
