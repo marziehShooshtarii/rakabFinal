@@ -415,39 +415,38 @@ bool UI::displaySelectedWarzone(std::string UIWarzone)
     }
     return false;
 }
-bool UI::displayGameTable()
+void UI::displayGameTable()
 {
-    while (1)
-    {
-        BeginDrawing();
-        ClearBackground(RAYWHITE);
-        // DrawTexture(character1, 0, 0, WHITE);
-        DrawTextureRec(renderTextureForGameTable.texture, (Rectangle){0, 0, (float)renderTextureForGameTable.texture.width, (float)-renderTextureForGameTable.texture.height}, Vector2{0, 0}, WHITE);
+    BeginDrawing();
+    ClearBackground(RAYWHITE);
+    // DrawTexture(character1, 0, 0, WHITE);
+    DrawTextureRec(renderTextureForGameTable.texture, (Rectangle){0, 0, (float)renderTextureForGameTable.texture.width, (float)-renderTextureForGameTable.texture.height}, Vector2{0, 0}, WHITE);
 
-        EndDrawing();
-        return 1;
-    }
-    return false;
+    EndDrawing();
+    std::clog << "end of display game table" << std::endl;
+    return;
 }
 
 bool UI::renderTextureForCharacterOnGame()
 {
+
     while (1)
     {
-        std::cout << "aval renderTextureForCharacterOnGame" << std::endl;
-        BeginTextureMode(renderTextureForGameTable);
-        std::cout << "aval2 renderTextureForCharacterOnGame" << std::endl;
-        ClearBackground(BLANK);
-        std::cout << "aval3 renderTextureForCharacterOnGame" << std::endl;
-        DrawTexture(character1, 0, 0, WHITE);
-        std::cout << "aval4 renderTextureForCharacterOnGame" << std::endl;
-        std::cout << "playerCardForUI.size " <<playerCardForUI.size()<<std::endl;
-        for (int i = 0; i < 10; i++)
-            DrawTexture(playerCardForUI[i], (i * 100) + 400, 610, WHITE);
-        std::cout << "aval5 renderTextureForCharacterOnGame" << std::endl;
-        EndTextureMode();
-        std::cout << "aval6 renderTextureForCharacterOnGame" << std::endl;
-        return 1;
+
+    // std::clog << this->playerCardForUI.size() << std::endl;
+
+    // BeginTextureMode(renderTextureForGameTable);
+    BeginDrawing();
+    ClearBackground(BLANK);
+    DrawTexture(character1, 0, 0, WHITE);
+    for (int i = 0; i < 4; i++)
+    {
+        DrawTexture(playerCardForUI[i], (i * 100) + 400, 610, WHITE);
+    }
+    // EndTextureMode();
+    EndDrawing();
+
+    // return 1;
     }
     return false;
 }
@@ -480,17 +479,17 @@ void UI::findTexture(std::vector<Card> cardsForUI)
 
     std::cout << "aval findTexture" << std::endl;
     std::cout << "cardsForUI.size " << cardsForUI.size() << std::endl;
-    // for (int i = 0; i < cardsForUI.size(); i++)
-    // {
+    for (int i = 0; i < cardsForUI.size(); i++)
+    {
 
         std::cout << "to for find" << std::endl;
-        //std::cout << "cardsForUI[i].getName()" << cardsForUI[i].getName() << std::endl;
+        // std::cout << "cardsForUI[i].getName()" << cardsForUI[i].getName() << std::endl;
         std::cout << "playerCardForUI.size " << playerCardForUI.size() << std::endl;
 
-        playerCardForUI.push_back(cards[0]);
-        //playerCardForUI.emplace_back(UIcardName.at(cardsForUI[i].getName()));
+        playerCardForUI.emplace_back(UIcardName.at(cardsForUI[i].getName()));
+        // playerCardForUI.emplace_back(UIcardName.at(cardsForUI[i].getName()));
         std::cout << "to for find2" << std::endl;
-    //}
+    }
     std::cout << "akhar findTexture" << std::endl;
 
     // return UIcardName.at(cardsForUI[cardIndex].getName());

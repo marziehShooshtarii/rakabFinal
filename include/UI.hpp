@@ -57,7 +57,7 @@ public:
     
     void initializeCharacterNumber();
     bool getLuckNumbers(std::string);
-    bool displayGameTable();
+    void displayGameTable();
     bool renderTextureForCharacterOnGame();
     void initializeCardTextureAndName();
     void findTexture(std::vector<Card>);
