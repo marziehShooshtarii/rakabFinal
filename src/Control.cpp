@@ -129,10 +129,22 @@ void Control::setPlayers()
 }
 void Control::randomCardSet()
 {
+
     setPlayers();
     std::cout << "after players" << std::endl;
+    std::cout << "identity.getPlayerNumber() -> " << identity.getPlayerNumber() << std::endl;
+    std::cout<<"player name - > " <<players[0].getName()<<std::endl;
+    std::cout << "size vector owened states - > "<<players[0].getNumberOfOwenedStates()<<std::endl;
+
+    // if (fistWarOfGame)
+    // {
+    //     for (int i = 0; i < identity.getPlayerNumber(); i++)
+    //         players[i].eraseOwenedStates();
+    // }
+
     for (int j = 0; j < identity.getPlayerNumber(); j++)
     {
+        std::cout << "identity.getPlayerNumber() -> " << identity.getPlayerNumber() << std::endl;
         for (int i = 0; i < (10 + players[j].getNumberOfOwenedStates()); i++)
         {
             std::cout << "identity.getPlayerNumber() -> " << identity.getPlayerNumber() << std::endl;
@@ -144,6 +156,7 @@ void Control::randomCardSet()
         }
         std::cout << "bad for aval " << std::endl;
     }
+    ifCardsAreSet = true;
     std::cout << "bad for dovoom " << std::endl;
 }
 void Control::validateIdentity()
@@ -154,7 +167,9 @@ void Control::validateIdentity()
 }
 void Control::shuffelingCards()
 {
+    std::cout << "too shuffle " << std::endl;
     random_shuffle(allCards.begin(), allCards.end());
+    std::cout << "tah shuffle " << std::endl;
 }
 void Control::displayStartOfWar()
 {
@@ -592,9 +607,9 @@ bool Control::determinWinnerOfWar()
         {
             if (scorsAtEndOfWar[k] % goodLuckNumber == 0)
                 scorsAtEndOfWar[k] *= 2;
-                
+
             if (scorsAtEndOfWar[k] % goodLuckNumber == 0)
-                scorsAtEndOfWar[k] = -1;//the player can't be the winner anyway
+                scorsAtEndOfWar[k] = -1; // the player can't be the winner anyway
         }
         if (scorsAtEndOfWar[i] > winnerScore)
         {
@@ -959,9 +974,13 @@ void Control::menu()
     std::cout << "c1" << std::endl;
     bool exitGame = true;
     bool exitPrevious = true;
+    ifCardsAreSet = false;
+    fistWarOfGame = true;
     newOrContinue = ui.menuGameLoop();
     int uiNumberPlayers = ui.displayPlayerNumberButton();
-    //ui.renderTextureForCharacterOnGame();
+    ui.renderTextureForCharacterOnGame();
+    // StartNewGame();
+
     // ui.Textbox();
     // ui.renderTextureForWarzoneMap();
     while (WindowShouldClose() == false && exitGame == true /*&& exitPrevious == true*/)
@@ -974,6 +993,7 @@ void Control::menu()
             if (uiNumberPlayers == 3)
             {
                 std::cout << "uiNumberPlayers -> " << uiNumberPlayers << std::endl;
+                std::cout << "identity.getPlayerNumber - > " << identity.getPlayerNumber() << std::endl;
                 for (int i = 0; i < 3; i++)
                 {
                     ui.thripleTextBoxDraw();
@@ -1012,6 +1032,12 @@ void Control::menu()
                 ui.displayCharectersAndNames(identity.getName(0), identity.getName(1), identity.getName(2));
                 ui.displaySelectedWarzone(warzone);
                 ui.displayGameTable();
+                // dealingCards();
+                // shuffelingCards();
+                // randomCardSet();
+                StartNewGame();
+                // diplayBeggingOfTheGame();
+                playingInput();
                 exitGame = false;
             }
             if (uiNumberPlayers == 4)
@@ -1037,8 +1063,8 @@ void Control::menu()
                 // exitPrevious = false;
                 exitGame = false;
             }
-                std::cout << "good luck -> " << goodLuckNumber << std::endl;
-                std::cout << "bad luck -> " << badLuckNumber << std::endl;
+            std::cout << "good luck -> " << goodLuckNumber << std::endl;
+            std::cout << "bad luck -> " << badLuckNumber << std::endl;
             std::cout << "after display " << std::endl;
             exitGame = false;
         }
@@ -1232,13 +1258,14 @@ void Control::saveReadAllInfo()
 void Control::StartNewGame()
 {
     // std::cout << "ghabl validate " << std::endl;
-    validateIdentity();
+    // validateIdentity();
     // std::cout << "ghabl dealing " << std::endl;
     dealingCards();
     // std::cout << "ghabl shuffle" << std::endl;
     shuffelingCards();
     // std::cout << "ghabl random" << std::endl;
-    randomCardSet();
+    if (!ifCardsAreSet)
+        randomCardSet();
     diplayBeggingOfTheGame();
     determinMinAge();
     // std::cout << "bad random function" << std::endl;
@@ -1260,5 +1287,5 @@ void Control::run()
     initializeSpecialCards();
     menu();
     std::cout << "safewe" << std::endl;
-    playingInput();
+    // playingInput();
 }

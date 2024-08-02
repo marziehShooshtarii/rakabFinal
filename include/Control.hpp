@@ -129,4 +129,6 @@ private:
     UI ui;
     int goodLuckNumber;
     int badLuckNumber;
+    bool ifCardsAreSet;
+    //bool fistWarOfGame; //to check if it's the first war
 };
