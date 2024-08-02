@@ -15,6 +15,12 @@ UI::UI()
     charectersAndNames = LoadTexture("../assets/c1.png");
     selectedWarzoneBackground = LoadTexture("../assets/selected_warzone2.png");
     gameTable = LoadTexture("../assets/game_background.png");
+    character1  = LoadTexture("../assets/gt1.png");
+    character2  = LoadTexture("../assets/gt2.png");
+    character3  = LoadTexture("../assets/gt3.png");
+    character4  = LoadTexture("../assets/gt4.png");
+   // renderTextureForGameTable = LoadRenderTexture(gameTable.width,gameTable.height);
+    
 
     // foregroundWarzoneMap = LoadTexture("../assets/foreground_map.png");
 
@@ -120,10 +126,22 @@ void UI::unloadingTexture()
 {
     UnloadFont(fontMenu);
     UnloadFont(gameFont);
+    UnloadFont(inputFont);
+
     UnloadTexture(backgroundMenu);
     UnloadTexture(backgroundIdentityMenu);
     UnloadTexture(backgroundWarzoneMap);
-    UnloadTexture(foregroundWarzoneMap);
+    //UnloadTexture(foregroundWarzoneMap);
+    UnloadTexture(charectersAndNames);
+    UnloadTexture(selectedWarzoneBackground);
+    UnloadTexture(gameTable);
+    UnloadTexture(character1);
+    UnloadTexture(character2);
+    UnloadTexture(character3);
+    UnloadTexture(character4);
+    //UnloadRenderTexture(renderTextureForGameTable);
+
+    
 }
 // void UI::unloadTextBox()
 // {
@@ -378,18 +396,29 @@ bool UI::displaySelectedWarzone(std::string UIWarzone)
     }
     return false;
 }
-bool UI::displayGameDeck()
+bool UI::displayGameTable()
 {
     while (1)
     {
         BeginDrawing();
         ClearBackground(RAYWHITE);
-        DrawTexture(gameTable, 0, 0, WHITE);
+        DrawTexture(character1, 0, 0, WHITE);
+        //DrawTexture(renderTextureForGameTable.texture, windowWidth/2 - renderTextureForGameTable.texture.width / 2, windowWidth / 2 - renderTextureForGameTable.texture.height / 2, WHITE);
 
         EndDrawing();
         return 1;
     }
     return false;
+}
+
+void UI::renderTextureForCharacterOnGame()
+{
+    BeginTextureMode(renderTextureForGameTable);
+    ClearBackground(BLANK);
+    DrawTexture(gameTable ,0 ,0,WHITE);
+    DrawTexture(character1 ,0 ,0,WHITE);
+    EndTextureMode();
+    
 }
 
 void UI::initializeCharacterNumber()

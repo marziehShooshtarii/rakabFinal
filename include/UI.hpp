@@ -53,9 +53,11 @@ public:
     bool displayCharectersAndNames(std::string, std::string,std::string);
     void initializeNextButton(float x, float y, float width, float hight);
     bool displaySelectedWarzone(std::string);
-    bool displayGameDeck();
+    
     void initializeCharacterNumber();
     bool getLuckNumbers(std::string);
+    bool displayGameTable();
+    void renderTextureForCharacterOnGame();
 private:
     const char* menuButtonsTitle[4];
     int windowWidth = 1200;
@@ -86,7 +88,7 @@ private:
     Texture2D character2;
     Texture2D character3;
     Texture2D character4;
-
+    RenderTexture2D renderTextureForGameTable;
     // uiInput UILuckNumber;//needed to get the luckNumber 
     // std::string UIPlayerName;
     // std::vector <std::string> allUIPlayerNames;
