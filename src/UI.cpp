@@ -14,7 +14,7 @@ UI::UI()
     backgroundWarzoneMap = LoadTexture("../assets/warzone_map.png");
     charectersAndNames = LoadTexture("../assets/c1.png");
     selectedWarzoneBackground = LoadTexture("../assets/selected_warzone2.png");
-    Texture2D gameTable = LoadTexture("../assets/game_background.png");
+    gameTable = LoadTexture("../assets/game_background.png");
 
     // foregroundWarzoneMap = LoadTexture("../assets/foreground_map.png");
 
@@ -396,21 +396,10 @@ void UI::initializeCharacterNumber()
 {
     characterNumber =
         {
-            // {"bella", 0},
-            // {"caline", 1},
-            // {"enna", 2},
-            // {"atela", 3},
-            // {"dimase", 4},
-            // {"olivadi", 5},
-            // {"lia", 6},
-            // {"armento", 7},
-            // {"morina", 8},
-            // {"talmone", 9},
-            // {"elinia", 10},
-            // {"rollo", 11},
-            // {"pladaci", 12},
-            // {"borge", 13},
-            // {"alora", 14},
+            {0, character1},
+            {1, character2},
+            {2, character3},
+            {3, character4},
 
         };
 }

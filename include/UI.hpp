@@ -82,6 +82,11 @@ private:
     Texture2D selectedWarzoneBackground; // for announcing the selected warzone
     Texture2D gameTable;//table background during the game
     std::unordered_map <int,Texture2D> characterNumber;
+    Texture2D character1;
+    Texture2D character2;
+    Texture2D character3;
+    Texture2D character4;
+
     // uiInput UILuckNumber;//needed to get the luckNumber 
     // std::string UIPlayerName;
     // std::vector <std::string> allUIPlayerNames;
