@@ -143,7 +143,7 @@ private:
         charactersIntro,
         showSelectedWarzone,
         displayDeck,
-
+        displayGameTable,
 
 
     };

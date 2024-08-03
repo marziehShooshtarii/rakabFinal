@@ -1062,12 +1062,12 @@ void Control::menu()
         case showSelectedWarzone:
         {
             ui.displaySelectedWarzone(warzone);
-             for (int i = 0; i < 3; i++)
-                {
-                    std::cout << "karaye ajib3 - > " << i << identity.getAge(i) << std::endl;
-                    std::cout << "karaye ajib4 - > " << i << identity.getName(i) << std::endl;
-                    std::cout << "karaye ajib4 - > " << i << identity.getColor(i) << std::endl;
-                }
+            for (int i = 0; i < 3; i++)
+            {
+                std::cout << "karaye ajib3 - > " << i << identity.getAge(i) << std::endl;
+                std::cout << "karaye ajib4 - > " << i << identity.getName(i) << std::endl;
+                std::cout << "karaye ajib4 - > " << i << identity.getColor(i) << std::endl;
+            }
             uiStates = displayDeck;
             break;
         }
@@ -1080,6 +1080,12 @@ void Control::menu()
             ui.findTexture(players[0].getAllPlayerCards());
 
             ui.renderTextureForCharacterOnGame();
+            uiStates = displayGameTable;
+            break;
+        }
+        case displayGameTable:
+        {
+            ui.displayGameTableAndCharacters();
             break;
         }
         }
