@@ -978,6 +978,7 @@ void Control::menu()
     UIStates uiStates;
     uiStates = UIMenu;
     std::cout << "menu1" << std::endl;
+    initializeUIStates();
     while (WindowShouldClose() == false /*&& exitGame == true /*&& exitPrevious == true*/)
     {
         // std::cout << "menu2" << std::endl;
@@ -1068,10 +1069,10 @@ void Control::menu()
                 std::cout << "karaye ajib4 - > " << i << identity.getName(i) << std::endl;
                 std::cout << "karaye ajib4 - > " << i << identity.getColor(i) << std::endl;
             }
-            uiStates = displayDeck;
+            uiStates = displayFirstPlayersCard;
             break;
         }
-        case displayDeck:
+        case displayFirstPlayersCard:
         {
             ui.displayGameTable();
             if (!ifCardsAreSet)
@@ -1085,7 +1086,23 @@ void Control::menu()
         }
         case displayGameTable:
         {
+            PlayerTurnHandler++;
             ui.displayGameTableAndCharacters();
+            uiStates = displayFirstPlayersCard;
+            if (uiStates == PlayerTurnHandler)
+                break;
+            else
+                uiStates = statesControler.at(PlayerTurnHandler);
+            break;
+        }
+        case displaySecondPlayersCard:
+        {
+            std::cout << "displaySecondPlayersCard" << std::endl;
+            break;
+        }
+        case displayThirdPlayersCard:
+        {
+            std::cout << "displayThirdPlayersCard" << std::endl;
             break;
         }
         }
@@ -1246,6 +1263,15 @@ void Control::menu()
     //     return;
 
     // std::cout << "Exit Menu" << std::endl;
+}
+void Control::initializeUIStates()
+{
+    statesControler =
+        {
+            {0, UIStates::displayFirstPlayersCard},
+            {1, UIStates::displaySecondPlayersCard},
+            {2, UIStates::displayThirdPlayersCard},
+        };
 }
 bool Control::determinNumberOfSavedGame()
 {
