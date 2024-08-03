@@ -242,7 +242,7 @@ void UI::initializeWarzoneButton(float x, float y, float width, float hight)
     UIwarzone[8] = (Button){(Rectangle){489 + x, 237 + y, width, hight}, "morina", false};   // morina
     UIwarzone[9] = (Button){(Rectangle){293 + x, 175 + y, width, hight}, "talmone", false};  // talmone
     UIwarzone[10] = (Button){(Rectangle){150 + x, 135 + y, width, hight}, "elinia", false};  // elinia
-    UIwarzone[11] = (Button){(Rectangle){370 + x, 84 + y, width, hight}, "rollo", false};   // rollo
+    UIwarzone[11] = (Button){(Rectangle){370 + x, 84 + y, width, hight}, "rollo", false};    // rollo
     UIwarzone[12] = (Button){(Rectangle){619 + x, 108 + y, width, hight}, "pladaci", false}; // pladaci
     UIwarzone[13] = (Button){(Rectangle){651 + x, 298 + y, width, hight}, "borge", false};   // borge
     UIwarzone[14] = (Button){(Rectangle){719 + x, 550 + y, width, hight}, "alora", false};   // alora
@@ -288,7 +288,7 @@ int UI::displayWarzoneButton(std::string starterPlayer)
         ClearBackground(RAYWHITE);
         for (int idx = 0; idx < 15; ++idx)
         {
-            std::cout << "to for " << std::endl;
+            //std::cout << "to for " << std::endl;
             Color selectedColor = WHITE;
             if (CheckCollisionPointRec(mousePssitionIdentity, UIwarzone[idx].getRectangle()))
             {
@@ -300,7 +300,7 @@ int UI::displayWarzoneButton(std::string starterPlayer)
             }
 
             DrawTextEx(fontMenu, this->UIwarzone[idx].title, (Vector2){this->UIwarzone[idx].getRectangle().x + 10, this->UIwarzone[idx].getRectangle().y + 10}, fontMenu.baseSize, 1, selectedColor);
-            std::cout << "tah for " << std::endl;
+           // std::cout << "tah for " << std::endl;
         }
 
         // EndTextureMode(); // Stop drawing to the render texture
