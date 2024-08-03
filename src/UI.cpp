@@ -14,7 +14,7 @@ UI::UI()
     backgroundWarzoneMap = LoadTexture("../assets/warzone_map.png");
     charectersAndNames = LoadTexture("../assets/c1.png");
     selectedWarzoneBackground = LoadTexture("../assets/selected_warzone2.png");
-    gameTable = LoadTexture("../assets/game_background.png");
+    gameTable = LoadTexture("../assets/charactersAndTable.png");
     character1 = LoadTexture("../assets/gt1.png");
     character2 = LoadTexture("../assets/gt2.png");
     character3 = LoadTexture("../assets/gt3.png");
@@ -429,26 +429,31 @@ void UI::displayGameTable()
 
 bool UI::renderTextureForCharacterOnGame()
 {
+    //bool isCardSelected = false;
     initializeCardsButtons(0, 0, 120, 50);
-    while (1)
+    while (/*!isCardSelected*/1)
     {
         Vector2 mousePssitionIdentity = GetMousePosition();
         bool mousePressedIdentity = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
-        std::cout << mousePressedIdentity << std::endl;
+        // std::cout << mousePressedIdentity << std::endl;
 
+        // std::clog << this->playerCardForUI.size() << std::endl;
+
+        // BeginTextureMode(renderTextureForGameTable);
         for (int i = 0; i < 10; i++)
         {
             if (cardsButtons[i].ifPressed(mousePssitionIdentity, mousePressedIdentity))
             {
-                //UnloadTexture(playerCardForUI[0]);
-                //playerCardForUI.pop_back();
+                // UnloadTexture(playerCardForUI[0]);
+                playerCardForUI.erase(playerCardForUI.begin());
+                //isCardSelected = true;
                 std::cout << "warzone selected - > " << i << std::endl;
+                std::cout << "playerCardForUI - > " << playerCardForUI.size() << std::endl;
                 return i;
             }
         }
-        // std::clog << this->playerCardForUI.size() << std::endl;
-
-        // BeginTextureMode(renderTextureForGameTable);
+        // if (isCardSelected)
+        //     return 0;
         BeginDrawing();
         ClearBackground(BLANK);
         DrawTexture(character1, 0, 0, WHITE);
@@ -465,7 +470,7 @@ bool UI::renderTextureForCharacterOnGame()
         {
             // std::cout << "to for " << std::endl;
             Color selectedColor = WHITE;
-            if (CheckCollisionPointRec(mousePssitionIdentity, UIwarzone[idx].getRectangle()))
+            if (CheckCollisionPointRec(mousePssitionIdentity, cardsButtons[idx].getRectangle()))
             {
                 selectedColor = WHITE;
             }
@@ -541,6 +546,39 @@ bool UI::displayCardsButtons()
     return -1;
 
     return false;
+}
+void UI::displayGameTableAndCharacters()
+{
+        while (1)
+    {
+        // Vector2 mousePssitionIdentity = GetMousePosition();
+        // bool mousePressedIdentity = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
+        // std::cout << mousePressedIdentity << std::endl;
+
+        // if (next.ifPressed(mousePssitionIdentity, mousePressedIdentity))
+        // {
+        //     std::cout << "too if " << std::endl;
+        //     return true; // next button has been pressed
+        // }
+
+        BeginDrawing();
+        ClearBackground(RAYWHITE);
+        DrawTexture(gameTable, 0, 0, WHITE);
+
+        // Color selectedColor = WHITE;
+        // if (CheckCollisionPointRec(mousePssitionIdentity, next.getRectangle()))
+        // {
+        //     selectedColor = WHITE;
+        // }
+        // else
+        // {
+        //     selectedColor = RED;
+        // }
+
+        // DrawTextEx(fontMenu, this->next.title, (Vector2){this->next.getRectangle().x + 10, this->next.getRectangle().y + 10}, fontMenu.baseSize, 1, selectedColor);
+
+        EndDrawing();
+    }
 }
 void UI::initializeCardTextureAndName()
 {
