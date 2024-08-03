@@ -1073,7 +1073,7 @@ void Control::menu()
         }
         case displayPlayersCard:
         {
-            ui.displaycharactersCards();
+            ui.displaycharactersCards(PlayerTurnHandler % 3);
             if (!ifCardsAreSet)
                 StartNewGame();
             std::cout << "ghable findTexture too control" << std::endl;
