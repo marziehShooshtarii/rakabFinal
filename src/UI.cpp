@@ -569,7 +569,7 @@ void UI::displayGameTableAndCharacters()
         std::cout << "firstCharacterPlayedCards.size() - > " << firstCharacterPlayedCards.size() <<std::endl;
         for (int i = 0; i < firstCharacterPlayedCards.size(); i++)
 
-            DrawTexture(firstCharacterPlayedCards[i], (i * 65) + 180, 270, WHITE);
+            DrawTexture(firstCharacterPlayedCards[i], (i * 65) + 100, 290, WHITE);
         // Color selectedColor = WHITE;
         // if (CheckCollisionPointRec(mousePssitionIdentity, next.getRectangle()))
         // {
