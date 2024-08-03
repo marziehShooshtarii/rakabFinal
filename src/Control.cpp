@@ -1076,16 +1076,20 @@ void Control::menu()
             ui.displaycharactersCards();
             if (!ifCardsAreSet)
                 StartNewGame();
-
-            ui.findTexture(players[PlayerTurnHandler].getAllPlayerCards(),PlayerTurnHandler);
-
-            ui.renderTextureForCharacterOnGameTable();
+            std::cout << "ghable findTexture too control" << std::endl;
+            if (PlayerTurnHandler < 3)
+                ui.findTexture(players[PlayerTurnHandler % 3].getAllPlayerCards(), PlayerTurnHandler % 3);
+            std::cout << "ghable findTexture too control 2" << std::endl;
+            std::cout << "UITurnHandler too control" << PlayerTurnHandler << std::endl;
+            ui.renderTextureForCharacterOnGameTable(PlayerTurnHandler % 3);
             uiStates = displayGameTable;
             break;
         }
         case displayGameTable:
         {
             PlayerTurnHandler++;
+            // if (PlayerTurnHandler == 3)
+            //     PlayerTurnHandler = 0;
             ui.displayGameTableAndCharacters(PlayerTurnHandler);
             uiStates = displayPlayersCard;
             // if (uiStates == PlayerTurnHandler)
@@ -1094,7 +1098,6 @@ void Control::menu()
             //     uiStates = statesControler.at(PlayerTurnHandler);
             break;
         }
-        
         }
     }
     // std::cout << "do you want to start a new game or continue or previous game ? " << std::endl;
@@ -1398,6 +1401,7 @@ void Control::saveReadAllInfo()
 }
 void Control::StartNewGame()
 {
+    std::cout << "shoroe StartNewGame" << std::endl;
     if (!ifCardsAreSet)
     {
         // std::cout << "ghabl validate " << std::endl;
