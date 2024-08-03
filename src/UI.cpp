@@ -443,9 +443,9 @@ bool UI::renderTextureForCharacterOnGame()
     {
         DrawTexture(playerCardForUI[i], (i * 100) + 400, 610, WHITE);
     }
-    for (int i = 0; i < playerCardForUI.size() / 2; i++)
+    for (int i = playerCardForUI.size() / 2; i < playerCardForUI.size(); i++)
     {
-        DrawTexture(playerCardForUI[i], (i * 100) + 400, 460, WHITE);
+        DrawTexture(playerCardForUI[i], ((i -playerCardForUI.size() / 2) * 100) + 400, 460, WHITE);
     }
     // EndTextureMode();
     EndDrawing();
