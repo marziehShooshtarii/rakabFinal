@@ -57,7 +57,7 @@ public:
     
     void initializeCharacterNumber();
     bool getLuckNumbers(std::string);
-    void displaycharactersCards();
+    void displaycharactersCards(int);
     bool renderTextureForCharacterOnGameTable(int);
     //bool renderTextureForCharactertwo();
     void initializeCardTextureAndName();
@@ -99,7 +99,7 @@ private:
     Texture2D character2;
     Texture2D character3;
     Texture2D character4;
-    RenderTexture2D renderTextureForGameTable;
+    RenderTexture2D renderTextureForGameTable[3];
     RenderTexture2D renderTextureForGameTableAndCharacters;
     Texture2D cards[15];
     std::vector <Texture2D> firstCharacterplayerCards;
@@ -114,7 +114,7 @@ private:
     std::unordered_map <int,std::vector<Texture2D>> playedCardsHandler;
     Button cardsButtons[10];
     int UITurnHandler;
-
+    Texture2D luckNumberBackground;
     // uiInput UILuckNumber;//needed to get the luckNumber 
     // std::string UIPlayerName;
     // std::vector <std::string> allUIPlayerNames;

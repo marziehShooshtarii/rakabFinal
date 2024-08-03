@@ -9,15 +9,16 @@ UI::UI()
     fontMenu = LoadFont("../assets/KaushanScript-Regular.ttf");
     gameFont = LoadFont("../assets/Future-TimeSplitters.otf");
     inputFont = LoadFont("../assets/SF-Atarian-System-Bold-Italic.ttf");
-    backgroundMenu = LoadTexture("../assets/b1.png");
+    backgroundMenu = LoadTexture("../assets/blueMenu.png");
     backgroundIdentityMenu = LoadTexture("../assets/b_6.png");
     backgroundWarzoneMap = LoadTexture("../assets/warzone_map.png");
-    charectersAndNames = LoadTexture("../assets/c1.png");
+    charectersAndNames = LoadTexture("../assets/charactersIntro.png");
+    luckNumberBackground = LoadTexture("../assets/luck.png");
     selectedWarzoneBackground = LoadTexture("../assets/selected_warzone2.png");
-    gameTable = LoadTexture("../assets/charactersAndTable.png");
-    character1 = LoadTexture("../assets/gt2.png");
-    character2 = LoadTexture("../assets/gt4.png");
-    character3 = LoadTexture("../assets/gt1.png");
+    gameTable = LoadTexture("../assets/dark_table.png");
+    character1 = LoadTexture("../assets/gt1_2.png");
+    character2 = LoadTexture("../assets/gt2_2.png");
+    character3 = LoadTexture("../assets/gt3_2.png");
     character4 = LoadTexture("../assets/gt3.png");
     cards[0] = LoadTexture("../assets/bahar.png");
     cards[1] = LoadTexture("../assets/zemestan.png");
@@ -35,11 +36,15 @@ UI::UI()
     cards[13] = LoadTexture("../assets/s6.png");
     cards[14] = LoadTexture("../assets/s10.png");
 
-    renderTextureForGameTable = LoadRenderTexture(character1.width, character1.height);
+    renderTextureForGameTable[0] = LoadRenderTexture(character1.width, character1.height);
+    renderTextureForGameTable[1] = LoadRenderTexture(character2.width, character1.height);
+    renderTextureForGameTable[2] = LoadRenderTexture(character3.width, character1.height);
+    
     renderTextureForGameTableAndCharacters = LoadRenderTexture(gameTable.width, gameTable.height);
     initializeCardTextureAndName();
     initializePlayerCardsHandler();
     initializePlayedCardsHandler();
+    initializeCharacterNumber();
 
     // temp = LoadImage("../assets/gt1.png");          // Load image
     // ImageFlipVertical(&temp);                       // Flip image vertically
@@ -439,12 +444,12 @@ bool UI::displaySelectedWarzone(std::string UIWarzone)
     }
     return false;
 }
-void UI::displaycharactersCards()
+void UI::displaycharactersCards(int turnHandler)
 {
     BeginDrawing();
     ClearBackground(RAYWHITE);
     // DrawTexture(character1, 0, 0, WHITE);
-    DrawTextureRec(renderTextureForGameTable.texture, (Rectangle){0, 0, (float)renderTextureForGameTable.texture.width, (float)-renderTextureForGameTable.texture.height}, Vector2{0, 0}, WHITE);
+    DrawTextureRec(renderTextureForGameTable[turnHandler].texture, (Rectangle){0, 0, (float)renderTextureForGameTable[turnHandler].texture.width, (float)-renderTextureForGameTable[turnHandler].texture.height}, Vector2{0, 0}, WHITE);
 
     EndDrawing();
     std::clog << "end of display game table" << std::endl;
@@ -497,7 +502,8 @@ bool UI::renderTextureForCharacterOnGameTable(int turnHandler)
         //     return 0;
         BeginDrawing();
         ClearBackground(BLANK);
-        DrawTexture(character1, 0, 0, WHITE);
+
+        DrawTexture(characterNumber.at(UITurnHandler), 0, 0, WHITE);
         for (int i = 0; i < playerCardsHandler.at(UITurnHandler).size() / 2; i++)
 
             DrawTexture(playerCardsHandler.at(UITurnHandler)[i], (i * 100) + 400, 610, WHITE);
@@ -950,7 +956,7 @@ bool UI::getLuckNumbers(std::string starterPlayer)
         Color textColor = {249, 105, 14, 225}; // color Ecstasy created
         BeginDrawing();
         ClearBackground(RAYWHITE);
-        DrawTexture(backgroundIdentityMenu, 0, 0, WHITE);
+        DrawTexture(luckNumberBackground, 0, 0, WHITE);
         // DrawText(playerToStartWar, 100, 50, 50, WHITE);
         // DrawText("you are the starter.", 100, 50, 50, WHITE);
         DrawTextEx(gameFont, playerToStartWar, (Vector2){100, 50}, gameFont.baseSize, 1, textColor);
