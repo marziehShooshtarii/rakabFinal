@@ -62,15 +62,21 @@ void Control ::displayOwenedStates()
 }
 int Control::determinMinAge()
 {
+    std::cout << "determinMinAge 1" << std::endl;
     int min = identity.getAge(0);
+    std::cout << "determinMinAge 2" << std::endl;
     for (int i = 1; i < identity.getPlayerNumber(); i++)
     {
+        std::cout << "determinMinAge 3" << std::endl;
         if (min > identity.getAge(i))
         {
+            std::cout << "determinMinAge 4" << std::endl;
             min = identity.getAge(i);
+            std::cout << "determinMinAge 5" << std::endl;
             starterPlayer = i;
         }
     }
+    std::cout << "determinMinAge 5" << std::endl;
     return starterPlayer;
 }
 void Control::diplayBeggingOfTheGame()
@@ -132,7 +138,7 @@ void Control::randomCardSet()
 
     setPlayers();
     std::cout << "after players" << std::endl;
-    std::cout << "identity.getPlayerNumber() -> " << identity.getPlayerNumber() << std::endl;
+    std::cout << "identity.getPlayerNumber() -> random card set" << identity.getPlayerNumber() << std::endl;
     std::cout << "player name - > " << players[0].getName() << std::endl;
     std::cout << "size vector owened states - > " << players[0].getNumberOfOwenedStates() << std::endl;
 
@@ -967,140 +973,251 @@ bool Control::isFileEmpty(const std::string &filename)
 // }
 void Control::menu()
 {
+    Map mapForUI;
+    ifCardsAreSet = false;
+    UIStates uiStates;
+    uiStates = UIMenu;
+    std::cout << "menu1" << std::endl;
+    while (WindowShouldClose() == false /*&& exitGame == true /*&& exitPrevious == true*/)
+    {
+        // std::cout << "menu2" << std::endl;
+
+        switch (uiStates)
+        {
+            std::cout << "menu3" << std::endl;
+        case UIMenu:
+        {
+            std::cout << "menu4" << std::endl;
+            newOrContinue = ui.menuGameLoop();
+            if (newOrContinue == "n")
+            {
+                std::cout << "menu5" << std::endl;
+                uiStates = UIplayerNumber;
+            }
+            if (newOrContinue == "c")
+            {
+                // uiStates = UIplayerNumber;
+            }
+            if (newOrContinue == "help")
+            {
+                // uiStates = UIplayerNumber;
+            }
+            if (newOrContinue == "exit")
+            {
+                // uiStates = UIplayerNumber;
+            }
+            break;
+        }
+        case UIplayerNumber:
+        {
+            uiNumberPlayers = ui.displayPlayerNumberButton();
+            if (uiNumberPlayers == 3)
+            {
+                identity.setPlayerNumberForSave(uiNumberPlayers);
+                uiStates = threePlayerInput;
+            }
+            break;
+        }
+        case threePlayerInput:
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                ui.thripleTextBoxDraw();
+                std::cout << "for text box" << i << std::endl;
+                identity.setPlayerNameForSave(ui.getPlayerNameAndColorFromUI(i));
+                identity.setPlayerAgeForSave(ui.getPlayerAgeAndLuckFromUI(i + 3));
+                identity.setPlayerColorForSave(ui.getPlayerNameAndColorFromUI(i + 6));
+                identity.setPlayerForSave();
+            }
+            std::cout << "threePlayerInput 2" << std::endl;
+            uiStates = warzoneMap;
+            break;
+        }
+        case warzoneMap:
+        {
+            std::cout << "warzone1" << std::endl;
+            ui.displayMap(identity.getName(determinMinAge()));
+            std::cout << "identity.getName(determinMinAge())" << identity.getName(determinMinAge()) << std::endl;
+            std::cout << "warzone2" << std::endl;
+            setWarzone(mapForUI.findKey(ui.displayWarzoneButton(identity.getName(determinMinAge())))); // setting warzone based on UI output
+            std::cout << "warzone3" << std::endl;
+            uiStates = luckAndBadLuckNumbers;
+            std::cout << "warzone4" << std::endl;
+            break;
+        }
+        case luckAndBadLuckNumbers:
+        {
+            ui.getLuckNumbers(identity.getName(starterPlayer));
+            goodLuckNumber = ui.getPlayerAgeAndLuckFromUI(0);
+            badLuckNumber = ui.getPlayerAgeAndLuckFromUI(1);
+            uiStates = charactersIntro;
+            break;
+        }
+        case charactersIntro:
+        {
+            ui.displayCharectersAndNames(identity.getName(0), identity.getName(1), identity.getName(2));
+            uiStates = showSelectedWarzone;
+            break;
+        }
+        case showSelectedWarzone:
+        {
+            ui.displaySelectedWarzone(warzone);
+             for (int i = 0; i < 3; i++)
+                {
+                    std::cout << "karaye ajib3 - > " << i << identity.getAge(i) << std::endl;
+                    std::cout << "karaye ajib4 - > " << i << identity.getName(i) << std::endl;
+                    std::cout << "karaye ajib4 - > " << i << identity.getColor(i) << std::endl;
+                }
+            uiStates = displayDeck;
+            break;
+        }
+        case displayDeck:
+        {
+            ui.displayGameTable();
+            if (!ifCardsAreSet)
+                StartNewGame();
+
+            ui.findTexture(players[0].getAllPlayerCards());
+
+            ui.renderTextureForCharacterOnGame();
+            break;
+        }
+        }
+    }
     // std::cout << "do you want to start a new game or continue or previous game ? " << std::endl;
     // std::cin >> newOrContinue;
     // ui.displayMenuBackground();
-    Map mapForUI;
-    std::cout << "c1" << std::endl;
-    bool exitGame = true;
-    bool exitPrevious = true;
-    ifCardsAreSet = false;
-    newOrContinue = ui.menuGameLoop();
-    int uiNumberPlayers = ui.displayPlayerNumberButton();
-    ui.initializeCardTextureAndName();
-    // ui.renderTextureForCharacterOnGame();
-    //  StartNewGame();
+    // // Map mapForUI;
+    // std::cout << "c1" << std::endl;
+    // bool exitGame = true;
+    // bool exitPrevious = true;
+    // ifCardsAreSet = false;
+    // newOrContinue = ui.menuGameLoop();
+    // int uiNumberPlayers = ui.displayPlayerNumberButton();
+    // ui.initializeCardTextureAndName();
+    // // ui.renderTextureForCharacterOnGame();
+    // //  StartNewGame();
 
-    // ui.Textbox();
-    // ui.renderTextureForWarzoneMap();
-    while (WindowShouldClose() == false && exitGame == true /*&& exitPrevious == true*/)
-    {
-        // for (int i = 0; i < 1; i++)
-        if (newOrContinue == "n")
-        {
-            std::cout << "display " << std::endl;
-            identity.setPlayerNumberForSave(uiNumberPlayers);
-            if (uiNumberPlayers == 3)
-            {
-                std::cout << "uiNumberPlayers -> " << uiNumberPlayers << std::endl;
-                std::cout << "identity.getPlayerNumber - > " << identity.getPlayerNumber() << std::endl;
-                for (int i = 0; i < 3; i++)
-                {
-                    ui.thripleTextBoxDraw();
-                    std::cout << "for text box" << i << std::endl;
-                    identity.setPlayerNameForSave(ui.getPlayerNameAndColorFromUI(i));
-                    identity.setPlayerAgeForSave(ui.getPlayerAgeAndLuckFromUI(i + 3));
-                    identity.setPlayerColorForSave(ui.getPlayerNameAndColorFromUI(i + 6));
-                    identity.setPlayerForSave();
-                    // setNameForUI(ui.getNamesFromUI(i));
-                    // setNameFromUI(ui.getFullNameFromUI(i));
-                    // setNameFromUI(ui.thripleTextBoxDraw(i));
-                    // ui.controlTransitionVectors(i);
-                    // setAgeForUI(ui.getAgeFromUI(i + 3));
-                    // ui.controlTransitionVectors(i + 3);
-                    // std::cout << "size vector ui -> " << ui.getNamesFromUI(i).size() << std::endl;
-                    // std::cout << "karaye ajib - > " << i << identity.getPlayerNameForUI() << std::endl;
-                    // std::cout << "karaye ajib2 - > " << i << identity.getPlayerAgeForUI() << std::endl;
-                    // std::cout << "size vector ui for age -> " << ui.getAgeFromUI(i).size() << std::endl;
-                    // ui.Textbox();
-                }
-                for (int i = 0; i < 3; i++)
-                {
-                    std::cout << "karaye ajib3 - > " << i << identity.getAge(i) << std::endl;
-                    std::cout << "karaye ajib4 - > " << i << identity.getName(i) << std::endl;
-                    std::cout << "karaye ajib4 - > " << i << identity.getColor(i) << std::endl;
-                }
-                ui.displayMap(identity.getName(determinMinAge()));
+    // // ui.Textbox();
+    // // ui.renderTextureForWarzoneMap();
+    // while (WindowShouldClose() == false && exitGame == true /*&& exitPrevious == true*/)
+    // {
+    //     // for (int i = 0; i < 1; i++)
+    //     if (newOrContinue == "n")
+    //     {
+    //         std::cout << "display " << std::endl;
+    //         identity.setPlayerNumberForSave(uiNumberPlayers);
+    //         if (uiNumberPlayers == 3)
+    //         {
+    //             std::cout << "uiNumberPlayers -> " << uiNumberPlayers << std::endl;
+    //             std::cout << "identity.getPlayerNumber - > " << identity.getPlayerNumber() << std::endl;
+    //             for (int i = 0; i < 3; i++)
+    //             {
+    //                 ui.thripleTextBoxDraw();
+    //                 std::cout << "for text box" << i << std::endl;
+    //                 identity.setPlayerNameForSave(ui.getPlayerNameAndColorFromUI(i));
+    //                 identity.setPlayerAgeForSave(ui.getPlayerAgeAndLuckFromUI(i + 3));
+    //                 identity.setPlayerColorForSave(ui.getPlayerNameAndColorFromUI(i + 6));
+    //                 identity.setPlayerForSave();
+    //                 // setNameForUI(ui.getNamesFromUI(i));
+    //                 // setNameFromUI(ui.getFullNameFromUI(i));
+    //                 // setNameFromUI(ui.thripleTextBoxDraw(i));
+    //                 // ui.controlTransitionVectors(i);
+    //                 // setAgeForUI(ui.getAgeFromUI(i + 3));
+    //                 // ui.controlTransitionVectors(i + 3);
+    //                 // std::cout << "size vector ui -> " << ui.getNamesFromUI(i).size() << std::endl;
+    //                 // std::cout << "karaye ajib - > " << i << identity.getPlayerNameForUI() << std::endl;
+    //                 // std::cout << "karaye ajib2 - > " << i << identity.getPlayerAgeForUI() << std::endl;
+    //                 // std::cout << "size vector ui for age -> " << ui.getAgeFromUI(i).size() << std::endl;
+    //                 // ui.Textbox();
+    //             }
+    //             for (int i = 0; i < 3; i++)
+    //             {
+    //                 std::cout << "karaye ajib3 - > " << i << identity.getAge(i) << std::endl;
+    //                 std::cout << "karaye ajib4 - > " << i << identity.getName(i) << std::endl;
+    //                 std::cout << "karaye ajib4 - > " << i << identity.getColor(i) << std::endl;
+    //             }
+    //             ui.displayMap(identity.getName(determinMinAge()));
 
-                // exitPrevious = false;
-                std::cout << "salam" << std::endl;
-                setWarzone(mapForUI.findKey(ui.displayWarzoneButton(identity.getName(determinMinAge())))); // setting warzone based on UI output
-                std ::cout << "test" << std::endl;
-                ui.getLuckNumbers(identity.getName(starterPlayer));
-                goodLuckNumber = ui.getPlayerAgeAndLuckFromUI(0);
-                badLuckNumber = ui.getPlayerAgeAndLuckFromUI(1);
-                ui.displayCharectersAndNames(identity.getName(0), identity.getName(1), identity.getName(2));
-                ui.displaySelectedWarzone(warzone);
-                ui.displayGameTable();
-                // dealingCards();
-                // shuffelingCards();
-                // randomCardSet();
-                if (!ifCardsAreSet)
-                    StartNewGame();
-                // diplayBeggingOfTheGame();
-                std::cout << "ghable playingInput" << std::endl;
-                // playingInput();
-                std::cout << "ghable findTexture" << std::endl;
-                // for (int k = 0; k < identity.getPlayerNumber(); k++)
-                ui.findTexture(players[0].getAllPlayerCards());
-                std::cout << "bade findTexture" << std::endl;
+    //             // exitPrevious = false;
+    //             std::cout << "salam" << std::endl;
+    //             setWarzone(mapForUI.findKey(ui.displayWarzoneButton(identity.getName(determinMinAge())))); // setting warzone based on UI output
+    //             std ::cout << "test" << std::endl;
+    //             ui.getLuckNumbers(identity.getName(starterPlayer));
+    //             goodLuckNumber = ui.getPlayerAgeAndLuckFromUI(0);
+    //             badLuckNumber = ui.getPlayerAgeAndLuckFromUI(1);
+    //             ui.displayCharectersAndNames(identity.getName(0), identity.getName(1), identity.getName(2));
+    //             ui.displaySelectedWarzone(warzone);
+    //             ui.displayGameTable();
+    //             // dealingCards();
+    //             // shuffelingCards();
+    //             // randomCardSet();
+    //             if (!ifCardsAreSet)
+    //                 StartNewGame();
+    //             // diplayBeggingOfTheGame();
+    //             std::cout << "ghable playingInput" << std::endl;
+    //             // playingInput();
+    //             std::cout << "ghable findTexture" << std::endl;
+    //             // for (int k = 0; k < identity.getPlayerNumber(); k++)
+    //             ui.findTexture(players[0].getAllPlayerCards());
+    //             std::cout << "bade findTexture" << std::endl;
 
-                ui.renderTextureForCharacterOnGame();
-                std::cout << "bade renderTextureForCharacterOnGame" << std::endl;
+    //             ui.renderTextureForCharacterOnGame();
+    //             std::cout << "bade renderTextureForCharacterOnGame" << std::endl;
 
-                // exitGame = false;
-            }
-            if (uiNumberPlayers == 4)
-            {
-                ui.quadrupleTextBoxDraw();
-                std::cout << "uiNumberPlayers -> " << uiNumberPlayers << std::endl;
-                for (int i = 0; i < 4; i++)
-                {
-                    identity.setPlayerNameForSave(ui.getPlayerNameAndColorFromUI(i));
-                    identity.setPlayerAgeForSave(ui.getPlayerAgeAndLuckFromUI(i + 4));
-                    identity.setPlayerColorForSave(ui.getPlayerNameAndColorFromUI(i + 8));
-                    identity.setPlayerForSave();
-                    std::cout << "for text box" << std::endl;
-                    // ui.Textbox();
-                    // std::cout << "karaye ajib - > " << identity.getPlayerNameForUI() << std::endl;
-                }
-                for (int i = 0; i < 4; i++)
-                {
-                    std::cout << "karaye ajib3 - > " << i << identity.getAge(i) << std::endl;
-                    std::cout << "karaye ajib4 - > " << i << identity.getName(i) << std::endl;
-                    std::cout << "karaye ajib4 - > " << i << identity.getColor(i) << std::endl;
-                }
-                // exitPrevious = false;
-                // exitGame = false;
-            }
-            std::cout << "good luck -> " << goodLuckNumber << std::endl;
-            std::cout << "bad luck -> " << badLuckNumber << std::endl;
-            std::cout << "after display " << std::endl;
-            // exitGame = false;
-        }
-        if (newOrContinue == "c")
-            exitGame = false;
-        if (newOrContinue == "help")
-            exitGame = false;
-        if (newOrContinue == "exit")
-            exitGame = false;
-    }
-    std::cout << "c2" << std::endl;
-    std::cout << "c3" << std::endl;
-    if (newOrContinue == "c")
-    {
-        std::cout << "if c " << std::endl;
-        // if (isFileEmpty("save.txt") == 1) // if tellg == 0 is true
-        // {
-        //     std::cout << "No previous game found." << std::endl;
-        //     menu();
-        // }
-        determinNumberOfSavedGame();
-        saveReadAllInfo();
-        std::cout << "IN menu!!!!!!!!!!!!!!!!!!!!!!!!!!" << std::endl;
-        // else
-        //     saveReadAllInfo();
-    }
+    //             // exitGame = false;
+    //         }
+    //         if (uiNumberPlayers == 4)
+    //         {
+    //             ui.quadrupleTextBoxDraw();
+    //             std::cout << "uiNumberPlayers -> " << uiNumberPlayers << std::endl;
+    //             for (int i = 0; i < 4; i++)
+    //             {
+    //                 identity.setPlayerNameForSave(ui.getPlayerNameAndColorFromUI(i));
+    //                 identity.setPlayerAgeForSave(ui.getPlayerAgeAndLuckFromUI(i + 4));
+    //                 identity.setPlayerColorForSave(ui.getPlayerNameAndColorFromUI(i + 8));
+    //                 identity.setPlayerForSave();
+    //                 std::cout << "for text box" << std::endl;
+    //                 // ui.Textbox();
+    //                 // std::cout << "karaye ajib - > " << identity.getPlayerNameForUI() << std::endl;
+    //             }
+    //             for (int i = 0; i < 4; i++)
+    //             {
+    //                 std::cout << "karaye ajib3 - > " << i << identity.getAge(i) << std::endl;
+    //                 std::cout << "karaye ajib4 - > " << i << identity.getName(i) << std::endl;
+    //                 std::cout << "karaye ajib4 - > " << i << identity.getColor(i) << std::endl;
+    //             }
+    //             // exitPrevious = false;
+    //             // exitGame = false;
+    //         }
+    //         std::cout << "good luck -> " << goodLuckNumber << std::endl;
+    //         std::cout << "bad luck -> " << badLuckNumber << std::endl;
+    //         std::cout << "after display " << std::endl;
+    //         // exitGame = false;
+    //     }
+    //     if (newOrContinue == "c")
+    //         exitGame = false;
+    //     if (newOrContinue == "help")
+    //         exitGame = false;
+    //     if (newOrContinue == "exit")
+    //         exitGame = false;
+    // }
+    // std::cout << "c2" << std::endl;
+    // std::cout << "c3" << std::endl;
+    // if (newOrContinue == "c")
+    // {
+    //     std::cout << "if c " << std::endl;
+    //     // if (isFileEmpty("save.txt") == 1) // if tellg == 0 is true
+    //     // {
+    //     //     std::cout << "No previous game found." << std::endl;
+    //     //     menu();
+    //     // }
+    //     determinNumberOfSavedGame();
+    //     saveReadAllInfo();
+    //     std::cout << "IN menu!!!!!!!!!!!!!!!!!!!!!!!!!!" << std::endl;
+    //     // else
+    //     //     saveReadAllInfo();
+    // }
     // else if (newOrContinue == "n")
     // {
     //     // int uiNumberPlayers = ui.displayPlayerNumberButton();

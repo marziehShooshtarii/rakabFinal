@@ -130,5 +130,21 @@ private:
     int goodLuckNumber;
     int badLuckNumber;
     bool ifCardsAreSet;
+    int uiNumberPlayers;
     //bool fistWarOfGame; //to check if it's the first war
+     enum UIStates
+    {
+        UIMenu,
+        UIplayerNumber,
+        threePlayerInput,
+        fourPlayerInput,
+        warzoneMap,
+        luckAndBadLuckNumbers,
+        charactersIntro,
+        showSelectedWarzone,
+        displayDeck,
+
+
+
+    };
 };
