@@ -57,14 +57,16 @@ public:
     
     void initializeCharacterNumber();
     bool getLuckNumbers(std::string);
-    void displayGameTable();
-    bool renderTextureForCharacterOnGame();
+    void displaycharactersCards();
+    bool renderTextureForCharacterOnGameTable();
+    //bool renderTextureForCharactertwo();
     void initializeCardTextureAndName();
-    void findTexture(std::vector<Card>);
+    void findTexture(std::vector<Card>,int);
     void initializeCardsButtons(float x, float y, float width, float hight);
     bool displayCardsButtons();
     void displayGameTableAndCharacters();
     void renderTextureForCharacterAndGameTable();
+    void initializePlayerCardsHandler();
 private:
     const char* menuButtonsTitle[4];
     int windowWidth = 1200;
@@ -99,14 +101,17 @@ private:
     RenderTexture2D renderTextureForGameTable;
     RenderTexture2D renderTextureForGameTableAndCharacters;
     Texture2D cards[15];
-    Image temp;
-    std::vector <Texture2D> playerCardForUI;
+    std::vector <Texture2D> firstCharacterplayerCards;
+    std::vector <Texture2D> secondCharacterplayerCards;
+    std::vector <Texture2D> thirdCharacterplayerCards;
+    std::vector <Texture2D> fourthCharacterplayerCards;
     std::vector <Texture2D> firstCharacterPlayedCards;
     std::vector <Texture2D> secondCharacterPlayedCards;
     std::vector <Texture2D> thirdCharacterPlayedCards;
     std::vector <Texture2D> fourthCharacterPlayedCards;
+    std::unordered_map <int,std::vector<Texture2D>> playerCardsHandler;
     Button cardsButtons[10];
-
+    int UITurnHandler;
 
     // uiInput UILuckNumber;//needed to get the luckNumber 
     // std::string UIPlayerName;

@@ -38,6 +38,7 @@ UI::UI()
     renderTextureForGameTable = LoadRenderTexture(character1.width, character1.height);
     renderTextureForGameTableAndCharacters = LoadRenderTexture(gameTable.width, gameTable.height);
     initializeCardTextureAndName();
+    initializePlayerCardsHandler();
 
     // temp = LoadImage("../assets/gt1.png");          // Load image
     // ImageFlipVertical(&temp);                       // Flip image vertically
@@ -402,21 +403,42 @@ void UI::initializeNextButton(float x, float y, float width, float hight)
 }
 bool UI::displaySelectedWarzone(std::string UIWarzone)
 {
+    initializeNextButton(1100, 680, 120, 50);
     const char *selectedUIWarzone = UIWarzone.c_str();
     while (1)
     {
+        Vector2 mousePssitionIdentity = GetMousePosition();
+        bool mousePressedIdentity = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
+        std::cout << mousePressedIdentity << std::endl;
+
+        if (next.ifPressed(mousePssitionIdentity, mousePressedIdentity))
+        {
+            std::cout << "too if " << std::endl;
+            return true; // next button has been pressed
+        }
         BeginDrawing();
         ClearBackground(RAYWHITE);
         DrawTexture(selectedWarzoneBackground, 0, 0, WHITE);
         DrawText("warzone : ", 80, 200, 40, BLACK);
         DrawText(selectedUIWarzone, 280, 200, 40, BLACK);
         DrawText("get ready for war!!!", 80, 235, 40, BLACK);
+        Color selectedColor = WHITE;
+        if (CheckCollisionPointRec(mousePssitionIdentity, next.getRectangle()))
+        {
+            selectedColor = WHITE;
+        }
+        else
+        {
+            selectedColor = RED;
+        }
+
+        DrawTextEx(fontMenu, this->next.title, (Vector2){this->next.getRectangle().x + 10, this->next.getRectangle().y + 10}, fontMenu.baseSize, 1, selectedColor);
         EndDrawing();
         return 1;
     }
     return false;
 }
-void UI::displayGameTable()
+void UI::displaycharactersCards()
 {
     BeginDrawing();
     ClearBackground(RAYWHITE);
@@ -428,11 +450,13 @@ void UI::displayGameTable()
     return;
 }
 
-bool UI::renderTextureForCharacterOnGame()
+bool UI::renderTextureForCharacterOnGameTable()
 {
-    //bool isCardSelected = false;
+    
+    //UITurnHandler = turnHandler;
+    // bool isCardSelected = false;
     initializeCardsButtons(0, 0, 120, 50);
-    while (/*!isCardSelected*/1)
+    while (/*!isCardSelected*/ 1)
     {
         Vector2 mousePssitionIdentity = GetMousePosition();
         bool mousePressedIdentity = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
@@ -446,11 +470,12 @@ bool UI::renderTextureForCharacterOnGame()
             if (cardsButtons[i].ifPressed(mousePssitionIdentity, mousePressedIdentity))
             {
                 // UnloadTexture(playerCardForUI[0]);
-                playerCardForUI.erase(playerCardForUI.begin() + i);
-                firstCharacterPlayedCards.push_back(playerCardForUI[i]);
-                //isCardSelected = true;
+                playerCardsHandler.at(UITurnHandler).erase(playerCardsHandler.at(UITurnHandler).begin() + i);
+                // playerCardForUI.erase(playerCardForUI.begin() + i);
+                firstCharacterPlayedCards.push_back(playerCardsHandler.at(UITurnHandler)[i]);
+                // isCardSelected = true;
                 std::cout << "warzone selected - > " << i << std::endl;
-                std::cout << "playerCardForUI - > " << playerCardForUI.size() << std::endl;
+                std::cout << "playerCardForUI - > " << playerCardsHandler.at(UITurnHandler).size() << std::endl;
                 return i;
             }
         }
@@ -459,16 +484,16 @@ bool UI::renderTextureForCharacterOnGame()
         BeginDrawing();
         ClearBackground(BLANK);
         DrawTexture(character1, 0, 0, WHITE);
-        for (int i = 0; i < playerCardForUI.size() / 2; i++)
+        for (int i = 0; i < playerCardsHandler.at(UITurnHandler).size() / 2; i++)
 
-            DrawTexture(playerCardForUI[i], (i * 100) + 400, 610, WHITE);
+            DrawTexture(playerCardsHandler.at(UITurnHandler)[i], (i * 100) + 400, 610, WHITE);
 
-        for (int i = playerCardForUI.size() / 2; i < playerCardForUI.size(); i++)
+        for (int i = playerCardsHandler.at(UITurnHandler).size() / 2; i < playerCardsHandler.at(UITurnHandler).size(); i++)
 
-            DrawTexture(playerCardForUI[i], ((i - playerCardForUI.size() / 2) * 100) + 400, 460, WHITE);
+            DrawTexture(playerCardsHandler.at(UITurnHandler)[i], ((i - playerCardsHandler.at(UITurnHandler).size() / 2) * 100) + 400, 460, WHITE);
 
         // EndTextureMode();
-        for (int idx = 0; idx < playerCardForUI.size(); ++idx)
+        for (int idx = 0; idx < playerCardsHandler.at(UITurnHandler).size(); ++idx)
         {
             // std::cout << "to for " << std::endl;
             Color selectedColor = WHITE;
@@ -493,10 +518,12 @@ bool UI::renderTextureForCharacterOnGame()
 
 void UI::initializeCardsButtons(float x, float y, float width, float hight)
 {
-    for (int i = 0; i < playerCardForUI.size() / 2; i++)
-        cardsButtons[i] = (Button){(Rectangle){(i * 100) + 400 + x, 610 + y, width, hight}, "test", false};
-    for (int i = playerCardForUI.size() / 2; i < playerCardForUI.size(); i++)
-        cardsButtons[i] = (Button){(Rectangle){((i - playerCardForUI.size() / 2) * 100) + 400 + x, 460 + y, width, hight}, "test", false};
+    
+        for (int i = 0; i < playerCardsHandler.at(UITurnHandler).size() / 2; i++)
+            cardsButtons[i] = (Button){(Rectangle){(i * 100) + 400 + x, 610 + y, width, hight}, "test", false};
+        for (int i = playerCardsHandler.at(UITurnHandler).size()  / 2; i < playerCardsHandler.at(UITurnHandler).size() ; i++)
+            cardsButtons[i] = (Button){(Rectangle){((i - playerCardsHandler.at(UITurnHandler).size() / 2) * 100) + 400 + x, 460 + y, width, hight}, "test", false};
+    
 }
 bool UI::displayCardsButtons()
 {
@@ -522,7 +549,9 @@ bool UI::displayCardsButtons()
         //     DrawTexture(playerCardForUI[i], 0, 0, WHITE);
         // displayMap(starterPlayer);
         ClearBackground(RAYWHITE);
-        for (int idx = 0; idx < playerCardForUI.size(); ++idx)
+        
+
+        for (int idx = 0; idx < playerCardsHandler.at(UITurnHandler).size(); ++idx)
         {
             // std::cout << "to for " << std::endl;
             Color selectedColor = WHITE;
@@ -538,6 +567,7 @@ bool UI::displayCardsButtons()
             DrawTextEx(fontMenu, this->cardsButtons[idx].title, (Vector2){this->cardsButtons[idx].getRectangle().x + 10, this->cardsButtons[idx].getRectangle().y + 10}, fontMenu.baseSize, 1, selectedColor);
             // std::cout << "tah for " << std::endl;
         }
+     
 
         // EndTextureMode(); // Stop drawing to the render texture
 
@@ -551,7 +581,7 @@ bool UI::displayCardsButtons()
 }
 void UI::displayGameTableAndCharacters()
 {
-        while (1)
+    while (1)
     {
         // Vector2 mousePssitionIdentity = GetMousePosition();
         // bool mousePressedIdentity = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
@@ -566,7 +596,7 @@ void UI::displayGameTableAndCharacters()
         BeginDrawing();
         ClearBackground(RAYWHITE);
         DrawTexture(gameTable, 0, 0, WHITE);
-        std::cout << "firstCharacterPlayedCards.size() - > " << firstCharacterPlayedCards.size() <<std::endl;
+        std::cout << "firstCharacterPlayedCards.size() - > " << firstCharacterPlayedCards.size() << std::endl;
         for (int i = 0; i < firstCharacterPlayedCards.size(); i++)
 
             DrawTexture(firstCharacterPlayedCards[i], (i * 65) + 100, 290, WHITE);
@@ -596,6 +626,16 @@ void UI::renderTextureForCharacterAndGameTable()
     std::clog << "end of display game table" << std::endl;
     return;
 }
+void UI::initializePlayerCardsHandler()
+{
+    playerCardsHandler =
+        {
+            {0, firstCharacterplayerCards},
+            {1, secondCharacterplayerCards},
+            {2, thirdCharacterplayerCards},
+            {3, fourthCharacterPlayedCards},
+        };
+}
 void UI::initializeCardTextureAndName()
 {
     UIcardName =
@@ -619,9 +659,9 @@ void UI::initializeCardTextureAndName()
         };
 }
 
-void UI::findTexture(std::vector<Card> cardsForUI)
+void UI::findTexture(std::vector<Card> cardsForUI,int turnHandler)
 {
-
+    UITurnHandler = turnHandler;
     std::cout << "aval findTexture" << std::endl;
     std::cout << "cardsForUI.size " << cardsForUI.size() << std::endl;
     for (int i = 0; i < cardsForUI.size(); i++)
@@ -629,9 +669,9 @@ void UI::findTexture(std::vector<Card> cardsForUI)
 
         std::cout << "to for find" << std::endl;
         // std::cout << "cardsForUI[i].getName()" << cardsForUI[i].getName() << std::endl;
-        std::cout << "playerCardForUI.size " << playerCardForUI.size() << std::endl;
+        std::cout << "playerCardForUI.size " << playerCardsHandler.at(UITurnHandler).size() << std::endl;
 
-        playerCardForUI.emplace_back(UIcardName.at(cardsForUI[i].getName()));
+        playerCardsHandler.at(UITurnHandler).emplace_back(UIcardName.at(cardsForUI[i].getName()));
         // playerCardForUI.emplace_back(UIcardName.at(cardsForUI[i].getName()));
         std::cout << "to for find2" << std::endl;
     }
