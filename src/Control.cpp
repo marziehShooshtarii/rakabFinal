@@ -1085,13 +1085,13 @@ void Control::menu()
         }
         case displayGameTable:
         {
-            ui.displayGameTableAndCharacters();
+            PlayerTurnHandler++;
+            ui.displayGameTableAndCharacters(PlayerTurnHandler);
             uiStates = displayPlayersCard;
             // if (uiStates == PlayerTurnHandler)
             //     break;
             // else
             //     uiStates = statesControler.at(PlayerTurnHandler);
-            // PlayerTurnHandler++;
             break;
         }
         
