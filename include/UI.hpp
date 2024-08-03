@@ -64,7 +64,7 @@ public:
     void findTexture(std::vector<Card>,int);
     void initializeCardsButtons(float x, float y, float width, float hight);
     bool displayCardsButtons();
-    void displayGameTableAndCharacters();
+    bool displayGameTableAndCharacters(int);
     void renderTextureForCharacterAndGameTable();
     void initializePlayerCardsHandler();
 private:
