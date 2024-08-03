@@ -15,10 +15,10 @@ UI::UI()
     charectersAndNames = LoadTexture("../assets/c1.png");
     selectedWarzoneBackground = LoadTexture("../assets/selected_warzone2.png");
     gameTable = LoadTexture("../assets/charactersAndTable.png");
-    character1 = LoadTexture("../assets/gt1.png");
-    character2 = LoadTexture("../assets/gt2.png");
-    character3 = LoadTexture("../assets/gt3.png");
-    character4 = LoadTexture("../assets/gt4.png");
+    character1 = LoadTexture("../assets/gt2.png");
+    character2 = LoadTexture("../assets/gt4.png");
+    character3 = LoadTexture("../assets/gt1.png");
+    character4 = LoadTexture("../assets/gt3.png");
     cards[0] = LoadTexture("../assets/bahar.png");
     cards[1] = LoadTexture("../assets/zemestan.png");
     cards[2] = LoadTexture("../assets/matarsak.png");
@@ -36,6 +36,7 @@ UI::UI()
     cards[14] = LoadTexture("../assets/s10.png");
 
     renderTextureForGameTable = LoadRenderTexture(character1.width, character1.height);
+    renderTextureForGameTableAndCharacters = LoadRenderTexture(gameTable.width, gameTable.height);
     initializeCardTextureAndName();
 
     // temp = LoadImage("../assets/gt1.png");          // Load image
@@ -258,12 +259,12 @@ void UI::initializeWarzoneButton(float x, float y, float width, float hight)
     //  for (int i = 0; i < 15; i++)
     //      UIwarzone[i] = (Button){(Rectangle){(i * 100) + x, y, width, hight}, "test", false};
 }
-void UI::renderTextureForWarzoneMap()
-{
-    RenderTexture2D target = LoadRenderTexture(windowWidth, windowHeight);
-    BeginTextureMode(target);  // Start drawing to the render texture
-    ClearBackground(RAYWHITE); // Clear the render texture with white
-}
+// void UI::renderTextureForWarzoneMap()
+// {
+//     RenderTexture2D target = LoadRenderTexture(windowWidth, windowHeight);
+//     BeginTextureMode(target);  // Start drawing to the render texture
+//     ClearBackground(RAYWHITE); // Clear the render texture with white
+// }
 int UI::displayWarzoneButton(std::string starterPlayer)
 {
     initializeWarzoneButton(50, 50, 120, 50);
@@ -445,7 +446,8 @@ bool UI::renderTextureForCharacterOnGame()
             if (cardsButtons[i].ifPressed(mousePssitionIdentity, mousePressedIdentity))
             {
                 // UnloadTexture(playerCardForUI[0]);
-                playerCardForUI.erase(playerCardForUI.begin());
+                playerCardForUI.erase(playerCardForUI.begin() + i);
+                firstCharacterPlayedCards.push_back(playerCardForUI[i]);
                 //isCardSelected = true;
                 std::cout << "warzone selected - > " << i << std::endl;
                 std::cout << "playerCardForUI - > " << playerCardForUI.size() << std::endl;
@@ -564,7 +566,10 @@ void UI::displayGameTableAndCharacters()
         BeginDrawing();
         ClearBackground(RAYWHITE);
         DrawTexture(gameTable, 0, 0, WHITE);
+        std::cout << "firstCharacterPlayedCards.size() - > " << firstCharacterPlayedCards.size() <<std::endl;
+        for (int i = 0; i < firstCharacterPlayedCards.size(); i++)
 
+            DrawTexture(firstCharacterPlayedCards[i], (i * 65) + 180, 270, WHITE);
         // Color selectedColor = WHITE;
         // if (CheckCollisionPointRec(mousePssitionIdentity, next.getRectangle()))
         // {
@@ -579,6 +584,17 @@ void UI::displayGameTableAndCharacters()
 
         EndDrawing();
     }
+}
+void UI::renderTextureForCharacterAndGameTable()
+{
+    BeginDrawing();
+    ClearBackground(RAYWHITE);
+    // DrawTexture(character1, 0, 0, WHITE);
+    DrawTextureRec(renderTextureForGameTableAndCharacters.texture, (Rectangle){0, 0, (float)renderTextureForGameTableAndCharacters.texture.width, (float)-renderTextureForGameTableAndCharacters.texture.height}, Vector2{0, 0}, WHITE);
+
+    EndDrawing();
+    std::clog << "end of display game table" << std::endl;
+    return;
 }
 void UI::initializeCardTextureAndName()
 {
