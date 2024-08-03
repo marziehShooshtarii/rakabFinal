@@ -288,7 +288,7 @@ int UI::displayWarzoneButton(std::string starterPlayer)
         ClearBackground(RAYWHITE);
         for (int idx = 0; idx < 15; ++idx)
         {
-            //std::cout << "to for " << std::endl;
+            // std::cout << "to for " << std::endl;
             Color selectedColor = WHITE;
             if (CheckCollisionPointRec(mousePssitionIdentity, UIwarzone[idx].getRectangle()))
             {
@@ -300,7 +300,7 @@ int UI::displayWarzoneButton(std::string starterPlayer)
             }
 
             DrawTextEx(fontMenu, this->UIwarzone[idx].title, (Vector2){this->UIwarzone[idx].getRectangle().x + 10, this->UIwarzone[idx].getRectangle().y + 10}, fontMenu.baseSize, 1, selectedColor);
-           // std::cout << "tah for " << std::endl;
+            // std::cout << "tah for " << std::endl;
         }
 
         // EndTextureMode(); // Stop drawing to the render texture
@@ -429,32 +429,119 @@ void UI::displayGameTable()
 
 bool UI::renderTextureForCharacterOnGame()
 {
-
+    initializeCardsButtons(0, 0, 120, 50);
     while (1)
     {
+        Vector2 mousePssitionIdentity = GetMousePosition();
+        bool mousePressedIdentity = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
+        std::cout << mousePressedIdentity << std::endl;
 
-    // std::clog << this->playerCardForUI.size() << std::endl;
+        for (int i = 0; i < 10; i++)
+        {
+            if (cardsButtons[i].ifPressed(mousePssitionIdentity, mousePressedIdentity))
+            {
+                //UnloadTexture(playerCardForUI[0]);
+                //playerCardForUI.pop_back();
+                std::cout << "warzone selected - > " << i << std::endl;
+                return i;
+            }
+        }
+        // std::clog << this->playerCardForUI.size() << std::endl;
 
-    // BeginTextureMode(renderTextureForGameTable);
-    BeginDrawing();
-    ClearBackground(BLANK);
-    DrawTexture(character1, 0, 0, WHITE);
-    for (int i = 0; i < playerCardForUI.size() / 2; i++)
-    {
-        DrawTexture(playerCardForUI[i], (i * 100) + 400, 610, WHITE);
-    }
-    for (int i = playerCardForUI.size() / 2; i < playerCardForUI.size(); i++)
-    {
-        DrawTexture(playerCardForUI[i], ((i -playerCardForUI.size() / 2) * 100) + 400, 460, WHITE);
-    }
-    // EndTextureMode();
-    EndDrawing();
+        // BeginTextureMode(renderTextureForGameTable);
+        BeginDrawing();
+        ClearBackground(BLANK);
+        DrawTexture(character1, 0, 0, WHITE);
+        for (int i = 0; i < playerCardForUI.size() / 2; i++)
 
-    // return 1;
+            DrawTexture(playerCardForUI[i], (i * 100) + 400, 610, WHITE);
+
+        for (int i = playerCardForUI.size() / 2; i < playerCardForUI.size(); i++)
+
+            DrawTexture(playerCardForUI[i], ((i - playerCardForUI.size() / 2) * 100) + 400, 460, WHITE);
+
+        // EndTextureMode();
+        for (int idx = 0; idx < playerCardForUI.size(); ++idx)
+        {
+            // std::cout << "to for " << std::endl;
+            Color selectedColor = WHITE;
+            if (CheckCollisionPointRec(mousePssitionIdentity, UIwarzone[idx].getRectangle()))
+            {
+                selectedColor = WHITE;
+            }
+            else
+            {
+                selectedColor = RED;
+            }
+
+            DrawTextEx(fontMenu, this->cardsButtons[idx].title, (Vector2){this->cardsButtons[idx].getRectangle().x + 10, this->cardsButtons[idx].getRectangle().y + 10}, fontMenu.baseSize, 1, selectedColor);
+            // std::cout << "tah for " << std::endl;
+        }
+        EndDrawing();
+
+        // return 1;
     }
     return false;
 }
 
+void UI::initializeCardsButtons(float x, float y, float width, float hight)
+{
+    for (int i = 0; i < playerCardForUI.size() / 2; i++)
+        cardsButtons[i] = (Button){(Rectangle){(i * 100) + 400 + x, 610 + y, width, hight}, "test", false};
+    for (int i = playerCardForUI.size() / 2; i < playerCardForUI.size(); i++)
+        cardsButtons[i] = (Button){(Rectangle){((i - playerCardForUI.size() / 2) * 100) + 400 + x, 460 + y, width, hight}, "test", false};
+}
+bool UI::displayCardsButtons()
+{
+
+    initializeCardsButtons(0, 0, 120, 50);
+    while (1)
+    {
+        Vector2 mousePssitionIdentity = GetMousePosition();
+        bool mousePressedIdentity = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
+        std::cout << mousePressedIdentity << std::endl;
+        std::cout << "yek" << std::endl;
+        for (int i = 0; i < 10; i++)
+        {
+            if (cardsButtons[i].ifPressed(mousePssitionIdentity, mousePressedIdentity))
+            {
+                std::cout << "warzone selected - > " << i << std::endl;
+                return i;
+            }
+        }
+
+        BeginDrawing();
+        // for (int i = 0; i < playerCardForUI.size(); i++)
+        //     DrawTexture(playerCardForUI[i], 0, 0, WHITE);
+        // displayMap(starterPlayer);
+        ClearBackground(RAYWHITE);
+        for (int idx = 0; idx < playerCardForUI.size(); ++idx)
+        {
+            // std::cout << "to for " << std::endl;
+            Color selectedColor = WHITE;
+            if (CheckCollisionPointRec(mousePssitionIdentity, UIwarzone[idx].getRectangle()))
+            {
+                selectedColor = WHITE;
+            }
+            else
+            {
+                selectedColor = RED;
+            }
+
+            DrawTextEx(fontMenu, this->cardsButtons[idx].title, (Vector2){this->cardsButtons[idx].getRectangle().x + 10, this->cardsButtons[idx].getRectangle().y + 10}, fontMenu.baseSize, 1, selectedColor);
+            // std::cout << "tah for " << std::endl;
+        }
+
+        // EndTextureMode(); // Stop drawing to the render texture
+
+        // Draw the render texture to the screen
+        // DrawTextureRec(target.texture, (Rectangle){ 0, 0, (float)target.texture.width, (float)-target.texture.height }, (Vector2){ 0, 0 }, WHITE);
+        EndDrawing();
+    }
+    return -1;
+
+    return false;
+}
 void UI::initializeCardTextureAndName()
 {
     UIcardName =

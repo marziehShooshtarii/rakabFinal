@@ -61,6 +61,8 @@ public:
     bool renderTextureForCharacterOnGame();
     void initializeCardTextureAndName();
     void findTexture(std::vector<Card>);
+    void initializeCardsButtons(float x, float y, float width, float hight);
+    bool displayCardsButtons();
 private:
     const char* menuButtonsTitle[4];
     int windowWidth = 1200;
@@ -96,6 +98,7 @@ private:
     Texture2D cards[15];
     Image temp;
     std::vector <Texture2D> playerCardForUI;
+    Button cardsButtons[10];
     // uiInput UILuckNumber;//needed to get the luckNumber 
     // std::string UIPlayerName;
     // std::vector <std::string> allUIPlayerNames;
