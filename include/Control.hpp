@@ -99,7 +99,6 @@ public:
     void setAgeForUI(std::vector<char>);
     void setNameFromUI(char names[]);
     void setWarzone(std::string);
-    void initializeUIStates();
     void run();
 
 private:
@@ -118,26 +117,24 @@ private:
     int maxScore = -1;
     int counterNeighbores = 0;
     std::string winnerOfGame;
-    int winner = -1; // can't be the numbers which may be the player's order
+    int winner = -1; //can't be the numbers which may be the player's order
     std::vector<Card> baharVSzemestan;
     std::string peaceSign;
-    int numberOfwars = 0; // for controling peace sign
-    std::vector<int> orderOfRishSefids;
+    int numberOfwars = 0;// for controling peace sign
+    std::vector<int>orderOfRishSefids;
     std::fstream save;
     std::string newOrContinue;
-    std::vector<std::string> numberOfSavedGames; // having more than one saved game
+    std::vector <std::string> numberOfSavedGames; //having more than one saved game
     int whichSavedGame;
     UI ui;
     int goodLuckNumber;
     int badLuckNumber;
     bool ifCardsAreSet;
     int uiNumberPlayers;
-    // bool fistWarOfGame; //to check if it's the first war
-    enum UIStates
+    int PlayerTurnHandler = 0;
+    //bool fistWarOfGame; //to check if it's the first war
+     enum UIStates
     {
-        displayFirstPlayersCard,
-        displaySecondPlayersCard,
-        displayThirdPlayersCard,
         UIMenu,
         UIplayerNumber,
         threePlayerInput,
@@ -146,9 +143,10 @@ private:
         luckAndBadLuckNumbers,
         charactersIntro,
         showSelectedWarzone,
+        displayDeck,
+        displayPlayersCard,
         displayGameTable,
 
+
     };
-    int PlayerTurnHandler = 0;
-    std::unordered_map <int,UIStates> statesControler;
 };

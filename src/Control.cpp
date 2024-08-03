@@ -978,7 +978,6 @@ void Control::menu()
     UIStates uiStates;
     uiStates = UIMenu;
     std::cout << "menu1" << std::endl;
-    initializeUIStates();
     while (WindowShouldClose() == false /*&& exitGame == true /*&& exitPrevious == true*/)
     {
         // std::cout << "menu2" << std::endl;
@@ -1069,42 +1068,33 @@ void Control::menu()
                 std::cout << "karaye ajib4 - > " << i << identity.getName(i) << std::endl;
                 std::cout << "karaye ajib4 - > " << i << identity.getColor(i) << std::endl;
             }
-            uiStates = displayFirstPlayersCard;
+            uiStates = displayPlayersCard;
             break;
         }
-        case displayFirstPlayersCard:
+        case displayPlayersCard:
         {
-            ui.displayGameTable();
+            ui.displaycharactersCards();
             if (!ifCardsAreSet)
                 StartNewGame();
 
-            ui.findTexture(players[0].getAllPlayerCards());
+            ui.findTexture(players[PlayerTurnHandler].getAllPlayerCards(),PlayerTurnHandler);
 
-            ui.renderTextureForCharacterOnGame();
+            ui.renderTextureForCharacterOnGameTable();
             uiStates = displayGameTable;
             break;
         }
         case displayGameTable:
         {
-            PlayerTurnHandler++;
             ui.displayGameTableAndCharacters();
-            uiStates = displayFirstPlayersCard;
-            if (uiStates == PlayerTurnHandler)
-                break;
-            else
-                uiStates = statesControler.at(PlayerTurnHandler);
+            uiStates = displayPlayersCard;
+            // if (uiStates == PlayerTurnHandler)
+            //     break;
+            // else
+            //     uiStates = statesControler.at(PlayerTurnHandler);
+            // PlayerTurnHandler++;
             break;
         }
-        case displaySecondPlayersCard:
-        {
-            std::cout << "displaySecondPlayersCard" << std::endl;
-            break;
-        }
-        case displayThirdPlayersCard:
-        {
-            std::cout << "displayThirdPlayersCard" << std::endl;
-            break;
-        }
+        
         }
     }
     // std::cout << "do you want to start a new game or continue or previous game ? " << std::endl;
@@ -1264,15 +1254,7 @@ void Control::menu()
 
     // std::cout << "Exit Menu" << std::endl;
 }
-void Control::initializeUIStates()
-{
-    statesControler =
-        {
-            {0, UIStates::displayFirstPlayersCard},
-            {1, UIStates::displaySecondPlayersCard},
-            {2, UIStates::displayThirdPlayersCard},
-        };
-}
+
 bool Control::determinNumberOfSavedGame()
 {
     std::cout << "please enter the number of the saved game you want to continue." << std::endl;
