@@ -45,6 +45,9 @@ UI::UI()
     initializePlayerCardsHandler();
     initializePlayedCardsHandler();
     initializeCharacterNumber();
+    initializePlayedCardsFromUI();
+    initializePlayerCardsFromUI();
+    initializePlayedStringCard();
     for (int i = 0; i < 3; i++)
         ifPlayerPassed[i] = false;
     // temp = LoadImage("../assets/gt1.png");          // Load image
@@ -168,7 +171,10 @@ void UI::unloadingTexture()
     UnloadTexture(character2);
     UnloadTexture(character3);
     UnloadTexture(character4);
-
+    for (int i = 0; i < 15; i++)
+    {
+        UnloadTexture(cards[i]);
+    }
     // UnloadRenderTexture(renderTextureForGameTable);
 }
 // void UI::unloadTextBox()
@@ -500,7 +506,9 @@ bool UI::renderTextureForCharacterOnGameTable(int turnHandler)
                 // UnloadTexture(playerCardForUI[0]);
                 // std::cout << "UITurnHandler--------------too render" << UITurnHandler << std::endl;
                 playedCardsHandler.at(UITurnHandler).emplace_back(playerCardsHandler.at(UITurnHandler)[i]);
-                // std::cout << "UITurnHandler--------------too render 2 " << std::endl;
+                std::cout << "UITurnHandler--------------too render 2 " << std::endl;
+                playedCardsFromUI.at(UITurnHandler).emplace_back(playerCardsFromUI.at(UITurnHandler)[i]);
+                // std::cout <<"16.6 -> " << playedCardsFromUI.at(UITurnHandler)[i];
                 playerCardsHandler.at(UITurnHandler).erase(playerCardsHandler.at(UITurnHandler).begin() + i);
                 // playerCardForUI.erase(playerCardForUI.begin() + i);
                 // firstCharacterPlayedCards.push_back(playerCardsHandler.at(UITurnHandler)[i]);
@@ -520,46 +528,46 @@ bool UI::renderTextureForCharacterOnGameTable(int turnHandler)
         //     return 0;
         // if (!getIfPlayerPassed(UITurnHandler))
         // {
-            BeginDrawing();
-            ClearBackground(BLANK);
-            DrawTexture(characterNumber.at(UITurnHandler), 0, 0, WHITE);
-            for (int i = 0; i < playerCardsHandler.at(UITurnHandler).size() / 2; i++)
+        BeginDrawing();
+        ClearBackground(BLANK);
+        DrawTexture(characterNumber.at(UITurnHandler), 0, 0, WHITE);
+        for (int i = 0; i < playerCardsHandler.at(UITurnHandler).size() / 2; i++)
 
-                DrawTexture(playerCardsHandler.at(UITurnHandler)[i], (i * 100) + 400, 610, WHITE);
+            DrawTexture(playerCardsHandler.at(UITurnHandler)[i], (i * 100) + 400, 610, WHITE);
 
-            for (int i = playerCardsHandler.at(UITurnHandler).size() / 2; i < playerCardsHandler.at(UITurnHandler).size(); i++)
+        for (int i = playerCardsHandler.at(UITurnHandler).size() / 2; i < playerCardsHandler.at(UITurnHandler).size(); i++)
 
-                DrawTexture(playerCardsHandler.at(UITurnHandler)[i], ((i - playerCardsHandler.at(UITurnHandler).size() / 2) * 100) + 400, 460, WHITE);
+            DrawTexture(playerCardsHandler.at(UITurnHandler)[i], ((i - playerCardsHandler.at(UITurnHandler).size() / 2) * 100) + 400, 460, WHITE);
 
-            // EndTextureMode();
-            for (int idx = 0; idx < playerCardsHandler.at(UITurnHandler).size(); ++idx)
+        // EndTextureMode();
+        for (int idx = 0; idx < playerCardsHandler.at(UITurnHandler).size(); ++idx)
+        {
+            // std::cout << "to for " << std::endl;
+            Color selectedColor = WHITE;
+            if (CheckCollisionPointRec(mousePssitionIdentity, cardsButtons[idx].getRectangle()))
             {
-                // std::cout << "to for " << std::endl;
-                Color selectedColor = WHITE;
-                if (CheckCollisionPointRec(mousePssitionIdentity, cardsButtons[idx].getRectangle()))
-                {
-                    selectedColor = WHITE;
-                }
-                else
-                {
-                    selectedColor = RED;
-                }
-
-                DrawTextEx(fontMenu, this->cardsButtons[idx].title, (Vector2){this->cardsButtons[idx].getRectangle().x + 10, this->cardsButtons[idx].getRectangle().y + 10}, fontMenu.baseSize, 1, selectedColor);
-                // std::cout << "tah for " << std::endl;
-            }
-            Color passColor = WHITE;
-            if (CheckCollisionPointRec(mousePssitionIdentity, passPosition.getRectangle()))
-            {
-                passColor = WHITE;
+                selectedColor = WHITE;
             }
             else
             {
-                passColor = RED;
+                selectedColor = RED;
             }
 
-            DrawTextEx(fontMenu, this->passPosition.title, (Vector2){this->passPosition.getRectangle().x + 10, this->passPosition.getRectangle().y + 10}, fontMenu.baseSize, 1, passColor);
-            EndDrawing();
+            DrawTextEx(fontMenu, this->cardsButtons[idx].title, (Vector2){this->cardsButtons[idx].getRectangle().x + 10, this->cardsButtons[idx].getRectangle().y + 10}, fontMenu.baseSize, 1, selectedColor);
+            // std::cout << "tah for " << std::endl;
+        }
+        Color passColor = WHITE;
+        if (CheckCollisionPointRec(mousePssitionIdentity, passPosition.getRectangle()))
+        {
+            passColor = WHITE;
+        }
+        else
+        {
+            passColor = RED;
+        }
+
+        DrawTextEx(fontMenu, this->passPosition.title, (Vector2){this->passPosition.getRectangle().x + 10, this->passPosition.getRectangle().y + 10}, fontMenu.baseSize, 1, passColor);
+        EndDrawing();
         // }
 
         // Color selectedColor = WHITE;
@@ -576,6 +584,7 @@ bool UI::renderTextureForCharacterOnGameTable(int turnHandler)
         // DrawTextEx(fontMenu, this->next.title, (Vector2){this->next.getRectangle().x + 10, this->next.getRectangle().y + 10}, fontMenu.baseSize, 1, selectedColor);
 
         // return 1;
+        getPlayedCardsFromUI();
     }
     return false;
 }
@@ -699,6 +708,42 @@ bool UI::displayGameTableAndCharacters(int turnHandlerForDisplay)
         EndDrawing();
     }
 }
+void UI::getPlayedCardsFromUI()
+{
+    
+    // for (int i=0 ; i < playedCardsFromUI.at(UITurnHandler).size(); i++) 
+    // {
+    //     std::cout << playedCardsFromUI.at(UITurnHandler)[i]<< "player aziz " << UITurnHandler << std::endl;
+    // }
+}
+// std::string UI::findCard(Texture2D value)
+// {
+
+//         // std::cout << value << std::endl;
+//         std::cout << "inja" << std::endl;
+//         std::string_view key;
+//         auto it = UIcardName.begin();
+//         // auto it = std::find_if(states.begin(),states.end(),[&key](const auto& value){return value.first == key;});
+//         std::cout << "inja2" << std::endl;
+//         // std::cout << it->second << std::endl;
+//         while (it != UIcardName.end())
+//         {
+
+//             std::cout << "inja3" << std::endl;
+//             // std::cout << it->second << std::endl;
+//             if (it->second == value)
+//             {
+//                 std::cout << "inja4" << std::endl;
+//                 std::cout << "mohem - >>>>> " << it->first << std::endl;
+//                 return it->first;
+//             }
+//             std::cout << "inja5" << std::endl;
+//             // std::cout << value << std::endl;
+//             it++;
+//         }
+//         std::cout << "inja6" << std::endl;
+
+// }
 void UI::renderTextureForCharacterAndGameTable()
 {
     BeginDrawing();
@@ -730,6 +775,47 @@ void UI::initializePlayedCardsHandler()
             {3, fourthCharacterPlayedCards},
         };
 }
+void UI::initializePlayedCardsFromUI()
+{
+    playedCardsFromUI =
+        {
+            {0, firstPlayedCardsFromUI},
+            {1, secondPlayedCardsFromUI},
+            {2, thirdPlayedCardsFromUI},
+            {3, forthPlayedCardsFromUI},
+        };
+}
+void UI::initializePlayerCardsFromUI()
+{
+    playerCardsFromUI =
+        {
+            {0, firstPlayerCardsFromUI},
+            {1, secondPlayerCardsFromUI},
+            {2, thirdPlayerCardsFromUI},
+            {3, forthPlayerCardsFromUI},
+        };
+}
+void UI::initializePlayedStringCard()
+{
+    // playedStringCard =
+        // {
+        //     {baharCards, "bahar"},
+        //     {zemestanCards, "zemestan"},
+        //     {matarsakCards, "matarsak"},
+        //     {tablzanCards, "tabl_zan"},
+        //     {shahDokhtCards, "shah_dokht"},
+        //     {shirzanCards, "shirzan"},
+        //     {rishSefidCards, "rish_sefid"},
+        //     {parchamDarCards, "parcham_dar"},
+        //     {sarbazOneCards, "sarbaz_1"},
+        //     {sarbazTwoCards, "sarbaz_2"},
+        //     {sarbazThreeCards, "sarbaz_3"},
+        //     {sarbazFourCards, "sarbaz_4"},
+        //     {sarbazFiveCards, "sarbaz_5"},
+        //     {sarbazSixCards, "sarbaz_6"},
+        //     {sarbazTenCards, "sarbaz_10"},
+        // };
+}
 void UI::initializeCardTextureAndName()
 {
     UIcardName =
@@ -752,7 +838,28 @@ void UI::initializeCardTextureAndName()
 
         };
 }
+void UI::initializeCardTextureAndStrings()
+{
+    // UIStringName =
+    //     {
+    //         {cards[0] ,"bahar"},
+    //         {cards[1] , "zemestan"},
+    //         {cards[2] , "matarsak"},
+    //         {cards[3] , "tabl_zan"},
+    //         {cards[4] , "shah_dokht"},
+    //         {cards[5] , "shirzan"},
+    //         {cards[6] , "rish_sefid"},
+    //         {cards[7] , "parcham_dar"},
+    //         {cards[8] , "sarbaz_1"},
+    //         {cards[9] , "sarbaz_2"},
+    //         {cards[10] , "sarbaz_3"},
+    //         {cards[11] , "sarbaz_4"},
+    //         {cards[12] , "sarbaz_5"},
+    //         {cards[13] , "sarbaz_6"},
+    //         {cards[14] , "sarbaz_10"},
 
+    //     };
+}
 void UI::findTexture(std::vector<Card> cardsForUI, int turnHandler)
 {
 
@@ -766,8 +873,13 @@ void UI::findTexture(std::vector<Card> cardsForUI, int turnHandler)
         std::cout << "playerCardForUI.size " << playerCardsHandler.at(turnHandler).size() << std::endl;
 
         playerCardsHandler.at(turnHandler).emplace_back(UIcardName.at(cardsForUI[i].getName()));
-        // playerCardForUI.emplace_back(UIcardName.at(cardsForUI[i].getName()));
+        playerCardsFromUI.at(turnHandler).emplace_back(cardsForUI[i].getName()); // player cards remain string for being used in played cards
+
         std::cout << "to for find2" << std::endl;
+    }
+    for (int i=0 ; i <playerCardsFromUI.at(turnHandler).size() ; i++)
+    {
+        std::cout << "cart jadid " << playerCardsFromUI.at(turnHandler)[i] << std::endl;
     }
     std::cout << "akhar findTexture" << std::endl;
 
