@@ -66,7 +66,7 @@ public:
     void findTexture(std::vector<Card>, int);
     void initializeCardsButtons(float x, float y, float width, float hight);
     bool displayCardsButtons();
-    bool displayGameTableAndCharacters(int);
+    bool displayGameTableAndCharacters(int , int);
     void renderTextureForCharacterAndGameTable();
     void initializePlayerCardsHandler();
     void initializePlayedCardsHandler();
@@ -155,6 +155,7 @@ private:
     std::vector<std::string> secondPlayerCardsFromUI;
     std::vector<std::string> thirdPlayerCardsFromUI;
     std::vector<std::string> forthPlayerCardsFromUI;
+    int UIstarterPlayer;
     // enum TextureString
     // {
     //     baharCards,
