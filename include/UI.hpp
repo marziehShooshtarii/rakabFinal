@@ -68,6 +68,9 @@ public:
     void renderTextureForCharacterAndGameTable();
     void initializePlayerCardsHandler();
     void initializePlayedCardsHandler();
+    void initializePassButton(float x, float y, float width, float hight);
+    void setIfPlayerPassed(bool , int);
+    bool getIfPlayerPassed(int);
 private:
     const char* menuButtonsTitle[4];
     int windowWidth = 1200;
@@ -115,6 +118,8 @@ private:
     Button cardsButtons[10];
     int UITurnHandler;
     Texture2D luckNumberBackground;
+    Button passPosition;
+    bool ifPlayerPassed[3];//check the whole players position
     // uiInput UILuckNumber;//needed to get the luckNumber 
     // std::string UIPlayerName;
     // std::vector <std::string> allUIPlayerNames;
