@@ -132,6 +132,7 @@ private:
     bool ifCardsAreSet;
     int uiNumberPlayers;
     int PlayerTurnHandler = 0;
+    int TurnControl = 0;
     //bool fistWarOfGame; //to check if it's the first war
      enum UIStates
     {

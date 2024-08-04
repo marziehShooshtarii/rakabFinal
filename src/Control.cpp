@@ -74,6 +74,7 @@ int Control::determinMinAge()
             min = identity.getAge(i);
             std::cout << "determinMinAge 5" << std::endl;
             starterPlayer = i;
+            TurnControl = i;//starterPlayer that can be changed
         }
     }
     std::cout << "determinMinAge 5" << std::endl;
@@ -1077,27 +1078,34 @@ void Control::menu()
             if (!ifCardsAreSet)
                 StartNewGame();
             std::cout << "ghable findTexture too control" << std::endl;
+
             if (PlayerTurnHandler < 3)
-                ui.findTexture(players[PlayerTurnHandler % 3].getAllPlayerCards(), PlayerTurnHandler % 3);
+                ui.findTexture(players[TurnControl].getAllPlayerCards(), TurnControl);
+
             std::cout << "ghable findTexture too control 2" << std::endl;
-            if (PlayerTurnHandler < 3 || players[PlayerTurnHandler % 3].getIfPassed() == false)
-                players[PlayerTurnHandler % 3].setIfPassed(ui.renderTextureForCharacterOnGameTable(PlayerTurnHandler % 3));
-            std::cout << "ifpassed too control" << identity.getName(PlayerTurnHandler % 3) << players[PlayerTurnHandler % 3].getIfPassed() << std::endl;
+
+            if (PlayerTurnHandler < 3 || players[starterPlayer].getIfPassed() == false)
+                players[TurnControl].setIfPassed(ui.renderTextureForCharacterOnGameTable(TurnControl));
+
+            std::cout << "ifpassed too control" << identity.getName(TurnControl) << players[TurnControl].getIfPassed() << std::endl;
             // ui.renderTextureForCharacterOnGameTable(PlayerTurnHandler % 3);
-            if (players[PlayerTurnHandler % 3].getIfPassed() == false)
+            if (players[TurnControl].getIfPassed() == false)
             {
-                
+
                 for (int i = (PlayerTurnHandler / 3); i < ui.getPlayedCardsFromUI().size(); i++)
                 {
-                    std::cout << "hi " << identity.getName(PlayerTurnHandler % 3) << ui.getPlayedCardsFromUI().size() << std::endl;
+                    std::cout << "hi " << identity.getName(TurnControl) << ui.getPlayedCardsFromUI().size() << std::endl;
                     selectedCard.setName(ui.getPlayedCardsFromUI()[i]);
-                    players[PlayerTurnHandler % 3].setPlayedCard(selectedCard);
+                    players[TurnControl].setPlayedCard(selectedCard);
                 }
             }
-            for (int i = 0; i < players[PlayerTurnHandler % 3].getNumberOfPlayedCards(); i++)
+            for (int i = 0; i < players[TurnControl].getNumberOfPlayedCards(); i++)
             {
-                std::cout << "to control player aziz " << players[PlayerTurnHandler % 3].getNumberOfPlayedCards() << "cards " << identity.getName(PlayerTurnHandler % 3) << " " << players[PlayerTurnHandler % 3].getPlayedCard(i).getName() << std::endl;
+                std::cout << "to control player aziz " << players[TurnControl].getNumberOfPlayedCards() << "cards " << identity.getName(TurnControl) << " " << players[TurnControl].getPlayedCard(i).getName() << std::endl;
             }
+            TurnControl++;
+            if (TurnControl == 3)
+                TurnControl = 0;
             uiStates = displayGameTable;
             break;
         }
@@ -1106,7 +1114,7 @@ void Control::menu()
             PlayerTurnHandler++;
             // if (PlayerTurnHandler == 3)
             //     PlayerTurnHandler = 0;
-            ui.displayGameTableAndCharacters(PlayerTurnHandler);
+            ui.displayGameTableAndCharacters(PlayerTurnHandler , starterPlayer);
             uiStates = displayPlayersCard;
             // if (uiStates == PlayerTurnHandler)
             //     break;
