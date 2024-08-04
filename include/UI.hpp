@@ -76,7 +76,7 @@ public:
     void initializePassButton(float x, float y, float width, float hight);
     void setIfPlayerPassed(bool, int);
     bool getIfPlayerPassed(int);
-    void getPlayedCardsFromUI();
+    std::vector <std::string> getPlayedCardsFromUI();
     // std::string findCard(Texture2D);
 private:
     const char *menuButtonsTitle[4];
