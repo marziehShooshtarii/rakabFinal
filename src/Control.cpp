@@ -1082,8 +1082,21 @@ void Control::menu()
             std::cout << "ghable findTexture too control 2" << std::endl;
             if (PlayerTurnHandler < 3 || players[PlayerTurnHandler % 3].getIfPassed() == false)
                 players[PlayerTurnHandler % 3].setIfPassed(ui.renderTextureForCharacterOnGameTable(PlayerTurnHandler % 3));
-            std::cout << "ifpassed too control"<< identity.getName(PlayerTurnHandler % 3) << players[PlayerTurnHandler % 3].getIfPassed() << std::endl;
+            std::cout << "ifpassed too control" << identity.getName(PlayerTurnHandler % 3) << players[PlayerTurnHandler % 3].getIfPassed() << std::endl;
             // ui.renderTextureForCharacterOnGameTable(PlayerTurnHandler % 3);
+            if (players[PlayerTurnHandler % 3].getIfPassed() == false)
+            {
+                for (int i = 0; i < ui.getPlayedCardsFromUI().size(); i++)
+                {
+                    std::cout << "hi " << identity.getName(PlayerTurnHandler % 3) << ui.getPlayedCardsFromUI().size() << std::endl;
+                    selectedCard.setName(ui.getPlayedCardsFromUI()[i]);
+                    players[PlayerTurnHandler % 3].setPlayedCard(selectedCard);
+                }
+            }
+            for (int i = 0; i < players[PlayerTurnHandler % 3].getNumberOfPlayedCards(); i++)
+            {
+                std::cout << "to control player aziz " << players[PlayerTurnHandler % 3].getNumberOfPlayedCards() << "cards " << identity.getName(PlayerTurnHandler % 3) << " " << players[PlayerTurnHandler % 3].getPlayedCard(i).getName() << std::endl;
+            }
             uiStates = displayGameTable;
             break;
         }
