@@ -1080,8 +1080,10 @@ void Control::menu()
             if (PlayerTurnHandler < 3)
                 ui.findTexture(players[PlayerTurnHandler % 3].getAllPlayerCards(), PlayerTurnHandler % 3);
             std::cout << "ghable findTexture too control 2" << std::endl;
-            std::cout << "UITurnHandler too control" << PlayerTurnHandler << std::endl;
-            ui.renderTextureForCharacterOnGameTable(PlayerTurnHandler % 3);
+            if (PlayerTurnHandler < 3 || players[PlayerTurnHandler % 3].getIfPassed() == false)
+                players[PlayerTurnHandler % 3].setIfPassed(ui.renderTextureForCharacterOnGameTable(PlayerTurnHandler % 3));
+            std::cout << "ifpassed too control"<< identity.getName(PlayerTurnHandler % 3) << players[PlayerTurnHandler % 3].getIfPassed() << std::endl;
+            // ui.renderTextureForCharacterOnGameTable(PlayerTurnHandler % 3);
             uiStates = displayGameTable;
             break;
         }
