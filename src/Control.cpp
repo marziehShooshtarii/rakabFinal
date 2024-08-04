@@ -1086,7 +1086,8 @@ void Control::menu()
             // ui.renderTextureForCharacterOnGameTable(PlayerTurnHandler % 3);
             if (players[PlayerTurnHandler % 3].getIfPassed() == false)
             {
-                for (int i = 0; i < ui.getPlayedCardsFromUI().size(); i++)
+                
+                for (int i = (PlayerTurnHandler / 3); i < ui.getPlayedCardsFromUI().size(); i++)
                 {
                     std::cout << "hi " << identity.getName(PlayerTurnHandler % 3) << ui.getPlayedCardsFromUI().size() << std::endl;
                     selectedCard.setName(ui.getPlayedCardsFromUI()[i]);
