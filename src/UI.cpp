@@ -690,7 +690,7 @@ bool UI::displayGameTableAndCharacters(int turnHandlerForDisplay, int TurnContro
         BeginDrawing();
         ClearBackground(RAYWHITE);
         DrawTexture(gameTable, 0, 0, WHITE);
-        std::cout << "aha " << std::endl;
+        //std::cout << "aha " << std::endl;
         // std::cout << "playedCardsHandler.at(k).size() - >........................displayGameTableAndCharacters" << playedCardsHandler.at(0).size() << std::endl;
         for (int q = 0; q < turnHandlerForDisplay / 4; q++)
         {
@@ -705,18 +705,18 @@ bool UI::displayGameTableAndCharacters(int turnHandlerForDisplay, int TurnContro
                     DrawTexture(playedCardsHandler.at(k)[i], (k * 200) + (i * 65) + 5, (playedCardsHandler.at(k).size() / 3 * 100) + 290, WHITE);
             }
         }
-        std::cout << "1:54 " << std::endl;
+        //std::cout << "1:54 " << std::endl;
         for (int k = 0; k < (((turnHandlerForDisplay - 1) % 3 + TurnControler) % 4) + 1; k++)
         {
-            std::cout << "1:55 " << turnHandlerForDisplay % 4 + TurnControler << " k chi " << k << std::endl;
+           // std::cout << "1:55 " << turnHandlerForDisplay % 4 + TurnControler << " k chi " << k << std::endl;
             for (int j = 0; j < playedCardsHandler.at(k).size() / 3; j++)
             {
-                std::cout << "1:56 " << std::endl;
+                //std::cout << "1:56 " << std::endl;
                 for (int i = 0; i < 3; i++)
                     DrawTexture(playedCardsHandler.at(k)[i], (k * 200) + (i * 65) + 5, (j * 100) + 290, WHITE);
-                std::cout << "1:57 " << playedCardsHandler.at(k).size() % 3 << std::endl;
+                //std::cout << "1:57 " << playedCardsHandler.at(k).size() % 3 << std::endl;
             }
-            std::cout << "2:42 " << k << "2:44" <<playedCardsHandler.at(k).size() % 3 << std::endl;
+            //std::cout << "2:42 " << k << "2:44" <<playedCardsHandler.at(k).size() % 3 << std::endl;
             for (int i = 0; i < playedCardsHandler.at(k).size() % 3; i++)
                 DrawTexture(playedCardsHandler.at(k)[i], (k * 200) + (i * 65) + 5, (playedCardsHandler.at(k).size() / 3 * 100) + 290, WHITE);
         }
@@ -975,6 +975,13 @@ bool UI::displayWinner(int winnerPlayer,std::string winnerName)
     initializeNextButton(250, 680, 120, 50);
     const char *winnerPlayerName = winnerName.c_str();
     std::cout<<"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1"<<std::endl;
+    firstCharacterPlayedCards.clear();
+    secondCharacterPlayedCards.clear();
+    thirdCharacterPlayedCards.clear();
+    firstPlayedCardsFromUI.clear();
+    secondPlayedCardsFromUI.clear();
+    thirdCharacterPlayedCards.clear();
+    std::cout<<"firstCharacterPlayedCards - >>>>>>>>>>"<<firstCharacterPlayedCards.size()<<std::endl;
     while (1)
     {
         Vector2 mousePssitionIdentity = GetMousePosition();

@@ -264,15 +264,15 @@ int Control::playingInput()
     //     controlTurn();
     // }
     if (checkParchamDar)
-        checkStatus = checkProcessOfEndingWar();//to check the war status
-        if (checkStatus == 1)
-            return 1;//the winner of the game is determined    
+        checkStatus = checkProcessOfEndingWar(); // to check the war status
+    if (checkStatus == 1)
+        return 1; // the winner of the game is determined
     numberOfwars++;
     if (checkStatus == 2)
-        return 2;//the winner of a certain war is determined
+        return 2; // the winner of a certain war is determined
     if (checkStatus == 3)
-        return 3;//the next player has not passed yet    
-    
+        return 3; // the next player has not passed yet
+
     // }
 }
 int Control::checkProcessOfEndingWar()
@@ -309,7 +309,7 @@ int Control::checkProcessOfEndingWar()
             players[s].eraseAllPlayedCards();
         }
         baharVSzemestan.clear();
-        for(int w = 0; w <identity.getPlayerNumber(); w++)
+        for (int w = 0; w < identity.getPlayerNumber(); w++)
         {
             players[w].setIfPassed(false);
         }
@@ -318,12 +318,12 @@ int Control::checkProcessOfEndingWar()
             if (players[q].getNumberOfOwenedStates() > 2)
             {
                 if (checkWin(q))
-                    return 1;//the winner of the game
+                    return 1; // the winner of the game
             }
         }
-        return 2;//the winner of a certain war
+        return 2; // the winner of a certain war
     }
-    return 3;//not all the palyers have passed 
+    return 3; // not all the palyers have passed
 }
 void Control::choiceForPeaceSign()
 {
@@ -1205,8 +1205,10 @@ void Control::menu()
         }
         case displayingWinner:
         {
-            std::cout<<"ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"<<std::endl;
-            ui.displayWinner(starterPlayer,players[starterPlayer].getName());
+            std::cout << "ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc" << std::endl;
+            ui.displayWinner(starterPlayer, players[starterPlayer].getName());
+            for (int i = 0; i < identity.getPlayerNumber(); i++)
+                players[i].eraseAllPlayedCards();
             uiStates = warzoneMap;
         }
         }
@@ -1399,9 +1401,8 @@ void Control::eraseSelectedCard()
 {
     for (int i = 0; i < players[TurnControl].getNumberOfPlayedCards(); i++)
     {
-    if (players[TurnControl].getPlayerCard(i).getName() == selectedCard.getName())
-        players[TurnControl].eraseCard(i);
-
+        if (players[TurnControl].getPlayerCard(i).getName() == selectedCard.getName())
+            players[TurnControl].eraseCard(i);
     }
 }
 bool Control::determinNumberOfSavedGame()
