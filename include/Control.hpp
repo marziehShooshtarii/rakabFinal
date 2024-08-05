@@ -150,7 +150,7 @@ private:
         displayDeck,
         displayPlayersCard,
         displayGameTable,
-
+        displayingWinner,
 
     };
 };

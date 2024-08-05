@@ -700,6 +700,7 @@ bool Control::determinWinnerOfWar()
         return false;
     }
     std::cout << "winner - > " << players[winner].getName() << std::endl;
+
     for (int d = 0; d < identity.getPlayerNumber(); d++)
         std::cout << identity.getName(d) << " -> " << scorsAtEndOfWar[d] << std::endl;
     for (int i = 0; i < identity.getPlayerNumber(); i++)
@@ -1178,7 +1179,7 @@ void Control::menu()
             //     std::cout << "to control player aziz " << players[TurnControl].getNumberOfPlayedCards() << "cards " << identity.getName(TurnControl) << " " << players[TurnControl].getPlayedCard(i).getName() << std::endl;
             // }
             if (playingInput() != 3)
-                uiStates = warzoneMap;
+                uiStates = displayingWinner;
             else
             {
                 TurnControl++;
@@ -1201,6 +1202,12 @@ void Control::menu()
             // else
             //     uiStates = statesControler.at(PlayerTurnHandler);
             break;
+        }
+        case displayingWinner:
+        {
+            std::cout<<"ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"<<std::endl;
+            ui.displayWinner(starterPlayer,players[starterPlayer].getName());
+            uiStates = warzoneMap;
         }
         }
     }
