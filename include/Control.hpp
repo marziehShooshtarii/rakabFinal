@@ -39,7 +39,7 @@ public:
     void setPlayers();
     void displayStartOfWar();
     int cinSelectedCard(int index);
-    bool playingInput();
+    int playingInput();
     bool playingCards(int index, int checkForMatarsak);
     bool checkIfAllPlayersPassed();
     bool checkIfCertianPlayerPassed(int index);
@@ -64,7 +64,7 @@ public:
     std::string cinTypeOfHelp();
     void displayOwenedStates();
     bool checkCardsForMatarsak(int index);
-    bool checkProcessOfEndingWar();
+    int checkProcessOfEndingWar();
     bool ifMaxScoreCardIsInHandForRishSefid(std::string, std::vector<Card> playedCards);
     void rishSefidEffect(std::vector<Card>);
     bool checkForRishSefid(std::vector<Card>);
@@ -99,6 +99,7 @@ public:
     void setAgeForUI(std::vector<char>);
     void setNameFromUI(char names[]);
     void setWarzone(std::string);
+    int setPlayedCardsFromUI();
     void run();
 
 private:
@@ -133,6 +134,7 @@ private:
     int uiNumberPlayers;
     int PlayerTurnHandler = 0;
     int TurnControl = 0;
+    int checkStatus = 0;//no status checked
     //bool fistWarOfGame; //to check if it's the first war
      enum UIStates
     {
