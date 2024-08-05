@@ -100,6 +100,7 @@ public:
     void setNameFromUI(char names[]);
     void setWarzone(std::string);
     int setPlayedCardsFromUI();
+    void eraseSelectedCard();
     void run();
 
 private:

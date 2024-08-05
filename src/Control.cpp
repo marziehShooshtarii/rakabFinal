@@ -309,7 +309,10 @@ int Control::checkProcessOfEndingWar()
             players[s].eraseAllPlayedCards();
         }
         baharVSzemestan.clear();
-
+        for(int w = 0; w <identity.getPlayerNumber(); w++)
+        {
+            players[w].setIfPassed(false);
+        }
         for (int q = 0; q < identity.getPlayerNumber(); q++)
         {
             if (players[q].getNumberOfOwenedStates() > 2)
@@ -1370,6 +1373,7 @@ int Control::setPlayedCardsFromUI()
             std::cout << "hi " << identity.getName(TurnControl) << ui.getPlayedCardsFromUI().size() << std::endl;
             selectedCard.setName(ui.getPlayedCardsFromUI()[i]);
             players[TurnControl].setPlayedCard(selectedCard);
+            eraseSelectedCard();
             std::cout << "lalala " << selectedCard.getName() << std::endl;
             if (selectedCard.getName() == "matarsak")
                 return 3;
@@ -1383,6 +1387,15 @@ int Control::setPlayedCardsFromUI()
     // {
     //     std::cout << "to control player aziz " << players[TurnControl].getNumberOfPlayedCards() << "cards " << identity.getName(TurnControl) << " " << players[TurnControl].getPlayedCard(i).getName() << std::endl;
     // }
+}
+void Control::eraseSelectedCard()
+{
+    for (int i = 0; i < players[TurnControl].getNumberOfPlayedCards(); i++)
+    {
+    if (players[TurnControl].getPlayerCard(i).getName() == selectedCard.getName())
+        players[TurnControl].eraseCard(i);
+
+    }
 }
 bool Control::determinNumberOfSavedGame()
 {
