@@ -282,6 +282,7 @@ void UI::initializeWarzoneButton(float x, float y, float width, float hight)
 int UI::displayWarzoneButton(std::string starterPlayer)
 {
     initializeWarzoneButton(50, 50, 120, 50);
+    const char *starterPlayerInUI = starterPlayer.c_str();
     while (1)
     {
         Vector2 mousePssitionIdentity = GetMousePosition();
@@ -317,7 +318,8 @@ int UI::displayWarzoneButton(std::string starterPlayer)
             DrawTextEx(fontMenu, this->UIwarzone[idx].title, (Vector2){this->UIwarzone[idx].getRectangle().x + 10, this->UIwarzone[idx].getRectangle().y + 10}, fontMenu.baseSize, 1, selectedColor);
             // std::cout << "tah for " << std::endl;
         }
-
+        DrawTextEx(gameFont,starterPlayerInUI ,(Vector2){40 , 40} , gameFont.baseSize, 1, WHITE);
+        DrawTextEx(gameFont,"choose the selected warzon" ,(Vector2){50 , 40} , gameFont.baseSize, 1, WHITE);
         // EndTextureMode(); // Stop drawing to the render texture
 
         // Draw the render texture to the screen
