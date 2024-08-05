@@ -73,10 +73,13 @@ public:
     void initializePlayedCardsFromUI();
     void initializePlayerCardsFromUI();
     void initializePlayedStringCard();
+  
+
     void initializePassButton(float x, float y, float width, float hight);
     void setIfPlayerPassed(bool, int);
     bool getIfPlayerPassed(int);
     std::vector <std::string> getPlayedCardsFromUI();
+    bool displayWinner(int,std::string);
     // std::string findCard(Texture2D);
 private:
     const char *menuButtonsTitle[4];
@@ -105,6 +108,7 @@ private:
     Texture2D gameTable;                 // table background during the game
     std::unordered_map<int, Texture2D> characterNumber;
     std::unordered_map<std::string,Texture2D> UIcardName;
+    
     std::unordered_map<int,std::string> playedStringCard;
     // std::unordered_map <Button,std::string> UIStringName;
     Texture2D character1;
@@ -114,6 +118,7 @@ private:
     RenderTexture2D renderTextureForGameTable[3];
     RenderTexture2D renderTextureForGameTableAndCharacters;
     Texture2D cards[15];
+    Texture2D winnerBackgroundForThreePlayers[3];
     // Texture2D baharCards;
     // Texture2D zemestanCards;
     // Texture2D shirzanCards;

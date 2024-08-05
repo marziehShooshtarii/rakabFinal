@@ -35,10 +35,14 @@ UI::UI()
     cards[12] = LoadTexture("../assets/s5.png");
     cards[13] = LoadTexture("../assets/s6.png");
     cards[14] = LoadTexture("../assets/s10.png");
+    winnerBackgroundForThreePlayers[0] = LoadTexture("../assets/winner2.png");
+    winnerBackgroundForThreePlayers[1] = LoadTexture("../assets/winner3.png");
+    winnerBackgroundForThreePlayers[2] = LoadTexture("../assets/winner1.png");
+   
 
     renderTextureForGameTable[0] = LoadRenderTexture(character1.width, character1.height);
-    renderTextureForGameTable[1] = LoadRenderTexture(character2.width, character1.height);
-    renderTextureForGameTable[2] = LoadRenderTexture(character3.width, character1.height);
+    renderTextureForGameTable[1] = LoadRenderTexture(character2.width, character2.height);
+    renderTextureForGameTable[2] = LoadRenderTexture(character3.width, character3.height);
 
     renderTextureForGameTableAndCharacters = LoadRenderTexture(gameTable.width, gameTable.height);
     initializeCardTextureAndName();
@@ -48,6 +52,7 @@ UI::UI()
     initializePlayedCardsFromUI();
     initializePlayerCardsFromUI();
     initializePlayedStringCard();
+
     for (int i = 0; i < 3; i++)
         ifPlayerPassed[i] = false;
     // temp = LoadImage("../assets/gt1.png");          // Load image
@@ -165,6 +170,7 @@ void UI::unloadingTexture()
     UnloadTexture(backgroundWarzoneMap);
     // UnloadTexture(foregroundWarzoneMap);
     UnloadTexture(charectersAndNames);
+    UnloadTexture(luckNumberBackground);
     UnloadTexture(selectedWarzoneBackground);
     UnloadTexture(gameTable);
     UnloadTexture(character1);
@@ -175,6 +181,18 @@ void UI::unloadingTexture()
     {
         UnloadTexture(cards[i]);
     }
+    for (int i = 0; i < 3; i++)
+    {
+        UnloadTexture(winnerBackgroundForThreePlayers[i]);
+    }
+    for (int i = 0; i < 3; i++)
+    {
+        UnloadRenderTexture(renderTextureForGameTable[i]);
+    }
+       UnloadRenderTexture(renderTextureForGameTableAndCharacters);
+    
+
+    
     // UnloadRenderTexture(renderTextureForGameTable);
 }
 // void UI::unloadTextBox()
@@ -294,6 +312,7 @@ int UI::displayWarzoneButton(std::string starterPlayer)
             if (UIwarzone[i].ifPressed(mousePssitionIdentity, mousePressedIdentity))
             {
                 std::cout << "warzone selected - > " << i << std::endl;
+                
                 return i; // number of the selected warzone according to states in Map.cpp
             }
         }
@@ -422,7 +441,7 @@ void UI::initializePassButton(float x, float y, float width, float hight)
 }
 bool UI::displaySelectedWarzone(std::string UIWarzone)
 {
-    initializeNextButton(1100, 680, 120, 50);
+    initializeNextButton(40, 680, 120, 50);
     const char *selectedUIWarzone = UIWarzone.c_str();
     while (1)
     {
@@ -433,6 +452,7 @@ bool UI::displaySelectedWarzone(std::string UIWarzone)
         if (next.ifPressed(mousePssitionIdentity, mousePressedIdentity))
         {
             std::cout << "too if " << std::endl;
+            next.setStatus(false);
             return true; // next button has been pressed
         }
         BeginDrawing();
@@ -663,6 +683,7 @@ bool UI::displayGameTableAndCharacters(int turnHandlerForDisplay, int TurnContro
         if (next.ifPressed(mousePssitionIdentity, mousePressedIdentity))
         {
             std::cout << "too if " << std::endl;
+            next.setStatus(false);
             return true; // next button has been pressed
         }
 
@@ -823,6 +844,7 @@ void UI::initializePlayedStringCard()
     //     {sarbazTenCards, "sarbaz_10"},
     // };
 }
+
 void UI::initializeCardTextureAndName()
 {
     UIcardName =
@@ -921,6 +943,7 @@ bool UI::displayCharectersAndNames(std::string name1, std::string name2, std::st
         if (next.ifPressed(mousePssitionIdentity, mousePressedIdentity))
         {
             std::cout << "too if " << std::endl;
+            next.setStatus(false);
             return true; // next button has been pressed
         }
 
@@ -947,6 +970,48 @@ bool UI::displayCharectersAndNames(std::string name1, std::string name2, std::st
         EndDrawing();
     }
 }
+bool UI::displayWinner(int winnerPlayer,std::string winnerName)
+{
+    initializeNextButton(250, 680, 120, 50);
+    const char *winnerPlayerName = winnerName.c_str();
+    std::cout<<"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1"<<std::endl;
+    while (1)
+    {
+        Vector2 mousePssitionIdentity = GetMousePosition();
+        bool mousePressedIdentity = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
+        // std::cout << mousePressedIdentity << std::endl;
+
+        if (next.ifPressed(mousePssitionIdentity, mousePressedIdentity))
+        {
+            std::cout << "too if " << std::endl;
+            next.setStatus(false);
+            return true; // next button has been pressed
+        }
+
+        BeginDrawing();
+        ClearBackground(RAYWHITE);
+        DrawTexture(winnerBackgroundForThreePlayers[winnerPlayer], 0, 0, WHITE);
+
+        DrawText(winnerPlayerName, 200, 40, 40, WHITE);
+        
+
+        Color selectedColor = WHITE;
+        if (CheckCollisionPointRec(mousePssitionIdentity, next.getRectangle()))
+        {
+            selectedColor = WHITE;
+        }
+        else
+        {
+            selectedColor = RED;
+        }
+
+        DrawTextEx(fontMenu, this->next.title, (Vector2){this->next.getRectangle().x + 10, this->next.getRectangle().y + 10}, fontMenu.baseSize, 1, selectedColor);
+
+        EndDrawing();
+    }
+    std::cout<<"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!2"<<std::endl;
+}
+
 // void UI::inputNumberOfPlayers()
 // {
 //     bool mouseOnText
