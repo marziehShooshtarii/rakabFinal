@@ -73,7 +73,9 @@ public:
     void initializePlayedCardsFromUI();
     void initializePlayerCardsFromUI();
     void initializePlayedStringCard();
-  
+    bool validCardsForMatarsak();
+    bool validateCardsForMatarsakInUI(int);
+
 
     void initializePassButton(float x, float y, float width, float hight);
     void setIfPlayerPassed(bool, int);
