@@ -314,6 +314,7 @@ int Control::checkProcessOfEndingWar()
             // }
             players[s].eraseAllPlayedCards();
         }
+        turnHandlerAfterEachWar = 0;
         baharVSzemestan.clear();
         for (int w = 0; w < identity.getPlayerNumber(); w++)
         {
@@ -1221,6 +1222,7 @@ void Control::menu()
         }
         case displayGameTable:
         {
+            turnHandlerAfterEachWar++;
             PlayerTurnHandler++;
             // if (PlayerTurnHandler == 3)
             //     PlayerTurnHandler = 0;
@@ -1414,7 +1416,7 @@ int Control::setPlayedCardsFromUI()
     {
         std::cout << "turn control azizam " << TurnControl << std::endl;
         std::cout << "players[TurnControl].getIfPassed() aziztaram " << players[TurnControl].getIfPassed() << std::endl;
-        for (int i = (PlayerTurnHandler / 3); i < ui.getPlayedCardsFromUI().size(); i++)
+        for (int i = (turnHandlerAfterEachWar / 3); i < ui.getPlayedCardsFromUI().size(); i++)
         {
             std::cout << "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii " << i << std::endl;
             std::cout << "hi " << identity.getName(TurnControl) << ui.getPlayedCardsFromUI().size() << std::endl;
