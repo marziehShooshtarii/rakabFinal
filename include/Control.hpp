@@ -151,6 +151,7 @@ private:
         displayPlayersCard,
         displayGameTable,
         displayingWinner,
+        showValidCardsForMatarsak,
 
     };
 };

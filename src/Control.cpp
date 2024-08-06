@@ -234,7 +234,9 @@ int Control::playingInput()
     if (checkSelectedCard != 5) // if player has played anything but parcham dar
     {
         std::cout << "4:05" << std::endl;
-        playingCards(i, checkSelectedCard);
+        if (playingCards(i, checkSelectedCard))
+            return 4; // matarsak has been played
+                      // playingCards(i, checkSelectedCard);
         std::cout << "4:06" << std::endl;
     }
     else
@@ -353,7 +355,7 @@ bool Control::playingCards(int index, int checkSelectedCard)
         std::cin.ignore();
         displayPlayingCards(index);
         playingCards(index, cinSelectedCard(index));
-        return true;
+        return false;
     }
     if (checkSelectedCard == 6)
     {
@@ -387,7 +389,7 @@ bool Control::playingCards(int index, int checkSelectedCard)
     //     displayPlayingCards(index);
     //     playingCards(index, cinSelectedCard(index));
     // }
-    return true;
+    return false;
 }
 bool Control::searchForExistingCards(int index, Card searchingCard)
 {
@@ -1178,6 +1180,12 @@ void Control::menu()
             // {
             //     std::cout << "to control player aziz " << players[TurnControl].getNumberOfPlayedCards() << "cards " << identity.getName(TurnControl) << " " << players[TurnControl].getPlayedCard(i).getName() << std::endl;
             // }
+            if (playingInput() == 4)
+            {
+                uiStates = showValidCardsForMatarsak;
+                break;
+            }
+            
             if (playingInput() != 3)
                 uiStates = displayingWinner;
             else
@@ -1210,6 +1218,13 @@ void Control::menu()
             for (int i = 0; i < identity.getPlayerNumber(); i++)
                 players[i].eraseAllPlayedCards();
             uiStates = warzoneMap;
+            break;
+        }
+        case showValidCardsForMatarsak:
+        {
+            ui.validCardsForMatarsak();
+            uiStates = displayGameTable;
+            break;
         }
         }
     }
@@ -1385,11 +1400,11 @@ int Control::setPlayedCardsFromUI()
             eraseSelectedCard();
             std::cout << "lalala " << selectedCard.getName() << std::endl;
             if (selectedCard.getName() == "matarsak")
-                return 3;
+                return 4;
             if (selectedCard.getName() == "parcham_dar")
                 return 5;
         }
-        return 4;
+        return 3;
     }
     return 7;
     // for (int i = 0; i < players[TurnControl].getNumberOfPlayedCards(); i++)
