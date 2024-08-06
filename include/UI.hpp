@@ -75,6 +75,7 @@ public:
     void initializePlayedStringCard();
     bool validCardsForMatarsak();
     bool validateCardsForMatarsakInUI(int);
+    void eraseAllCardsAfterWar();
 
 
     void initializePassButton(float x, float y, float width, float hight);

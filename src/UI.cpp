@@ -303,7 +303,7 @@ int UI::displayWarzoneButton(std::string starterPlayer)
         Vector2 mousePssitionIdentity = GetMousePosition();
         bool mousePressedIdentity = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
         // std::cout << mousePressedIdentity << std::endl;
-        //std::cout << "yek" << std::endl;
+        // std::cout << "yek" << std::endl;
         for (int i = 0; i < 15; i++)
         {
             if (UIwarzone[i].ifPressed(mousePssitionIdentity, mousePressedIdentity))
@@ -535,7 +535,7 @@ bool UI::renderTextureForCharacterOnGameTable(int starterPlayer)
                 // isCardSelected = true;
 
                 std::cout << "warzone selected - > " << i << std::endl;
-                std::cout<<"[playedCardsHandler.at(UIstarterPlayer).size()//////////////////////////////////////////////"<<playedCardsHandler.at(UIstarterPlayer).size();
+                std::cout << "[playedCardsHandler.at(UIstarterPlayer).size()//////////////////////////////////////////////" << playedCardsHandler.at(UIstarterPlayer).size();
                 // std::cout << "playedCardForUI - >>>>>>>>>>>>>> renderTextureForCharacterOnGameTable" << playedCardsHandler.at(UIstarterPlayer).size() << std::endl;
                 return false;
             }
@@ -656,7 +656,7 @@ bool UI::validCardsForMatarsak()
         }
 
         // EndTextureMode();
-        for (int idx = 0; idx <  playedCardsHandler.at(UIstarterPlayer).size(); ++idx)
+        for (int idx = 0; idx < playedCardsHandler.at(UIstarterPlayer).size(); ++idx)
         {
             // std::cout << "to for " << std::endl;
             Color selectedColor = WHITE;
@@ -705,6 +705,15 @@ bool UI::validateCardsForMatarsakInUI(int indexCard)
     return true;
 }
 
+void UI::eraseAllCardsAfterWar()
+{
+    for (int i = 0; i < 4; i++)
+    {
+        playedCardsHandler.at(i).clear();
+        playedCardsFromUI.at(i).clear();
+    }
+}
+
 void UI::initializeCardsButtons(float x, float y, float width, float hight)
 {
     std::cout << "UIstarterPlayer too initialize " << UIstarterPlayer << std::endl;
@@ -722,7 +731,7 @@ bool UI::displayCardsButtons()
         Vector2 mousePssitionIdentity = GetMousePosition();
         bool mousePressedIdentity = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
         // std::cout << mousePressedIdentity << std::endl;
-        
+
         for (int i = 0; i < 10; i++)
         {
             if (cardsButtons[i].ifPressed(mousePssitionIdentity, mousePressedIdentity))
@@ -831,7 +840,7 @@ bool UI::displayGameTableAndCharacters(int turnHandlerForDisplay, int TurnContro
 }
 std::vector<std::string> UI::getPlayedCardsFromUI()
 {
-    std::cout <<"playedCardsFromUI.at(UIstarterPlayer)- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"<<playedCardsFromUI.at(UIstarterPlayer).size()<<std::endl;
+    std::cout << "playedCardsFromUI.at(UIstarterPlayer)- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" << playedCardsFromUI.at(UIstarterPlayer).size() << std::endl;
     return playedCardsFromUI.at(UIstarterPlayer);
     // for (int i=0 ; i < playedCardsFromUI.at(UIstarterPlayer).size(); i++)
     // {
