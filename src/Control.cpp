@@ -1236,6 +1236,7 @@ void Control::menu()
         }
         case displayingWinner:
         {
+            ui.eraseAllCardsAfterWar();
             std::cout << "ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc" << std::endl;
             ui.displayWinner(starterPlayer, players[starterPlayer].getName());
             for (int i = 0; i < identity.getPlayerNumber(); i++)
