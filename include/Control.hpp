@@ -137,6 +137,7 @@ private:
     int TurnControl = 0;
     int checkStatus = 0;//no status checked
     int turnHandlerAfterEachWar = 0;
+    int numberOfWinnerOfGame;
     //bool fistWarOfGame; //to check if it's the first war
      enum UIStates
     {
@@ -152,6 +153,7 @@ private:
         displayPlayersCard,
         displayGameTable,
         displayingWinner,
+        displayWinnerOfGame,
         showValidCardsForMatarsak,
 
     };

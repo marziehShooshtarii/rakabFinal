@@ -791,6 +791,7 @@ bool Control ::checkWin(int index)
 
     if (counterNeighbores == 3 || players[index].getNumberOfOwenedStates() == 5)
     {
+        numberOfWinnerOfGame = index;
         winnerOfGame = players[index].getName();
         std::cout << "winnerOfGame@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" << winnerOfGame << std::endl;
         return true;
@@ -1108,6 +1109,12 @@ void Control::menu()
                 identity.setPlayerNumberForSave(uiNumberPlayers);
                 uiStates = threePlayerInput;
             }
+            if (uiNumberPlayers == 4)
+            {
+                identity.setPlayerNumberForSave(uiNumberPlayers);
+                uiStates = fourPlayerInput;
+            }
+            
             break;
         }
         case threePlayerInput:
@@ -1115,6 +1122,21 @@ void Control::menu()
             for (int i = 0; i < 3; i++)
             {
                 ui.thripleTextBoxDraw();
+                std::cout << "for text box" << i << std::endl;
+                identity.setPlayerNameForSave(ui.getPlayerNameAndColorFromUI(i));
+                identity.setPlayerAgeForSave(ui.getPlayerAgeAndLuckFromUI(i + 3));
+                identity.setPlayerColorForSave(ui.getPlayerNameAndColorFromUI(i + 6));
+                identity.setPlayerForSave();
+            }
+            std::cout << "threePlayerInput 2" << std::endl;
+            uiStates = warzoneMap;
+            break;
+        }
+        case fourPlayerInput:
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                ui.quadrupleTextBoxDraw();
                 std::cout << "for text box" << i << std::endl;
                 identity.setPlayerNameForSave(ui.getPlayerNameAndColorFromUI(i));
                 identity.setPlayerAgeForSave(ui.getPlayerAgeAndLuckFromUI(i + 3));
@@ -1197,6 +1219,11 @@ void Control::menu()
             //     std::cout << "to control player aziz " << players[TurnControl].getNumberOfPlayedCards() << "cards " << identity.getName(TurnControl) << " " << players[TurnControl].getPlayedCard(i).getName() << std::endl;
             // }
             int returnPlayingInput = playingInput();
+            if (returnPlayingInput == 1)
+            {
+                uiStates = displayWinnerOfGame;
+                break;
+            }
             if (returnPlayingInput == 4)
             {
                 uiStates = showValidCardsForMatarsak;
@@ -1249,6 +1276,12 @@ void Control::menu()
         {
             ui.validCardsForMatarsak();
             uiStates = displayGameTable;
+            break;
+        }
+        case displayWinnerOfGame:
+        {
+            ui.displayFinalWinner(numberOfWinnerOfGame,winnerOfGame);
+            uiStates = UIMenu;
             break;
         }
         }
