@@ -44,6 +44,7 @@ UI::UI()
     winnerBackgroundForEndOfGame[1] = LoadTexture("../assets/finalWinner2.png");
     winnerBackgroundForEndOfGame[2] = LoadTexture("../assets/finalWinner3.png");
     winnerBackgroundForEndOfGame[3] = LoadTexture("../assets/finalWinner4.png");
+    noWinner = LoadTexture("../assets/noWinner.png");
 
     renderTextureForGameTable[0] = LoadRenderTexture(character1.width, character1.height);
     renderTextureForGameTable[1] = LoadRenderTexture(character2.width, character2.height);
@@ -815,33 +816,36 @@ bool UI::displayGameTableAndCharactersForThree(int turnHandlerForDisplay, int Tu
         DrawTexture(gameTableForThreePlayers, 0, 0, WHITE);
         // std::cout << "aha " << std::endl;
         //  std::cout << "playedCardsHandler.at(k).size() - >........................displayGameTableAndCharacters" << playedCardsHandler.at(0).size() << std::endl;
-        for (int q = 0; q < turnHandlerForDisplay / 4; q++)
+        for (int q = 0; q < turnHandlerForDisplay / 3; q++)
         {
             for (int k = 0; k < 4; k++)
             {
                 for (int j = 0; j < playedCardsHandler.at(k).size() / 3; j++)
                 {
-                    for (int i = 0; i < 3; i++)
+                    for (int i = (j*3); i < (j*3) + 3; i++)
                         DrawTexture(playedCardsHandler.at(k)[i], (k * 200) + (i * 65) + 5, (j * 100) + 290, WHITE);
                 }
-                for (int i = 0; i < playedCardsHandler.at(k).size() % 3; i++)
+                for (int i = playedCardsHandler.at(k).size() - (playedCardsHandler.at(k).size() % 3); i < playedCardsHandler.at(k).size(); i++)
                     DrawTexture(playedCardsHandler.at(k)[i], (k * 200) + (i * 65) + 5, (playedCardsHandler.at(k).size() / 3 * 100) + 290, WHITE);
             }
         }
         // std::cout << "1:54 " << std::endl;
-        for (int k = 0; k < (((turnHandlerForDisplay - 1) % 3 + TurnControler) % 4) + 1; k++)
+        if (turnHandlerForDisplay / 3 < 1)
         {
-            // std::cout << "1:55 " << turnHandlerForDisplay % 4 + TurnControler << " k chi " << k << std::endl;
-            for (int j = 0; j < playedCardsHandler.at(k).size() / 3; j++)
+            for (int k = 0; k < (((turnHandlerForDisplay - 1) % 3 + TurnControler) % 4) + 1; k++)
             {
-                // std::cout << "1:56 " << std::endl;
-                for (int i = 0; i < 3; i++)
-                    DrawTexture(playedCardsHandler.at(k)[i], (k * 200) + (i * 65) + 5, (j * 100) + 290, WHITE);
-                // std::cout << "1:57 " << playedCardsHandler.at(k).size() % 3 << std::endl;
+                // std::cout << "1:55 " << turnHandlerForDisplay % 4 + TurnControler << " k chi " << k << std::endl;
+                for (int j = 0; j < playedCardsHandler.at(k).size() / 3; j++)
+                {
+                    // std::cout << "1:56 " << std::endl;
+                    for (int i = 0; i < 3; i++)
+                        DrawTexture(playedCardsHandler.at(k)[i], (k * 200) + (i * 65) + 5, (j * 100) + 290, WHITE);
+                    // std::cout << "1:57 " << playedCardsHandler.at(k).size() % 3 << std::endl;
+                }
+                // std::cout << "2:42 " << k << "2:44" <<playedCardsHandler.at(k).size() % 3 << std::endl;
+                for (int i = playedCardsHandler.at(k).size() - (playedCardsHandler.at(k).size() % 3); i < playedCardsHandler.at(k).size() % 3; i++)
+                    DrawTexture(playedCardsHandler.at(k)[i], (k * 200) + (i * 65) + 5, (playedCardsHandler.at(k).size() / 3 * 100) + 290, WHITE);
             }
-            // std::cout << "2:42 " << k << "2:44" <<playedCardsHandler.at(k).size() % 3 << std::endl;
-            for (int i = 0; i < playedCardsHandler.at(k).size() % 3; i++)
-                DrawTexture(playedCardsHandler.at(k)[i], (k * 200) + (i * 65) + 5, (playedCardsHandler.at(k).size() / 3 * 100) + 290, WHITE);
         }
 
         Color selectedColor = WHITE;
@@ -1223,6 +1227,46 @@ bool UI::displayCharectersAndNames(std::string name1, std::string name2, std::st
         DrawTextPro(gameFont, playerName1, (Vector2){200, 40}, (Vector2){1}, 1, 40, 1, {50, 190, 220, 225});
         DrawTextPro(gameFont, playerName2, (Vector2){600, 40}, (Vector2){1}, 1, 40, 1, {50, 190, 220, 225});
         DrawTextPro(gameFont, playerName3, (Vector2){980, 40}, (Vector2){1}, 1, 40, 1, {50, 190, 220, 225});
+
+        Color selectedColor = WHITE;
+        if (CheckCollisionPointRec(mousePssitionIdentity, next.getRectangle()))
+        {
+            selectedColor = WHITE;
+        }
+        else
+        {
+            selectedColor = RED;
+        }
+
+        DrawTextEx(fontMenu, this->next.title, (Vector2){this->next.getRectangle().x + 10, this->next.getRectangle().y + 10}, fontMenu.baseSize, 1, selectedColor);
+
+        EndDrawing();
+    }
+}
+bool UI::displayNoWinner()
+{
+    initializeNextButton(1100, 680, 120, 50);
+
+    while (1)
+    {
+        Vector2 mousePssitionIdentity = GetMousePosition();
+        bool mousePressedIdentity = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
+        // std::cout << mousePressedIdentity << std::endl;
+
+        if (next.ifPressed(mousePssitionIdentity, mousePressedIdentity))
+        {
+            std::cout << "too if displayNoWinner" << std::endl;
+            next.setStatus(false);
+            return true; // next button has been pressed
+        }
+        std::cout << "too  displayNoWinner" << std::endl;
+
+        BeginDrawing();
+        ClearBackground(RAYWHITE);
+        std::cout << "too  displayNoWinner 2" << std::endl;
+        DrawTexture(noWinner, 0, 0, WHITE);
+        std::cout << "too  displayNoWinner 3" << std::endl;
+        DrawTextPro(gameFont, "there is no winner in this war!!!", (Vector2){200, 40}, (Vector2){1}, 1, 40, 1, {50, 190, 220, 225});
 
         Color selectedColor = WHITE;
         if (CheckCollisionPointRec(mousePssitionIdentity, next.getRectangle()))

@@ -84,6 +84,7 @@ public:
     int ExitGameControl();
     std::vector <std::string> getPlayedCardsFromUI();
     bool displayWinner(int,std::string);
+    bool displayNoWinner();
     // std::string findCard(Texture2D);
 private:
     const char *menuButtonsTitle[4];
@@ -126,6 +127,7 @@ private:
     Texture2D cards[15];
     Texture2D winnerBackgroundForEachWar[4];
     Texture2D winnerBackgroundForEndOfGame[4];
+    Texture2D noWinner;
     Button saveGame;
     Button exitGame;
     // Texture2D baharCards;
