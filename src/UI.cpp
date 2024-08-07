@@ -39,6 +39,10 @@ UI::UI()
     winnerBackgroundForEachWar[1] = LoadTexture("../assets/winner3.png");
     winnerBackgroundForEachWar[2] = LoadTexture("../assets/winner1.png");
     winnerBackgroundForEachWar[3] = LoadTexture("../assets/winner4.png");
+    winnerBackgroundForEndOfGame[0] = LoadTexture("../assets/finalWinner1.png");
+    winnerBackgroundForEndOfGame[1] = LoadTexture("../assets/finalWinner2.png");
+    winnerBackgroundForEndOfGame[2] = LoadTexture("../assets/finalWinner3.png");
+    winnerBackgroundForEndOfGame[3] = LoadTexture("../assets/finalWinner4.png");
 
     renderTextureForGameTable[0] = LoadRenderTexture(character1.width, character1.height);
     renderTextureForGameTable[1] = LoadRenderTexture(character2.width, character2.height);
@@ -184,6 +188,7 @@ void UI::unloadingTexture()
     for (int i = 0; i < 4; i++)
     {
         UnloadTexture(winnerBackgroundForEachWar[i]);
+        UnloadTexture(winnerBackgroundForEndOfGame[i]);
     }
     for (int i = 0; i < 3; i++)
     {
@@ -1120,6 +1125,52 @@ bool UI::displayWinner(int winnerPlayer, std::string winnerName)
         EndDrawing();
     }
     std::cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!2" << std::endl;
+}
+bool UI::displayFinalWinner(int winnerPlayer, std::string winnerName)
+{
+    initializeNextButton(250, 680, 120, 50);
+    const char *winnerPlayerName = winnerName.c_str();
+    std::cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1" << std::endl;
+    // firstCharacterPlayedCards.clear();
+    // secondCharacterPlayedCards.clear();
+    // thirdCharacterPlayedCards.clear();
+    // firstPlayedCardsFromUI.clear();
+    // secondPlayedCardsFromUI.clear();
+    // thirdCharacterPlayedCards.clear();
+    std::cout << "firstCharacterPlayedCards - >>>>>>>>>>" << firstCharacterPlayedCards.size() << std::endl;
+    while (1)
+    {
+        Vector2 mousePssitionIdentity = GetMousePosition();
+        bool mousePressedIdentity = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
+        // std::cout << mousePressedIdentity << std::endl;
+
+        if (next.ifPressed(mousePssitionIdentity, mousePressedIdentity))
+        {
+            std::cout << "too if " << std::endl;
+            next.setStatus(false);
+            return true; // next button has been pressed
+        }
+
+        BeginDrawing();
+        ClearBackground(RAYWHITE);
+        DrawTexture(winnerBackgroundForEndOfGame[winnerPlayer], 0, 0, WHITE);
+
+        DrawText(winnerPlayerName, 200, 40, 40, WHITE);
+
+        Color selectedColor = WHITE;
+        if (CheckCollisionPointRec(mousePssitionIdentity, next.getRectangle()))
+        {
+            selectedColor = WHITE;
+        }
+        else
+        {
+            selectedColor = RED;
+        }
+
+        DrawTextEx(fontMenu, this->next.title, (Vector2){this->next.getRectangle().x + 10, this->next.getRectangle().y + 10}, fontMenu.baseSize, 1, selectedColor);
+
+        EndDrawing();
+    }
 }
 
 // void UI::inputNumberOfPlayers()

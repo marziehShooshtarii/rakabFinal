@@ -76,6 +76,7 @@ public:
     bool validCardsForMatarsak();
     bool validateCardsForMatarsakInUI(int);
     void eraseAllCardsAfterWar();
+    bool displayFinalWinner(int , std::string);
 
 
     void initializePassButton(float x, float y, float width, float hight);
@@ -122,6 +123,7 @@ private:
     RenderTexture2D renderTextureForGameTableAndCharacters;
     Texture2D cards[15];
     Texture2D winnerBackgroundForEachWar[4];
+    Texture2D winnerBackgroundForEndOfGame[4];
     // Texture2D baharCards;
     // Texture2D zemestanCards;
     // Texture2D shirzanCards;
