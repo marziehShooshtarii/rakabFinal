@@ -1213,7 +1213,7 @@ void Control::menu()
             if (returnPlayingInput == 5) // there is no winner for war
             {
                 std::cout << "aya too in if miofte" << std::endl;
-                uiStates = warzoneMap;
+                uiStates = noWinnerForWar;
                 break;
             }
 
@@ -1230,6 +1230,15 @@ void Control::menu()
                 if (uiNumberPlayers == 4)
                     uiStates = displayGameTableForFour;
             }
+            break;
+        }
+        case noWinnerForWar:
+        {
+            std::cout << "chera ino neshon nemeidi" << std::endl;
+            ui.displayNoWinner();
+            std::cout << "chera ino neshon nemeidi 2" << std::endl;
+            uiStates = warzoneMap;
+            std::cout << "chera ino neshon nemeidi 3" << std::endl;
             break;
         }
         case displayGameTableForThree:
@@ -1471,8 +1480,9 @@ int Control::setPlayedCardsFromUI()
     {
         std::cout << "turn control azizam " << TurnControl << std::endl;
         std::cout << "players[TurnControl].getIfPassed() aziztaram " << players[TurnControl].getIfPassed() << std::endl;
-        for (int i = (turnHandlerAfterEachWar / 3); i < ui.getPlayedCardsFromUI().size(); i++)
+        for (int i = players[TurnControl].getNumberOfPlayedCards(); i < ui.getPlayedCardsFromUI().size(); i++)
         {
+    
             std::cout << "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii " << i << std::endl;
             std::cout << "hi " << identity.getName(TurnControl) << ui.getPlayedCardsFromUI().size() << std::endl;
             selectedCard.setName(ui.getPlayedCardsFromUI()[i]);

@@ -160,6 +160,7 @@ private:
         showValidCardsForMatarsak,
         UISaveInfo,
         controlExit,
+        noWinnerForWar,
 
     };
 };
