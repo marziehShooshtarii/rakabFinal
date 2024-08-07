@@ -1207,7 +1207,9 @@ void Control::menu()
             }
             if (returnPlayingInput == 4)
             {
+                std::cout<<"matarsakkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk 1"<<std::endl;
                 uiStates = showValidCardsForMatarsak;
+                std::cout<<"matarsakkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk 2"<<std::endl;
                 break;
             }
             if (returnPlayingInput == 5) // there is no winner for war
@@ -1288,7 +1290,9 @@ void Control::menu()
         }
         case showValidCardsForMatarsak:
         {
+            std::cout<<"matarsakkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk 3"<<std::endl;
             ui.validCardsForMatarsak();
+            std::cout<<"matarsakkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk 4"<<std::endl;
             if (uiNumberPlayers == 3)
                 uiStates = displayGameTableForThree;
             if (uiNumberPlayers == 4)
