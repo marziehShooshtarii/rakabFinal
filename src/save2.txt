@@ -1,0 +1,27 @@
+3
+naz 12 green 1
+number_of_owned_states: 0
+owend_states: 
+player_cards_number: 10
+player_cards: sarbaz_4 zemestan sarbaz_4 matarsak sarbaz_1 sarbaz_2 sarbaz_3 matarsak bahar sarbaz_4 
+played_cards_number: 1
+played_cards: zemestan 
+ben 6 blue 1
+number_of_owned_states: 1
+owend_states: caline 
+player_cards_number: 10
+player_cards: rish_sefid matarsak matarsak sarbaz_2 sarbaz_3 sarbaz_10 shirzan sarbaz_5 sarbaz_10 bahar 
+played_cards_number: 1
+played_cards: sarbaz_5 
+ali 45 red 0
+number_of_owned_states: 0
+owend_states: 
+player_cards_number: 10
+player_cards: sarbaz_6 parcham_dar shirzan sarbaz_5 sarbaz_1 sarbaz_5 sarbaz_10 matarsak matarsak sarbaz_1 
+played_cards_number: 2
+played_cards: shirzan sarbaz_10 
+player_cards_number: 1
+baharVSzemestan: zemestan 
+warzone: bella
+peace_sign: 
+starter_player: 2
