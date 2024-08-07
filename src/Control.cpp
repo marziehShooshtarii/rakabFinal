@@ -1114,7 +1114,7 @@ void Control::menu()
                 identity.setPlayerNumberForSave(uiNumberPlayers);
                 uiStates = fourPlayerInput;
             }
-            
+
             break;
         }
         case threePlayerInput:
@@ -1134,16 +1134,16 @@ void Control::menu()
         }
         case fourPlayerInput:
         {
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < 4; i++)
             {
                 ui.quadrupleTextBoxDraw();
                 std::cout << "for text box" << i << std::endl;
                 identity.setPlayerNameForSave(ui.getPlayerNameAndColorFromUI(i));
-                identity.setPlayerAgeForSave(ui.getPlayerAgeAndLuckFromUI(i + 3));
-                identity.setPlayerColorForSave(ui.getPlayerNameAndColorFromUI(i + 6));
+                identity.setPlayerAgeForSave(ui.getPlayerAgeAndLuckFromUI(i + 4));
+                identity.setPlayerColorForSave(ui.getPlayerNameAndColorFromUI(i + 8));
                 identity.setPlayerForSave();
             }
-            std::cout << "threePlayerInput 2" << std::endl;
+            std::cout << "fourPlayerInput 2" << std::endl;
             uiStates = warzoneMap;
             break;
         }
@@ -1176,7 +1176,7 @@ void Control::menu()
         case showSelectedWarzone:
         {
             ui.displaySelectedWarzone(warzone);
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < (identity.getPlayerNumber()); i++)
             {
                 std::cout << "karaye ajib3 - > " << i << identity.getAge(i) << std::endl;
                 std::cout << "karaye ajib4 - > " << i << identity.getName(i) << std::endl;
@@ -1187,17 +1187,17 @@ void Control::menu()
         }
         case displayPlayersCard:
         {
-            ui.displaycharactersCards(PlayerTurnHandler % 3);
+            ui.displaycharactersCards(PlayerTurnHandler % (identity.getPlayerNumber()));
             if (!ifCardsAreSet)
                 StartNewGame();
             std::cout << "ghable findTexture too control" << std::endl;
 
-            if (PlayerTurnHandler < 3)
+            if (PlayerTurnHandler < (identity.getPlayerNumber()))
                 ui.findTexture(players[TurnControl].getAllPlayerCards(), TurnControl);
 
             std::cout << "ghable findTexture too control 2" << std::endl;
 
-            if (PlayerTurnHandler < 3 || players[TurnControl].getIfPassed() == false)
+            if (PlayerTurnHandler < (identity.getPlayerNumber()) || players[TurnControl].getIfPassed() == false)
                 players[TurnControl].setIfPassed(ui.renderTextureForCharacterOnGameTable(TurnControl));
 
             std::cout << "ifpassed too control" << identity.getName(TurnControl) << players[TurnControl].getIfPassed() << std::endl;
@@ -1241,20 +1241,23 @@ void Control::menu()
             else
             {
                 TurnControl++;
-                if (TurnControl == 3)
+                if (TurnControl == (identity.getPlayerNumber()))
                     TurnControl = 0;
                 std::cout << "ghabl playing input aziz " << std::endl;
-                uiStates = displayGameTable;
+                if (uiNumberPlayers == 3)
+                    uiStates = displayGameTableForThree;
+                if (uiNumberPlayers == 4)
+                    uiStates = displayGameTableForFour;
             }
             break;
         }
-        case displayGameTable:
+        case displayGameTableForThree:
         {
             turnHandlerAfterEachWar++;
             PlayerTurnHandler++;
             // if (PlayerTurnHandler == 3)
             //     PlayerTurnHandler = 0;
-            ui.displayGameTableAndCharacters(PlayerTurnHandler, starterPlayer);
+            ui.displayGameTableAndCharactersForThree(PlayerTurnHandler, starterPlayer);
             uiStates = displayPlayersCard;
             // if (uiStates == PlayerTurnHandler)
             //     break;
@@ -1262,6 +1265,21 @@ void Control::menu()
             //     uiStates = statesControler.at(PlayerTurnHandler);
             break;
         }
+        case displayGameTableForFour:
+        {
+            turnHandlerAfterEachWar++;
+            PlayerTurnHandler++;
+            // if (PlayerTurnHandler == 3)
+            //     PlayerTurnHandler = 0;
+            ui.displayGameTableAndCharactersForFour(PlayerTurnHandler, starterPlayer);
+            uiStates = displayPlayersCard;
+            // if (uiStates == PlayerTurnHandler)
+            //     break;
+            // else
+            //     uiStates = statesControler.at(PlayerTurnHandler);
+            break;
+        }
+
         case displayingWinner:
         {
             ui.eraseAllCardsAfterWar();
@@ -1275,12 +1293,15 @@ void Control::menu()
         case showValidCardsForMatarsak:
         {
             ui.validCardsForMatarsak();
-            uiStates = displayGameTable;
+            if (uiNumberPlayers == 3)
+                    uiStates = displayGameTableForThree;
+                if (uiNumberPlayers == 4)
+                    uiStates = displayGameTableForFour;
             break;
         }
         case displayWinnerOfGame:
         {
-            ui.displayFinalWinner(numberOfWinnerOfGame,winnerOfGame);
+            ui.displayFinalWinner(numberOfWinnerOfGame, winnerOfGame);
             uiStates = UIMenu;
             break;
         }
