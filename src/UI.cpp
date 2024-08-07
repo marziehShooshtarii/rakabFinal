@@ -343,10 +343,8 @@ int UI::displayWarzoneButton(std::string starterPlayer)
             DrawTextEx(fontMenu, this->UIwarzone[idx].title, (Vector2){this->UIwarzone[idx].getRectangle().x + 10, this->UIwarzone[idx].getRectangle().y + 10}, fontMenu.baseSize, 1, selectedColor);
             // std::cout << "tah for " << std::endl;
         }
-        DrawTextEx(gameFont, starterPlayerInUI, (Vector2){40, 40}, gameFont.baseSize, 1, WHITE);
-        DrawTextEx(gameFont, "choose the selected warzon", (Vector2){50, 40}, gameFont.baseSize, 1, WHITE);
-        // EndTextureMode(); // Stop drawing to the render texture
-
+        DrawTextPro(gameFont , starterPlayerInUI , (Vector2){40, 40} , (Vector2){1}, 1 ,40, 1,{50, 180, 220, 255});
+        DrawTextPro(gameFont , "choose the selected warzon" , (Vector2){80, 40} , (Vector2){1}, 1 ,40, 1,{50, 180, 220, 255});
         // Draw the render texture to the screen
         // DrawTextureRec(target.texture, (Rectangle){ 0, 0, (float)target.texture.width, (float)-target.texture.height }, (Vector2){ 0, 0 }, WHITE);
         EndDrawing();
@@ -847,9 +845,9 @@ bool UI::displayGameTableAndCharactersForThree(int turnHandlerForDisplay, int Tu
         EndDrawing();
     }
 }
-bool UI::displayGameTableAndCharactersForFour(int turnHandlerForDisplay, int TurnControler )
+bool UI::displayGameTableAndCharactersForFour(int turnHandlerForDisplay, int TurnControler)
 {
- initializeNextButton(1100, 680, 120, 50);
+    initializeNextButton(1100, 680, 120, 50);
     while (1)
     {
         Vector2 mousePssitionIdentity = GetMousePosition();
@@ -1126,10 +1124,9 @@ bool UI::displayCharectersAndNames(std::string name1, std::string name2, std::st
         BeginDrawing();
         ClearBackground(RAYWHITE);
         DrawTexture(charectersAndNames, 0, 0, WHITE);
-
-        DrawText(playerName1, 200, 40, 40, WHITE);
-        DrawText(playerName2, 600, 40, 40, WHITE);
-        DrawText(playerName3, 980, 40, 40, WHITE);
+        DrawTextPro(gameFont, playerName1, (Vector2){200, 40}, (Vector2){1}, 1, 40, 1, {50, 190, 220, 225});
+        DrawTextPro(gameFont, playerName2, (Vector2){600, 40}, (Vector2){1}, 1, 40, 1, {50, 190, 220, 225});
+        DrawTextPro(gameFont, playerName3, (Vector2){980, 40}, (Vector2){1}, 1, 40, 1, {50, 190, 220, 225});
 
         Color selectedColor = WHITE;
         if (CheckCollisionPointRec(mousePssitionIdentity, next.getRectangle()))
@@ -1175,7 +1172,10 @@ bool UI::displayWinner(int winnerPlayer, std::string winnerName)
         ClearBackground(RAYWHITE);
         DrawTexture(winnerBackgroundForEachWar[winnerPlayer], 0, 0, WHITE);
 
-        DrawText(winnerPlayerName, 200, 40, 40, WHITE);
+        DrawTextPro(gameFont, winnerPlayerName, (Vector2){350, 40}, (Vector2){1}, 1, 40, 1, {50, 190, 220, 225});
+        DrawTextPro(gameFont, "is the winner.", (Vector2){420, 40}, (Vector2){1}, 1, 40, 1, {50, 190, 220, 225});
+        // DrawTextPro(gameFont, "is the winner.", (Vector2){200, 40}, (Vector2){1}, 1, 40, 1, {50, 190, 220, 225});
+        // DrawText(winnerPlayerName, 200, 40, 40, WHITE);
 
         Color selectedColor = WHITE;
         if (CheckCollisionPointRec(mousePssitionIdentity, next.getRectangle()))
