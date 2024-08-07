@@ -343,8 +343,8 @@ int UI::displayWarzoneButton(std::string starterPlayer)
             DrawTextEx(fontMenu, this->UIwarzone[idx].title, (Vector2){this->UIwarzone[idx].getRectangle().x + 10, this->UIwarzone[idx].getRectangle().y + 10}, fontMenu.baseSize, 1, selectedColor);
             // std::cout << "tah for " << std::endl;
         }
-        DrawTextPro(gameFont , starterPlayerInUI , (Vector2){40, 40} , (Vector2){1}, 1 ,40, 1,{50, 180, 220, 255});
-        DrawTextPro(gameFont , "choose the selected warzon" , (Vector2){80, 40} , (Vector2){1}, 1 ,40, 1,{50, 180, 220, 255});
+        DrawTextPro(gameFont, starterPlayerInUI, (Vector2){40, 40}, (Vector2){1}, 1, 40, 1, {50, 180, 220, 255});
+        DrawTextPro(gameFont, "choose the selected warzon", (Vector2){80, 40}, (Vector2){1}, 1, 40, 1, {50, 180, 220, 255});
         // Draw the render texture to the screen
         // DrawTextureRec(target.texture, (Rectangle){ 0, 0, (float)target.texture.width, (float)-target.texture.height }, (Vector2){ 0, 0 }, WHITE);
         EndDrawing();
@@ -443,6 +443,14 @@ void UI::initializePassButton(float x, float y, float width, float hight)
 {
     passPosition = (Button){(Rectangle){x, y, width, hight}, "pass", false};
 }
+void UI::initializeSaveGameButton(float x, float y, float width, float hight)
+{
+    saveGame = (Button){(Rectangle){x, y, width, hight}, "save", false};
+}
+void UI::initializeExitGameButton(float x, float y, float width, float hight)
+{
+    exitGame = (Button){(Rectangle){x, y, width, hight}, "Exit", false};
+}
 bool UI::displaySelectedWarzone(std::string UIWarzone)
 {
     initializeNextButton(40, 680, 120, 50);
@@ -493,14 +501,14 @@ void UI::displaycharactersCards(int turnHandler)
     return;
 }
 
-void UI::setIfPlayerPassed(bool checkPassed, int playerIndex)
-{
-    ifPlayerPassed[playerIndex] = checkPassed;
-}
-bool UI::getIfPlayerPassed(int playerIndex)
-{
-    return ifPlayerPassed[playerIndex];
-}
+// void UI::setIfPlayerPassed(bool checkPassed, int playerIndex)
+// {
+//     ifPlayerPassed[playerIndex] = checkPassed;
+// }
+// bool UI::getIfPlayerPassed(int playerIndex)
+// {
+//     return ifPlayerPassed[playerIndex];
+// }
 bool UI::renderTextureForCharacterOnGameTable(int starterPlayer)
 {
     UIstarterPlayer = starterPlayer;
@@ -784,6 +792,7 @@ bool UI::displayCardsButtons()
 bool UI::displayGameTableAndCharactersForThree(int turnHandlerForDisplay, int TurnControler)
 {
     initializeNextButton(1100, 680, 120, 50);
+    initializeExitGameButton(10, 10, 120, 50);
     while (1)
     {
         Vector2 mousePssitionIdentity = GetMousePosition();
@@ -793,7 +802,12 @@ bool UI::displayGameTableAndCharactersForThree(int turnHandlerForDisplay, int Tu
         {
             std::cout << "too if " << std::endl;
             next.setStatus(false);
-            return true; // next button has been pressed
+            return false; // next button has been pressed
+        }
+        if (exitGame.ifPressed(mousePssitionIdentity, mousePressedIdentity))
+        {
+            std::cout << "too if " << std::endl;
+            return true; // exit button has been pressed
         }
 
         BeginDrawing();
@@ -842,17 +856,36 @@ bool UI::displayGameTableAndCharactersForThree(int turnHandlerForDisplay, int Tu
 
         DrawTextEx(fontMenu, this->next.title, (Vector2){this->next.getRectangle().x + 10, this->next.getRectangle().y + 10}, fontMenu.baseSize, 1, selectedColor);
 
+        Color exitColor = WHITE;
+        if (CheckCollisionPointRec(mousePssitionIdentity, exitGame.getRectangle()))
+        {
+            exitColor = WHITE;
+        }
+        else
+        {
+            exitColor = RED;
+        }
+
+        DrawTextEx(fontMenu, this->exitGame.title, (Vector2){this->exitGame.getRectangle().x + 10, this->exitGame.getRectangle().y + 10}, fontMenu.baseSize, 1, exitColor);
+
         EndDrawing();
     }
 }
 bool UI::displayGameTableAndCharactersForFour(int turnHandlerForDisplay, int TurnControler)
 {
     initializeNextButton(1100, 680, 120, 50);
+    initializeExitGameButton(10, 10, 120, 50);
     while (1)
     {
         Vector2 mousePssitionIdentity = GetMousePosition();
         bool mousePressedIdentity = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
 
+        if (next.ifPressed(mousePssitionIdentity, mousePressedIdentity))
+        {
+            std::cout << "too if " << std::endl;
+            next.setStatus(false);
+            return false; // next button has been pressed
+        }
         if (next.ifPressed(mousePssitionIdentity, mousePressedIdentity))
         {
             std::cout << "too if " << std::endl;
@@ -906,6 +939,18 @@ bool UI::displayGameTableAndCharactersForFour(int turnHandlerForDisplay, int Tur
 
         DrawTextEx(fontMenu, this->next.title, (Vector2){this->next.getRectangle().x + 10, this->next.getRectangle().y + 10}, fontMenu.baseSize, 1, selectedColor);
 
+        Color exitColor = WHITE;
+        if (CheckCollisionPointRec(mousePssitionIdentity, exitGame.getRectangle()))
+        {
+            exitColor = WHITE;
+        }
+        else
+        {
+            exitColor = RED;
+        }
+
+        DrawTextEx(fontMenu, this->exitGame.title, (Vector2){this->exitGame.getRectangle().x + 10, this->exitGame.getRectangle().y + 10}, fontMenu.baseSize, 1, exitColor);
+
         EndDrawing();
     }
 }
@@ -917,6 +962,56 @@ std::vector<std::string> UI::getPlayedCardsFromUI()
     // {
     //     std::cout << playedCardsFromUI.at(UIstarterPlayer)[i]<< "player aziz " << UIstarterPlayer << std::endl;
     // }
+}
+int UI::ExitGameControl()
+{
+    initializeSaveGameButton(200, 100, 120, 50);
+    initializeExitGameButton(200, 200, 120, 50);
+    while (1)
+    {
+        Vector2 mousePssitionIdentity = GetMousePosition();
+        bool mousePressedIdentity = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
+        if (saveGame.ifPressed(mousePssitionIdentity, mousePressedIdentity))
+        {
+            std::cout << "too if " << std::endl;
+            next.setStatus(false);
+            return 1; // save button has been pressed
+        }
+        if (exitGame.ifPressed(mousePssitionIdentity, mousePressedIdentity))
+        {
+            std::cout << "too if " << std::endl;
+            next.setStatus(false);
+            return 2; // exit button has been pressed
+        }
+        BeginDrawing();
+        DrawTexture(backgroundIdentityMenu, 0, 0, WHITE);
+        Color exitColor = WHITE;
+        if (CheckCollisionPointRec(mousePssitionIdentity, exitGame.getRectangle()))
+        {
+            exitColor = WHITE;
+        }
+        else
+        {
+            exitColor = RED;
+        }
+
+        DrawTextPro(fontMenu, this->exitGame.title, (Vector2){this->exitGame.getRectangle().x + 10, this->exitGame.getRectangle().y + 10}, (Vector2){1}, 1, 100, 1, exitColor);
+        // DrawTextEx(fontMenu, this->exitGame.title, (Vector2){this->exitGame.getRectangle().x + 10, this->exitGame.getRectangle().y + 10}, fontMenu.baseSize, 1, exitColor);
+
+        Color saveColor = WHITE;
+        if (CheckCollisionPointRec(mousePssitionIdentity, saveGame.getRectangle()))
+        {
+            saveColor = WHITE;
+        }
+        else
+        {
+            saveColor = RED;
+        }
+
+        DrawTextPro(fontMenu, this->saveGame.title, (Vector2){this->saveGame.getRectangle().x + 10, this->saveGame.getRectangle().y + 10}, (Vector2){1}, 1, 100, 1, saveColor);
+        // DrawTextEx(fontMenu, this->saveGame.title, (Vector2){this->saveGame.getRectangle().x + 10, this->saveGame.getRectangle().y + 10}, fontMenu.baseSize, 1, saveColor);
+        EndDrawing();
+    }
 }
 // std::string UI::findCard(Texture2D value)
 // {
@@ -1041,6 +1136,7 @@ void UI::initializeCardTextureAndName()
 
         };
 }
+
 void UI::initializeCardTextureAndStrings()
 {
     // UIStringName =
