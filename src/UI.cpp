@@ -15,7 +15,8 @@ UI::UI()
     charectersAndNames = LoadTexture("../assets/charactersIntro.png");
     luckNumberBackground = LoadTexture("../assets/luck.png");
     selectedWarzoneBackground = LoadTexture("../assets/selected_warzone2.png");
-    gameTable = LoadTexture("../assets/dark_table.png");
+    gameTableForThreePlayers = LoadTexture("../assets/dark_table.png");
+    gameTableForFourPlayers = LoadTexture("../assets/dark_table_for_four.png");
     character1 = LoadTexture("../assets/gt1_2.png");
     character2 = LoadTexture("../assets/gt2_2.png");
     character3 = LoadTexture("../assets/gt3_2.png");
@@ -48,7 +49,8 @@ UI::UI()
     renderTextureForGameTable[1] = LoadRenderTexture(character2.width, character2.height);
     renderTextureForGameTable[2] = LoadRenderTexture(character3.width, character3.height);
 
-    renderTextureForGameTableAndCharacters = LoadRenderTexture(gameTable.width, gameTable.height);
+    renderTextureForGameTableAndCharacters = LoadRenderTexture(gameTableForThreePlayers.width, gameTableForThreePlayers.height);
+    renderTextureForGameTableAndCharactersForFour = LoadRenderTexture(gameTableForFourPlayers.width, gameTableForFourPlayers.height);
     initializeCardTextureAndName();
     initializePlayerCardsHandler();
     initializePlayedCardsHandler();
@@ -176,7 +178,8 @@ void UI::unloadingTexture()
     UnloadTexture(charectersAndNames);
     UnloadTexture(luckNumberBackground);
     UnloadTexture(selectedWarzoneBackground);
-    UnloadTexture(gameTable);
+    UnloadTexture(gameTableForThreePlayers);
+    UnloadTexture(gameTableForFourPlayers);
     UnloadTexture(character1);
     UnloadTexture(character2);
     UnloadTexture(character3);
@@ -780,7 +783,7 @@ bool UI::displayCardsButtons()
 
     return false;
 }
-bool UI::displayGameTableAndCharacters(int turnHandlerForDisplay, int TurnControler)
+bool UI::displayGameTableAndCharactersForThree(int turnHandlerForDisplay, int TurnControler)
 {
     initializeNextButton(1100, 680, 120, 50);
     while (1)
@@ -797,7 +800,71 @@ bool UI::displayGameTableAndCharacters(int turnHandlerForDisplay, int TurnContro
 
         BeginDrawing();
         ClearBackground(RAYWHITE);
-        DrawTexture(gameTable, 0, 0, WHITE);
+        DrawTexture(gameTableForThreePlayers, 0, 0, WHITE);
+        // std::cout << "aha " << std::endl;
+        //  std::cout << "playedCardsHandler.at(k).size() - >........................displayGameTableAndCharacters" << playedCardsHandler.at(0).size() << std::endl;
+        for (int q = 0; q < turnHandlerForDisplay / 4; q++)
+        {
+            for (int k = 0; k < 4; k++)
+            {
+                for (int j = 0; j < playedCardsHandler.at(k).size() / 3; j++)
+                {
+                    for (int i = 0; i < 3; i++)
+                        DrawTexture(playedCardsHandler.at(k)[i], (k * 200) + (i * 65) + 5, (j * 100) + 290, WHITE);
+                }
+                for (int i = 0; i < playedCardsHandler.at(k).size() % 3; i++)
+                    DrawTexture(playedCardsHandler.at(k)[i], (k * 200) + (i * 65) + 5, (playedCardsHandler.at(k).size() / 3 * 100) + 290, WHITE);
+            }
+        }
+        // std::cout << "1:54 " << std::endl;
+        for (int k = 0; k < (((turnHandlerForDisplay - 1) % 3 + TurnControler) % 4) + 1; k++)
+        {
+            // std::cout << "1:55 " << turnHandlerForDisplay % 4 + TurnControler << " k chi " << k << std::endl;
+            for (int j = 0; j < playedCardsHandler.at(k).size() / 3; j++)
+            {
+                // std::cout << "1:56 " << std::endl;
+                for (int i = 0; i < 3; i++)
+                    DrawTexture(playedCardsHandler.at(k)[i], (k * 200) + (i * 65) + 5, (j * 100) + 290, WHITE);
+                // std::cout << "1:57 " << playedCardsHandler.at(k).size() % 3 << std::endl;
+            }
+            // std::cout << "2:42 " << k << "2:44" <<playedCardsHandler.at(k).size() % 3 << std::endl;
+            for (int i = 0; i < playedCardsHandler.at(k).size() % 3; i++)
+                DrawTexture(playedCardsHandler.at(k)[i], (k * 200) + (i * 65) + 5, (playedCardsHandler.at(k).size() / 3 * 100) + 290, WHITE);
+        }
+
+        Color selectedColor = WHITE;
+        if (CheckCollisionPointRec(mousePssitionIdentity, next.getRectangle()))
+        {
+            selectedColor = WHITE;
+        }
+        else
+        {
+            selectedColor = RED;
+        }
+
+        DrawTextEx(fontMenu, this->next.title, (Vector2){this->next.getRectangle().x + 10, this->next.getRectangle().y + 10}, fontMenu.baseSize, 1, selectedColor);
+
+        EndDrawing();
+    }
+}
+bool UI::displayGameTableAndCharactersForFour(int turnHandlerForDisplay, int TurnControler )
+{
+ initializeNextButton(1100, 680, 120, 50);
+    while (1)
+    {
+        Vector2 mousePssitionIdentity = GetMousePosition();
+        bool mousePressedIdentity = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
+
+        if (next.ifPressed(mousePssitionIdentity, mousePressedIdentity))
+        {
+            std::cout << "too if " << std::endl;
+            next.setStatus(false);
+            return true; // next button has been pressed
+        }
+
+        BeginDrawing();
+        ClearBackground(RAYWHITE);
+        DrawTexture(gameTableForFourPlayers, 0, 0, WHITE);
         // std::cout << "aha " << std::endl;
         //  std::cout << "playedCardsHandler.at(k).size() - >........................displayGameTableAndCharacters" << playedCardsHandler.at(0).size() << std::endl;
         for (int q = 0; q < turnHandlerForDisplay / 4; q++)

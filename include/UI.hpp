@@ -66,7 +66,8 @@ public:
     void findTexture(std::vector<Card>, int);
     void initializeCardsButtons(float x, float y, float width, float hight);
     bool displayCardsButtons();
-    bool displayGameTableAndCharacters(int , int);
+    bool displayGameTableAndCharactersForThree(int , int);
+    bool displayGameTableAndCharactersForFour(int , int);
     void renderTextureForCharacterAndGameTable();
     void initializePlayerCardsHandler();
     void initializePlayedCardsHandler();
@@ -109,7 +110,8 @@ private:
     Button next;                         // for moving to the next step of the game
     Texture2D charectersAndNames;        // for introducing charecters with their names
     Texture2D selectedWarzoneBackground; // for announcing the selected warzone
-    Texture2D gameTable;                 // table background during the game
+    Texture2D gameTableForThreePlayers;                 // table background during the game for three players
+    Texture2D gameTableForFourPlayers;                 // table background during the game for four players
     std::unordered_map<int, Texture2D> characterNumber;
     std::unordered_map<std::string,Texture2D> UIcardName;
     
@@ -121,6 +123,7 @@ private:
     Texture2D character4;
     RenderTexture2D renderTextureForGameTable[3];
     RenderTexture2D renderTextureForGameTableAndCharacters;
+    RenderTexture2D renderTextureForGameTableAndCharactersForFour;
     Texture2D cards[15];
     Texture2D winnerBackgroundForEachWar[4];
     Texture2D winnerBackgroundForEndOfGame[4];
