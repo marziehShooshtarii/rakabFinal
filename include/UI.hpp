@@ -66,8 +66,8 @@ public:
     void findTexture(std::vector<Card>, int);
     void initializeCardsButtons(float x, float y, float width, float hight);
     bool displayCardsButtons();
-    bool displayGameTableAndCharactersForThree(int , int);
-    bool displayGameTableAndCharactersForFour(int , int);
+    bool displayGameTableAndCharactersForThree(int, int);
+    bool displayGameTableAndCharactersForFour(int, int);
     void renderTextureForCharacterAndGameTable();
     void initializePlayerCardsHandler();
     void initializePlayedCardsHandler();
@@ -77,13 +77,13 @@ public:
     bool validCardsForMatarsak();
     bool validateCardsForMatarsakInUI(int);
     void eraseAllCardsAfterWar();
-    bool displayFinalWinner(int , std::string);
+    bool displayFinalWinner(int, std::string);
     void initializeSaveGameButton(float x, float y, float width, float hight);
     void initializeExitGameButton(float x, float y, float width, float hight);
     void initializePassButton(float x, float y, float width, float hight);
     int ExitGameControl();
-    std::vector <std::string> getPlayedCardsFromUI();
-    bool displayWinner(int,std::string);
+    std::vector<std::string> getPlayedCardsFromUI();
+    bool displayWinner(int, std::string);
     bool displayNoWinner();
     // std::string findCard(Texture2D);
 private:
@@ -110,12 +110,12 @@ private:
     Button next;                         // for moving to the next step of the game
     Texture2D charectersAndNames;        // for introducing charecters with their names
     Texture2D selectedWarzoneBackground; // for announcing the selected warzone
-    Texture2D gameTableForThreePlayers;                 // table background during the game for three players
-    Texture2D gameTableForFourPlayers;                 // table background during the game for four players
+    Texture2D gameTableForThreePlayers;  // table background during the game for three players
+    Texture2D gameTableForFourPlayers;   // table background during the game for four players
     std::unordered_map<int, Texture2D> characterNumber;
-    std::unordered_map<std::string,Texture2D> UIcardName;
-    
-    std::unordered_map<int,std::string> playedStringCard;
+    std::unordered_map<std::string, Texture2D> UIcardName;
+
+    std::unordered_map<int, std::string> playedStringCard;
     // std::unordered_map <Button,std::string> UIStringName;
     Texture2D character1;
     Texture2D character2;
@@ -172,6 +172,7 @@ private:
     std::vector<std::string> thirdPlayerCardsFromUI;
     std::vector<std::string> forthPlayerCardsFromUI;
     int UIstarterPlayer;
+    std::vector<int> orderOfPlayedCardsForMatarsak;
     // enum TextureString
     // {
     //     baharCards,

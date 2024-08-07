@@ -543,6 +543,7 @@ bool UI::renderTextureForCharacterOnGameTable(int starterPlayer)
                 playedCardsHandler.at(UIstarterPlayer).emplace_back(playerCardsHandler.at(UIstarterPlayer)[i]);
                 std::cout << "UIstarterPlayer--------------too render 2 " << std::endl;
                 playedCardsFromUI.at(UIstarterPlayer).emplace_back(playerCardsFromUI.at(UIstarterPlayer)[i]);
+                orderOfPlayedCardsForMatarsak.push_back(i); // for knowing order of played cards for matarsak
                 // std::cout <<"16.6 -> " << playedCardsFromUI.at(UIstarterPlayer)[i];
                 playerCardsHandler.at(UIstarterPlayer).erase(playerCardsHandler.at(UIstarterPlayer).begin() + i);
                 playerCardsFromUI.at(UIstarterPlayer).erase(playerCardsFromUI.at(UIstarterPlayer).begin() + i);
@@ -635,12 +636,18 @@ bool UI::validCardsForMatarsak()
 
         Vector2 mousePssitionIdentity = GetMousePosition();
         bool mousePressedIdentity = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
-
+        std::cout << "matarsakkkkkkkkkkkkkkkkkkkkkkkkkkk 5" << std::endl;
         for (int i = 0; i < playedCardsHandler.at(UIstarterPlayer).size(); i++)
         {
-
+            std::cout << "matarsakkkkkkkkkkkkkkkkkkkkkkkkkkk 6" << std::endl;
+            for (int k = 0; k < orderOfPlayedCardsForMatarsak.size(); k++)
+            {
+                if (i == orderOfPlayedCardsForMatarsak[k])
+                    i++;
+            }
             if (cardsButtons[i].ifPressed(mousePssitionIdentity, mousePressedIdentity))
             {
+                std::cout << "matarsakkkkkkkkkkkkkkkkkkkkkkkkkkk 7" << std::endl;
                 playerCardsFromUI.at(UIstarterPlayer).emplace_back(playedCardsFromUI.at(UIstarterPlayer)[i]);
                 playerCardsHandler.at(UIstarterPlayer).emplace_back(playedCardsHandler.at(UIstarterPlayer)[i]);
                 playedCardsFromUI.at(UIstarterPlayer).erase(playedCardsFromUI.at(UIstarterPlayer).begin() + i);
@@ -653,23 +660,29 @@ bool UI::validCardsForMatarsak()
         }
 
         // if (isCardSelected)
+        std::cout << "matarsakkkkkkkkkkkkkkkkkkkkkkkkkkk 8" << std::endl;
         //     return 0;
         // if (!getIfPlayerPassed(UIstarterPlayer))
         // {
         BeginDrawing();
         ClearBackground(BLANK);
         DrawTexture(characterNumber.at(UIstarterPlayer), 0, 0, WHITE);
+        std::cout << "matarsakkkkkkkkkkkkkkkkkkkkkkkkkkk 9" << std::endl;
         for (int i = 0; i < playedCardsHandler.at(UIstarterPlayer).size() / 2; i++)
         {
+            std::cout << "matarsakkkkkkkkkkkkkkkkkkkkkkkkkkk 10" << std::endl;
             if (validateCardsForMatarsakInUI(i))
                 DrawTexture(playedCardsHandler.at(UIstarterPlayer)[i], (i * 100) + 400, 610, WHITE);
         }
+        std::cout << "matarsakkkkkkkkkkkkkkkkkkkkkkkkkkk 11" << std::endl;
 
         for (int i = playedCardsHandler.at(UIstarterPlayer).size() / 2; i < playedCardsHandler.at(UIstarterPlayer).size(); i++)
         {
+            std::cout << "matarsakkkkkkkkkkkkkkkkkkkkkkkkkkk 12" << std::endl;
             if (validateCardsForMatarsakInUI(i))
                 DrawTexture(playedCardsHandler.at(UIstarterPlayer)[i], ((i - playedCardsHandler.at(UIstarterPlayer).size() / 2) * 100) + 400, 460, WHITE);
         }
+        std::cout << "matarsakkkkkkkkkkkkkkkkkkkkkkkkkkk 13" << std::endl;
 
         // EndTextureMode();
         for (int idx = 0; idx < playedCardsHandler.at(UIstarterPlayer).size(); ++idx)
@@ -706,6 +719,7 @@ bool UI::validCardsForMatarsak()
         // DrawTextEx(fontMenu, this->next.title, (Vector2){this->next.getRectangle().x + 10, this->next.getRectangle().y + 10}, fontMenu.baseSize, 1, selectedColor);
 
         // return 1;
+        std::cout << "matarsakkkkkkkkkkkkkkkkkkkkkkkkkkk 14" << std::endl;
         // getPlayedCardsFromUI();
     }
     return false;
@@ -822,11 +836,11 @@ bool UI::displayGameTableAndCharactersForThree(int turnHandlerForDisplay, int Tu
             {
                 for (int j = 0; j < playedCardsHandler.at(k).size() / 3; j++)
                 {
-                    for (int i = (j*3); i < (j*3) + 3; i++)
-                        DrawTexture(playedCardsHandler.at(k)[i], (k * 200) + (i * 65) + 5, (j * 100) + 290, WHITE);
+                    for (int i = (j * 3); i < (j * 3) + 3; i++)
+                        DrawTexture(playedCardsHandler.at(k)[i], (k * 300) + (i * 65) + 5, (j * 100) + 290, WHITE);
                 }
                 for (int i = playedCardsHandler.at(k).size() - (playedCardsHandler.at(k).size() % 3); i < playedCardsHandler.at(k).size(); i++)
-                    DrawTexture(playedCardsHandler.at(k)[i], (k * 200) + (i * 65) + 5, (playedCardsHandler.at(k).size() / 3 * 100) + 290, WHITE);
+                    DrawTexture(playedCardsHandler.at(k)[i], (k * 300) + (i * 65) + 5, (playedCardsHandler.at(k).size() / 3 * 100) + 290, WHITE);
             }
         }
         // std::cout << "1:54 " << std::endl;
@@ -839,12 +853,12 @@ bool UI::displayGameTableAndCharactersForThree(int turnHandlerForDisplay, int Tu
                 {
                     // std::cout << "1:56 " << std::endl;
                     for (int i = 0; i < 3; i++)
-                        DrawTexture(playedCardsHandler.at(k)[i], (k * 200) + (i * 65) + 5, (j * 100) + 290, WHITE);
+                        DrawTexture(playedCardsHandler.at(k)[i], (k * 300) + (i * 65) + 5, (j * 100) + 290, WHITE);
                     // std::cout << "1:57 " << playedCardsHandler.at(k).size() % 3 << std::endl;
                 }
                 // std::cout << "2:42 " << k << "2:44" <<playedCardsHandler.at(k).size() % 3 << std::endl;
                 for (int i = playedCardsHandler.at(k).size() - (playedCardsHandler.at(k).size() % 3); i < playedCardsHandler.at(k).size() % 3; i++)
-                    DrawTexture(playedCardsHandler.at(k)[i], (k * 200) + (i * 65) + 5, (playedCardsHandler.at(k).size() / 3 * 100) + 290, WHITE);
+                    DrawTexture(playedCardsHandler.at(k)[i], (k * 300) + (i * 65) + 5, (playedCardsHandler.at(k).size() / 3 * 100) + 290, WHITE);
             }
         }
 
