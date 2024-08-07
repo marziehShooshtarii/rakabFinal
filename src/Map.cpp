@@ -7,10 +7,10 @@ Map::Map()
 }
 bool Map::setMapStates()
 {
-    readMapFile.open("matrix.txt", std::ios::in);
+    readMapFile.open("../src/matrix.txt", std::ios::in);
     if (!readMapFile.is_open())
     {
-        std ::cerr << "Error opening the file!" << std::endl;
+        std ::cerr << "Error opening the file! mapppppppppppppppppppppppppppppppppppp" << std::endl;
         return 1;
     }
     for (int i = 0; i < 15; i++)
