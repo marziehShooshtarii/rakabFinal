@@ -1199,21 +1199,6 @@ void Control::menu()
             std::cout << "ifpassed too control" << identity.getName(TurnControl) << players[TurnControl].getIfPassed() << std::endl;
             // setPlayedCardsFromUI();
             std::cout << "az tabe miad biroon" << std::endl;
-            // ui.renderTextureForCharacterOnGameTable(PlayerTurnHandler % 3);
-            // if (players[TurnControl].getIfPassed() == false)
-            // {
-
-            //     for (int i = (PlayerTurnHandler / 3); i < ui.getPlayedCardsFromUI().size(); i++)
-            //     {
-            //         std::cout << "hi " << identity.getName(TurnControl) << ui.getPlayedCardsFromUI().size() << std::endl;
-            //         selectedCard.setName(ui.getPlayedCardsFromUI()[i]);
-            //         players[TurnControl].setPlayedCard(selectedCard);
-            //     }
-            // }
-            // for (int i = 0; i < players[TurnControl].getNumberOfPlayedCards(); i++)
-            // {
-            //     std::cout << "to control player aziz " << players[TurnControl].getNumberOfPlayedCards() << "cards " << identity.getName(TurnControl) << " " << players[TurnControl].getPlayedCard(i).getName() << std::endl;
-            // }
             int returnPlayingInput = playingInput();
             if (returnPlayingInput == 1)
             {
@@ -1253,8 +1238,11 @@ void Control::menu()
             PlayerTurnHandler++;
             // if (PlayerTurnHandler == 3)
             //     PlayerTurnHandler = 0;
-            ui.displayGameTableAndCharactersForThree(PlayerTurnHandler, starterPlayer);
-            uiStates = displayPlayersCard;
+            ifExitTheGame = ui.displayGameTableAndCharactersForThree(PlayerTurnHandler, starterPlayer);
+            if (ifExitTheGame)
+                uiStates = controlExit;
+            else
+                uiStates = displayPlayersCard;
             // if (uiStates == PlayerTurnHandler)
             //     break;
             // else
@@ -1267,8 +1255,11 @@ void Control::menu()
             PlayerTurnHandler++;
             // if (PlayerTurnHandler == 3)
             //     PlayerTurnHandler = 0;
-            ui.displayGameTableAndCharactersForFour(PlayerTurnHandler, starterPlayer);
-            uiStates = displayPlayersCard;
+            ifExitTheGame = ui.displayGameTableAndCharactersForFour(PlayerTurnHandler, starterPlayer);
+            if (ifExitTheGame)
+                uiStates = controlExit;
+            else
+                uiStates = displayPlayersCard;
             // if (uiStates == PlayerTurnHandler)
             //     break;
             // else
@@ -1299,6 +1290,18 @@ void Control::menu()
         {
             ui.displayFinalWinner(numberOfWinnerOfGame, winnerOfGame);
             uiStates = UIMenu;
+            break;
+        }
+        case UISaveInfo:
+        {
+            saveAllInfo(TurnControl);
+            break;
+        }
+        case controlExit:
+        {
+            checkSaveGame = ui.ExitGameControl();
+            if (checkSaveGame == 1)
+                uiStates = UISaveInfo;
             break;
         }
         }

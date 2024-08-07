@@ -138,6 +138,8 @@ private:
     int checkStatus = 0;//no status checked
     int turnHandlerAfterEachWar = 0;
     int numberOfWinnerOfGame;
+    bool ifExitTheGame = false;
+    int checkSaveGame = 0 ;//no button pressed
     //bool fistWarOfGame; //to check if it's the first war
      enum UIStates
     {
@@ -156,6 +158,8 @@ private:
         displayingWinner,
         displayWinnerOfGame,
         showValidCardsForMatarsak,
+        UISaveInfo,
+        controlExit,
 
     };
 };
