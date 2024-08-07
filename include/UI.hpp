@@ -121,7 +121,7 @@ private:
     RenderTexture2D renderTextureForGameTable[3];
     RenderTexture2D renderTextureForGameTableAndCharacters;
     Texture2D cards[15];
-    Texture2D winnerBackgroundForThreePlayers[3];
+    Texture2D winnerBackgroundForEachWar[4];
     // Texture2D baharCards;
     // Texture2D zemestanCards;
     // Texture2D shirzanCards;

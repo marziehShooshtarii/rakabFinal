@@ -35,9 +35,10 @@ UI::UI()
     cards[12] = LoadTexture("../assets/s5.png");
     cards[13] = LoadTexture("../assets/s6.png");
     cards[14] = LoadTexture("../assets/s10.png");
-    winnerBackgroundForThreePlayers[0] = LoadTexture("../assets/winner2.png");
-    winnerBackgroundForThreePlayers[1] = LoadTexture("../assets/winner3.png");
-    winnerBackgroundForThreePlayers[2] = LoadTexture("../assets/winner1.png");
+    winnerBackgroundForEachWar[0] = LoadTexture("../assets/winner2.png");
+    winnerBackgroundForEachWar[1] = LoadTexture("../assets/winner3.png");
+    winnerBackgroundForEachWar[2] = LoadTexture("../assets/winner1.png");
+    winnerBackgroundForEachWar[3] = LoadTexture("../assets/winner4.png");
 
     renderTextureForGameTable[0] = LoadRenderTexture(character1.width, character1.height);
     renderTextureForGameTable[1] = LoadRenderTexture(character2.width, character2.height);
@@ -180,9 +181,9 @@ void UI::unloadingTexture()
     {
         UnloadTexture(cards[i]);
     }
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < 4; i++)
     {
-        UnloadTexture(winnerBackgroundForThreePlayers[i]);
+        UnloadTexture(winnerBackgroundForEachWar[i]);
     }
     for (int i = 0; i < 3; i++)
     {
@@ -1100,7 +1101,7 @@ bool UI::displayWinner(int winnerPlayer, std::string winnerName)
 
         BeginDrawing();
         ClearBackground(RAYWHITE);
-        DrawTexture(winnerBackgroundForThreePlayers[winnerPlayer], 0, 0, WHITE);
+        DrawTexture(winnerBackgroundForEachWar[winnerPlayer], 0, 0, WHITE);
 
         DrawText(winnerPlayerName, 200, 40, 40, WHITE);
 
