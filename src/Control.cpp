@@ -307,15 +307,11 @@ int Control::checkProcessOfEndingWar()
 
         for (int s = 0; s < identity.getPlayerNumber(); s++)
         {
-            std::cout << "players[s].getAllPlayedCards().size() - > " << players[s].getAllPlayedCards().size() << std::endl;
-            // for (int n = 0; n < players[s].getAllPlayedCards().size(); n++)
-            // {
-            //     players[s].erasePlayedCard(n);
-            // }
             players[s].eraseAllPlayedCards();
         }
         turnHandlerAfterEachWar = 0;
         baharVSzemestan.clear();
+        orderOfRishSefids.clear();
         for (int w = 0; w < identity.getPlayerNumber(); w++)
         {
             players[w].setIfPassed(false);
@@ -336,7 +332,7 @@ void Control::choiceForPeaceSign()
 {
     std::cout << players[orderOfRishSefids[orderOfRishSefids.size() - 1]].getName() << " please choose the state you want to place your peace sign on.";
     // std::cin >> peaceSign;
-    ui.displayWarzoneButton(identity.getName(starterPlayer));
+    ui.displayWarzoneButton(players[orderOfRishSefids[orderOfRishSefids.size() - 1]].getName());
 }
 void Control::displayPlayingCards(int index)
 {
@@ -1169,7 +1165,7 @@ void Control::menu()
         }
         case charactersIntro:
         {
-            ui.displayCharectersAndNames(identity.getName(0), identity.getName(1), identity.getName(2));
+            ui.displayCharectersAndNames(identity.getName(starterPlayer), identity.getName((starterPlayer + 1) % 3), identity.getName((starterPlayer + 2) % 3));
             uiStates = showSelectedWarzone;
             break;
         }
@@ -1294,9 +1290,9 @@ void Control::menu()
         {
             ui.validCardsForMatarsak();
             if (uiNumberPlayers == 3)
-                    uiStates = displayGameTableForThree;
-                if (uiNumberPlayers == 4)
-                    uiStates = displayGameTableForFour;
+                uiStates = displayGameTableForThree;
+            if (uiNumberPlayers == 4)
+                uiStates = displayGameTableForFour;
             break;
         }
         case displayWinnerOfGame:
