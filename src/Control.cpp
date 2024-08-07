@@ -792,6 +792,7 @@ bool Control ::checkWin(int index)
     if (counterNeighbores == 3 || players[index].getNumberOfOwenedStates() == 5)
     {
         winnerOfGame = players[index].getName();
+        std::cout << "winnerOfGame@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" << winnerOfGame << std::endl;
         return true;
     }
     return false;
@@ -1203,7 +1204,7 @@ void Control::menu()
             }
             if (returnPlayingInput == 5) // there is no winner for war
             {
-                std::cout <<"aya too in if miofte"<<std::endl;
+                std::cout << "aya too in if miofte" << std::endl;
                 uiStates = warzoneMap;
                 break;
             }
@@ -1610,11 +1611,11 @@ void Control::StartNewGame()
 }
 void Control::initializingNumberOfSavedGames()
 {
-    numberOfSavedGames.push_back("save.txt");
-    numberOfSavedGames.push_back("save2.txt");
-    numberOfSavedGames.push_back("save3.txt");
-    numberOfSavedGames.push_back("save4.txt");
-    numberOfSavedGames.push_back("save5.txt");
+    numberOfSavedGames.push_back("../src/save.txt");
+    numberOfSavedGames.push_back("../src/save2.txt");
+    numberOfSavedGames.push_back("../src/save3.txt");
+    numberOfSavedGames.push_back("../src/save4.txt");
+    numberOfSavedGames.push_back("../src/save5.txt");
 }
 void Control::setWarzone(std::string stateName)
 {
