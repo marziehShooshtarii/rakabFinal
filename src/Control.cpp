@@ -1207,9 +1207,9 @@ void Control::menu()
             }
             if (returnPlayingInput == 4)
             {
-                std::cout<<"matarsakkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk 1"<<std::endl;
+                std::cout << "matarsakkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk 1" << std::endl;
                 uiStates = showValidCardsForMatarsak;
-                std::cout<<"matarsakkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk 2"<<std::endl;
+                std::cout << "matarsakkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk 2" << std::endl;
                 break;
             }
             if (returnPlayingInput == 5) // there is no winner for war
@@ -1291,9 +1291,10 @@ void Control::menu()
         case showValidCardsForMatarsak:
         {
             ui.displaycharactersCardsForMatarsak(PlayerTurnHandler % (identity.getPlayerNumber()));
-            std::cout<<"matarsakkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk 3"<<std::endl;
+            std::cout << "matarsakkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk 3" << std::endl;
             ui.validCardsForMatarsak();
-            std::cout<<"matarsakkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk 4"<<std::endl;
+            setPlayedCardsAfterMatarsak();
+            std::cout << "matarsakkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk 4" << std::endl;
             if (uiNumberPlayers == 3)
                 uiStates = displayGameTableForThree;
             if (uiNumberPlayers == 4)
@@ -1487,7 +1488,7 @@ int Control::setPlayedCardsFromUI()
         std::cout << "players[TurnControl].getIfPassed() aziztaram " << players[TurnControl].getIfPassed() << std::endl;
         for (int i = players[TurnControl].getNumberOfPlayedCards(); i < ui.getPlayedCardsFromUI().size(); i++)
         {
-    
+
             std::cout << "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii " << i << std::endl;
             std::cout << "hi " << identity.getName(TurnControl) << ui.getPlayedCardsFromUI().size() << std::endl;
             selectedCard.setName(ui.getPlayedCardsFromUI()[i]);
@@ -1508,6 +1509,20 @@ int Control::setPlayedCardsFromUI()
     //     std::cout << "to control player aziz " << players[TurnControl].getNumberOfPlayedCards() << "cards " << identity.getName(TurnControl) << " " << players[TurnControl].getPlayedCard(i).getName() << std::endl;
     // }
 }
+void Control::setPlayedCardsAfterMatarsak()
+{
+    if (players[TurnControl].getIfPassed() == false)
+    {
+        players[TurnControl].eraseAllPlayedCards();
+
+        for (int i = 0; i < ui.getPlayedCardsFromUI().size(); i++)
+        {
+
+            selectedCard.setName(ui.getPlayedCardsFromUI()[i]);
+            players[TurnControl].setPlayedCard(selectedCard);
+        }
+    }
+}
 void Control::eraseSelectedCard()
 {
     for (int i = 0; i < players[TurnControl].getNumberOfPlayedCards(); i++)
@@ -1516,6 +1531,7 @@ void Control::eraseSelectedCard()
             players[TurnControl].eraseCard(i);
     }
 }
+
 bool Control::determinNumberOfSavedGame()
 {
     std::cout << "please enter the number of the saved game you want to continue." << std::endl;

@@ -101,6 +101,7 @@ public:
     void setWarzone(std::string);
     int setPlayedCardsFromUI();
     void eraseSelectedCard();
+    void setPlayedCardsAfterMatarsak();
     void run();
 
 private:
