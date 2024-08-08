@@ -45,10 +45,10 @@ UI::UI()
     winnerBackgroundForEndOfGame[2] = LoadTexture("../assets/finalWinner3.png");
     winnerBackgroundForEndOfGame[3] = LoadTexture("../assets/finalWinner4.png");
     noWinner = LoadTexture("../assets/noWinner.png");
-    matarsakAndCharacters [0] = LoadTexture("../assets/matarsak1.png");
-    matarsakAndCharacters [1] = LoadTexture("../assets/matarsak2.png");
-    matarsakAndCharacters [2] = LoadTexture("../assets/matarsak3.png");
-    matarsakAndCharacters [3] = LoadTexture("../assets/matarsak4.png");
+    matarsakAndCharacters[0] = LoadTexture("../assets/matarsak1.png");
+    matarsakAndCharacters[1] = LoadTexture("../assets/matarsak2.png");
+    matarsakAndCharacters[2] = LoadTexture("../assets/matarsak3.png");
+    matarsakAndCharacters[3] = LoadTexture("../assets/matarsak4.png");
 
     renderTextureForGameTable[0] = LoadRenderTexture(character1.width, character1.height);
     renderTextureForGameTable[1] = LoadRenderTexture(character2.width, character2.height);
@@ -67,9 +67,7 @@ UI::UI()
     initializePlayedCardsFromUI();
     initializePlayerCardsFromUI();
     initializePlayedStringCard();
-
-    for (int i = 0; i < 3; i++)
-        ifPlayerPassed[i] = false;
+    // initializeDropDownMenuForSavedGameNumber();
     // temp = LoadImage("../assets/gt1.png");          // Load image
     // ImageFlipVertical(&temp);                       // Flip image vertically
     // Texture2D texture = LoadTextureFromImage(temp); // Load texture from image
@@ -562,7 +560,7 @@ bool UI::renderTextureForCharacterOnGameTable(int starterPlayer)
                 playedCardsHandler.at(UIstarterPlayer).emplace_back(playerCardsHandler.at(UIstarterPlayer)[i]);
                 std::cout << "UIstarterPlayer--------------too render 2 " << std::endl;
                 playedCardsFromUI.at(UIstarterPlayer).emplace_back(playerCardsFromUI.at(UIstarterPlayer)[i]);
-            
+
                 // std::cout <<"16.6 -> " << playedCardsFromUI.at(UIstarterPlayer)[i];
                 playerCardsHandler.at(UIstarterPlayer).erase(playerCardsHandler.at(UIstarterPlayer).begin() + i);
                 playerCardsFromUI.at(UIstarterPlayer).erase(playerCardsFromUI.at(UIstarterPlayer).begin() + i);
@@ -655,14 +653,13 @@ bool UI::validCardsForMatarsak()
 
         Vector2 mousePssitionIdentity = GetMousePosition();
         bool mousePressedIdentity = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
-        
+
         for (int i = 0; i < (playedCardsHandler.at(UIstarterPlayer).size() - numberOfInvalidCardsForMatarsak()); i++)
         {
-            
-           
+
             if (cardsButtons[i].ifPressed(mousePssitionIdentity, mousePressedIdentity))
             {
-                
+
                 playerCardsFromUI.at(UIstarterPlayer).emplace_back(playedCardsFromUI.at(UIstarterPlayer)[i]);
                 playerCardsHandler.at(UIstarterPlayer).emplace_back(playedCardsHandler.at(UIstarterPlayer)[i]);
                 playedCardsFromUI.at(UIstarterPlayer).erase(playedCardsFromUI.at(UIstarterPlayer).begin() + i);
@@ -675,29 +672,27 @@ bool UI::validCardsForMatarsak()
         }
 
         // if (isCardSelected)
-        
+
         //     return 0;
         // if (!getIfPlayerPassed(UIstarterPlayer))
         // {
         BeginDrawing();
         ClearBackground(BLANK);
         DrawTexture(matarsakAndCharacters[UIstarterPlayer], 0, 0, WHITE);
-        
+
         for (int i = 0; i < playedCardsHandler.at(UIstarterPlayer).size() / 2; i++)
         {
-            
+
             if (validateCardsForMatarsakInUI(i))
                 DrawTexture(playedCardsHandler.at(UIstarterPlayer)[i], (i * 100) + 400, 610, WHITE);
         }
-        
 
         for (int i = playedCardsHandler.at(UIstarterPlayer).size() / 2; i < playedCardsHandler.at(UIstarterPlayer).size(); i++)
         {
-            
+
             if (validateCardsForMatarsakInUI(i))
                 DrawTexture(playedCardsHandler.at(UIstarterPlayer)[i], ((i - playedCardsHandler.at(UIstarterPlayer).size() / 2) * 100) + 400, 460, WHITE);
         }
-        
 
         // EndTextureMode();
         for (int idx = 0; idx < (playedCardsHandler.at(UIstarterPlayer).size() - numberOfInvalidCardsForMatarsak()); ++idx)
@@ -734,7 +729,7 @@ bool UI::validCardsForMatarsak()
         // DrawTextEx(fontMenu, this->next.title, (Vector2){this->next.getRectangle().x + 10, this->next.getRectangle().y + 10}, fontMenu.baseSize, 1, selectedColor);
 
         // return 1;
-        
+
         // getPlayedCardsFromUI();
     }
     return false;
@@ -780,11 +775,10 @@ void UI::initializeCardsButtons(float x, float y, float width, float hight)
 void UI::initializeCardsButtonsForMatarsak(float x, float y, float width, float hight)
 {
     std::cout << "UIstarterPlayer too initialize " << UIstarterPlayer << std::endl;
-    for (int i = 0; i < /*(playedCardsHandler.at(UIstarterPlayer).size() - numberOfInvalidCardsForMatarsak()) / 2*/10; i++)
+    for (int i = 0; i < /*(playedCardsHandler.at(UIstarterPlayer).size() - numberOfInvalidCardsForMatarsak()) / 2*/ 10; i++)
         cardsButtons[i] = (Button){(Rectangle){(i * 100) + 400 + x, 610 + y, width, hight}, "matarsak", false};
     // for (int i = /*(playedCardsHandler.at(UIstarterPlayer).size() - numberOfInvalidCardsForMatarsak()) / 2*/10; i < playedCardsHandler.at(UIstarterPlayer).size(); i++)
     //     cardsButtons[i] = (Button){(Rectangle){((i - playedCardsHandler.at(UIstarterPlayer).size() / 2) * 100) + 400 + x, 460 + y, width, hight}, "matarsak", false};
-
 }
 bool UI::displayCardsButtons()
 {
@@ -1747,7 +1741,81 @@ bool UI::quadrupleTextBoxDraw()
 //     textBoxes[playerAgeIndex].transferPlayerNameToVector();
 //     return textBoxes[playerAgeIndex].getTextBoxName();
 // }
+void UI::initializeOptionsForSavedGameNumber()
+{
+    options[0] = {"firstSavedGame"};
+    options[1] = {"secondSavedGame"};
+    options[2] = {"thirdSavedGame"};
+    options[3] = {"forthSavedGame"};
+    options[4] = {"fifthSavedGame"};
+    selectedOption = "Select a saved game";
+    isDropdownOpen = false;
+}
+void UI::initializeOptionsAndDropdownBoundsForSavedGameNumber()
+{
+    dropdownBounds = {350, 250, 100, 30};
+    optionBounds[0] = {350, 250 + 30, 100, 30};
+    optionBounds[1] = {350, 250 + 60, 100, 30};
+    optionBounds[2] = {350, 250 + 90, 100, 30};
+    optionBounds[3] = {350, 250 + 120, 100, 30};
+    optionBounds[4] = {350, 250 + 150, 100, 30};
+}
+void UI::initializeDropDownMenuForSavedGameNumber()
+{
+    initializeOptionsForSavedGameNumber();
+    initializeOptionsAndDropdownBoundsForSavedGameNumber();
+}
+int UI::displayOpenDropDownMenuForSavedGameNumber()
+{
+    initializeDropDownMenuForSavedGameNumber();
+    while (1)
+    {
+        if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON))
+        {
+            Vector2 mousePos = GetMousePosition();
+            if (CheckCollisionPointRec(mousePos, dropdownBounds))
+            {
+                isDropdownOpen = !isDropdownOpen; // Toggle dropdown open/close
+            }
+            else if (isDropdownOpen)
+            {
+                // Check if the click is within one of the option bounds
+                for (int i = 0; i < 5; i++)
+                {
+                    if (CheckCollisionPointRec(mousePos, optionBounds[i]))
+                    {
+                        selectedOption = options[i]; // Set selected option on click
+                        isDropdownOpen = false;      // Close the dropdown
+                        savedGameNumber = i;         // which option was selected
+                        return savedGameNumber;
+                    }
+                }
+            }
+        }
+        BeginDrawing();
+        ClearBackground(RAYWHITE);
+        DrawTexture(backgroundIdentityMenu, 0, 0, WHITE);
+        // Draw the dropdown box
+        DrawRectangleRec(dropdownBounds, LIGHTGRAY);
+        DrawRectangleLinesEx(dropdownBounds, 2, DARKGRAY);
+        DrawTextPro(inputFont, selectedOption.c_str(), (Vector2){dropdownBounds.x + 5, dropdownBounds.y + 5}, (Vector2){1}, 1, 40, 1, RED);
+        // DrawText(selectedOption.c_str(), dropdownBounds.x + 5, dropdownBounds.y + 5, 10, BLACK);
 
+        // Draw the options if the dropdown is open
+        if (isDropdownOpen)
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                DrawRectangleRec(optionBounds[i], LIGHTGRAY);
+                DrawRectangleLinesEx(optionBounds[i], 1, DARKGRAY);
+                DrawTextPro(inputFont, options[i].c_str(), (Vector2){optionBounds[i].x + 5, optionBounds[i].y + 5}, (Vector2){1}, 1, 40, 1, RED);
+                // DrawText(options[i].c_str(), optionBounds[i].x + 5, optionBounds[i].y + 5, 10, BLACK);
+            }
+        }
+
+        EndDrawing();
+    }
+}
 void UI::controlTransitionVectors(int playerTextBoxIndex)
 {
     textBoxes[playerTextBoxIndex].transferPlayerNameToVector();

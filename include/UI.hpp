@@ -88,6 +88,10 @@ public:
     void initializeCardsButtonsForMatarsak(float x, float y, float width, float hight);
     int numberOfInvalidCardsForMatarsak();
     void displaycharactersCardsForMatarsak(int turnHandler);
+    void initializeOptionsForSavedGameNumber();
+    void initializeOptionsAndDropdownBoundsForSavedGameNumber();
+    void initializeDropDownMenuForSavedGameNumber();
+    int displayOpenDropDownMenuForSavedGameNumber();
     // std::string findCard(Texture2D);
 private:
     const char *menuButtonsTitle[4];
@@ -228,15 +232,11 @@ private:
     //     CloseWindow();
     //     bool ifPressed(Vector2 mousePos, bool mousePressed)
     // {
-    //     DrawRectangleRec(rect, DARKGREEN);
-    //     DrawRectangleLinesEx(rect, 3, DARKGRAY);
-    //     int measuringTextWidth = MeasureText("new game", 22);
-    //     DrawText("new game", rect.x + rect.width / 2 - measuringTextWidth / 2, rect.y + rect.height / 2 - 10, 22, WHITE);
-    //     if (CheckCollisionPointRec(mousePos, rect) && mousePressed)
-    //     {
-    //         return true;
-    //     }
-    //     return false;
-    // }
+    std::string options[5];
+    std::string selectedOption;
+    bool isDropdownOpen;
+    Rectangle dropdownBounds;
+    Rectangle optionBounds[5];
+    int savedGameNumber = -1;//no saved game selected
 };
 #endif
