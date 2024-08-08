@@ -6,7 +6,7 @@ Help ::Help()
 }
 bool Help::setHelpOrders()
 {
-    readHelpFile.open("help.txt", std::ios::in);
+    readHelpFile.open("../src/help.txt", std::ios::in);
     if (!readHelpFile.is_open())
     {
         std ::cerr << "Error opening the file!" << std::endl;
