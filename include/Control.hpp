@@ -159,7 +159,9 @@ private:
         displayingWinner,
         displayWinnerOfGame,
         showValidCardsForMatarsak,
-        UISaveInfo,
+        UISaveWriteInfo,
+        UISaveReadInfo,
+        UIWhichSavedGame,
         controlExit,
         noWinnerForWar,
 

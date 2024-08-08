@@ -954,11 +954,14 @@ void Control::saveSigns()
 void Control::saveStarterPlayer(int index)
 {
     starterPlayer = index;
-    save << "starter_player: " << starterPlayer << std::endl;
+    save << "turn_control: " << TurnControl << std::endl;
+    save << "turnHandlerAfterEachWar : " << turnHandlerAfterEachWar << std::endl;
+    save << "PlayerTurnHandler : " << PlayerTurnHandler << std::endl;
 }
 bool Control::saveAllInfo(int index)
 {
     // save.open("save.txt", std::ios::in | std::ios::out);
+    // int counterOfSaveGame = 1;
     for (int i = 0; i < numberOfSavedGames.size(); i++)
     {
         std::cout << "i - > " << i << std::endl;
@@ -967,6 +970,7 @@ bool Control::saveAllInfo(int index)
         //         /// NOTE: if file save folder isn't available this will create it
         //         std::filesystem::create_directory(save);
         //     }
+        std::cout << "to save info" << std::endl;
         if (isFileEmpty(numberOfSavedGames[i]) == 1) // if file is empty
         {
             std::cout << "file if empty" << std::endl;
@@ -996,10 +1000,20 @@ bool Control::saveAllInfo(int index)
             saveSigns();
             std::cout << "888888888888888" << std::endl;
             saveStarterPlayer(index);
-            std::cout << "9999999999999" << std::endl;
+            std::cout << "9999999999999"<< ifCardsAreSet << std::endl;
+            save << "if_Card_passed : " << true << std::endl;
             break;
         }
+        // int indexControlerForSave = 4;
+        // if (i == indexControlerForSave && counterOfSaveGame == 1)
+        // {
+        //     counterOfSaveGame--;
+        //     i = 0;
+        // }
+        // if (counterOfSaveGame == 0)
+        //     counterOfSaveGame = 1;
     }
+    save.close();
 }
 bool Control::isFileEmpty(const std::string &filename)
 {
@@ -1085,7 +1099,7 @@ void Control::menu()
             }
             if (newOrContinue == "c")
             {
-                // uiStates = UIplayerNumber;
+                uiStates = UIWhichSavedGame;
             }
             if (newOrContinue == "help")
             {
@@ -1111,6 +1125,20 @@ void Control::menu()
                 uiStates = fourPlayerInput;
             }
 
+            break;
+        }
+        case UIWhichSavedGame:
+        {
+            ifCardsAreSet = true;
+            whichSavedGame = ui.displayOpenDropDownMenuForSavedGameNumber();
+            std::cout << "which saved game -> " << whichSavedGame << std::endl;
+            uiStates = UISaveReadInfo;
+            break;
+        }
+        case UISaveReadInfo:
+        {
+            saveReadAllInfo();
+            uiStates = displayPlayersCard;
             break;
         }
         case threePlayerInput:
@@ -1186,10 +1214,13 @@ void Control::menu()
             ui.displaycharactersCards(PlayerTurnHandler % (identity.getPlayerNumber()));
             if (!ifCardsAreSet)
                 StartNewGame();
-            std::cout << "ghable findTexture too control" << std::endl;
+            std::cout << "ghable findTexture too control" << ifCardsAreSet << std::endl;
 
-            if (PlayerTurnHandler < (identity.getPlayerNumber()))
+            if (PlayerTurnHandler < (identity.getPlayerNumber()) || newOrContinue == "c")
+            {
+                std::cout << "finddddddddddddddddddddddddddd" << std::endl;
                 ui.findTexture(players[TurnControl].getAllPlayerCards(), TurnControl);
+            }
 
             std::cout << "ghable findTexture too control 2" << std::endl;
 
@@ -1307,7 +1338,7 @@ void Control::menu()
             uiStates = UIMenu;
             break;
         }
-        case UISaveInfo:
+        case UISaveWriteInfo:
         {
             saveAllInfo(TurnControl);
             break;
@@ -1316,7 +1347,7 @@ void Control::menu()
         {
             checkSaveGame = ui.ExitGameControl();
             if (checkSaveGame == 1)
-                uiStates = UISaveInfo;
+                uiStates = UISaveWriteInfo;
             break;
         }
         }
@@ -1636,12 +1667,14 @@ void Control::saveReadSigns()
 }
 void Control::saveReadStarterPlayerAndSelectedCard()
 {
-    std::string stringStarterPlayer;
-    save >> stringStarterPlayer >> starterPlayer;
+    std::string stringTurnControl, stringTurnHandlerAfterEachWar, stringPlayerTurnHandler;
+    save >> stringTurnControl >> TurnControl;
+    save >> stringTurnHandlerAfterEachWar >> turnHandlerAfterEachWar;
+    save >> stringPlayerTurnHandler >> PlayerTurnHandler;
 }
 void Control::saveReadAllInfo()
 {
-    save.open(numberOfSavedGames[whichSavedGame - 1], std::ios::in | std::ios::out);
+    save.open(numberOfSavedGames[whichSavedGame], std::ios::in | std::ios::out);
     if (!save.is_open())
     {
         std ::cerr << "Error opening the file!" << std::endl;
@@ -1672,6 +1705,10 @@ void Control::saveReadAllInfo()
     saveReadSigns();
     std::cout << "ghbl played starter player " << std::endl;
     saveReadStarterPlayerAndSelectedCard();
+    bool stirngIfCardSet;
+    std::cout << "ghabl ifCardSet " << ifCardsAreSet << std::endl;
+    save >> stirngIfCardSet >> ifCardsAreSet;
+    save.close();
 }
 void Control::StartNewGame()
 {
