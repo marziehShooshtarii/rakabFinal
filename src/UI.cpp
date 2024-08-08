@@ -450,6 +450,10 @@ void UI::initializePassButton(float x, float y, float width, float hight)
 {
     passPosition = (Button){(Rectangle){x, y, width, hight}, "pass", false};
 }
+void UI::initializeHelpButton(float x, float y, float width, float hight)
+{
+    help = (Button){(Rectangle){x, y, width, hight}, "help", false};
+}
 void UI::initializeSaveGameButton(float x, float y, float width, float hight)
 {
     saveGame = (Button){(Rectangle){x, y, width, hight}, "save", false};
@@ -767,15 +771,15 @@ void UI::eraseAllCardsAfterWar()
 void UI::initializeCardsButtons(float x, float y, float width, float hight)
 {
     std::cout << "UIstarterPlayer too initialize " << UIstarterPlayer << std::endl;
-    
+
     for (int i = 0; i < playerCardsHandler.at(UIstarterPlayer).size() / 2; i++)
         cardsButtons[i] = (Button){(Rectangle){(i * 100) + 400 + x, 610 + y, width, hight}, "test", false};
-    
+
     std::cout << "UIstarterPlayer too initialize 2 " << UIstarterPlayer << std::endl;
-   
+
     for (int i = playerCardsHandler.at(UIstarterPlayer).size() / 2; i < 10; i++)
         cardsButtons[i] = (Button){(Rectangle){((i - playerCardsHandler.at(UIstarterPlayer).size() / 2) * 100) + 400 + x, 460 + y, width, hight}, "test", false};
-   
+
     std::cout << "UIstarterPlayer too initialize 3 " << UIstarterPlayer << std::endl;
 }
 void UI::initializeCardsButtonsForMatarsak(float x, float y, float width, float hight)
@@ -838,10 +842,11 @@ bool UI::displayCardsButtons()
 
     return false;
 }
-bool UI::displayGameTableAndCharactersForThree(int turnHandlerForDisplay, int TurnControler)
+int UI::displayGameTableAndCharactersForThree(int turnHandlerForDisplay, int TurnControler)
 {
     initializeNextButton(1100, 680, 120, 50);
     initializeExitGameButton(10, 10, 120, 50);
+    initializeHelpButton(90, 10, 120, 50);
     while (1)
     {
         Vector2 mousePssitionIdentity = GetMousePosition();
@@ -851,12 +856,17 @@ bool UI::displayGameTableAndCharactersForThree(int turnHandlerForDisplay, int Tu
         {
             std::cout << "too if " << std::endl;
             next.setStatus(false);
-            return false; // next button has been pressed
+            return 0; // next button has been pressed
         }
         if (exitGame.ifPressed(mousePssitionIdentity, mousePressedIdentity))
         {
             std::cout << "too if " << std::endl;
-            return true; // exit button has been pressed
+            return 1; // exit button has been pressed
+        }
+        if (help.ifPressed(mousePssitionIdentity, mousePressedIdentity))
+        {
+            std::cout << "too if " << std::endl;
+            return 2; // help button has been pressed
         }
 
         BeginDrawing();
@@ -920,6 +930,18 @@ bool UI::displayGameTableAndCharactersForThree(int turnHandlerForDisplay, int Tu
 
         DrawTextEx(fontMenu, this->exitGame.title, (Vector2){this->exitGame.getRectangle().x + 10, this->exitGame.getRectangle().y + 10}, fontMenu.baseSize, 1, exitColor);
 
+        Color helpColor = WHITE;
+        if (CheckCollisionPointRec(mousePssitionIdentity, help.getRectangle()))
+        {
+            helpColor = WHITE;
+        }
+        else
+        {
+            helpColor = RED;
+        }
+
+        DrawTextEx(fontMenu, this->help.title, (Vector2){this->help.getRectangle().x + 10, this->help.getRectangle().y + 10}, fontMenu.baseSize, 1, helpColor);
+
         EndDrawing();
     }
 }
@@ -974,7 +996,7 @@ bool UI::displayGameTableAndCharactersForFour(int turnHandlerForDisplay, int Tur
                     DrawTexture(playedCardsHandler.at(k)[i], (k * 200) + (i * 65) + 5, (j * 100) + 290, WHITE);
                 std::cout << "1:57 " << playedCardsHandler.at(k).size() % 3 << std::endl;
             }
-            std::cout << "2:42 " << k << "2:44" <<playedCardsHandler.at(k).size() % 3 << std::endl;
+            std::cout << "2:42 " << k << "2:44" << playedCardsHandler.at(k).size() % 3 << std::endl;
             for (int i = 0; i < playedCardsHandler.at(k).size() % 3; i++)
                 DrawTexture(playedCardsHandler.at(k)[i], (k * 200) + (i * 65) + 5, (playedCardsHandler.at(k).size() / 3 * 100) + 290, WHITE);
         }
@@ -1006,7 +1028,6 @@ bool UI::displayGameTableAndCharactersForFour(int turnHandlerForDisplay, int Tur
         EndDrawing();
         std::cout << "akhar zahamat " << std::endl;
     }
-
 }
 std::vector<std::string> UI::getPlayedCardsFromUI()
 {
@@ -1587,7 +1608,7 @@ bool UI::getLuckNumbers(std::string starterPlayer)
         {
             return true;
         }
-        
+
         Color textColor = {249, 105, 14, 225}; // color Ecstasy created
         BeginDrawing();
         ClearBackground(RAYWHITE);
@@ -1596,7 +1617,7 @@ bool UI::getLuckNumbers(std::string starterPlayer)
         DrawTextEx(gameFont, "you are the starter.", (Vector2){145, 50}, gameFont.baseSize, 1, textColor);
         DrawTextEx(gameFont, "please enter the good luck number:", (Vector2){100, 100}, gameFont.baseSize, 1, textColor);
         DrawTextEx(gameFont, "please enter your bad luck number:", (Vector2){450, 100}, gameFont.baseSize, 1, textColor);
-  
+
         textBoxDraw(inputFont, framesCounter);
 
         Color selectedColor = WHITE;
@@ -1606,10 +1627,10 @@ bool UI::getLuckNumbers(std::string starterPlayer)
         }
         else
         {
-            selectedColor ={242, 120, 75, 225}; // Crusta color created
+            selectedColor = {242, 120, 75, 225}; // Crusta color created
         }
         DrawTextEx(gameFont, this->ConfirmPlayerData.title, (Vector2){this->ConfirmPlayerData.getRectangle().x + 10, this->ConfirmPlayerData.getRectangle().y + 10}, fontMenu.baseSize, 1, selectedColor);
-      
+
         EndDrawing();
     }
 }
@@ -1771,7 +1792,7 @@ int UI::displayOpenDropDownMenuForSavedGameNumber()
         // Draw the dropdown box
         DrawRectangleRec(dropdownBounds, LIGHTGRAY);
         DrawRectangleLinesEx(dropdownBounds, 2, DARKGRAY);
-        DrawTextPro(inputFont, selectedOption.c_str(), (Vector2){dropdownBounds.x + 37, dropdownBounds.y - 11}, (Vector2){1}, 1, 40, 1, {225 , 120 , 80 , 225});
+        DrawTextPro(inputFont, selectedOption.c_str(), (Vector2){dropdownBounds.x + 37, dropdownBounds.y - 11}, (Vector2){1}, 1, 40, 1, {225, 120, 80, 225});
 
         // Draw the options if the dropdown is open
         if (isDropdownOpen)
@@ -1780,7 +1801,89 @@ int UI::displayOpenDropDownMenuForSavedGameNumber()
             {
                 DrawRectangleRec(optionBounds[i], LIGHTGRAY);
                 DrawRectangleLinesEx(optionBounds[i], 1, DARKGRAY);
-                DrawTextPro(inputFont, options[i].c_str(), (Vector2){optionBounds[i].x + 10, optionBounds[i].y + 5}, (Vector2){1}, 1, 40, 1, {225 , 110 , 80 , 225});
+                DrawTextPro(inputFont, options[i].c_str(), (Vector2){optionBounds[i].x + 10, optionBounds[i].y + 5}, (Vector2){1}, 1, 40, 1, {225, 110, 80, 225});
+            }
+        }
+
+        EndDrawing();
+    }
+}
+void UI::initializeHelpOptions()
+{
+    helpOptions[0] = {"bahar"};
+    helpOptions[1] = {"zemestan"};
+    helpOptions[2] = {"tablzan"};
+    helpOptions[3] = {"shah dokht"};
+    helpOptions[4] = {"matarsak"};
+    helpOptions[5] = {"rish sefid"};
+    helpOptions[6] = {"shirzan"};
+    helpOptions[7] = {"parchamdar"};
+    selectedHelpOption = "select a card";
+    isDropdownOpenForHelp = false;
+}
+void UI::initializeHelpDropdownBounds()
+{
+    dropdownHelpBounds = {350, 250, 350, 30};
+    helpOptionBounds[0] = {420, 250 + 30, 200, 50};
+    helpOptionBounds[1] = {420, 250 + 80, 200, 50};
+    helpOptionBounds[2] = {420, 250 + 130, 200, 50};
+    helpOptionBounds[3] = {420, 250 + 180, 200, 50};
+    helpOptionBounds[4] = {420, 250 + 230, 200, 50};
+    helpOptionBounds[5] = {420, 250 + 280, 200, 50};
+    helpOptionBounds[6] = {420, 250 + 330, 200, 50};
+    helpOptionBounds[7] = {420, 250 + 380, 200, 50};
+}
+void UI::initializeHelpOptionsAndDropdownBounds()
+{
+    initializeHelpOptions();
+    initializeHelpDropdownBounds();
+}
+std::string UI::helpGameControl()
+{
+    initializeHelpOptionsAndDropdownBounds();
+    while (1)
+    {
+        if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON))
+        {
+            Vector2 mousePos = GetMousePosition();
+            if (CheckCollisionPointRec(mousePos, dropdownBounds))
+            {
+                isDropdownOpenForHelp = !isDropdownOpenForHelp; // Toggle dropdown open/close
+            }
+            else if (isDropdownOpenForHelp)
+            {
+                // Check if the click is within one of the option bounds
+                for (int i = 0; i < 8; i++)
+                {
+                    if (CheckCollisionPointRec(mousePos, helpOptionBounds[i]))
+                    {
+                        selectedHelpOption = helpOptions[i]; // Set selected option on click
+                        isDropdownOpen = false;              // Close the dropdown
+                        helpChoice = helpOptions[i];
+                        return helpChoice;
+                    }
+                }
+            }
+        }
+        // Draw
+        BeginDrawing();
+        DrawTexture(backgroundMenu, 0, 0, WHITE);
+
+        // Draw the dropdown box
+        DrawRectangleRec(dropdownHelpBounds, LIGHTGRAY);
+        DrawRectangleLinesEx(dropdownHelpBounds, 2, DARKGRAY);
+        // DrawText(selectedHelpOption.c_str(), dropdownHelpBounds.x + 5, dropdownHelpBounds.y + 5, 10, BLACK);
+        DrawTextPro(inputFont, selectedHelpOption.c_str(), (Vector2){dropdownHelpBounds.x + 37, dropdownHelpBounds.y - 11}, (Vector2){1}, 1, 40, 1, {225, 120, 80, 225});
+
+        // Draw the options if the dropdown is open
+        if (isDropdownOpenForHelp)
+        {
+            for (int i = 0; i < 8; i++)
+            {
+                DrawRectangleRec(helpOptionBounds[i], LIGHTGRAY);
+                DrawRectangleLinesEx(helpOptionBounds[i], 1, DARKGRAY);
+                // DrawText(helpOption[i].c_str(), helpOptionBounds[i].x + 5, helpOptionBounds[i].y + 5, 10, BLACK);
+                DrawTextPro(inputFont, helpOptions[i].c_str(), (Vector2){helpOptionBounds[i].x + 37, helpOptionBounds[i].y - 11}, (Vector2){1}, 1, 40, 1, {225, 120, 80, 225});
             }
         }
 

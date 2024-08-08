@@ -66,7 +66,7 @@ public:
     void findTexture(std::vector<Card>, int);
     void initializeCardsButtons(float x, float y, float width, float hight);
     bool displayCardsButtons();
-    bool displayGameTableAndCharactersForThree(int, int);
+    int displayGameTableAndCharactersForThree(int, int);
     bool displayGameTableAndCharactersForFour(int, int);
     void renderTextureForCharacterAndGameTable();
     void initializePlayerCardsHandler();
@@ -81,7 +81,9 @@ public:
     void initializeSaveGameButton(float x, float y, float width, float hight);
     void initializeExitGameButton(float x, float y, float width, float hight);
     void initializePassButton(float x, float y, float width, float hight);
+    void initializeHelpButton(float x, float y, float width, float hight);
     int ExitGameControl();
+    std::string helpGameControl();
     std::vector<std::string> getPlayedCardsFromUI();
     bool displayWinner(int, std::string);
     bool displayNoWinner();
@@ -92,6 +94,11 @@ public:
     void initializeOptionsAndDropdownBoundsForSavedGameNumber();
     void initializeDropDownMenuForSavedGameNumber();
     int displayOpenDropDownMenuForSavedGameNumber();
+    void initializeHelpOptions();
+    void initializeHelpOptionsAndDropdownBounds();
+    void initializeHelpDropdownBounds();
+
+    
     // std::string findCard(Texture2D);
 private:
     const char *menuButtonsTitle[4];
@@ -182,6 +189,7 @@ private:
     std::vector<std::string> forthPlayerCardsFromUI;
     int UIstarterPlayer;
     std::vector<int> orderOfPlayedCardsForMatarsak;
+    Button help;
     // enum TextureString
     // {
     //     baharCards,
@@ -238,5 +246,11 @@ private:
     Rectangle dropdownBounds;
     Rectangle optionBounds[5];
     int savedGameNumber = -1;//no saved game selected
+    std::string helpOptions[8];
+    std::string selectedHelpOption;
+    Rectangle dropdownHelpBounds;
+    Rectangle helpOptionBounds[5];
+    bool isDropdownOpenForHelp;
+    std::string helpChoice;
 };
 #endif
