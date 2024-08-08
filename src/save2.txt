@@ -1,27 +1,30 @@
 3
-naz 12 green 1
-number_of_owned_states: 0
-owend_states: 
-player_cards_number: 10
-player_cards: sarbaz_4 zemestan sarbaz_4 matarsak sarbaz_1 sarbaz_2 sarbaz_3 matarsak bahar sarbaz_4 
-played_cards_number: 1
-played_cards: zemestan 
-ben 6 blue 1
+naz 78 blue 0
 number_of_owned_states: 1
 owend_states: caline 
 player_cards_number: 10
-player_cards: rish_sefid matarsak matarsak sarbaz_2 sarbaz_3 sarbaz_10 shirzan sarbaz_5 sarbaz_10 bahar 
+player_cards: matarsak tabl_zan tabl_zan sarbaz_10 sarbaz_5 parcham_dar shirzan sarbaz_2 sarbaz_4 sarbaz_2 
 played_cards_number: 1
-played_cards: sarbaz_5 
-ali 45 red 0
+played_cards: sarbaz_4 
+ben 5 red 0
 number_of_owned_states: 0
 owend_states: 
 player_cards_number: 10
-player_cards: sarbaz_6 parcham_dar shirzan sarbaz_5 sarbaz_1 sarbaz_5 sarbaz_10 matarsak matarsak sarbaz_1 
-played_cards_number: 2
-played_cards: shirzan sarbaz_10 
-player_cards_number: 1
-baharVSzemestan: zemestan 
-warzone: bella
+player_cards: sarbaz_6 matarsak sarbaz_1 sarbaz_4 sarbaz_2 tabl_zan sarbaz_5 sarbaz_4 sarbaz_4 sarbaz_3 
+played_cards_number: 1
+played_cards: sarbaz_3 
+ali 46 gray 0
+number_of_owned_states: 0
+owend_states: 
+player_cards_number: 10
+player_cards: matarsak zemestan rish_sefid sarbaz_2 sarbaz_4 sarbaz_6 sarbaz_2 sarbaz_4 sarbaz_4 rish_sefid 
+played_cards_number: 1
+played_cards: sarbaz_6 
+player_cards_number: 0
+baharVSzemestan: 
+warzone: elinia
 peace_sign: 
-starter_player: 2
+turn_control: 1
+turnHandlerAfterEachWar : 3
+PlayerTurnHandler : 8
+if_Card_passed : 1

@@ -1,27 +1,30 @@
 3
-ben 65 red 0
+naz 23 green 0
 number_of_owned_states: 0
 owend_states: 
-player_cards_number: 8
-player_cards: sarbaz_2 sarbaz_5 sarbaz_4 sarbaz_3 rish_sefid sarbaz_4 sarbaz_6 sarbaz_4 
+player_cards_number: 10
+player_cards: sarbaz_2 sarbaz_2 sarbaz_3 matarsak sarbaz_3 matarsak tabl_zan rish_sefid shirzan sarbaz_3 
 played_cards_number: 1
-played_cards: sarbaz_10 
-baz 14 blue 0
+played_cards: sarbaz_3 
+red 5 gray 0
 number_of_owned_states: 0
 owend_states: 
-player_cards_number: 7
-player_cards: sarbaz_4 sarbaz_1 sarbaz_10 tabl_zan tabl_zan parcham_dar sarbaz_2 
+player_cards_number: 10
+player_cards: sarbaz_3 sarbaz_5 sarbaz_1 sarbaz_3 shirzan sarbaz_3 sarbaz_5 zemestan zemestan sarbaz_10 
 played_cards_number: 1
-played_cards: sarbaz_6 
-naz 98 gray 0
-number_of_owned_states: 1
-owend_states: bella 
-player_cards_number: 8
-player_cards: sarbaz_2 sarbaz_2 sarbaz_2 shirzan sarbaz_2 shirzan sarbaz_10 shirzan 
+played_cards: sarbaz_5 
+ben 4 blue 0
+number_of_owned_states: 0
+owend_states: 
+player_cards_number: 10
+player_cards: sarbaz_10 sarbaz_4 sarbaz_10 sarbaz_4 rish_sefid sarbaz_6 shirzan sarbaz_1 matarsak sarbaz_3 
 played_cards_number: 1
-played_cards: sarbaz_2 
+played_cards: sarbaz_1 
 player_cards_number: 0
 baharVSzemestan: 
-warzone: enna
-peace_sign: lia
-starter_player: 2
+warzone: caline
+peace_sign: 
+turn_control: 2
+turnHandlerAfterEachWar : 3
+PlayerTurnHandler : 3
+if_Card_passed : 1
