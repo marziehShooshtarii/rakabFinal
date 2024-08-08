@@ -1114,7 +1114,7 @@ void Control::menu()
             }
             if (newOrContinue == "help")
             {
-                // uiStates = UIplayerNumber;
+                uiStates = generalHelp;
             }
             if (newOrContinue == "exit")
             {
@@ -1365,6 +1365,12 @@ void Control::menu()
             helpSelected = ui.helpGameControl();
             ui.displayHelp(helpChoice.searchInHelps(helpSelected));
             uiStates = displayPlayersCard;
+            break;
+        }
+        case generalHelp:
+        {
+            ui.displayHelp(helpChoice.searchInHelps("general"));
+            uiStates = UIplayerNumber;
             break;
         }
         case UISaveWriteInfo:
