@@ -12,7 +12,7 @@ UI::UI()
     backgroundMenu = LoadTexture("../assets/blueMenu.png");
     backgroundIdentityMenu = LoadTexture("../assets/b_6.png");
     backgroundWarzoneMap = LoadTexture("../assets/warzone_map.png");
-    charectersAndNames = LoadTexture("../assets/charactersIntro.png");
+    charectersAndNames = LoadTexture("../assets/charactersIntroForThree.png");
     luckNumberBackground = LoadTexture("../assets/luck.png");
     selectedWarzoneBackground = LoadTexture("../assets/selected_warzone2.png");
     gameTableForThreePlayers = LoadTexture("../assets/dark_table.png");
@@ -45,10 +45,18 @@ UI::UI()
     winnerBackgroundForEndOfGame[2] = LoadTexture("../assets/finalWinner3.png");
     winnerBackgroundForEndOfGame[3] = LoadTexture("../assets/finalWinner4.png");
     noWinner = LoadTexture("../assets/noWinner.png");
+    matarsakAndCharacters [0] = LoadTexture("../assets/matarsak1.png");
+    matarsakAndCharacters [1] = LoadTexture("../assets/matarsak2.png");
+    matarsakAndCharacters [2] = LoadTexture("../assets/matarsak3.png");
+    matarsakAndCharacters [3] = LoadTexture("../assets/matarsak4.png");
 
     renderTextureForGameTable[0] = LoadRenderTexture(character1.width, character1.height);
     renderTextureForGameTable[1] = LoadRenderTexture(character2.width, character2.height);
     renderTextureForGameTable[2] = LoadRenderTexture(character3.width, character3.height);
+    renderTextureMatarsakCharacters[0] = LoadRenderTexture(matarsakAndCharacters[0].width, matarsakAndCharacters[0].height);
+    renderTextureMatarsakCharacters[1] = LoadRenderTexture(matarsakAndCharacters[1].width, matarsakAndCharacters[1].height);
+    renderTextureMatarsakCharacters[2] = LoadRenderTexture(matarsakAndCharacters[2].width, matarsakAndCharacters[2].height);
+    renderTextureMatarsakCharacters[3] = LoadRenderTexture(matarsakAndCharacters[3].width, matarsakAndCharacters[3].height);
 
     renderTextureForGameTableAndCharacters = LoadRenderTexture(gameTableForThreePlayers.width, gameTableForThreePlayers.height);
     renderTextureForGameTableAndCharactersForFour = LoadRenderTexture(gameTableForFourPlayers.width, gameTableForFourPlayers.height);
@@ -501,6 +509,17 @@ void UI::displaycharactersCards(int turnHandler)
     std::clog << "end of display game table" << std::endl;
     return;
 }
+void UI::displaycharactersCardsForMatarsak(int turnHandler)
+{
+    BeginDrawing();
+    ClearBackground(RAYWHITE);
+    // DrawTexture(character1, 0, 0, WHITE);
+    DrawTextureRec(renderTextureMatarsakCharacters[turnHandler].texture, (Rectangle){0, 0, (float)renderTextureMatarsakCharacters[turnHandler].texture.width, (float)-renderTextureMatarsakCharacters[turnHandler].texture.height}, Vector2{0, 0}, WHITE);
+
+    EndDrawing();
+    std::clog << "end of display game table" << std::endl;
+    return;
+}
 
 // void UI::setIfPlayerPassed(bool checkPassed, int playerIndex)
 // {
@@ -543,7 +562,7 @@ bool UI::renderTextureForCharacterOnGameTable(int starterPlayer)
                 playedCardsHandler.at(UIstarterPlayer).emplace_back(playerCardsHandler.at(UIstarterPlayer)[i]);
                 std::cout << "UIstarterPlayer--------------too render 2 " << std::endl;
                 playedCardsFromUI.at(UIstarterPlayer).emplace_back(playerCardsFromUI.at(UIstarterPlayer)[i]);
-                orderOfPlayedCardsForMatarsak.push_back(i); // for knowing order of played cards for matarsak
+            
                 // std::cout <<"16.6 -> " << playedCardsFromUI.at(UIstarterPlayer)[i];
                 playerCardsHandler.at(UIstarterPlayer).erase(playerCardsHandler.at(UIstarterPlayer).begin() + i);
                 playerCardsFromUI.at(UIstarterPlayer).erase(playerCardsFromUI.at(UIstarterPlayer).begin() + i);
@@ -629,25 +648,21 @@ bool UI::renderTextureForCharacterOnGameTable(int starterPlayer)
 bool UI::validCardsForMatarsak()
 {
 
-    initializeCardsButtons(0, 0, 120, 50);
+    initializeCardsButtonsForMatarsak(0, 0, 120, 50);
 
     while (1)
     {
 
         Vector2 mousePssitionIdentity = GetMousePosition();
         bool mousePressedIdentity = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
-        std::cout << "matarsakkkkkkkkkkkkkkkkkkkkkkkkkkk 5" << std::endl;
-        for (int i = 0; i < playedCardsHandler.at(UIstarterPlayer).size(); i++)
+        
+        for (int i = 0; i < (playedCardsHandler.at(UIstarterPlayer).size() - numberOfInvalidCardsForMatarsak()); i++)
         {
-            std::cout << "matarsakkkkkkkkkkkkkkkkkkkkkkkkkkk 6" << std::endl;
-            for (int k = 0; k < orderOfPlayedCardsForMatarsak.size(); k++)
-            {
-                if (i == orderOfPlayedCardsForMatarsak[k])
-                    i++;
-            }
+            
+           
             if (cardsButtons[i].ifPressed(mousePssitionIdentity, mousePressedIdentity))
             {
-                std::cout << "matarsakkkkkkkkkkkkkkkkkkkkkkkkkkk 7" << std::endl;
+                
                 playerCardsFromUI.at(UIstarterPlayer).emplace_back(playedCardsFromUI.at(UIstarterPlayer)[i]);
                 playerCardsHandler.at(UIstarterPlayer).emplace_back(playedCardsHandler.at(UIstarterPlayer)[i]);
                 playedCardsFromUI.at(UIstarterPlayer).erase(playedCardsFromUI.at(UIstarterPlayer).begin() + i);
@@ -660,32 +675,32 @@ bool UI::validCardsForMatarsak()
         }
 
         // if (isCardSelected)
-        std::cout << "matarsakkkkkkkkkkkkkkkkkkkkkkkkkkk 8" << std::endl;
+        
         //     return 0;
         // if (!getIfPlayerPassed(UIstarterPlayer))
         // {
         BeginDrawing();
         ClearBackground(BLANK);
-        DrawTexture(characterNumber.at(UIstarterPlayer), 0, 0, WHITE);
-        std::cout << "matarsakkkkkkkkkkkkkkkkkkkkkkkkkkk 9" << std::endl;
+        DrawTexture(matarsakAndCharacters[UIstarterPlayer], 0, 0, WHITE);
+        
         for (int i = 0; i < playedCardsHandler.at(UIstarterPlayer).size() / 2; i++)
         {
-            std::cout << "matarsakkkkkkkkkkkkkkkkkkkkkkkkkkk 10" << std::endl;
+            
             if (validateCardsForMatarsakInUI(i))
                 DrawTexture(playedCardsHandler.at(UIstarterPlayer)[i], (i * 100) + 400, 610, WHITE);
         }
-        std::cout << "matarsakkkkkkkkkkkkkkkkkkkkkkkkkkk 11" << std::endl;
+        
 
         for (int i = playedCardsHandler.at(UIstarterPlayer).size() / 2; i < playedCardsHandler.at(UIstarterPlayer).size(); i++)
         {
-            std::cout << "matarsakkkkkkkkkkkkkkkkkkkkkkkkkkk 12" << std::endl;
+            
             if (validateCardsForMatarsakInUI(i))
                 DrawTexture(playedCardsHandler.at(UIstarterPlayer)[i], ((i - playedCardsHandler.at(UIstarterPlayer).size() / 2) * 100) + 400, 460, WHITE);
         }
-        std::cout << "matarsakkkkkkkkkkkkkkkkkkkkkkkkkkk 13" << std::endl;
+        
 
         // EndTextureMode();
-        for (int idx = 0; idx < playedCardsHandler.at(UIstarterPlayer).size(); ++idx)
+        for (int idx = 0; idx < (playedCardsHandler.at(UIstarterPlayer).size() - numberOfInvalidCardsForMatarsak()); ++idx)
         {
             // std::cout << "to for " << std::endl;
             Color selectedColor = WHITE;
@@ -719,20 +734,30 @@ bool UI::validCardsForMatarsak()
         // DrawTextEx(fontMenu, this->next.title, (Vector2){this->next.getRectangle().x + 10, this->next.getRectangle().y + 10}, fontMenu.baseSize, 1, selectedColor);
 
         // return 1;
-        std::cout << "matarsakkkkkkkkkkkkkkkkkkkkkkkkkkk 14" << std::endl;
+        
         // getPlayedCardsFromUI();
     }
     return false;
 }
-bool UI::validateCardsForMatarsakInUI(int indexCard)
+bool UI::validateCardsForMatarsakInUI(int cardIndex)
 {
     // for (int i = 0; i < playedCardsFromUI.at(UIstarterPlayer).size(); i++)
     // {
-    if (playedCardsFromUI.at(UIstarterPlayer)[indexCard] == "bahar" || playedCardsFromUI.at(UIstarterPlayer)[indexCard] == "zemestan" || playedCardsFromUI.at(UIstarterPlayer)[indexCard] == "rish_sefid" || playedCardsFromUI.at(UIstarterPlayer)[indexCard] == "parcham_dar" || playedCardsFromUI.at(UIstarterPlayer)[indexCard] == "tabl_zan" || playedCardsFromUI.at(UIstarterPlayer)[indexCard] == "shirzan" || playedCardsFromUI.at(UIstarterPlayer)[indexCard] == "shah_dokht")
+    if (playedCardsFromUI.at(UIstarterPlayer)[cardIndex] == "bahar" || playedCardsFromUI.at(UIstarterPlayer)[cardIndex] == "zemestan" || playedCardsFromUI.at(UIstarterPlayer)[cardIndex] == "rish_sefid" || playedCardsFromUI.at(UIstarterPlayer)[cardIndex] == "parcham_dar" || playedCardsFromUI.at(UIstarterPlayer)[cardIndex] == "tabl_zan" || playedCardsFromUI.at(UIstarterPlayer)[cardIndex] == "shirzan" || playedCardsFromUI.at(UIstarterPlayer)[cardIndex] == "shah_dokht")
         return false;
 
     //}
     return true;
+}
+int UI::numberOfInvalidCardsForMatarsak()
+{
+    int counterInvalidCards = 0;
+    for (int i = 0; i < playedCardsFromUI.at(UIstarterPlayer).size(); i++)
+    {
+        if (playedCardsFromUI.at(UIstarterPlayer)[i] == "bahar" || playedCardsFromUI.at(UIstarterPlayer)[i] == "zemestan" || playedCardsFromUI.at(UIstarterPlayer)[i] == "rish_sefid" || playedCardsFromUI.at(UIstarterPlayer)[i] == "parcham_dar" || playedCardsFromUI.at(UIstarterPlayer)[i] == "tabl_zan" || playedCardsFromUI.at(UIstarterPlayer)[i] == "shirzan" || playedCardsFromUI.at(UIstarterPlayer)[i] == "shah_dokht")
+            counterInvalidCards++;
+    }
+    return counterInvalidCards;
 }
 
 void UI::eraseAllCardsAfterWar()
@@ -751,6 +776,15 @@ void UI::initializeCardsButtons(float x, float y, float width, float hight)
         cardsButtons[i] = (Button){(Rectangle){(i * 100) + 400 + x, 610 + y, width, hight}, "test", false};
     for (int i = playerCardsHandler.at(UIstarterPlayer).size() / 2; i < playerCardsHandler.at(UIstarterPlayer).size(); i++)
         cardsButtons[i] = (Button){(Rectangle){((i - playerCardsHandler.at(UIstarterPlayer).size() / 2) * 100) + 400 + x, 460 + y, width, hight}, "test", false};
+}
+void UI::initializeCardsButtonsForMatarsak(float x, float y, float width, float hight)
+{
+    std::cout << "UIstarterPlayer too initialize " << UIstarterPlayer << std::endl;
+    for (int i = 0; i < /*(playedCardsHandler.at(UIstarterPlayer).size() - numberOfInvalidCardsForMatarsak()) / 2*/10; i++)
+        cardsButtons[i] = (Button){(Rectangle){(i * 100) + 400 + x, 610 + y, width, hight}, "matarsak", false};
+    // for (int i = /*(playedCardsHandler.at(UIstarterPlayer).size() - numberOfInvalidCardsForMatarsak()) / 2*/10; i < playedCardsHandler.at(UIstarterPlayer).size(); i++)
+    //     cardsButtons[i] = (Button){(Rectangle){((i - playedCardsHandler.at(UIstarterPlayer).size() / 2) * 100) + 400 + x, 460 + y, width, hight}, "matarsak", false};
+
 }
 bool UI::displayCardsButtons()
 {

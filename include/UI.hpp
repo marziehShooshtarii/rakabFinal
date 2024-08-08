@@ -85,6 +85,9 @@ public:
     std::vector<std::string> getPlayedCardsFromUI();
     bool displayWinner(int, std::string);
     bool displayNoWinner();
+    void initializeCardsButtonsForMatarsak(float x, float y, float width, float hight);
+    int numberOfInvalidCardsForMatarsak();
+    void displaycharactersCardsForMatarsak(int turnHandler);
     // std::string findCard(Texture2D);
 private:
     const char *menuButtonsTitle[4];
@@ -121,9 +124,11 @@ private:
     Texture2D character2;
     Texture2D character3;
     Texture2D character4;
+    Texture2D matarsakAndCharacters[4];
     RenderTexture2D renderTextureForGameTable[3];
     RenderTexture2D renderTextureForGameTableAndCharacters;
     RenderTexture2D renderTextureForGameTableAndCharactersForFour;
+    RenderTexture2D renderTextureMatarsakCharacters[4];
     Texture2D cards[15];
     Texture2D winnerBackgroundForEachWar[4];
     Texture2D winnerBackgroundForEndOfGame[4];
