@@ -1,0 +1,33 @@
+3
+naz 56 red 0
+number_of_owned_states: 0
+owend_states: 
+player_cards_number: 10
+player_cards: rish_sefid sarbaz_5 sarbaz_3 bahar sarbaz_4 sarbaz_6 shirzan tabl_zan sarbaz_10 matarsak 
+played_cards_number: 1
+played_cards: sarbaz_3 
+ben 5 blue 0
+number_of_owned_states: 0
+owend_states: 
+player_cards_number: 9
+player_cards: zemestan matarsak shirzan sarbaz_1 sarbaz_1 shirzan matarsak zemestan sarbaz_1 
+played_cards_number: 1
+played_cards: shirzan 
+ali 4 gray 0
+number_of_owned_states: 1
+owend_states: pladaci 
+player_cards_number: 10
+player_cards: tabl_zan sarbaz_3 sarbaz_5 matarsak sarbaz_2 sarbaz_4 sarbaz_1 sarbaz_10 shirzan sarbaz_5 
+played_cards_number: 2
+played_cards: sarbaz_4 sarbaz_5 
+player_cards_number: 0
+baharVSzemestan: 
+good_luck_number: 954
+bad_luck_number: 213
+starter_player: 0
+turn_control: 0
+turnHandlerAfterEachWar : 4
+PlayerTurnHandler : 8
+if_Card_passed : 1
+warzone: armento
+peace_sign: 
