@@ -846,7 +846,7 @@ int UI::displayGameTableAndCharactersForThree(int turnHandlerForDisplay, int Tur
 {
     initializeNextButton(1100, 680, 120, 50);
     initializeExitGameButton(10, 10, 120, 50);
-    initializeHelpButton(90, 10, 120, 50);
+    initializeHelpButton(150, 10, 120, 50);
     while (1)
     {
         Vector2 mousePssitionIdentity = GetMousePosition();
@@ -1812,12 +1812,12 @@ void UI::initializeHelpOptions()
 {
     helpOptions[0] = {"bahar"};
     helpOptions[1] = {"zemestan"};
-    helpOptions[2] = {"tablzan"};
-    helpOptions[3] = {"shah dokht"};
+    helpOptions[2] = {"tabl_zan"};
+    helpOptions[3] = {"shah_dokht"};
     helpOptions[4] = {"matarsak"};
-    helpOptions[5] = {"rish sefid"};
+    helpOptions[5] = {"rish_sefid"};
     helpOptions[6] = {"shirzan"};
-    helpOptions[7] = {"parchamdar"};
+    helpOptions[7] = {"parcham_dar"};
     selectedHelpOption = "select a card";
     isDropdownOpenForHelp = false;
 }
@@ -1846,21 +1846,24 @@ std::string UI::helpGameControl()
         if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON))
         {
             Vector2 mousePos = GetMousePosition();
-            if (CheckCollisionPointRec(mousePos, dropdownBounds))
+            if (CheckCollisionPointRec(mousePos, dropdownHelpBounds))
             {
                 isDropdownOpenForHelp = !isDropdownOpenForHelp; // Toggle dropdown open/close
             }
             else if (isDropdownOpenForHelp)
             {
+                std::cout << "farsh" << std::endl;
                 // Check if the click is within one of the option bounds
                 for (int i = 0; i < 8; i++)
                 {
                     if (CheckCollisionPointRec(mousePos, helpOptionBounds[i]))
                     {
+                        std::cout << "kooh dard " << std::endl;
                         selectedHelpOption = helpOptions[i]; // Set selected option on click
-                        isDropdownOpen = false;              // Close the dropdown
-                        helpChoice = helpOptions[i];
-                        return helpChoice;
+                        isDropdownOpenForHelp = false;       // Close the dropdown
+                        // helpChoice = helpOptions[i];
+                        std::cout << "help aziz " << selectedHelpOption << std::endl;
+                        return selectedHelpOption;
                     }
                 }
             }
@@ -1887,6 +1890,37 @@ std::string UI::helpGameControl()
             }
         }
 
+        EndDrawing();
+    }
+}
+
+bool UI::displayHelp(std::string SpecialChoosedHelp)
+{
+    initializeNextButton(1100, 680, 120, 50);
+    while (1)
+    {
+        Vector2 mousePssitionIdentity = GetMousePosition();
+        bool mousePressedIdentity = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
+        if (next.ifPressed(mousePssitionIdentity, mousePressedIdentity))
+        {
+            std::cout << "too if " << std::endl;
+            next.setStatus(false);
+            return true; // next button has been pressed
+        }
+        BeginDrawing();
+        DrawTexture(backgroundIdentityMenu, 0, 0, WHITE);
+        DrawTextEx(gameFont, SpecialChoosedHelp.c_str(), (Vector2){200, 400}, gameFont.baseSize, 1, BLACK);
+        Color selectedColor = WHITE;
+        if (CheckCollisionPointRec(mousePssitionIdentity, next.getRectangle()))
+        {
+            selectedColor = WHITE;
+        }
+        else
+        {
+            selectedColor = {242, 120, 75, 225}; // Crusta color created
+        }
+
+        DrawTextEx(gameFont, this->next.title, (Vector2){this->next.getRectangle().x + 10, this->next.getRectangle().y + 10}, fontMenu.baseSize, 1, selectedColor);
         EndDrawing();
     }
 }

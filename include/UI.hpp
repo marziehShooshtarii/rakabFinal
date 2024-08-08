@@ -97,8 +97,7 @@ public:
     void initializeHelpOptions();
     void initializeHelpOptionsAndDropdownBounds();
     void initializeHelpDropdownBounds();
-
-    
+    bool displayHelp(std::string);
     // std::string findCard(Texture2D);
 private:
     const char *menuButtonsTitle[4];
