@@ -674,7 +674,7 @@ bool Control::determinWinnerOfWar()
             std::cout << "score -> " << scorsAtEndOfWar[i] << std::endl;
         }
         std::cout << "akhar polymorphism" << std::endl;
-        std::cout << "lalalaaaaaaaaa 1 " <<goodLuckNumber << std::endl;
+        std::cout << "lalalaaaaaaaaa 1 " << goodLuckNumber << std::endl;
         std::cout << "olalaaaaaaaaa 2 " << badLuckNumber << std::endl;
 
         if (scorsAtEndOfWar[i] % goodLuckNumber == 0)
@@ -1233,7 +1233,7 @@ void Control::menu()
             {
                 std::cout << "finddddddddddddddddddddddddddd" << std::endl;
                 ui.findTexture(players[TurnControl].getAllPlayerCards(), TurnControl);
-                numberOfDealingHandsAfterSaveGame ++;
+                numberOfDealingHandsAfterSaveGame++;
             }
 
             std::cout << "ghable findTexture too control 2" << std::endl;
@@ -1296,11 +1296,13 @@ void Control::menu()
             PlayerTurnHandler++;
             // if (PlayerTurnHandler == 3)
             //     PlayerTurnHandler = 0;
-            ifExitTheGame = ui.displayGameTableAndCharactersForThree(PlayerTurnHandler, starterPlayer);
-            if (ifExitTheGame)
+            ExitStatus = ui.displayGameTableAndCharactersForThree(PlayerTurnHandler, starterPlayer);
+            if (ExitStatus == 0)
                 uiStates = controlExit;
-            else
+            else if (ExitStatus == 1)
                 uiStates = displayPlayersCard;
+            else if (ExitStatus == 2)
+                uiStates = specialHelp;
             // if (uiStates == PlayerTurnHandler)
             //     break;
             // else
@@ -1314,12 +1316,14 @@ void Control::menu()
             // if (PlayerTurnHandler == 3)
             //     PlayerTurnHandler = 0;
             std::cout << "are areeeeeeeeeeeeeeeeeee" << std::endl;
-            ifExitTheGame = ui.displayGameTableAndCharactersForFour(PlayerTurnHandler, starterPlayer);
-            if (ifExitTheGame)
+            ExitStatus = ui.displayGameTableAndCharactersForFour(PlayerTurnHandler, starterPlayer);
+            if (ExitStatus == 0)
                 uiStates = controlExit;
-            else
+            else if (ExitStatus == 1)
                 uiStates = displayPlayersCard;
-            std::cout << "moshkel toii " << std::endl;    
+            else if (ExitStatus == 2)
+                uiStates = specialHelp;
+            std::cout << "moshkel toii " << std::endl;
             // if (uiStates == PlayerTurnHandler)
             //     break;
             // else
@@ -1355,6 +1359,11 @@ void Control::menu()
             ui.displayFinalWinner(numberOfWinnerOfGame, winnerOfGame);
             uiStates = UIMenu;
             break;
+        }
+        case specialHelp:
+        {
+            helpSelected = ui.helpGameControl();
+            helpChoice.searchInHelps(helpSelected);
         }
         case UISaveWriteInfo:
         {
@@ -1683,7 +1692,6 @@ void Control::saveReadLuckNumbers()
     save >> stringGoodLuckNumbers >> goodLuckNumber;
     save >> stringBadLuckNumbers >> badLuckNumber;
     std::cout << "good luck numbers -> " << goodLuckNumber << " bad luck numbers -> " << badLuckNumber << std::endl;
-   
 }
 void Control::saveReadSigns()
 {

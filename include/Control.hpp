@@ -141,9 +141,11 @@ private:
     int checkStatus = 0;//no status checked
     int turnHandlerAfterEachWar = 0;
     int numberOfWinnerOfGame;
-    bool ifExitTheGame = false;
+    int ExitStatus = -1;//no button pressed
     int checkSaveGame = 0 ;//no button pressed
     int numberOfDealingHandsAfterSaveGame = 0;
+    std::string helpSelected;
+    Help helpChoice;
     //bool fistWarOfGame; //to check if it's the first war
      enum UIStates
     {
@@ -167,6 +169,7 @@ private:
         UIWhichSavedGame,
         controlExit,
         noWinnerForWar,
-
+        specialHelp,
+        generalHelp,
     };
 };
