@@ -1290,6 +1290,7 @@ void Control::menu()
         }
         case showValidCardsForMatarsak:
         {
+            ui.displaycharactersCardsForMatarsak(PlayerTurnHandler % (identity.getPlayerNumber()));
             std::cout<<"matarsakkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk 3"<<std::endl;
             ui.validCardsForMatarsak();
             std::cout<<"matarsakkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk 4"<<std::endl;
