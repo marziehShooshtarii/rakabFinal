@@ -674,6 +674,8 @@ bool Control::determinWinnerOfWar()
             std::cout << "score -> " << scorsAtEndOfWar[i] << std::endl;
         }
         std::cout << "akhar polymorphism" << std::endl;
+        std::cout << "lalalaaaaaaaaa 1 " <<goodLuckNumber << std::endl;
+        std::cout << "olalaaaaaaaaa 2 " << badLuckNumber << std::endl;
 
         if (scorsAtEndOfWar[i] % goodLuckNumber == 0)
             scorsAtEndOfWar[i] *= 2;
@@ -951,9 +953,15 @@ void Control::saveSigns()
     save << "warzone: " << warzone << std::endl
          << "peace_sign: " << peaceSign << std::endl;
 }
+void Control::saveLuckNumbers()
+{
+    save << "good_luck_number: " << goodLuckNumber << std::endl;
+    save << "bad_luck_number: " << badLuckNumber << std::endl;
+}
 void Control::saveStarterPlayer(int index)
 {
     starterPlayer = index;
+    save << "starter_player: " << starterPlayer << std::endl;
     save << "turn_control: " << TurnControl << std::endl;
     save << "turnHandlerAfterEachWar : " << turnHandlerAfterEachWar << std::endl;
     save << "PlayerTurnHandler : " << PlayerTurnHandler << std::endl;
@@ -997,11 +1005,14 @@ bool Control::saveAllInfo(int index)
             }
             saveBaharVSZemestan();
             std::cout << "77777777777777" << std::endl;
-            saveSigns();
+            saveLuckNumbers();
+            std::cout << "goooooood " << goodLuckNumber << std::endl;
+            std::cout << "badddddddddddddd " << badLuckNumber << std::endl;
             std::cout << "888888888888888" << std::endl;
             saveStarterPlayer(index);
-            std::cout << "9999999999999"<< ifCardsAreSet << std::endl;
+            std::cout << "9999999999999" << ifCardsAreSet << std::endl;
             save << "if_Card_passed : " << true << std::endl;
+            saveSigns();
             break;
         }
         // int indexControlerForSave = 4;
@@ -1212,6 +1223,8 @@ void Control::menu()
         case displayPlayersCard:
         {
             ui.displaycharactersCards(PlayerTurnHandler % (identity.getPlayerNumber()));
+            if (numberOfDealingHandsAfterSaveGame == identity.getPlayerNumber())
+                newOrContinue = "n";
             if (!ifCardsAreSet)
                 StartNewGame();
             std::cout << "ghable findTexture too control" << ifCardsAreSet << std::endl;
@@ -1220,6 +1233,7 @@ void Control::menu()
             {
                 std::cout << "finddddddddddddddddddddddddddd" << std::endl;
                 ui.findTexture(players[TurnControl].getAllPlayerCards(), TurnControl);
+                numberOfDealingHandsAfterSaveGame ++;
             }
 
             std::cout << "ghable findTexture too control 2" << std::endl;
@@ -1260,8 +1274,10 @@ void Control::menu()
                 std::cout << "ghabl playing input aziz " << std::endl;
                 if (uiNumberPlayers == 3)
                     uiStates = displayGameTableForThree;
+                std::cout << "bade che koofti" << std::endl;
                 if (uiNumberPlayers == 4)
                     uiStates = displayGameTableForFour;
+                std::cout << "beckandim" << std::endl;
             }
             break;
         }
@@ -1297,11 +1313,13 @@ void Control::menu()
             PlayerTurnHandler++;
             // if (PlayerTurnHandler == 3)
             //     PlayerTurnHandler = 0;
+            std::cout << "are areeeeeeeeeeeeeeeeeee" << std::endl;
             ifExitTheGame = ui.displayGameTableAndCharactersForFour(PlayerTurnHandler, starterPlayer);
             if (ifExitTheGame)
                 uiStates = controlExit;
             else
                 uiStates = displayPlayersCard;
+            std::cout << "moshkel toii " << std::endl;    
             // if (uiStates == PlayerTurnHandler)
             //     break;
             // else
@@ -1658,6 +1676,15 @@ void Control::saveReadBaharVSZemestan()
         baharVSzemestan.push_back(stringBaharVSzemestan);
     }
 }
+void Control::saveReadLuckNumbers()
+{
+    std::string stringGoodLuckNumbers;
+    std::string stringBadLuckNumbers;
+    save >> stringGoodLuckNumbers >> goodLuckNumber;
+    save >> stringBadLuckNumbers >> badLuckNumber;
+    std::cout << "good luck numbers -> " << goodLuckNumber << " bad luck numbers -> " << badLuckNumber << std::endl;
+   
+}
 void Control::saveReadSigns()
 {
     std::string stringWarzone;
@@ -1667,7 +1694,8 @@ void Control::saveReadSigns()
 }
 void Control::saveReadStarterPlayerAndSelectedCard()
 {
-    std::string stringTurnControl, stringTurnHandlerAfterEachWar, stringPlayerTurnHandler;
+    std::string stringStarterPlayer, stringTurnControl, stringTurnHandlerAfterEachWar, stringPlayerTurnHandler;
+    save >> stringStarterPlayer >> starterPlayer;
     save >> stringTurnControl >> TurnControl;
     save >> stringTurnHandlerAfterEachWar >> turnHandlerAfterEachWar;
     save >> stringPlayerTurnHandler >> PlayerTurnHandler;
@@ -1684,6 +1712,7 @@ void Control::saveReadAllInfo()
     int intPlayerNumber;
     save >> intPlayerNumber;
     // std::cout << "bad tedad bazikon khondan " << std::endl;
+    uiNumberPlayers = intPlayerNumber;
     identity.setPlayerNumberForSave(intPlayerNumber);
     std::cout << "identity.getPlayerNumberForSave -> " << identity.getPlayerNumber() << std::endl;
     for (int i = 0; i < identity.getPlayerNumber(); i++)
@@ -1702,12 +1731,13 @@ void Control::saveReadAllInfo()
     std::cout << "ghbl played bahar " << std::endl;
     saveReadBaharVSZemestan();
     std::cout << "ghbl played signs " << std::endl;
-    saveReadSigns();
     std::cout << "ghbl played starter player " << std::endl;
+    saveReadLuckNumbers();
     saveReadStarterPlayerAndSelectedCard();
     bool stirngIfCardSet;
     std::cout << "ghabl ifCardSet " << ifCardsAreSet << std::endl;
     save >> stirngIfCardSet >> ifCardsAreSet;
+    saveReadSigns();
     save.close();
 }
 void Control::StartNewGame()

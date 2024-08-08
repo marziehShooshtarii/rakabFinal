@@ -80,6 +80,7 @@ public:
     void saveSigns();
     void saveStarterPlayer(int);
     void savePlayerStates(int index);
+    void saveLuckNumbers();
     bool saveAllInfo(int);
     void menu();
     void saveReadPlayerInfo(int index);
@@ -87,6 +88,7 @@ public:
     void saveReadPlayedCardsInfo(int index);
     void saveReadPlayerCardsInfo(int index);
     void saveReadBaharVSZemestan();
+    void saveReadLuckNumbers();
     void saveReadSigns();
     void saveReadStarterPlayerAndSelectedCard();
     void saveReadAllInfo();
@@ -141,6 +143,7 @@ private:
     int numberOfWinnerOfGame;
     bool ifExitTheGame = false;
     int checkSaveGame = 0 ;//no button pressed
+    int numberOfDealingHandsAfterSaveGame = 0;
     //bool fistWarOfGame; //to check if it's the first war
      enum UIStates
     {
