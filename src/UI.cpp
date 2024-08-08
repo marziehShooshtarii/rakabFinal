@@ -1587,20 +1587,18 @@ bool UI::getLuckNumbers(std::string starterPlayer)
         {
             return true;
         }
+        
         Color textColor = {249, 105, 14, 225}; // color Ecstasy created
         BeginDrawing();
         ClearBackground(RAYWHITE);
         DrawTexture(luckNumberBackground, 0, 0, WHITE);
-        // DrawText(playerToStartWar, 100, 50, 50, WHITE);
-        // DrawText("you are the starter.", 100, 50, 50, WHITE);
         DrawTextEx(gameFont, playerToStartWar, (Vector2){100, 50}, gameFont.baseSize, 1, textColor);
         DrawTextEx(gameFont, "you are the starter.", (Vector2){145, 50}, gameFont.baseSize, 1, textColor);
         DrawTextEx(gameFont, "please enter the good luck number:", (Vector2){100, 100}, gameFont.baseSize, 1, textColor);
         DrawTextEx(gameFont, "please enter your bad luck number:", (Vector2){450, 100}, gameFont.baseSize, 1, textColor);
-        // DrawTextEx(gameFont, "please enter your color:", (Vector2){750, 50}, gameFont.baseSize, 1, textColor);
+  
         textBoxDraw(inputFont, framesCounter);
-        // for (int index = 0; index < 3; index++)
-        // {
+
         Color selectedColor = WHITE;
         if (CheckCollisionPointRec(mousePssitionConfirmation, ConfirmPlayerData.getRectangle()))
         {
@@ -1608,13 +1606,10 @@ bool UI::getLuckNumbers(std::string starterPlayer)
         }
         else
         {
-            selectedColor = /*RED*/ {242, 120, 75, 225}; // Crusta color created
+            selectedColor ={242, 120, 75, 225}; // Crusta color created
         }
         DrawTextEx(gameFont, this->ConfirmPlayerData.title, (Vector2){this->ConfirmPlayerData.getRectangle().x + 10, this->ConfirmPlayerData.getRectangle().y + 10}, fontMenu.baseSize, 1, selectedColor);
-        // }
-        // DrawTextEx(fontMenu, this->ConfirmPlayerData[1].title, (Vector2){this->ConfirmPlayerData[1].getRectangle().x + 10, this->ConfirmPlayerData[1].getRectangle().y + 10}, fontMenu.baseSize, 1, selectedColor);
-        // DrawTextEx(fontMenu, this->ConfirmPlayerData[2].title, (Vector2){this->ConfirmPlayerData[2].getRectangle().x + 10, this->ConfirmPlayerData[2].getRectangle().y + 10}, fontMenu.baseSize, 1, selectedColor);
-        // std::cout << "tah displayConfirmPlayerDataButton" << std::endl;
+      
         EndDrawing();
     }
 }
@@ -1638,20 +1633,12 @@ bool UI::thripleTextBoxDraw()
         textBoxUpdate();
         Vector2 mousePssitionConfirmation = GetMousePosition();
         bool mousePressedConfirmation = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
-        // std::cout << mousePressedComfermation << std::endl;
-        // std::cout <<playerIndex << "playerIndex" << std::endl;
+
         if (ConfirmPlayerData.ifPressed(mousePssitionConfirmation, mousePressedConfirmation))
         {
             return true;
         }
-        // if (ConfirmPlayerData[1].ifPressed(mousePssitionConfirmation, mousePressedConfirmation))
-        // {
-        //     return true;
-        // }
-        // if (ConfirmPlayerData[2].ifPressed(mousePssitionConfirmation, mousePressedConfirmation))
-        // {
-        //     return true;
-        // }
+
         Color textColor = {249, 105, 14, 225}; // color Ecstasy created
         BeginDrawing();
         ClearBackground(RAYWHITE);
@@ -1660,8 +1647,7 @@ bool UI::thripleTextBoxDraw()
         DrawTextEx(gameFont, "please enter your ages:", (Vector2){450, 50}, gameFont.baseSize, 1, textColor);
         DrawTextEx(gameFont, "please enter your color:", (Vector2){750, 50}, gameFont.baseSize, 1, textColor);
         textBoxDraw(inputFont, framesCounter);
-        // for (int index = 0; index < 3; index++)
-        // {
+
         Color selectedColor = WHITE;
         if (CheckCollisionPointRec(mousePssitionConfirmation, ConfirmPlayerData.getRectangle()))
         {
@@ -1669,13 +1655,9 @@ bool UI::thripleTextBoxDraw()
         }
         else
         {
-            selectedColor = /*RED*/ {242, 120, 75, 225}; // Crusta color created
+            selectedColor = {242, 120, 75, 225}; // Crusta color created
         }
         DrawTextEx(gameFont, this->ConfirmPlayerData.title, (Vector2){this->ConfirmPlayerData.getRectangle().x + 10, this->ConfirmPlayerData.getRectangle().y + 10}, fontMenu.baseSize, 1, selectedColor);
-        // }
-        // DrawTextEx(fontMenu, this->ConfirmPlayerData[1].title, (Vector2){this->ConfirmPlayerData[1].getRectangle().x + 10, this->ConfirmPlayerData[1].getRectangle().y + 10}, fontMenu.baseSize, 1, selectedColor);
-        // DrawTextEx(fontMenu, this->ConfirmPlayerData[2].title, (Vector2){this->ConfirmPlayerData[2].getRectangle().x + 10, this->ConfirmPlayerData[2].getRectangle().y + 10}, fontMenu.baseSize, 1, selectedColor);
-        // std::cout << "tah displayConfirmPlayerDataButton" << std::endl;
         EndDrawing();
     }
 }
@@ -1732,41 +1714,24 @@ bool UI::quadrupleTextBoxDraw()
     }
 }
 
-// std::vector<char> UI::getNamesFromUI(int playerIndex)
-// {
-//     textBoxes[playerIndex].transferPlayerNameToVector();
-//     std::cout << "textBoxes[playerIndex].getTextBoxName(). -> " << textBoxes[playerIndex].getTextBoxName().size() << std::endl;
-//     return textBoxes[playerIndex].getTextBoxName();
-// }
-
-// char * UI::getFullNameFromUI(int index)
-// {
-//     return textBoxes[index].getFullName();
-// }
-
-// std::vector<char> UI::getAgeFromUI(int playerAgeIndex)
-// {
-//     textBoxes[playerAgeIndex].transferPlayerNameToVector();
-//     return textBoxes[playerAgeIndex].getTextBoxName();
-// }
 void UI::initializeOptionsForSavedGameNumber()
 {
-    options[0] = {"firstSavedGame"};
-    options[1] = {"secondSavedGame"};
-    options[2] = {"thirdSavedGame"};
-    options[3] = {"forthSavedGame"};
-    options[4] = {"fifthSavedGame"};
-    selectedOption = "Select a saved game";
+    options[0] = {"saved Game 1"};
+    options[1] = {"saved Game 2"};
+    options[2] = {"saved Game 3"};
+    options[3] = {"saved Game 4"};
+    options[4] = {"saved Game 5"};
+    selectedOption = "select a saved game";
     isDropdownOpen = false;
 }
 void UI::initializeOptionsAndDropdownBoundsForSavedGameNumber()
 {
-    dropdownBounds = {350, 250, 100, 30};
-    optionBounds[0] = {350, 250 + 30, 100, 30};
-    optionBounds[1] = {350, 250 + 60, 100, 30};
-    optionBounds[2] = {350, 250 + 90, 100, 30};
-    optionBounds[3] = {350, 250 + 120, 100, 30};
-    optionBounds[4] = {350, 250 + 150, 100, 30};
+    dropdownBounds = {350, 250, 350, 30};
+    optionBounds[0] = {420, 250 + 30, 200, 50};
+    optionBounds[1] = {420, 250 + 80, 200, 50};
+    optionBounds[2] = {420, 250 + 130, 200, 50};
+    optionBounds[3] = {420, 250 + 180, 200, 50};
+    optionBounds[4] = {420, 250 + 230, 200, 50};
 }
 void UI::initializeDropDownMenuForSavedGameNumber()
 {
@@ -1806,8 +1771,7 @@ int UI::displayOpenDropDownMenuForSavedGameNumber()
         // Draw the dropdown box
         DrawRectangleRec(dropdownBounds, LIGHTGRAY);
         DrawRectangleLinesEx(dropdownBounds, 2, DARKGRAY);
-        DrawTextPro(inputFont, selectedOption.c_str(), (Vector2){dropdownBounds.x + 5, dropdownBounds.y + 5}, (Vector2){1}, 1, 40, 1, RED);
-        // DrawText(selectedOption.c_str(), dropdownBounds.x + 5, dropdownBounds.y + 5, 10, BLACK);
+        DrawTextPro(inputFont, selectedOption.c_str(), (Vector2){dropdownBounds.x + 37, dropdownBounds.y - 11}, (Vector2){1}, 1, 40, 1, {225 , 120 , 80 , 225});
 
         // Draw the options if the dropdown is open
         if (isDropdownOpen)
@@ -1816,8 +1780,7 @@ int UI::displayOpenDropDownMenuForSavedGameNumber()
             {
                 DrawRectangleRec(optionBounds[i], LIGHTGRAY);
                 DrawRectangleLinesEx(optionBounds[i], 1, DARKGRAY);
-                DrawTextPro(inputFont, options[i].c_str(), (Vector2){optionBounds[i].x + 5, optionBounds[i].y + 5}, (Vector2){1}, 1, 40, 1, RED);
-                // DrawText(options[i].c_str(), optionBounds[i].x + 5, optionBounds[i].y + 5, 10, BLACK);
+                DrawTextPro(inputFont, options[i].c_str(), (Vector2){optionBounds[i].x + 10, optionBounds[i].y + 5}, (Vector2){1}, 1, 40, 1, {225 , 110 , 80 , 225});
             }
         }
 
