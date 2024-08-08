@@ -1296,12 +1296,12 @@ void Control::menu()
             PlayerTurnHandler++;
             // if (PlayerTurnHandler == 3)
             //     PlayerTurnHandler = 0;
-            ExitStatus = ui.displayGameTableAndCharactersForThree(PlayerTurnHandler, starterPlayer);
-            if (ExitStatus == 0)
+            exitStatus = ui.displayGameTableAndCharactersForThree(PlayerTurnHandler, starterPlayer);
+            if (exitStatus == 0)
                 uiStates = controlExit;
-            else if (ExitStatus == 1)
+            else if (exitStatus == 1)
                 uiStates = displayPlayersCard;
-            else if (ExitStatus == 2)
+            else if (exitStatus == 2)
                 uiStates = specialHelp;
             // if (uiStates == PlayerTurnHandler)
             //     break;
@@ -1316,12 +1316,12 @@ void Control::menu()
             // if (PlayerTurnHandler == 3)
             //     PlayerTurnHandler = 0;
             std::cout << "are areeeeeeeeeeeeeeeeeee" << std::endl;
-            ExitStatus = ui.displayGameTableAndCharactersForFour(PlayerTurnHandler, starterPlayer);
-            if (ExitStatus == 0)
+            exitStatus = ui.displayGameTableAndCharactersForFour(PlayerTurnHandler, starterPlayer);
+            if (exitStatus == 0)
                 uiStates = controlExit;
-            else if (ExitStatus == 1)
+            else if (exitStatus == 1)
                 uiStates = displayPlayersCard;
-            else if (ExitStatus == 2)
+            else if (exitStatus == 2)
                 uiStates = specialHelp;
             std::cout << "moshkel toii " << std::endl;
             // if (uiStates == PlayerTurnHandler)
@@ -1363,7 +1363,9 @@ void Control::menu()
         case specialHelp:
         {
             helpSelected = ui.helpGameControl();
-            helpChoice.searchInHelps(helpSelected);
+            ui.displayHelp(helpChoice.searchInHelps(helpSelected));
+            uiStates = displayPlayersCard;
+            break;
         }
         case UISaveWriteInfo:
         {

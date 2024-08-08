@@ -141,7 +141,7 @@ private:
     int checkStatus = 0;//no status checked
     int turnHandlerAfterEachWar = 0;
     int numberOfWinnerOfGame;
-    int ExitStatus = -1;//no button pressed
+    int exitStatus = -1;//no button pressed
     int checkSaveGame = 0 ;//no button pressed
     int numberOfDealingHandsAfterSaveGame = 0;
     std::string helpSelected;
