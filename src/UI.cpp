@@ -1983,6 +1983,18 @@ bool UI::displayWarSigns(std::vector<int> numberOfstates, std::vector<std::strin
         ClearBackground(BLANK);
         DrawTexture(warzoneMapWithSigns, 0, 0, WHITE);
         //int j = 0;
+        for (int i = 0;  i < numberOfstates.size(); i++)
+        {
+            std::cout <<"mohemmmmmmm" << numberOfstates[i] <<std::endl;
+        }
+        for (int i = 0;  i < nameOfstates.size(); i++)
+        {
+            std::cout <<"mohemmmmmmm 2" << nameOfstates[i] <<std::endl;
+        }
+        for (int i = 0;  i < winners.size(); i++)
+        {
+            std::cout <<"mohemmmmmmm 3" << winners[i] <<std::endl;
+        }
         for (int i = 0; i < winners.size(); i++)
         {
             std::cout << winners[i] << "winer.size"<<std::endl;
@@ -2011,10 +2023,13 @@ bool UI::displayWarSigns(std::vector<int> numberOfstates, std::vector<std::strin
                     }
                 }
                 }
+                //break;
             }
             else
             {
                 std::cout <<"vared else mishe" <<std::endl;
+                std::cout <<"numberOfstates[winners[i - 1]]" << numberOfstates[winners[i - 1]]<<std::endl;
+                std::cout <<"numberOfstates[winners[i]]" << numberOfstates[winners[i]]<<std::endl;
                 for (int j = numberOfstates[winners[i - 1]]; j < numberOfstates[winners[i]]; j++)
                 {
                     // std::cout << "too displayWarSigns 2 " << std::endl;
