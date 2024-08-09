@@ -1225,12 +1225,13 @@ void Control::menu()
 
             std::cout << "too displayWarSigns 1" << std::endl;
             allOwenedStatesForUI();
-            std::cout << "number -----" << numberOfOwendStatesForEachPlayer.size() <<std::endl;
-            std::cout << "name -----" << nameOfOwenedStates.size() <<std::endl;
+            calculateNumberOfWinners();
+            std::cout << "number -----" << numberOfOwendStatesForEachPlayer.size() << std::endl;
+            std::cout << "name -----" << nameOfOwenedStates.size() << std::endl;
             std::cout << "too displayWarSigns 2" << std::endl;
             ui.displayRenderWarSigns();
             std::cout << "too displayWarSigns 3" << std::endl;
-            ui.displayWarSigns(numberOfOwendStatesForEachPlayer, nameOfOwenedStates,orderOfWinners);
+            ui.displayWarSigns(numberOfOwendStatesForEachPlayer, nameOfOwenedStates, orderOfWinners, numberOfWinners);
             std::cout << "too displayWarSigns 4" << std::endl;
             uiStates = warzoneMap;
             break;
@@ -1607,12 +1608,12 @@ void Control::setPlayedCardsAfterMatarsak()
 
 void Control::allOwenedStatesForUI()
 {
-    std::cout << "numberOfOwendStatesForEachPlayer.size()"<<numberOfOwendStatesForEachPlayer.size()<<std::endl;
-    std::cout << "nameOfOwenedStates.size()"<<nameOfOwenedStates.size()<<std::endl;
+    std::cout << "numberOfOwendStatesForEachPlayer.size()" << numberOfOwendStatesForEachPlayer.size() << std::endl;
+    std::cout << "nameOfOwenedStates.size()" << nameOfOwenedStates.size() << std::endl;
     numberOfOwendStatesForEachPlayer.clear();
     nameOfOwenedStates.clear();
-    std::cout << "numberOfOwendStatesForEachPlayer.size()"<<numberOfOwendStatesForEachPlayer.size()<<std::endl;
-    std::cout << "nameOfOwenedStates.size()"<<nameOfOwenedStates.size()<<std::endl;
+    std::cout << "numberOfOwendStatesForEachPlayer.size()" << numberOfOwendStatesForEachPlayer.size() << std::endl;
+    std::cout << "nameOfOwenedStates.size()" << nameOfOwenedStates.size() << std::endl;
     std::cout << "allOwenedStatesForUI 1" << std::endl;
     for (int i = 0; i < identity.getPlayerNumber(); i++)
     {
@@ -1631,8 +1632,8 @@ void Control::allOwenedStatesForUI()
             nameOfOwenedStates.emplace_back(players[i].getOwenedStates(j));
         }
     }
-    std::cout << "numberOfOwendStatesForEachPlayer.size()"<<numberOfOwendStatesForEachPlayer.size()<<std::endl;
-    std::cout << "nameOfOwenedStates.size()"<<nameOfOwenedStates.size()<<std::endl;
+    std::cout << "numberOfOwendStatesForEachPlayer.size()" << numberOfOwendStatesForEachPlayer.size() << std::endl;
+    std::cout << "nameOfOwenedStates.size()" << nameOfOwenedStates.size() << std::endl;
     std::cout << "allOwenedStatesForUI 7" << std::endl;
 }
 // void Control::initializeAllOwenedStatesForUI()
@@ -1840,6 +1841,22 @@ void Control::initializingNumberOfSavedGames()
 void Control::setWarzone(std::string stateName)
 {
     warzone = stateName;
+}
+void Control::calculateNumberOfWinners()
+{
+    // int numberOfWinsCounter = 0;
+    for (int j = 0; j < identity.getPlayerNumber(); j++)
+    {
+        for (int i = 0; i < orderOfWinners.size(); i++)
+        {
+            if (orderOfWinners[i] == j)
+            {
+                numberOfWinners++;
+                // numberOfWins.push_back(numberOfWinsCounter);
+                break;
+            }
+        }
+    }
 }
 void Control::run()
 {

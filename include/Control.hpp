@@ -106,6 +106,7 @@ public:
     void setPlayedCardsAfterMatarsak();
     void allOwenedStatesForUI();
     void initializeAllOwenedStatesForUI();
+    void calculateNumberOfWinners();
     void run();
 
 private:
@@ -151,7 +152,7 @@ private:
     std::vector<int> numberOfOwendStatesForEachPlayer;
     std::vector<std::string> nameOfOwenedStates;
     std::vector<int> orderOfWinners;
-
+    int numberOfWinners = 0;
     // bool fistWarOfGame; //to check if it's the first war
     enum UIStates
     {
