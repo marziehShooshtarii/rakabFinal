@@ -707,7 +707,7 @@ bool Control::determinWinnerOfWar()
         return false; // there is no winner for this war
     }
     std::cout << "winner - > " << players[winner].getName() << std::endl;
-
+    orderOfWinners.push_back(winner);
     for (int d = 0; d < identity.getPlayerNumber(); d++)
         std::cout << identity.getName(d) << " -> " << scorsAtEndOfWar[d] << std::endl;
     for (int i = 0; i < identity.getPlayerNumber(); i++)
@@ -1220,6 +1220,21 @@ void Control::menu()
             uiStates = displayPlayersCard;
             break;
         }
+        case displayWarSigns:
+        {
+
+            std::cout << "too displayWarSigns 1" << std::endl;
+            allOwenedStatesForUI();
+            std::cout << "number -----" << numberOfOwendStatesForEachPlayer.size() <<std::endl;
+            std::cout << "name -----" << nameOfOwenedStates.size() <<std::endl;
+            std::cout << "too displayWarSigns 2" << std::endl;
+            ui.displayRenderWarSigns();
+            std::cout << "too displayWarSigns 3" << std::endl;
+            ui.displayWarSigns(numberOfOwendStatesForEachPlayer, nameOfOwenedStates,orderOfWinners);
+            std::cout << "too displayWarSigns 4" << std::endl;
+            uiStates = warzoneMap;
+            break;
+        }
         case displayPlayersCard:
         {
             ui.displaycharactersCards(PlayerTurnHandler % (identity.getPlayerNumber()));
@@ -1338,7 +1353,7 @@ void Control::menu()
             ui.displayWinner(starterPlayer, players[starterPlayer].getName());
             for (int i = 0; i < identity.getPlayerNumber(); i++)
                 players[i].eraseAllPlayedCards();
-            uiStates = warzoneMap;
+            uiStates = displayWarSigns;
             break;
         }
         case showValidCardsForMatarsak:
@@ -1589,6 +1604,44 @@ void Control::setPlayedCardsAfterMatarsak()
         }
     }
 }
+
+void Control::allOwenedStatesForUI()
+{
+    std::cout << "numberOfOwendStatesForEachPlayer.size()"<<numberOfOwendStatesForEachPlayer.size()<<std::endl;
+    std::cout << "nameOfOwenedStates.size()"<<nameOfOwenedStates.size()<<std::endl;
+    numberOfOwendStatesForEachPlayer.clear();
+    nameOfOwenedStates.clear();
+    std::cout << "numberOfOwendStatesForEachPlayer.size()"<<numberOfOwendStatesForEachPlayer.size()<<std::endl;
+    std::cout << "nameOfOwenedStates.size()"<<nameOfOwenedStates.size()<<std::endl;
+    std::cout << "allOwenedStatesForUI 1" << std::endl;
+    for (int i = 0; i < identity.getPlayerNumber(); i++)
+    {
+        std::cout << "allOwenedStatesForUI 2" << std::endl;
+        std::cout << "players[i].getNumberOfOwenedStates() - >>>>" << players[i].getNumberOfOwenedStates();
+        numberOfOwendStatesForEachPlayer.emplace_back(players[i].getNumberOfOwenedStates());
+        std::cout << "allOwenedStatesForUI 3" << std::endl;
+    }
+    std::cout << "allOwenedStatesForUI 4" << std::endl;
+    for (int i = 0; i < identity.getPlayerNumber(); i++)
+    {
+        std::cout << "allOwenedStatesForUI 5" << std::endl;
+        for (int j = 0; j < players[i].getNumberOfOwenedStates(); j++)
+        {
+            std::cout << "allOwenedStatesForUI 6" << std::endl;
+            nameOfOwenedStates.emplace_back(players[i].getOwenedStates(j));
+        }
+    }
+    std::cout << "numberOfOwendStatesForEachPlayer.size()"<<numberOfOwendStatesForEachPlayer.size()<<std::endl;
+    std::cout << "nameOfOwenedStates.size()"<<nameOfOwenedStates.size()<<std::endl;
+    std::cout << "allOwenedStatesForUI 7" << std::endl;
+}
+// void Control::initializeAllOwenedStatesForUI()
+// {
+//     for (int i = 0; i < identity.getPlayerNumber(); i++)
+//     {
+//         numberOfOwendStatesForEachPlayer[i] = 0;
+//     }
+// }
 void Control::eraseSelectedCard()
 {
     for (int i = 0; i < players[TurnControl].getNumberOfPlayedCards(); i++)

@@ -104,6 +104,8 @@ public:
     int setPlayedCardsFromUI();
     void eraseSelectedCard();
     void setPlayedCardsAfterMatarsak();
+    void allOwenedStatesForUI();
+    void initializeAllOwenedStatesForUI();
     void run();
 
 private:
@@ -122,14 +124,14 @@ private:
     int maxScore = -1;
     int counterNeighbores = 0;
     std::string winnerOfGame;
-    int winner = -1; //can't be the numbers which may be the player's order
+    int winner = -1; // can't be the numbers which may be the player's order
     std::vector<Card> baharVSzemestan;
     std::string peaceSign;
-    int numberOfwars = 0;// for controling peace sign
-    std::vector<int>orderOfRishSefids;
+    int numberOfwars = 0; // for controling peace sign
+    std::vector<int> orderOfRishSefids;
     std::fstream save;
     std::string newOrContinue;
-    std::vector <std::string> numberOfSavedGames; //having more than one saved game
+    std::vector<std::string> numberOfSavedGames; // having more than one saved game
     int whichSavedGame;
     UI ui;
     int goodLuckNumber;
@@ -138,16 +140,20 @@ private:
     int uiNumberPlayers;
     int PlayerTurnHandler = 0;
     int TurnControl = 0;
-    int checkStatus = 0;//no status checked
+    int checkStatus = 0; // no status checked
     int turnHandlerAfterEachWar = 0;
     int numberOfWinnerOfGame;
-    int exitStatus = -1;//no button pressed
-    int checkSaveGame = 0 ;//no button pressed
+    int exitStatus = -1;   // no button pressed
+    int checkSaveGame = 0; // no button pressed
     int numberOfDealingHandsAfterSaveGame = 0;
     std::string helpSelected;
     Help helpChoice;
-    //bool fistWarOfGame; //to check if it's the first war
-     enum UIStates
+    std::vector<int> numberOfOwendStatesForEachPlayer;
+    std::vector<std::string> nameOfOwenedStates;
+    std::vector<int> orderOfWinners;
+
+    // bool fistWarOfGame; //to check if it's the first war
+    enum UIStates
     {
         UIMenu,
         UIplayerNumber,
@@ -171,5 +177,6 @@ private:
         noWinnerForWar,
         specialHelp,
         generalHelp,
+        displayWarSigns,
     };
 };
