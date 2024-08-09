@@ -1966,7 +1966,7 @@ int UI::getPlayerAgeAndLuckFromUI(int playerAgeIndex)
     return textBoxes[playerAgeIndex].getTextBoxIntNumber();
 }
 
-bool UI::displayWarSigns(std::vector<int> numberOfstates, std::vector<std::string> nameOfstates,std::vector<int>winners)
+bool UI::displayWarSigns(std::vector<int> numberOfstates, std::vector<std::string> nameOfstates, std::vector<int> winners)
 {
 
     initializeNextButton(1100, 680, 200, 100);
@@ -1982,19 +1982,21 @@ bool UI::displayWarSigns(std::vector<int> numberOfstates, std::vector<std::strin
         BeginDrawing();
         ClearBackground(BLANK);
         DrawTexture(warzoneMapWithSigns, 0, 0, WHITE);
+        //int j = 0;
         for (int i = 0; i < winners.size(); i++)
         {
-            std::cout <<winners[i]<<" winnerrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"<<std::endl;
-            //std::cout << "too displayWarSigns 1 " << std::endl;
-            for (int j = 0; j < numberOfstates[winners[i]]; j++)
+            std::cout << winners[i] << "winer.size"<<std::endl;
+            std::cout << winners[i] << " winnerrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr" << std::endl;
+            // std::cout << "too displayWarSigns 1 " << std::endl;
+            if (i == 0)
             {
-                //std::cout << "too displayWarSigns 2 " << std::endl;
-
+                for (int j = 0; j < numberOfstates[winners[i]]; j++)
+                {
                 for (statesCoordinatesItr = statesCoordinates.begin(); statesCoordinatesItr != statesCoordinates.end(); statesCoordinatesItr++)
                 {
-                    //std::cout << "too displayWarSigns 3 " << std::endl;
-                    std::cout << "statesCoordinatesItr->first " << statesCoordinatesItr->first <<std::endl;
-                    std::cout << "numberOfstates[i] " << nameOfstates[j] <<std::endl;
+                    // std::cout << "too displayWarSigns 3 " << std::endl;
+                    std::cout << "statesCoordinatesItr->first " << statesCoordinatesItr->first << std::endl;
+                    std::cout << "numberOfstates[i] " << nameOfstates[j] << std::endl;
                     if (statesCoordinatesItr->first == nameOfstates[j])
                     {
                         std::cout << "too displayWarSigns 4 " << std::endl;
@@ -2008,7 +2010,36 @@ bool UI::displayWarSigns(std::vector<int> numberOfstates, std::vector<std::strin
                         // }
                     }
                 }
+                }
             }
+            else
+            {
+                std::cout <<"vared else mishe" <<std::endl;
+                for (int j = numberOfstates[winners[i - 1]]; j < numberOfstates[winners[i]]; j++)
+                {
+                    // std::cout << "too displayWarSigns 2 " << std::endl;
+
+                    for (statesCoordinatesItr = statesCoordinates.begin(); statesCoordinatesItr != statesCoordinates.end(); statesCoordinatesItr++)
+                    {
+                        // std::cout << "too displayWarSigns 3 " << std::endl;
+                        std::cout << "statesCoordinatesItr->first " << statesCoordinatesItr->first << std::endl;
+                        std::cout << "numberOfstates[i] " << nameOfstates[j] << std::endl;
+                        if (statesCoordinatesItr->first == nameOfstates[j])
+                        {
+                            std::cout << "too displayWarSigns 4 " << std::endl;
+                            // statesCoordinatesPtr = statesCoordinatesItr->first + statesCoordinatesItr->first.begin();
+                            statesCoordinatesPtr = statesCoordinatesItr->second.begin();
+                            // for (statesCoordinatesPtr = statesCoordinatesItr->second.begin(); statesCoordinatesPtr != statesCoordinatesItr->second.end(); statesCoordinatesPtr++)
+                            // {
+                            //     if (statesCoordinatesItr->second == statesCoordinatesPtr->first)
+                            DrawTexture(warSigns[winners[i]], statesCoordinatesPtr->first, statesCoordinatesPtr->second, WHITE);
+                            std::cout << "too displayWarSigns 5 " << std::endl;
+                            // }
+                        }
+                    }
+                }
+            }
+            // j = numberOfstates[winners[i - 1]];
         }
 
         Color color = WHITE;
