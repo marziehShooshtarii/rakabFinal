@@ -101,10 +101,13 @@ public:
     void initializeHelpDropdownBounds();
     bool displayHelp(std::string);
     void displayRenderWarSigns();
-    bool displayWarSigns(std::vector<int>,std::vector<std::string>,std::vector<int>,int);
+    bool displayWarSigns(std::vector<int>, std::vector<std::string>, std::vector<int>, int, std::vector<std::string>);
     void setNumberOfPlayers(int);
     void initializeStatesCoordinates();
-    
+    void initializeWarSignColors();
+    // void initializeOptionsAndDropdownBoundsForColors();
+    // void initializeOptionsColors();
+
     // std::string findCard(Texture2D);
 private:
     const char *menuButtonsTitle[4];
@@ -200,9 +203,9 @@ private:
     int UIstarterPlayer;
     std::vector<int> orderOfPlayedCardsForMatarsak;
     Button help;
-    std::map<std::string, std::map<int, int> > statesCoordinates;
-    std::map<std::string, std::map<int, int> >::iterator statesCoordinatesItr;
-    std::map<int, int>::iterator statesCoordinatesPtr; 
+    std::map<std::string, std::map<int, int>> statesCoordinates;
+    std::map<std::string, std::map<int, int>>::iterator statesCoordinatesItr;
+    std::map<int, int>::iterator statesCoordinatesPtr;
     // enum TextureString
     // {
     //     baharCards,
@@ -258,7 +261,7 @@ private:
     bool isDropdownOpen;
     Rectangle dropdownBounds;
     Rectangle optionBounds[5];
-    int savedGameNumber = -1;//no saved game selected
+    int savedGameNumber = -1; // no saved game selected
     std::string helpOptions[8];
     std::string selectedHelpOption;
     Rectangle dropdownHelpBounds;
@@ -266,5 +269,11 @@ private:
     bool isDropdownOpenForHelp;
     std::string helpChoice;
     int numberOfPlayers;
+    std::unordered_map<std::string, Texture2D> warSignColors;
+    // std::vector <Rectangle> colorOptionBounds;
+    // std::vector <std::string> colorOptions;
+    // bool isDropdownOpenForColor;
+    // Rectangle dropdownBoundsForColors;
+    // std::string selectedOptionForColors;
 };
 #endif

@@ -76,6 +76,7 @@ UI::UI()
     initializePlayerCardsFromUI();
     initializePlayedStringCard();
     initializeStatesCoordinates();
+    initializeWarSignColors();
     // initializeDropDownMenuForSavedGameNumber();
     // temp = LoadImage("../assets/gt1.png");          // Load image
     // ImageFlipVertical(&temp);                       // Flip image vertically
@@ -1781,6 +1782,25 @@ void UI::initializeOptionsAndDropdownBoundsForSavedGameNumber()
     optionBounds[3] = {420, 250 + 180, 200, 50};
     optionBounds[4] = {420, 250 + 230, 200, 50};
 }
+// void UI::initializeOptionsColors()
+// {
+//     colorOptions[0] = {"red"};
+//     colorOptions[1] = {"purple"};
+//     colorOptions[2] = {"blue"};
+//     colorOptions[3] = {"green"};
+    
+//     selectedOptionForColors = "select a color";
+//     isDropdownOpenForColor = false;
+// }
+// void UI::initializeOptionsAndDropdownBoundsForColors()
+// {
+//     dropdownBoundsForColors = {350, 250, 350, 30};
+//     colorOptionBounds[0] = {420, 250 + 30, 200, 50};
+//     colorOptionBounds[1] = {420, 250 + 80, 200, 50};
+//     colorOptionBounds[2] = {420, 250 + 130, 200, 50};
+//     colorOptionBounds[3] = {420, 250 + 180, 200, 50};
+//     colorOptionBounds[4] = {420, 250 + 230, 200, 50};
+// }
 void UI::initializeDropDownMenuForSavedGameNumber()
 {
     initializeOptionsForSavedGameNumber();
@@ -1966,7 +1986,7 @@ int UI::getPlayerAgeAndLuckFromUI(int playerAgeIndex)
     return textBoxes[playerAgeIndex].getTextBoxIntNumber();
 }
 
-bool UI::displayWarSigns(std::vector<int> numberOfstates, std::vector<std::string> nameOfstates, std::vector<int> winners, int numberOfwinnersInUI)
+bool UI::displayWarSigns(std::vector<int> numberOfstates, std::vector<std::string> nameOfstates, std::vector<int> winners, int numberOfwinnersInUI,std::vector<std::string> colors)
 {
 
     initializeNextButton(1100, 680, 200, 100);
@@ -2023,7 +2043,7 @@ bool UI::displayWarSigns(std::vector<int> numberOfstates, std::vector<std::strin
                             // for (statesCoordinatesPtr = statesCoordinatesItr->second.begin(); statesCoordinatesPtr != statesCoordinatesItr->second.end(); statesCoordinatesPtr++)
                             // {
                             //     if (statesCoordinatesItr->second == statesCoordinatesPtr->first)
-                            DrawTexture(warSigns[winners[i]], statesCoordinatesPtr->first, statesCoordinatesPtr->second, WHITE);
+                            DrawTexture(warSignColors.at(colors[winners[i]]), statesCoordinatesPtr->first, statesCoordinatesPtr->second, WHITE);
                             // break;
                             std::cout << "too displayWarSigns 5 " << std::endl;
                             // }
@@ -2054,7 +2074,7 @@ bool UI::displayWarSigns(std::vector<int> numberOfstates, std::vector<std::strin
                             // for (statesCoordinatesPtr = statesCoordinatesItr->second.begin(); statesCoordinatesPtr != statesCoordinatesItr->second.end(); statesCoordinatesPtr++)
                             // {
                             //     if (statesCoordinatesItr->second == statesCoordinatesPtr->first)
-                            DrawTexture(warSigns[winners[i]], statesCoordinatesPtr->first, statesCoordinatesPtr->second, WHITE);
+                            DrawTexture(warSignColors.at(colors[winners[i]]), statesCoordinatesPtr->first, statesCoordinatesPtr->second, WHITE);
                             std::cout << "too displayWarSigns 5 " << std::endl;
                             // }
                         }
@@ -2118,4 +2138,16 @@ void UI::initializeStatesCoordinates()
     statesCoordinates.insert(std::make_pair("borge", std::map<int, int>()));
     statesCoordinates["alora"].insert(std::make_pair(769, 600));
     statesCoordinates.insert(std::make_pair("alora", std::map<int, int>()));
+}
+
+void UI::initializeWarSignColors()
+{
+    warSignColors = 
+    {
+        {"purple",warSigns[0]},
+        {"blue",warSigns[1]},
+        {"green",warSigns[2]},
+        {"red",warSigns[3]},
+
+    };
 }
