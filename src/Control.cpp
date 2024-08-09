@@ -1844,7 +1844,8 @@ void Control::setWarzone(std::string stateName)
 }
 void Control::calculateNumberOfWinners()
 {
-    // int numberOfWinsCounter = 0;
+    
+    numberOfWinners = 0;
     for (int j = 0; j < identity.getPlayerNumber(); j++)
     {
         for (int i = 0; i < orderOfWinners.size(); i++)
@@ -1852,6 +1853,7 @@ void Control::calculateNumberOfWinners()
             if (orderOfWinners[i] == j)
             {
                 numberOfWinners++;
+                std::cout << "chera eshtebahe"<<std::endl;
                 // numberOfWins.push_back(numberOfWinsCounter);
                 break;
             }
