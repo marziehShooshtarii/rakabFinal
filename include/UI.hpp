@@ -3,7 +3,9 @@
 #include <string>
 #include <vector>
 #include <unordered_map>
+#include <map>
 #include <array>
+#include <utility>
 #include "raylib.h"
 #include "Button.hpp"
 #include "uiInput.hpp"
@@ -98,6 +100,11 @@ public:
     void initializeHelpOptionsAndDropdownBounds();
     void initializeHelpDropdownBounds();
     bool displayHelp(std::string);
+    void displayRenderWarSigns();
+    bool displayWarSigns(std::vector<int>,std::vector<std::string>,std::vector<int>);
+    void setNumberOfPlayers(int);
+    void initializeStatesCoordinates();
+    
     // std::string findCard(Texture2D);
 private:
     const char *menuButtonsTitle[4];
@@ -139,10 +146,13 @@ private:
     RenderTexture2D renderTextureForGameTableAndCharacters;
     RenderTexture2D renderTextureForGameTableAndCharactersForFour;
     RenderTexture2D renderTextureMatarsakCharacters[4];
+    RenderTexture2D renderTextureForWarSigns;
     Texture2D cards[15];
     Texture2D winnerBackgroundForEachWar[4];
     Texture2D winnerBackgroundForEndOfGame[4];
     Texture2D noWinner;
+    Texture2D warzoneMapWithSigns;
+
     Button saveGame;
     Button exitGame;
     // Texture2D baharCards;
@@ -176,6 +186,7 @@ private:
     Button cardsButtons[10];
     int UITurnHandler;
     Texture2D luckNumberBackground;
+    Texture2D warSigns[4];
     Button passPosition;
     bool ifPlayerPassed[3]; // check the whole players position
     std::vector<std::string> firstPlayedCardsFromUI;
@@ -189,6 +200,9 @@ private:
     int UIstarterPlayer;
     std::vector<int> orderOfPlayedCardsForMatarsak;
     Button help;
+    std::map<std::string, std::map<int, int> > statesCoordinates;
+    std::map<std::string, std::map<int, int> >::iterator statesCoordinatesItr;
+    std::map<int, int>::iterator statesCoordinatesPtr; 
     // enum TextureString
     // {
     //     baharCards,
@@ -251,5 +265,6 @@ private:
     Rectangle helpOptionBounds[5];
     bool isDropdownOpenForHelp;
     std::string helpChoice;
+    int numberOfPlayers;
 };
 #endif

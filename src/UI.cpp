@@ -12,8 +12,10 @@ UI::UI()
     backgroundMenu = LoadTexture("../assets/blueMenu.png");
     backgroundIdentityMenu = LoadTexture("../assets/b_6.png");
     backgroundWarzoneMap = LoadTexture("../assets/warzone_map.png");
+    warzoneMapWithSigns = LoadTexture("../assets/warzone_map2.png");
+
     charectersAndNames = LoadTexture("../assets/charactersIntroForThree.png");
-    luckNumberBackground = LoadTexture("../assets/luck.png");
+    luckNumberBackground = LoadTexture("../assets/luck2.png");
     selectedWarzoneBackground = LoadTexture("../assets/selected_warzone2.png");
     gameTableForThreePlayers = LoadTexture("../assets/dark_table.png");
     gameTableForFourPlayers = LoadTexture("../assets/dark_table_for_four.png");
@@ -36,6 +38,11 @@ UI::UI()
     cards[12] = LoadTexture("../assets/s5.png");
     cards[13] = LoadTexture("../assets/s6.png");
     cards[14] = LoadTexture("../assets/s10.png");
+    warSigns[0] = LoadTexture("../assets/warSign1-2-Photoroom.png");
+    warSigns[1] = LoadTexture("../assets/warSign2_2-Photoroom.png");
+    warSigns[2] = LoadTexture("../assets/warSign3_2-Photoroom.png");
+    warSigns[3] = LoadTexture("../assets/warSign4_2-Photoroom.png");
+
     winnerBackgroundForEachWar[0] = LoadTexture("../assets/winner2.png");
     winnerBackgroundForEachWar[1] = LoadTexture("../assets/winner3.png");
     winnerBackgroundForEachWar[2] = LoadTexture("../assets/winner1.png");
@@ -60,6 +67,7 @@ UI::UI()
 
     renderTextureForGameTableAndCharacters = LoadRenderTexture(gameTableForThreePlayers.width, gameTableForThreePlayers.height);
     renderTextureForGameTableAndCharactersForFour = LoadRenderTexture(gameTableForFourPlayers.width, gameTableForFourPlayers.height);
+    renderTextureForWarSigns = LoadRenderTexture(warzoneMapWithSigns.width, warzoneMapWithSigns.height);
     initializeCardTextureAndName();
     initializePlayerCardsHandler();
     initializePlayedCardsHandler();
@@ -67,6 +75,7 @@ UI::UI()
     initializePlayedCardsFromUI();
     initializePlayerCardsFromUI();
     initializePlayedStringCard();
+    initializeStatesCoordinates();
     // initializeDropDownMenuForSavedGameNumber();
     // temp = LoadImage("../assets/gt1.png");          // Load image
     // ImageFlipVertical(&temp);                       // Flip image vertically
@@ -241,11 +250,13 @@ int UI::displayPlayerNumberButton()
         if (playerNumberButtons[1].ifPressed(mousePssitionIdentity, mousePressedIdentity))
         {
             std::cout << "player 3" << std::endl;
+            setNumberOfPlayers(3);
             return 3; // number of players
         }
         if (playerNumberButtons[2].ifPressed(mousePssitionIdentity, mousePressedIdentity))
         {
             std::cout << "player 4" << std::endl;
+            setNumberOfPlayers(4);
             return 4; // number of players
         }
         // }
@@ -424,6 +435,22 @@ void UI::initializeWarzoneMap()
 {
     backgroundWarzoneMap = LoadTexture("../assets/map2.png");
 }
+void UI::displayRenderWarSigns()
+{
+    std::cout << "displayRenderWarSigns 1" << std::endl;
+    BeginDrawing();
+    std::cout << "displayRenderWarSigns 2" << std::endl;
+    ClearBackground(RAYWHITE);
+    std::cout << "displayRenderWarSigns 3" << std::endl;
+    // DrawTexture(character1, 0, 0, WHITE);
+    DrawTextureRec(renderTextureForWarSigns.texture, (Rectangle){0, 0, (float)renderTextureForWarSigns.texture.width, (float)-renderTextureForWarSigns.texture.height}, Vector2{0, 0}, WHITE);
+    std::cout << "displayRenderWarSigns 4" << std::endl;
+
+    EndDrawing();
+    std::clog << "end of display game table 1 " << std::endl;
+    return;
+}
+
 bool UI::displayMap(std::string str)
 {
 
@@ -856,12 +883,12 @@ int UI::displayGameTableAndCharactersForThree(int turnHandlerForDisplay, int Tur
         {
             std::cout << "too if " << std::endl;
             next.setStatus(false);
-            return 0; // next button has been pressed
+            return 1; // next button has been pressed
         }
         if (exitGame.ifPressed(mousePssitionIdentity, mousePressedIdentity))
         {
             std::cout << "too if " << std::endl;
-            return 1; // exit button has been pressed
+            return 0; // exit button has been pressed
         }
         if (help.ifPressed(mousePssitionIdentity, mousePressedIdentity))
         {
@@ -1937,4 +1964,104 @@ int UI::getPlayerAgeAndLuckFromUI(int playerAgeIndex)
 {
     textBoxes[playerAgeIndex].convertNumberToInteger(); // char array has been converted to integer in uiInput
     return textBoxes[playerAgeIndex].getTextBoxIntNumber();
+}
+
+bool UI::displayWarSigns(std::vector<int> numberOfstates, std::vector<std::string> nameOfstates,std::vector<int>winners)
+{
+
+    initializeNextButton(1100, 680, 200, 100);
+    while (1)
+    {
+        Vector2 mousePssitionIdentity = GetMousePosition();
+        bool mousePressedIdentity = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
+
+        if (next.ifPressed(mousePssitionIdentity, mousePressedIdentity))
+        {
+            return true; // the player has passed the turn
+        }
+        BeginDrawing();
+        ClearBackground(BLANK);
+        DrawTexture(warzoneMapWithSigns, 0, 0, WHITE);
+        for (int i = 0; i < winners.size(); i++)
+        {
+            std::cout <<winners[i]<<" winnerrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"<<std::endl;
+            //std::cout << "too displayWarSigns 1 " << std::endl;
+            for (int j = 0; j < numberOfstates[winners[i]]; j++)
+            {
+                //std::cout << "too displayWarSigns 2 " << std::endl;
+
+                for (statesCoordinatesItr = statesCoordinates.begin(); statesCoordinatesItr != statesCoordinates.end(); statesCoordinatesItr++)
+                {
+                    //std::cout << "too displayWarSigns 3 " << std::endl;
+                    std::cout << "statesCoordinatesItr->first " << statesCoordinatesItr->first <<std::endl;
+                    std::cout << "numberOfstates[i] " << nameOfstates[j] <<std::endl;
+                    if (statesCoordinatesItr->first == nameOfstates[j])
+                    {
+                        std::cout << "too displayWarSigns 4 " << std::endl;
+                        // statesCoordinatesPtr = statesCoordinatesItr->first + statesCoordinatesItr->first.begin();
+                        statesCoordinatesPtr = statesCoordinatesItr->second.begin();
+                        // for (statesCoordinatesPtr = statesCoordinatesItr->second.begin(); statesCoordinatesPtr != statesCoordinatesItr->second.end(); statesCoordinatesPtr++)
+                        // {
+                        //     if (statesCoordinatesItr->second == statesCoordinatesPtr->first)
+                        DrawTexture(warSigns[winners[i]], statesCoordinatesPtr->first, statesCoordinatesPtr->second, WHITE);
+                        std::cout << "too displayWarSigns 5 " << std::endl;
+                        // }
+                    }
+                }
+            }
+        }
+
+        Color color = WHITE;
+        if (CheckCollisionPointRec(mousePssitionIdentity, next.getRectangle()))
+        {
+            color = WHITE;
+        }
+        else
+        {
+            color = RED;
+        }
+
+        DrawTextEx(fontMenu, this->next.title, (Vector2){this->next.getRectangle().x + 10, this->next.getRectangle().y + 10}, fontMenu.baseSize, 1, color);
+        EndDrawing();
+    }
+}
+
+void UI::setNumberOfPlayers(int players)
+{
+    numberOfPlayers = players;
+}
+
+void UI::initializeStatesCoordinates()
+{
+    statesCoordinates.insert(std::make_pair("bella", std::map<int, int>()));
+    statesCoordinates["bella"].insert(std::make_pair(870, 165));
+    statesCoordinates.insert(std::make_pair("caline", std::map<int, int>()));
+    statesCoordinates["caline"].insert(std::make_pair(882, 310));
+    statesCoordinates.insert(std::make_pair("bella", std::map<int, int>()));
+    statesCoordinates["enna"].insert(std::make_pair(818, 410));
+    statesCoordinates.insert(std::make_pair("enna", std::map<int, int>()));
+    statesCoordinates["atela"].insert(std::make_pair(874, 560));
+    statesCoordinates.insert(std::make_pair("atela", std::map<int, int>()));
+    statesCoordinates["dimase"].insert(std::make_pair(704, 517));
+    statesCoordinates.insert(std::make_pair("dimase", std::map<int, int>()));
+    statesCoordinates["olivadi"].insert(std::make_pair(591, 524));
+    statesCoordinates.insert(std::make_pair("olivadi", std::map<int, int>()));
+    statesCoordinates["lia"].insert(std::make_pair(493, 622));
+    statesCoordinates.insert(std::make_pair("lia", std::map<int, int>()));
+    statesCoordinates["armento"].insert(std::make_pair(478, 470));
+    statesCoordinates.insert(std::make_pair("armento", std::map<int, int>()));
+    statesCoordinates["morina"].insert(std::make_pair(539, 287));
+    statesCoordinates.insert(std::make_pair("morina", std::map<int, int>()));
+    statesCoordinates["talmone"].insert(std::make_pair(343, 225));
+    statesCoordinates.insert(std::make_pair("talmone", std::map<int, int>()));
+    statesCoordinates["elinia"].insert(std::make_pair(200, 185));
+    statesCoordinates.insert(std::make_pair("elinia", std::map<int, int>()));
+    statesCoordinates["rollo"].insert(std::make_pair(420, 134));
+    statesCoordinates.insert(std::make_pair("rollo", std::map<int, int>()));
+    statesCoordinates["pladaci"].insert(std::make_pair(669, 158));
+    statesCoordinates.insert(std::make_pair("pladaci", std::map<int, int>()));
+    statesCoordinates["borge"].insert(std::make_pair(701, 348));
+    statesCoordinates.insert(std::make_pair("borge", std::map<int, int>()));
+    statesCoordinates["alora"].insert(std::make_pair(769, 600));
+    statesCoordinates.insert(std::make_pair("alora", std::map<int, int>()));
 }
