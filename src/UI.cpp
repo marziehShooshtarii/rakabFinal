@@ -2001,12 +2001,13 @@ bool UI::displayWarSigns(std::vector<int> numberOfstates, std::vector<std::strin
         // }
         for (int i = 0; i < winners.size(); i++)
         {
+            //for (int q = winners[i]; q < )
             std::cout << winners[i] << "winer.size" << std::endl;
             std::cout << winners[i] << " winnerrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr" << std::endl;
             // std::cout << "too displayWarSigns 1 " << std::endl;
             if (i == 0)
             {
-                for (int j = 0; j < numberOfstates[winners[i]] /*wins[i]*/; j++)
+                for (int j = 0; j < /*numberOfstates[winners[i]]*/ /*wins[i]*/1; j++)
                 {
                     for (statesCoordinatesItr = statesCoordinates.begin(); statesCoordinatesItr != statesCoordinates.end(); statesCoordinatesItr++)
                     {
@@ -2036,7 +2037,7 @@ bool UI::displayWarSigns(std::vector<int> numberOfstates, std::vector<std::strin
                 std::cout << "vared else mishe" << std::endl;
                 std::cout << "numberOfstates[winners[i - 1]]" << numberOfstates[winners[i - 1]] << std::endl;
                 std::cout << "numberOfstates[winners[i]]" << numberOfstates[winners[i]] << std::endl;
-                for (int j = numberOfstates[winners[i - 1]] /*wins[i - 1]*/; j < (numberOfstates[winners[i - 1]] + 1 /*numberOfstates[winners[i]]*/) /*wins[i]*/; j++)
+                for (int j = i/*numberOfstates[winners[i - 1]]*/ /*wins[i - 1]*/; j < (/*numberOfstates[winners[i - 1]]*/i + 1 /*numberOfstates[winners[i]]*/) /*wins[i]*/; j++)
                 {
                     // std::cout << "too displayWarSigns 2 " << std::endl;
                     std::cout << "injaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" << std::endl;
