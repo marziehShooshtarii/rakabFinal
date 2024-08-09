@@ -101,7 +101,7 @@ public:
     void initializeHelpDropdownBounds();
     bool displayHelp(std::string);
     void displayRenderWarSigns();
-    bool displayWarSigns(std::vector<int>,std::vector<std::string>,std::vector<int>);
+    bool displayWarSigns(std::vector<int>,std::vector<std::string>,std::vector<int>,int);
     void setNumberOfPlayers(int);
     void initializeStatesCoordinates();
     
