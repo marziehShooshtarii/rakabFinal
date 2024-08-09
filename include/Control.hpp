@@ -107,6 +107,7 @@ public:
     void allOwenedStatesForUI();
     void initializeAllOwenedStatesForUI();
     void calculateNumberOfWinners();
+    void initializeColorsForUI();
     void run();
 
 private:
@@ -153,6 +154,7 @@ private:
     std::vector<std::string> nameOfOwenedStates;
     std::vector<int> orderOfWinners;
     int numberOfWinners = 0;
+    std::vector<std::string> colorsForUI;
     // bool fistWarOfGame; //to check if it's the first war
     enum UIStates
     {

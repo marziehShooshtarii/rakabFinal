@@ -1222,7 +1222,8 @@ void Control::menu()
         }
         case displayWarSigns:
         {
-
+            std::cout << "aval displayWarSigns" <<std::endl;
+            initializeColorsForUI();
             std::cout << "too displayWarSigns 1" << std::endl;
             allOwenedStatesForUI();
             calculateNumberOfWinners();
@@ -1231,7 +1232,7 @@ void Control::menu()
             std::cout << "too displayWarSigns 2" << std::endl;
             ui.displayRenderWarSigns();
             std::cout << "too displayWarSigns 3" << std::endl;
-            ui.displayWarSigns(numberOfOwendStatesForEachPlayer, nameOfOwenedStates, orderOfWinners, numberOfWinners);
+            ui.displayWarSigns(numberOfOwendStatesForEachPlayer, nameOfOwenedStates, orderOfWinners, numberOfWinners,colorsForUI);
             std::cout << "too displayWarSigns 4" << std::endl;
             uiStates = warzoneMap;
             break;
@@ -1844,7 +1845,7 @@ void Control::setWarzone(std::string stateName)
 }
 void Control::calculateNumberOfWinners()
 {
-    
+
     numberOfWinners = 0;
     for (int j = 0; j < identity.getPlayerNumber(); j++)
     {
@@ -1853,11 +1854,23 @@ void Control::calculateNumberOfWinners()
             if (orderOfWinners[i] == j)
             {
                 numberOfWinners++;
-                std::cout << "chera eshtebahe"<<std::endl;
+                std::cout << "chera eshtebahe" << std::endl;
                 // numberOfWins.push_back(numberOfWinsCounter);
                 break;
             }
         }
+    }
+}
+void Control::initializeColorsForUI()
+{
+    std::cout<<"aval initializeColorsForUI" <<std::endl;
+    for (int i = 0; i < identity.getPlayerNumber(); i++)
+    {
+        colorsForUI.emplace_back(players[i].getColor());
+    }
+    for (int i = 0; i < identity.getPlayerNumber(); i++)
+    {
+        std::cout << "colorsssssssssssssssssssssssssssssssss" << colorsForUI[i] << std::endl;
     }
 }
 void Control::run()
