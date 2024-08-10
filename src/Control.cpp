@@ -1158,12 +1158,12 @@ void Control::menu()
             {
                 ui.thripleTextBoxDraw();
                 //std::string UIColors = ui.displayOpenDropDownMenuForColors();
-
+                //std::cout << "uicolors" << UIColors << std::endl;
                 std::cout << "for text box" << i << std::endl;
                 identity.setPlayerNameForSave(ui.getPlayerNameAndColorFromUI(i));
                 identity.setPlayerAgeForSave(ui.getPlayerAgeAndLuckFromUI(i + 3));
                 identity.setPlayerColorForSave(ui.getPlayerNameAndColorFromUI(i + 6));
-                //identity.setPlayerColorForSave(UIColors);
+                 //identity.setPlayerColorForSave(UIColors);
                 identity.setPlayerForSave();
             }
             std::cout << "threePlayerInput 2" << std::endl;
