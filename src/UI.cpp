@@ -235,21 +235,21 @@ int UI::displayPlayerNumberButton()
 }
 void UI::initializeWarzoneButton(float x, float y, float width, float hight)
 {
-    UIwarzone[0] = (Button){(Rectangle){820 + x, 115 + y, width, hight}, "bella", false};    // bella
-    UIwarzone[1] = (Button){(Rectangle){832 + x, 260 + y, width, hight}, "calline", false};  // calline
-    UIwarzone[2] = (Button){(Rectangle){768 + x, 360 + y, width, hight}, "enna", false};     // lia
-    UIwarzone[3] = (Button){(Rectangle){824 + x, 510 + y, width, hight}, "atela", false};    // atela
-    UIwarzone[4] = (Button){(Rectangle){654 + x, 467 + y, width, hight}, "dimase", false};   // dimase
-    UIwarzone[5] = (Button){(Rectangle){541 + x, 474 + y, width, hight}, "olivadi", false};  // olivadi
-    UIwarzone[6] = (Button){(Rectangle){443 + x, 572 + y, width, hight}, "lia", false};      // enna
-    UIwarzone[7] = (Button){(Rectangle){428 + x, 420 + y, width, hight}, "armento", false};  // armento
-    UIwarzone[8] = (Button){(Rectangle){489 + x, 237 + y, width, hight}, "morina", false};   // morina
-    UIwarzone[9] = (Button){(Rectangle){293 + x, 175 + y, width, hight}, "talmone", false};  // talmone
-    UIwarzone[10] = (Button){(Rectangle){150 + x, 135 + y, width, hight}, "elinia", false};  // elinia
-    UIwarzone[11] = (Button){(Rectangle){370 + x, 84 + y, width, hight}, "rollo", false};    // rollo
-    UIwarzone[12] = (Button){(Rectangle){619 + x, 108 + y, width, hight}, "pladaci", false}; // pladaci
-    UIwarzone[13] = (Button){(Rectangle){651 + x, 298 + y, width, hight}, "borge", false};   // borge
-    UIwarzone[14] = (Button){(Rectangle){719 + x, 550 + y, width, hight}, "alora", false};   // alora
+    UIwarzone[0] = (Button){(Rectangle){820 + x, 115 + y, width, hight}, "", false};    // bella
+    UIwarzone[1] = (Button){(Rectangle){832 + x, 260 + y, width, hight}, "", false};  // calline
+    UIwarzone[2] = (Button){(Rectangle){768 + x, 360 + y, width, hight}, "", false};     // lia
+    UIwarzone[3] = (Button){(Rectangle){824 + x, 510 + y, width, hight}, "", false};    // atela
+    UIwarzone[4] = (Button){(Rectangle){654 + x, 467 + y, width, hight}, "", false};   // dimase
+    UIwarzone[5] = (Button){(Rectangle){541 + x, 474 + y, width, hight}, "", false};  // olivadi
+    UIwarzone[6] = (Button){(Rectangle){443 + x, 572 + y, width, hight}, "", false};      // enna
+    UIwarzone[7] = (Button){(Rectangle){428 + x, 420 + y, width, hight}, "", false};  // armento
+    UIwarzone[8] = (Button){(Rectangle){489 + x, 237 + y, width, hight}, "", false};   // morina
+    UIwarzone[9] = (Button){(Rectangle){293 + x, 175 + y, width, hight}, "", false};  // talmone
+    UIwarzone[10] = (Button){(Rectangle){150 + x, 135 + y, width, hight}, "", false};  // elinia
+    UIwarzone[11] = (Button){(Rectangle){370 + x, 84 + y, width, hight}, "", false};    // rollo
+    UIwarzone[12] = (Button){(Rectangle){619 + x, 108 + y, width, hight}, "", false}; // pladaci
+    UIwarzone[13] = (Button){(Rectangle){651 + x, 298 + y, width, hight}, "", false};   // borge
+    UIwarzone[14] = (Button){(Rectangle){719 + x, 550 + y, width, hight}, "", false};   // alora
 }
 
 int UI::displayWarzoneButton(std::string starterPlayer)
