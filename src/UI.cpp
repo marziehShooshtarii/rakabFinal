@@ -739,8 +739,8 @@ bool UI::validCardsForMatarsak()
             {
                 selectedColor = RED;
             }
-            std::cout << "cardsButtons[idx].getRectangle().x + 10 " <<cardsButtons[idx].getRectangle().x + 10 << std::endl;
-            std::cout << "cardsButtons[idx].getRectangle().y + 10 " <<cardsButtons[idx].getRectangle().y + 10 << std::endl;
+            std::cout << "cardsButtons[idx].getRectangle().x + 10 " << cardsButtons[idx].getRectangle().x + 10 << std::endl;
+            std::cout << "cardsButtons[idx].getRectangle().y + 10 " << cardsButtons[idx].getRectangle().y + 10 << std::endl;
             DrawTextEx(fontMenu, this->cardsButtons[idx].title, (Vector2){this->cardsButtons[idx].getRectangle().x + 10, this->cardsButtons[idx].getRectangle().y + 10}, fontMenu.baseSize, 1, selectedColor);
             // std::cout << "tah for " << std::endl;
         }
@@ -974,10 +974,11 @@ int UI::displayGameTableAndCharactersForThree(int turnHandlerForDisplay, int Tur
         EndDrawing();
     }
 }
-bool UI::displayGameTableAndCharactersForFour(int turnHandlerForDisplay, int TurnControler)
+int UI::displayGameTableAndCharactersForFour(int turnHandlerForDisplay, int TurnControler)
 {
     initializeNextButton(1100, 680, 120, 50);
     initializeExitGameButton(10, 10, 120, 50);
+    initializeHelpButton(150, 10, 120, 50);
     while (1)
     {
         Vector2 mousePssitionIdentity = GetMousePosition();
@@ -987,13 +988,17 @@ bool UI::displayGameTableAndCharactersForFour(int turnHandlerForDisplay, int Tur
         {
             std::cout << "too if " << std::endl;
             next.setStatus(false);
-            return false; // next button has been pressed
+            return 1; // next button has been pressed
         }
-        if (next.ifPressed(mousePssitionIdentity, mousePressedIdentity))
+        if (exitGame.ifPressed(mousePssitionIdentity, mousePressedIdentity))
         {
             std::cout << "too if " << std::endl;
-            next.setStatus(false);
-            return true; // next button has been pressed
+            return 0; // exit button has been pressed
+        }
+        if (help.ifPressed(mousePssitionIdentity, mousePressedIdentity))
+        {
+            std::cout << "too if " << std::endl;
+            return 2; // help button has been pressed
         }
 
         BeginDrawing();
@@ -1007,28 +1012,31 @@ bool UI::displayGameTableAndCharactersForFour(int turnHandlerForDisplay, int Tur
             {
                 for (int j = 0; j < playedCardsHandler.at(k).size() / 3; j++)
                 {
-                    for (int i = 0; i < 3; i++)
+                    for (int i = (j * 3); i < (j * 3) + 3; i++)
                         DrawTexture(playedCardsHandler.at(k)[i], (k * 200) + (i * 65) + 5, (j * 100) + 290, WHITE);
                 }
-                for (int i = 0; i < playedCardsHandler.at(k).size() % 3; i++)
+                for (int i = playedCardsHandler.at(k).size() - (playedCardsHandler.at(k).size() % 3); i < playedCardsHandler.at(k).size(); i++)
+                    DrawTexture(playedCardsHandler.at(k)[i], (k * 200) + (i * 65) + 5, (playedCardsHandler.at(k).size() / 3 * 100) + 290, WHITE);
+            }
+        }
+        if (turnHandlerForDisplay / 4 < 1)
+        {
+            for (int k = 0; k < (((turnHandlerForDisplay - 1) % 4 + TurnControler) % 4) + 1; k++)
+            {
+                // std::cout << "1:55 " << turnHandlerForDisplay % 4 + TurnControler << " k chi " << k << std::endl;
+                for (int j = 0; j < playedCardsHandler.at(k).size() / 3; j++)
+                {
+                    std::cout << "1:56 " << std::endl;
+                    for (int i = 0; i < 4; i++)
+                        DrawTexture(playedCardsHandler.at(k)[i], (k * 200) + (i * 65) + 5, (j * 100) + 290, WHITE);
+                    std::cout << "1:57 " << playedCardsHandler.at(k).size() % 3 << std::endl;
+                }
+                std::cout << "2:42 " << k << "2:44" << playedCardsHandler.at(k).size() % 3 << std::endl;
+                for (int i = playedCardsHandler.at(k).size() - (playedCardsHandler.at(k).size() % 3); i < playedCardsHandler.at(k).size() % 4; i++)
                     DrawTexture(playedCardsHandler.at(k)[i], (k * 200) + (i * 65) + 5, (playedCardsHandler.at(k).size() / 3 * 100) + 290, WHITE);
             }
         }
         std::cout << "1:54 " << std::endl;
-        for (int k = 0; k < (((turnHandlerForDisplay - 1) % 3 + TurnControler) % 4) + 1; k++)
-        {
-            // std::cout << "1:55 " << turnHandlerForDisplay % 4 + TurnControler << " k chi " << k << std::endl;
-            for (int j = 0; j < playedCardsHandler.at(k).size() / 3; j++)
-            {
-                std::cout << "1:56 " << std::endl;
-                for (int i = 0; i < 3; i++)
-                    DrawTexture(playedCardsHandler.at(k)[i], (k * 200) + (i * 65) + 5, (j * 100) + 290, WHITE);
-                std::cout << "1:57 " << playedCardsHandler.at(k).size() % 3 << std::endl;
-            }
-            std::cout << "2:42 " << k << "2:44" << playedCardsHandler.at(k).size() % 3 << std::endl;
-            for (int i = 0; i < playedCardsHandler.at(k).size() % 3; i++)
-                DrawTexture(playedCardsHandler.at(k)[i], (k * 200) + (i * 65) + 5, (playedCardsHandler.at(k).size() / 3 * 100) + 290, WHITE);
-        }
 
         Color selectedColor = WHITE;
         if (CheckCollisionPointRec(mousePssitionIdentity, next.getRectangle()))
@@ -1878,13 +1886,13 @@ std::string UI::displayOpenDropDownMenuForColors()
             {
                 DrawRectangleRec(colorOptionBounds[i], LIGHTGRAY);
                 std::cout << "colors 14" << std::endl;
-                
+
                 DrawRectangleLinesEx(colorOptionBounds[i], 1, DARKGRAY);
                 std::cout << "colors 15" << std::endl;
                 DrawTextPro(inputFont, colorOptions[i].c_str(), (Vector2){colorOptionBounds[i].x + 10, colorOptionBounds[i].y + 5}, (Vector2){1}, 1, 40, 1, {225, 110, 80, 225});
                 std::cout << "colors 16" << std::endl;
             }
-                std::cout << "colors 17" << std::endl;
+            std::cout << "colors 17" << std::endl;
         }
 
         EndDrawing();

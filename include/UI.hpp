@@ -69,7 +69,7 @@ public:
     void initializeCardsButtons(float x, float y, float width, float hight);
     bool displayCardsButtons();
     int displayGameTableAndCharactersForThree(int, int);
-    bool displayGameTableAndCharactersForFour(int, int);
+    int displayGameTableAndCharactersForFour(int, int);
     void renderTextureForCharacterAndGameTable();
     void initializePlayerCardsHandler();
     void initializePlayedCardsHandler();
