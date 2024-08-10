@@ -1,7 +1,7 @@
 #include <string>
 #include <iostream>
 #include "Card.hpp"
-Card::Card() 
+Card::Card()
 {
     setCardScores();
 }
@@ -9,7 +9,6 @@ Card::Card(const std::string &p_nameOfCard)
 {
     setCardScores();
     nameOfCard = p_nameOfCard;
-
 }
 std::string Card::getName()
 {
@@ -36,9 +35,11 @@ void Card::setCardScores()
             {"matarsak", 0},
             {"tabl_zan", 0},
             {"shah_dokht", 0},
-            {"shirzan",0},
-            {"rish_sefid",0},
-            {"parcham_dar",0},
+            {"shirzan", 0},
+            {"rish_sefid", 0},
+            {"parcham_dar", 0},
+            {"fok_sefid", 0},
+            {"rakhsh_sefid", 0},
             {"sarbaz_1", 1},
             {"sarbaz_2", 2},
             {"sarbaz_3", 3},
@@ -52,7 +53,6 @@ int Card::searchInCardScore(std::string str)
 {
     return cardsScore.at(str);
 }
-int Card::effectOfCard(std::vector<Card> playedCards,int score)
+int Card::effectOfCard(std::vector<Card> playedCards, int score)
 {
-    
 }
