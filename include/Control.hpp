@@ -158,6 +158,9 @@ private:
     std::vector<int> orderOfWinners;
     int numberOfWinners = 0;
     std::vector<std::string> colorsForUI;
+    int displayIdentity = 0;
+    std::string selectedColor;
+    std::string UIPlayerName;
     // bool fistWarOfGame; //to check if it's the first war
     enum UIStates
     {

@@ -110,7 +110,7 @@ void Control::dealingCards()
         {"shirzan", 12},
         {"parcham_dar", 3},
         {"rish_sefid", 6},
-        {"fok_sefid", 3},     // new card added
+        {"fok_sefid", 3},    // new card added
         {"rakhsh_sefid", 2}, // new card added
         {"sarbaz_1", 8},
         {"sarbaz_2", 10},
@@ -231,7 +231,6 @@ int Control::playingInput()
         return 3; // the next player has not passed yet
     if (checkStatus == 4)
         return 5; // there is no winner for this war
-
 }
 int Control::checkProcessOfEndingWar()
 {
@@ -302,14 +301,14 @@ void Control::setOrderOfWinner()
 // }
 void Control::choiceForPeaceSign()
 {
-    std::cout << " too choiceForPeaceSign ....................................................................................1"<<std::endl;
+    std::cout << " too choiceForPeaceSign ....................................................................................1" << std::endl;
     Map mapForPeaceSign;
     std::cout << players[orderOfRishSefids[orderOfRishSefids.size() - 1]].getName() << " please choose the state you want to place your peace sign on.";
-    std::cout << " too choiceForPeaceSign ....................................................................................2"<<std::endl;
+    std::cout << " too choiceForPeaceSign ....................................................................................2" << std::endl;
     // std::cin >> peaceSign;
-    //ui.displayWarzoneButton(players[orderOfRishSefids[orderOfRishSefids.size() - 1]].getName());
+    // ui.displayWarzoneButton(players[orderOfRishSefids[orderOfRishSefids.size() - 1]].getName());
     peaceSign = mapForPeaceSign.findKey(ui.displayWarzoneForPeacsignButtons(players[orderOfRishSefids[orderOfRishSefids.size() - 1]].getName()));
-    std::cout << " too choiceForPeaceSign ....................................................................................3"<<std::endl;
+    std::cout << " too choiceForPeaceSign ....................................................................................3" << std::endl;
 }
 void Control::displayPlayingCards(int index)
 {
@@ -1144,17 +1143,17 @@ void Control::menu()
         {
             for (int i = 0; i < 3; i++)
             {
-                ui.thripleTextBoxDraw();
-                // std::string UIColors = ui.displayOpenDropDownMenuForColors();
-                // std::cout << "uicolors" << UIColors << std::endl;
-                std::cout << "for text box" << i << std::endl;
-                identity.setPlayerNameForSave(ui.getPlayerNameAndColorFromUI(i));
+                if (displayIdentity == 0)
+                    ui.thripleTextBoxDraw();
+                UIPlayerName = ui.getPlayerNameAndColorFromUI(i);
+                identity.setPlayerNameForSave(UIPlayerName);
                 identity.setPlayerAgeForSave(ui.getPlayerAgeAndLuckFromUI(i + 3));
-                identity.setPlayerColorForSave(ui.getPlayerNameAndColorFromUI(i + 6));
-                // identity.setPlayerColorForSave(UIColors);
+                selectedColor = ui.displayOpenDropDownMenuForColors(UIPlayerName);
+                identity.setPlayerColorForSave(selectedColor);
                 identity.setPlayerForSave();
+                displayIdentity++;
             }
-            std::cout << "threePlayerInput 2" << std::endl;
+            displayIdentity = 0;
 
             uiStates = warzoneMap;
             break;
@@ -1163,14 +1162,18 @@ void Control::menu()
         {
             for (int i = 0; i < 4; i++)
             {
-                ui.quadrupleTextBoxDraw();
-                std::cout << "for text box" << i << std::endl;
-                identity.setPlayerNameForSave(ui.getPlayerNameAndColorFromUI(i));
+                if (displayIdentity == 0)
+                    ui.quadrupleTextBoxDraw();
+                UIPlayerName = ui.getPlayerNameAndColorFromUI(i);
+                identity.setPlayerNameForSave(UIPlayerName);
                 identity.setPlayerAgeForSave(ui.getPlayerAgeAndLuckFromUI(i + 4));
-                identity.setPlayerColorForSave(ui.getPlayerNameAndColorFromUI(i + 8));
+                selectedColor = ui.displayOpenDropDownMenuForColors(UIPlayerName);
+                identity.setPlayerColorForSave(selectedColor);
                 identity.setPlayerForSave();
+                displayIdentity++;
             }
-            std::cout << "fourPlayerInput 2" << std::endl;
+            displayIdentity = 0;
+
             uiStates = warzoneMap;
             break;
         }
@@ -1224,7 +1227,7 @@ void Control::menu()
             std::cout << "too displayWarSigns 2" << std::endl;
             ui.displayRenderWarSigns();
             std::cout << "too displayWarSigns 3" << std::endl;
-            ui.displayWarSigns(numberOfOwendStatesForEachPlayer, nameOfOwenedStates, orderOfWinners, numberOfWinners, colorsForUI,peaceSign);
+            ui.displayWarSigns(numberOfOwendStatesForEachPlayer, nameOfOwenedStates, orderOfWinners, numberOfWinners, colorsForUI, peaceSign);
             std::cout << "too displayWarSigns 4" << std::endl;
             uiStates = warzoneMap;
             break;
