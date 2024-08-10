@@ -1157,13 +1157,17 @@ void Control::menu()
             for (int i = 0; i < 3; i++)
             {
                 ui.thripleTextBoxDraw();
+                //std::string UIColors = ui.displayOpenDropDownMenuForColors();
+
                 std::cout << "for text box" << i << std::endl;
                 identity.setPlayerNameForSave(ui.getPlayerNameAndColorFromUI(i));
                 identity.setPlayerAgeForSave(ui.getPlayerAgeAndLuckFromUI(i + 3));
                 identity.setPlayerColorForSave(ui.getPlayerNameAndColorFromUI(i + 6));
+                //identity.setPlayerColorForSave(UIColors);
                 identity.setPlayerForSave();
             }
             std::cout << "threePlayerInput 2" << std::endl;
+
             uiStates = warzoneMap;
             break;
         }
@@ -1222,7 +1226,7 @@ void Control::menu()
         }
         case displayWarSigns:
         {
-            std::cout << "aval displayWarSigns" <<std::endl;
+            std::cout << "aval displayWarSigns" << std::endl;
             initializeColorsForUI();
             std::cout << "too displayWarSigns 1" << std::endl;
             allOwenedStatesForUI();
@@ -1232,7 +1236,7 @@ void Control::menu()
             std::cout << "too displayWarSigns 2" << std::endl;
             ui.displayRenderWarSigns();
             std::cout << "too displayWarSigns 3" << std::endl;
-            ui.displayWarSigns(numberOfOwendStatesForEachPlayer, nameOfOwenedStates, orderOfWinners, numberOfWinners,colorsForUI);
+            ui.displayWarSigns(numberOfOwendStatesForEachPlayer, nameOfOwenedStates, orderOfWinners, numberOfWinners, colorsForUI);
             std::cout << "too displayWarSigns 4" << std::endl;
             uiStates = warzoneMap;
             break;
@@ -1863,7 +1867,7 @@ void Control::calculateNumberOfWinners()
 }
 void Control::initializeColorsForUI()
 {
-    std::cout<<"aval initializeColorsForUI" <<std::endl;
+    std::cout << "aval initializeColorsForUI" << std::endl;
     for (int i = 0; i < identity.getPlayerNumber(); i++)
     {
         colorsForUI.emplace_back(players[i].getColor());
