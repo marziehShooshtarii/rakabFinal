@@ -268,7 +268,7 @@ private:
     Rectangle dropdownBounds;
     Rectangle optionBounds[5];
     int savedGameNumber = -1; // no saved game selected
-    std::string helpOptions[8];
+    std::string helpOptions[10];
     std::string selectedHelpOption;
     Rectangle dropdownHelpBounds;
     Rectangle helpOptionBounds[5];
@@ -276,8 +276,8 @@ private:
     std::string helpChoice;
     int numberOfPlayers;
     std::unordered_map<std::string, Texture2D> warSignColors;
-    /*std::vector <Rectangle>*/ Rectangle colorOptionBounds [4];
-    /*std::vector <std::string>*/ std::string colorOptions [4];
+    Rectangle colorOptionBounds [4];
+    std::string colorOptions [4];
     bool isDropdownOpenForColor;
     Rectangle dropdownBoundsForColors;
     std::string selectedOptionForColors;
