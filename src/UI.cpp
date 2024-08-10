@@ -622,18 +622,18 @@ void UI::initializeCardsButtons(float x, float y, float width, float hight)
 {
 
     for (int i = 0; i < playerCardsHandler.at(UIstarterPlayer).size() / 2; i++)
-        cardsButtons[i] = (Button){(Rectangle){(i * 100) + 400 + x, 610 + y, width, hight}, "test", false};
+        cardsButtons[i] = (Button){(Rectangle){(i * 100) + 400 + x, 610 + y, width, hight}, "", false};
 
     for (int i = playerCardsHandler.at(UIstarterPlayer).size() / 2; i < 10; i++)
-        cardsButtons[i] = (Button){(Rectangle){((i - playerCardsHandler.at(UIstarterPlayer).size() / 2) * 100) + 400 + x, 460 + y, width, hight}, "test", false};
+        cardsButtons[i] = (Button){(Rectangle){((i - playerCardsHandler.at(UIstarterPlayer).size() / 2) * 100) + 400 + x, 460 + y, width, hight}, "", false};
 }
 void UI::initializeCardsButtonsForMatarsak(float x, float y, float width, float hight)
 {
 
     for (int i = 0; i < playedCardsHandler.at(UIstarterPlayer).size() / 2; i++)
-        cardsButtons[i] = (Button){(Rectangle){(i * 100) + 400 + x, 610 + y, width, hight}, "matarsak", false};
+        cardsButtons[i] = (Button){(Rectangle){(i * 100) + 400 + x, 610 + y, width, hight}, "", false};
     for (int i = playedCardsHandler.at(UIstarterPlayer).size() / 2; i < playedCardsHandler.at(UIstarterPlayer).size(); i++)
-        cardsButtons[i] = (Button){(Rectangle){((i - playedCardsHandler.at(UIstarterPlayer).size() / 2) * 100) + 400 + x, 460 + y, width, hight}, "matarsak", false};
+        cardsButtons[i] = (Button){(Rectangle){((i - playedCardsHandler.at(UIstarterPlayer).size() / 2) * 100) + 400 + x, 460 + y, width, hight}, "", false};
 }
 bool UI::displayCardsButtons()
 {
