@@ -108,7 +108,7 @@ public:
     void initializeOptionsAndDropdownBoundsForColors();
     void initializeOptionsColors();
     void initializeDropDownMenuForColors();
-    std::string displayOpenDropDownMenuForColors();
+    std::string displayOpenDropDownMenuForColors(std::string);
     int displayWarzoneForPeacsignButtons(std::string);
     
 

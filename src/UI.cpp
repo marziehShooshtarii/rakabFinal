@@ -1176,12 +1176,7 @@ int UI::displayGameTableAndCharactersForFour(int turnHandlerForDisplay, int Turn
 }
 std::vector<std::string> UI::getPlayedCardsFromUI()
 {
-
     return playedCardsFromUI.at(UIstarterPlayer);
-    // for (int i=0 ; i < playedCardsFromUI.at(UIstarterPlayer).size(); i++)
-    // {
-    //     std::cout << playedCardsFromUI.at(UIstarterPlayer)[i]<< "player aziz " << UIstarterPlayer << std::endl;
-    // }
 }
 int UI::ExitGameControl()
 {
@@ -1216,7 +1211,6 @@ int UI::ExitGameControl()
         }
 
         DrawTextPro(fontMenu, this->exitGame.title, (Vector2){this->exitGame.getRectangle().x + 10, this->exitGame.getRectangle().y + 10}, (Vector2){1}, 1, 100, 1, exitColor);
-        // DrawTextEx(fontMenu, this->exitGame.title, (Vector2){this->exitGame.getRectangle().x + 10, this->exitGame.getRectangle().y + 10}, fontMenu.baseSize, 1, exitColor);
 
         Color saveColor = WHITE;
         if (CheckCollisionPointRec(mousePssitionIdentity, saveGame.getRectangle()))
@@ -1229,38 +1223,11 @@ int UI::ExitGameControl()
         }
 
         DrawTextPro(fontMenu, this->saveGame.title, (Vector2){this->saveGame.getRectangle().x + 10, this->saveGame.getRectangle().y + 10}, (Vector2){1}, 1, 100, 1, saveColor);
-        // DrawTextEx(fontMenu, this->saveGame.title, (Vector2){this->saveGame.getRectangle().x + 10, this->saveGame.getRectangle().y + 10}, fontMenu.baseSize, 1, saveColor);
+
         EndDrawing();
     }
 }
-// std::string UI::findCard(Texture2D value)
-// {
 
-//         // std::cout << value << std::endl;
-//         std::cout << "inja" << std::endl;
-//         std::string_view key;
-//         auto it = UIcardName.begin();
-//         // auto it = std::find_if(states.begin(),states.end(),[&key](const auto& value){return value.first == key;});
-//         std::cout << "inja2" << std::endl;
-//         // std::cout << it->second << std::endl;
-//         while (it != UIcardName.end())
-//         {
-
-//             std::cout << "inja3" << std::endl;
-//             // std::cout << it->second << std::endl;
-//             if (it->second == value)
-//             {
-//                 std::cout << "inja4" << std::endl;
-//                 std::cout << "mohem - >>>>> " << it->first << std::endl;
-//                 return it->first;
-//             }
-//             std::cout << "inja5" << std::endl;
-//             // std::cout << value << std::endl;
-//             it++;
-//         }
-//         std::cout << "inja6" << std::endl;
-
-// }
 void UI::renderTextureForCharacterAndGameTable()
 {
     BeginDrawing();
@@ -1311,27 +1278,6 @@ void UI::initializePlayerCardsFromUI()
             {2, thirdPlayerCardsFromUI},
             {3, forthPlayerCardsFromUI},
         };
-}
-void UI::initializePlayedStringCard()
-{
-    // playedStringCard =
-    // {
-    //     {baharCards, "bahar"},
-    //     {zemestanCards, "zemestan"},
-    //     {matarsakCards, "matarsak"},
-    //     {tablzanCards, "tabl_zan"},
-    //     {shahDokhtCards, "shah_dokht"},
-    //     {shirzanCards, "shirzan"},
-    //     {rishSefidCards, "rish_sefid"},
-    //     {parchamDarCards, "parcham_dar"},
-    //     {sarbazOneCards, "sarbaz_1"},
-    //     {sarbazTwoCards, "sarbaz_2"},
-    //     {sarbazThreeCards, "sarbaz_3"},
-    //     {sarbazFourCards, "sarbaz_4"},
-    //     {sarbazFiveCards, "sarbaz_5"},
-    //     {sarbazSixCards, "sarbaz_6"},
-    //     {sarbazTenCards, "sarbaz_10"},
-    // };
 }
 
 void UI::initializeCardTextureAndName()
@@ -1481,8 +1427,6 @@ bool UI::displayWinner(int winnerPlayer, std::string winnerName)
     {
         Vector2 mousePssitionIdentity = GetMousePosition();
         bool mousePressedIdentity = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
-        // std::cout << mousePressedIdentity << std::endl;
-
         if (next.ifPressed(mousePssitionIdentity, mousePressedIdentity))
         {
 
@@ -1496,9 +1440,6 @@ bool UI::displayWinner(int winnerPlayer, std::string winnerName)
 
         DrawTextPro(gameFont, winnerPlayerName, (Vector2){350, 40}, (Vector2){1}, 1, 40, 1, {50, 190, 220, 225});
         DrawTextPro(gameFont, "is the winner.", (Vector2){420, 40}, (Vector2){1}, 1, 40, 1, {50, 190, 220, 225});
-        // DrawTextPro(gameFont, "is the winner.", (Vector2){200, 40}, (Vector2){1}, 1, 40, 1, {50, 190, 220, 225});
-        // DrawText(winnerPlayerName, 200, 40, 40, WHITE);
-
         Color selectedColor = WHITE;
         if (CheckCollisionPointRec(mousePssitionIdentity, next.getRectangle()))
         {
@@ -1519,19 +1460,10 @@ bool UI::displayFinalWinner(int winnerPlayer, std::string winnerName)
     initializeNextButton(250, 680, 120, 50);
     const char *winnerPlayerName = winnerName.c_str();
 
-    // firstCharacterPlayedCards.clear();
-    // secondCharacterPlayedCards.clear();
-    // thirdCharacterPlayedCards.clear();
-    // firstPlayedCardsFromUI.clear();
-    // secondPlayedCardsFromUI.clear();
-    // thirdCharacterPlayedCards.clear();
-
     while (1)
     {
         Vector2 mousePssitionIdentity = GetMousePosition();
         bool mousePressedIdentity = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
-        // std::cout << mousePressedIdentity << std::endl;
-
         if (next.ifPressed(mousePssitionIdentity, mousePressedIdentity))
         {
 
@@ -1561,115 +1493,6 @@ bool UI::displayFinalWinner(int winnerPlayer, std::string winnerName)
     }
 }
 
-// void UI::inputNumberOfPlayers()
-// {
-//     bool mouseOnText
-// }
-/*bool UI::Textbox()
-{
-    uiInput input;
-    int letterCount = 0;
-    int framesCounter = 0;
-    while (1)
-    {
-        input.initializeTextBoxRec();
-        char playerName[50];
-        for (int i = 0; i < 50; i++)
-        {
-            playerName[i] = input.getUIPlayerName(i);
-        }
-        bool mouseOnText = false;
-        if (CheckCollisionPointRec(GetMousePosition(), input.getTextBoxRec()))
-        {
-            mouseOnText = true;
-        }
-        else
-        {
-            mouseOnText = false;
-        }
-        if (mouseOnText)
-        {
-            std::cout << "02222222222222" << std::endl;
-            SetMouseCursor(MOUSE_CURSOR_IBEAM);
-            std::cout << "get key pressed " << GetCharPressed() << std::endl;
-            int key = GetCharPressed();
-            int counter = 0;
-            while (key > 0)
-            {
-                std::cout << "011111111111111111" << std::endl;
-                counter++;
-                std::cout << "033333333333" << std::endl;
-                if ((key >= 32) && (key <= 125) && (letterCount < 50))
-                {
-                    std::cout << "0 " << (char)key << std::endl;
-                    input.setUIPlayerName(letterCount, (char)key);
-                    std::cout << "one " << (char)key << std::endl;
-                    input.setUIPlayerName(letterCount + 1, '\0');
-                    std::cout << "tow " << (char)key << std::endl;
-                    letterCount++;
-                    std::cout << letterCount << std::endl;
-                }
-
-                key = GetCharPressed();
-            }
-            if (IsKeyPressed(KEY_BACKSPACE))
-            {
-                letterCount--;
-                if (letterCount < 0)
-                    letterCount = 0;
-                input.setUIPlayerName(letterCount, '\0');
-            }
-            if (IsKeyPressed(KEY_ENTER))
-            {
-                std::cout << "Enter key pressed" << input.getFullName() << std::endl;
-                input.resetInput();
-                letterCount = 0;
-            }
-            if (IsKeyPressed(KEY_ENTER))
-            {
-                ClearBackground(WHITE);
-                return true;
-            }
-        }
-        else
-            SetMouseCursor(MOUSE_CURSOR_DEFAULT);
-
-        if (mouseOnText)
-            framesCounter++;
-        else
-            framesCounter = 0;
-        BeginDrawing();
-
-        ClearBackground(RAYWHITE);
-        DrawTextEx(fontMenu, "PLACE MOUSE OVER INPUT BOX!", (Vector2){240, 140}, fontMenu.baseSize, 1, RED);
-
-        DrawRectangleRec(input.getTextBoxRec(), LIGHTGRAY);
-        if (mouseOnText)
-            // DrawRectangle((int)input.getTextBoxRec().x,(int)input.getTextBoxRec().y,(int)input.getTextBoxRec().width, (int)input.getTextBoxRec().height, RED);
-            DrawRectangleLines((int)input.getTextBoxRec().x, (int)input.getTextBoxRec().y, (int)input.getTextBoxRec().width, (int)input.getTextBoxRec().height, RED);
-        else
-            DrawRectangleLines((int)input.getTextBoxRec().x, (int)input.getTextBoxRec().y, (int)input.getTextBoxRec().width, (int)input.getTextBoxRec().height, MAROON);
-        // DrawTextEx(fontMenu, "", (Vector2){(float)input.getTextBoxRec().x + 5, (float)input.getTextBoxRec().y + 8}, fontMenu.baseSize, 1, RED);
-        // DrawText(input.getFullName(), (int)input.getTextBoxRec().x + 5, (int)input.getTextBoxRec().y + 8, 40, MAROON);
-        DrawTextEx(fontMenu, input.getFullName(), (Vector2){(float)input.getTextBoxRec().x + 5, (float)input.getTextBoxRec().y + 8}, fontMenu.baseSize, 1, DARKGRAY);
-        DrawTextEx(fontMenu, TextFormat("player name: %i/%i", letterCount, 50), (Vector2){315, 250}, fontMenu.baseSize, 1, DARKGRAY);
-        // DrawText(TextFormat("player name: %i/%i", letterCount, 50), 315, 250, 20, DARKGRAY);
-
-        if (mouseOnText)
-        {
-            if (letterCount < 50)
-            {
-                // Draw blinking underscore char
-                if (((framesCounter / 20) % 2) == 0)
-                    DrawText("_", (int)input.getTextBoxRec().x + 8 + MeasureText(playerName, 40), (int)input.getTextBoxRec().y + 12, 40, WHITE);
-            }
-            else
-                DrawText("Press BACKSPACE to delete chars...", 230, 300, 20, GRAY);
-        }
-
-        EndDrawing();
-    }
-}*/
 void UI::clearTextBox()
 {
     textBoxes.clear();
@@ -1752,9 +1575,6 @@ bool UI::thripleTextBoxDraw()
     AddTextBox(500, 100, 100, 50);
     AddTextBox(500, 200, 100, 50);
     AddTextBox(500, 300, 100, 50); // three text boxs for player ages
-    AddTextBox(770, 100, 165, 50);
-    AddTextBox(770, 200, 165, 50);
-    AddTextBox(770, 300, 165, 50); // three text boxs for player selected color
     int framesCounter = 0;
     initializeConfirmPlayerDataButton(950, 350, 180, 50);
     while (1)
@@ -1776,7 +1596,6 @@ bool UI::thripleTextBoxDraw()
         DrawTexture(backgroundIdentityMenu, 0, 0, WHITE);
         DrawTextEx(gameFont, "please enter your names:", (Vector2){100, 50}, gameFont.baseSize, 1, textColor);
         DrawTextEx(gameFont, "please enter your ages:", (Vector2){450, 50}, gameFont.baseSize, 1, textColor);
-        DrawTextEx(gameFont, "please enter your color:", (Vector2){750, 50}, gameFont.baseSize, 1, textColor);
         textBoxDraw(inputFont, framesCounter);
 
         Color selectedColor = WHITE;
@@ -1802,10 +1621,6 @@ bool UI::quadrupleTextBoxDraw()
     AddTextBox(500, 200, 100, 50);
     AddTextBox(500, 300, 100, 50);
     AddTextBox(500, 400, 100, 50); // four text boxs for player's ages
-    AddTextBox(760, 100, 200, 50);
-    AddTextBox(760, 200, 200, 50);
-    AddTextBox(760, 300, 200, 50);
-    AddTextBox(760, 400, 200, 50); // four text boxs for player's selected colors
 
     int framesCounter = 0;
     initializeConfirmPlayerDataButton(950, 450, 180, 50);
@@ -1827,7 +1642,6 @@ bool UI::quadrupleTextBoxDraw()
         DrawTexture(backgroundIdentityMenu, 0, 0, WHITE);
         DrawTextEx(gameFont, "please enter your names:", (Vector2){100, 50}, gameFont.baseSize, 1, textColor);
         DrawTextEx(gameFont, "please enter your ages:", (Vector2){470, 50}, gameFont.baseSize, 1, textColor);
-        DrawTextEx(gameFont, "please enter your color:", (Vector2){800, 50}, gameFont.baseSize, 1, textColor);
         textBoxDraw(inputFont, framesCounter);
         Color selectedColor = WHITE;
         if (CheckCollisionPointRec(mousePssitionConfirmation, ConfirmPlayerData.getRectangle()))
@@ -1885,7 +1699,7 @@ void UI::initializeDropDownMenuForColors()
     initializeOptionsColors();
     initializeOptionsAndDropdownBoundsForColors();
 }
-std::string UI::displayOpenDropDownMenuForColors()
+std::string UI::displayOpenDropDownMenuForColors(std::string playerName)
 {
     initializeDropDownMenuForColors();
     while (1)
@@ -1919,7 +1733,8 @@ std::string UI::displayOpenDropDownMenuForColors()
         DrawRectangleRec(dropdownBoundsForColors, LIGHTGRAY);
         DrawRectangleLinesEx(dropdownBoundsForColors, 2, DARKGRAY);
         DrawTextPro(inputFont, selectedOptionForColors.c_str(), (Vector2){dropdownBoundsForColors.x + 37, dropdownBoundsForColors.y - 11}, (Vector2){1}, 1, 40, 1, {225, 120, 80, 225});
-
+        DrawTextPro(gameFont, playerName.c_str(), (Vector2){300, 100}, (Vector2){1}, 1, 50, 1, {80, 200, 220, 225});
+        DrawTextPro(gameFont, "choose the color: ", (Vector2){380, 100}, (Vector2){1}, 1, 50, 1, {80, 200, 220, 225});
         // Draw the options if the dropdown is open
         if (isDropdownOpenForColor)
         {
@@ -2086,7 +1901,6 @@ bool UI::displayHelp(std::string SpecialChoosedHelp)
         bool mousePressedIdentity = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
         if (next.ifPressed(mousePssitionIdentity, mousePressedIdentity))
         {
-            std::cout << "too if " << std::endl;
             next.setStatus(false);
             return true; // next button has been pressed
         }
@@ -2172,7 +1986,7 @@ bool UI::displayWarSigns(std::vector<int> numberOfstates, std::vector<std::strin
             else if (i > 0)
             {
 
-                for (int j = i; j < ( i + 1 ); j++)
+                for (int j = i; j < (i + 1); j++)
                 {
 
                     for (statesCoordinatesItr = statesCoordinates.begin(); statesCoordinatesItr != statesCoordinates.end(); statesCoordinatesItr++)
