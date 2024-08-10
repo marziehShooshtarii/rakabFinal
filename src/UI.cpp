@@ -1008,36 +1008,112 @@ int UI::displayGameTableAndCharactersForFour(int turnHandlerForDisplay, int Turn
         ClearBackground(RAYWHITE);
         DrawTexture(gameTableForFourPlayers, 0, 0, WHITE);
         std::cout << "aha ke shi" << std::endl;
+
         //  std::cout << "playedCardsHandler.at(k).size() - >........................displayGameTableAndCharacters" << playedCardsHandler.at(0).size() << std::endl;
-        for (int q = 0; q < turnHandlerForDisplay / 4; q++)
+        if (turnHandlerForDisplay / 4 >= 1)
         {
-            for (int k = 0; k < 4; k++)
+            for (int q = 0; q < turnHandlerForDisplay / 4; q++)
             {
-                for (int j = 0; j < playedCardsHandler.at(k).size() / 3; j++)
+                for (int k = 0; k < 4; k++)
                 {
-                    for (int i = (j * 3); i < (j * 3) + 3; i++)
-                        DrawTexture(playedCardsHandler.at(k)[i], (k * 200) + (i * 65) + 5, (j * 100) + 290, WHITE);
+                    if (k == 3)
+                    {
+                        continue;
+                    }
+                    // if (k == 4)
+                    // {
+                    //     for (int j = 0; j < playedCardsHandler.at(k).size() / 2; j++)
+                    //     {
+                    //         for (int i = (j * 2); i < (j * 2) + 2; i++)
+                    //             DrawTexture(playedCardsHandler.at(k)[i], (k * 400) + (i * 65) + 465, (j * 100) + 400, WHITE);
+                    //     }
+                    //     for (int i = playedCardsHandler.at(k).size() - (playedCardsHandler.at(k).size() % 2); i < playedCardsHandler.at(k).size(); i++)
+                    //         DrawTexture(playedCardsHandler.at(k)[i], (k * 400) + ((i - playedCardsHandler.at(k).size() + (playedCardsHandler.at(k).size() % 2)) * 65) + 465, (playedCardsHandler.at(k).size() / 2 * 100) + 400, WHITE);
+                    // }
+                    // else
+                    // {
+
+                    for (int j = 0; j < playedCardsHandler.at(k).size() / 3; j++)
+                    {
+                        for (int i = (j * 3); i < (j * 3) + 3; i++)
+                            DrawTexture(playedCardsHandler.at(k)[i], (k * 400) + (i * 65) + 65, (j * 70) + 250, WHITE);
+                    }
+                    for (int i = playedCardsHandler.at(k).size() - (playedCardsHandler.at(k).size() % 3); i < playedCardsHandler.at(k).size(); i++)
+                        DrawTexture(playedCardsHandler.at(k)[i], (k * 400) + ((i - playedCardsHandler.at(k).size() + (playedCardsHandler.at(k).size() % 3)) * 65) + 65, (playedCardsHandler.at(k).size() / 3 * 70) + 250, WHITE);
+                    // }
                 }
-                for (int i = playedCardsHandler.at(k).size() - (playedCardsHandler.at(k).size() % 3); i < playedCardsHandler.at(k).size(); i++)
-                    DrawTexture(playedCardsHandler.at(k)[i], (k * 200) + ((i - playedCardsHandler.at(k).size() + (playedCardsHandler.at(k).size() % 3)) * 65) + 5, (playedCardsHandler.at(k).size() / 3 * 100) + 290, WHITE);
             }
+
+
+            for (int j = 0; j < playedCardsHandler.at(3).size() / 3 ; j++)
+            {
+                for (int i = (j * 3); i < (j * 3) + 3; i++)
+                    DrawTexture(playedCardsHandler.at(3)[i],  (i * 65) + 65, (j * 70) + 500, WHITE);
+            }
+            for (int i = playedCardsHandler.at(3).size() - (playedCardsHandler.at(3).size() % 3); i < playedCardsHandler.at(3).size(); i++)
+                DrawTexture(playedCardsHandler.at(3)[i], ((i - playedCardsHandler.at(3).size() + (playedCardsHandler.at(3).size() % 3)) * 65) + 65, (playedCardsHandler.at(3).size() / 3 * 70) + 500, WHITE);
+            // for (int j = 4; j < 4 + (playedCardsHandler.at(3).size() - 4) / 2; j++)
+            // {
+            //     for (int i = (j * 2); i < (j * 2) + 2; i++)
+            //         DrawTexture(playedCardsHandler.at(3)[i], (i * 65) + 465, (j * 70) + 500, WHITE);
+            // }
+            // for (int i = playedCardsHandler.at(3).size() - ((playedCardsHandler.at(3).size() - 4) / 2); i < playedCardsHandler.at(3).size(); i++)
+            //     DrawTexture(playedCardsHandler.at(3)[i], ((i - playedCardsHandler.at(3).size() + (playedCardsHandler.at(3).size() % 2)) * 65) + 465, (playedCardsHandler.at(3).size() / 2 * 70) + 500, WHITE);
         }
+        // for (int q = 0; q < turnHandlerForDisplay / 4; q++)
+        // {
+        //     for (int k = 0; k < 4; k++)
+        //     {
+        //         for (int j = 0; j < playedCardsHandler.at(k).size() / 3; j++)
+        //         {
+        //             for (int i = (j * 3); i < (j * 3) + 3; i++)
+        //                 DrawTexture(playedCardsHandler.at(k)[i], (k * 200) + (i * 65) + 5, (j * 100) + 290, WHITE);
+        //         }
+        //         for (int i = playedCardsHandler.at(k).size() - (playedCardsHandler.at(k).size() % 3); i < playedCardsHandler.at(k).size(); i++)
+        //             DrawTexture(playedCardsHandler.at(k)[i], (k * 200) + ((i - playedCardsHandler.at(k).size() + (playedCardsHandler.at(k).size() % 3)) * 65) + 5, (playedCardsHandler.at(k).size() / 3 * 100) + 290, WHITE);
+        //     }
+        // }
         if (turnHandlerForDisplay / 4 < 1)
         {
             for (int k = 0; k < (((turnHandlerForDisplay - 1) % 4 + TurnControler) % 4) + 1; k++)
             {
+                if (k == 3)
+                {
+                    continue;
+                }
                 // std::cout << "1:55 " << turnHandlerForDisplay % 4 + TurnControler << " k chi " << k << std::endl;
                 for (int j = 0; j < playedCardsHandler.at(k).size() / 3; j++)
                 {
                     std::cout << "1:56 " << std::endl;
                     for (int i = 0; i < 4; i++)
-                        DrawTexture(playedCardsHandler.at(k)[i], (k * 200) + (i * 65) + 5, (j * 100) + 290, WHITE);
+                        DrawTexture(playedCardsHandler.at(k)[i], (k * 400) + (i * 65) + 65, (j * 70) + 250, WHITE);
                     std::cout << "1:57 " << playedCardsHandler.at(k).size() % 3 << std::endl;
                 }
                 std::cout << "2:42 " << k << "2:44" << playedCardsHandler.at(k).size() % 3 << std::endl;
-                for (int i = playedCardsHandler.at(k).size() - (playedCardsHandler.at(k).size() % 3); i < playedCardsHandler.at(k).size() % 4; i++)
-                    DrawTexture(playedCardsHandler.at(k)[i], (k * 200) + (i * 65) + 5, (playedCardsHandler.at(k).size() / 3 * 100) + 290, WHITE);
+                for (int i = playedCardsHandler.at(k).size() - (playedCardsHandler.at(k).size() % 3); i < playedCardsHandler.at(k).size() % 3/*% 3*/; i++)
+                    DrawTexture(playedCardsHandler.at(k)[i], (k * 400) + (i * 65) + 65, (playedCardsHandler.at(k).size() / 3 * 70) + 250, WHITE);
             }
+            for (int j = 0; j < playedCardsHandler.at(3).size() / 3 ; j++)
+            {
+                for (int i = (j * 3); i < (j * 3) + 3; i++)
+                    DrawTexture(playedCardsHandler.at(3)[i],  (i * 65) + 65, (j * 70) + 500, WHITE);
+            }
+            for (int i = playedCardsHandler.at(3).size() - (playedCardsHandler.at(3).size() % 3); i < playedCardsHandler.at(3).size() % 3; i++)
+                DrawTexture(playedCardsHandler.at(3)[i], /*(i - playedCardsHandler.at(3).size() + (/*playedCardsHandler.at(3).size() % 2))*/ 1200 + (i * 65) + 65, (playedCardsHandler.at(3).size() / 3 * 70) + 500, WHITE);
+            // for (int j = 0; j < playedCardsHandler.at(3).size() / 2; j++)
+            // {
+            //     for (int i = (j * 2); i < (j * 2) + 2; i++)
+            //         DrawTexture(playedCardsHandler.at(3)[i], (400) + (i * 65) + 465, (j * 70) + 500, WHITE);
+            // }
+            // for (int i = playedCardsHandler.at(3).size() - (playedCardsHandler.at(3).size() % 2); i < playedCardsHandler.at(3).size(); i++)
+            //     DrawTexture(playedCardsHandler.at(3)[i], (400) + ((i - playedCardsHandler.at(3).size() + (playedCardsHandler.at(3).size() % 2)) * 65) + 465, (playedCardsHandler.at(3).size() / 2 * 70) + 500, WHITE);
+            //     for (int j = 4; j < 4 + (playedCardsHandler.at(3).size() - 4) / 2; j++)
+            // {
+            //     for (int i = (j * 2); i < (j * 2) + 2; i++)
+            //         DrawTexture(playedCardsHandler.at(3)[i], (i * 65) + 465, (j * 70) + 500, WHITE);
+            // }
+            // for (int i = playedCardsHandler.at(3).size() - ((playedCardsHandler.at(3).size() - 4) / 2); i < playedCardsHandler.at(3).size(); i++)
+            //     DrawTexture(playedCardsHandler.at(3)[i], ((i - playedCardsHandler.at(3).size() + (playedCardsHandler.at(3).size() % 2)) * 65) + 465, (playedCardsHandler.at(3).size() / 2 * 70) + 500, WHITE);
         }
         std::cout << "1:54 " << std::endl;
 
