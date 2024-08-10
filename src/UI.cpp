@@ -533,12 +533,19 @@ bool UI::validCardsForMatarsak()
 {
 
     initializeCardsButtonsForMatarsak(0, 0, 120, 50);
-
+    initializeNextButton(1100, 680, 120, 50);
     while (1)
     {
 
         Vector2 mousePssitionIdentity = GetMousePosition();
         bool mousePressedIdentity = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
+
+        if (next.ifPressed(mousePssitionIdentity, mousePressedIdentity))
+        {
+
+            next.setStatus(false);
+            return 1; // next button has been pressed
+        }
 
         for (int i = 0; i < (playedCardsHandler.at(UIstarterPlayer).size() - numberOfInvalidCardsForMatarsak()); i++)
         {
@@ -572,6 +579,17 @@ bool UI::validCardsForMatarsak()
             if (validateCardsForMatarsakInUI(i))
                 DrawTexture(playedCardsHandler.at(UIstarterPlayer)[i], ((i - playedCardsHandler.at(UIstarterPlayer).size() / 2) * 100) + 400, 460, WHITE);
         }
+        Color selectedColor = WHITE;
+        if (CheckCollisionPointRec(mousePssitionIdentity, next.getRectangle()))
+        {
+            selectedColor = WHITE;
+        }
+        else
+        {
+            selectedColor = RED;
+        }
+
+        DrawTextEx(fontMenu, this->next.title, (Vector2){this->next.getRectangle().x + 10, this->next.getRectangle().y + 10}, fontMenu.baseSize, 1, selectedColor);
 
         for (int idx = 0; idx < (playedCardsHandler.at(UIstarterPlayer).size() - numberOfInvalidCardsForMatarsak()); ++idx)
         {
@@ -840,7 +858,7 @@ int UI::displayGameTableAndCharactersForFour(int turnHandlerForDisplay, int Turn
                 DrawTexture(playedCardsHandler.at(3)[i], ((i - playedCardsHandler.at(3).size() + (playedCardsHandler.at(3).size() % 3)) * 65) + 65, (playedCardsHandler.at(3).size() / 3 * 70) + 500, WHITE);
         }
 
-        if (turnHandlerForDisplay / 4 < 1)
+        else
         {
             for (int k = 0; k < (((turnHandlerForDisplay - 1) % 4 + TurnControler) % 4) + 1; k++)
             {
@@ -852,7 +870,7 @@ int UI::displayGameTableAndCharactersForFour(int turnHandlerForDisplay, int Turn
                 for (int j = 0; j < playedCardsHandler.at(k).size() / 3; j++)
                 {
 
-                    for (int i = 0; i < 4; i++)
+                    for (int i = 0; i < 3; i++)
                         DrawTexture(playedCardsHandler.at(k)[i], (k * 400) + (i * 65) + 65, (j * 70) + 250, WHITE);
                 }
 
