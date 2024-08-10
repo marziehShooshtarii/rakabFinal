@@ -14,6 +14,9 @@ set(PROJECT_SOURCES
    Shirzan.cpp
    Special.cpp
    Tabl_zan.cpp
+   UI.cpp
+   Button.cpp
+   uiInput.cpp
 )
 
 add_executable(${PROJECT_NAME}
