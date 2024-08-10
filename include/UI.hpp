@@ -105,6 +105,7 @@ public:
     void initializeDropDownMenuForColors();
     std::string displayOpenDropDownMenuForColors(std::string);
     int displayWarzoneForPeacsignButtons(std::string);
+    bool displayStart();
 
 private:
     const char *menuButtonsTitle[4];
@@ -173,8 +174,9 @@ private:
     Texture2D warSigns[4];
     Texture2D peaceSignForUI;
     Texture2D peaceSignBackground;
-    // Texture2D helpForEachCard;
-    // Texture2D helpGeneral;
+    Texture2D helpForEachCard;
+    Texture2D helpGeneral;
+    Texture2D exit;
 
     Button passPosition;
     bool ifPlayerPassed[3]; // check the whole players position
@@ -212,5 +214,6 @@ private:
     bool isDropdownOpenForColor;
     Rectangle dropdownBoundsForColors;
     std::string selectedOptionForColors;
+    Texture2D start;
 };
 #endif

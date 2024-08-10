@@ -69,8 +69,8 @@ UI::UI()
     matarsakAndCharacters[2] = LoadTexture("../assets/matarsak3.png");
     matarsakAndCharacters[3] = LoadTexture("../assets/matarsak4.png");
 
-    // helpForEachCard = LoadTexture("../assets/helpForCards.png");
-    // helpGeneral = LoadTexture("../assets/helpGeneral.png");
+    helpForEachCard = LoadTexture("../assets/helpForCards.png");
+    helpGeneral = LoadTexture("../assets/helpGeneral.png");
 
     renderTextureForGameTable[0] = LoadRenderTexture(character1.width, character1.height);
     renderTextureForGameTable[1] = LoadRenderTexture(character2.width, character2.height);
@@ -85,6 +85,8 @@ UI::UI()
     renderTextureForGameTableAndCharactersForFour = LoadRenderTexture(gameTableForFourPlayers.width, gameTableForFourPlayers.height);
 
     renderTextureForWarSigns = LoadRenderTexture(warzoneMapWithSigns.width, warzoneMapWithSigns.height);
+    start = LoadTexture("../assets/start.png");
+    exit = LoadTexture("../assets/ending.png");
     initializeCardTextureAndName();
     initializePlayerCardsHandler();
     initializePlayedCardsHandler();
@@ -339,6 +341,47 @@ int UI::displayWarzoneForPeacsignButtons(std::string lastPlayerPlayedRishSefid)
     }
     return -1;
 }
+bool UI::displayStart()
+{
+
+    initializeNextButton(1100, 680, 120, 50);
+  
+    while (1)
+    {
+        Vector2 mousePssitionIdentity = GetMousePosition();
+        bool mousePressedIdentity = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
+
+        if (next.ifPressed(mousePssitionIdentity, mousePressedIdentity))
+        {
+
+            next.setStatus(false);
+            return true; // next button has been pressed
+        }
+
+        BeginDrawing();
+        ClearBackground(RAYWHITE);
+
+        DrawTexture(start, 0, 0, WHITE);
+        DrawTextPro(gameFont, "rakab", (Vector2){590, 100}, (Vector2){1}, 1, 100, 1, {50, 190, 220, 225});
+       
+
+        Color selectedColor = WHITE;
+        if (CheckCollisionPointRec(mousePssitionIdentity, next.getRectangle()))
+        {
+            selectedColor = WHITE;
+        }
+        else
+        {
+            selectedColor = RED;
+        }
+
+        DrawTextEx(fontMenu, this->next.title, (Vector2){this->next.getRectangle().x + 10, this->next.getRectangle().y + 10}, fontMenu.baseSize, 1, selectedColor);
+
+        EndDrawing();
+    }
+}
+
+
 void UI::initializePlayerNumberButton()
 {
     playerNumberButtons[0] = (Button){(Rectangle){50, 220, 120, 50}, "choose the player numbers:", false};
@@ -938,7 +981,7 @@ int UI::ExitGameControl()
             return 2; // exit button has been pressed
         }
         BeginDrawing();
-        DrawTexture(backgroundIdentityMenu, 0, 0, WHITE);
+        DrawTexture(exit, 0, 0, WHITE);
         Color exitColor = WHITE;
         if (CheckCollisionPointRec(mousePssitionIdentity, exitGame.getRectangle()))
         {
@@ -1065,6 +1108,7 @@ void UI::initializeCharacterNumber()
 
         };
 }
+
 
 bool UI::displayCharectersAndNamesForThree(std::string name1, std::string name2, std::string name3)
 {
@@ -1330,6 +1374,7 @@ bool UI::getLuckNumbers(std::string starterPlayer)
         DrawTextEx(gameFont, "you are the starter.", (Vector2){145, 50}, gameFont.baseSize, 1, textColor);
         DrawTextEx(gameFont, "please enter the good luck number:", (Vector2){100, 100}, gameFont.baseSize, 1, textColor);
         DrawTextEx(gameFont, "please enter your bad luck number:", (Vector2){450, 100}, gameFont.baseSize, 1, textColor);
+        DrawTextEx(gameFont, "please enter your bad luck number and good luck from 10 to 99", (Vector2){100, 300}, gameFont.baseSize, 1, WHITE);
 
         textBoxDraw(inputFont, framesCounter);
 
@@ -1562,7 +1607,7 @@ int UI::displayOpenDropDownMenuForSavedGameNumber()
         }
         BeginDrawing();
         ClearBackground(RAYWHITE);
-        DrawTexture(backgroundIdentityMenu, 0, 0, WHITE);
+        DrawTexture(helpForEachCard, 0, 0, WHITE);
         DrawRectangleRec(dropdownBounds, LIGHTGRAY);
         DrawRectangleLinesEx(dropdownBounds, 2, DARKGRAY);
         DrawTextPro(inputFont, selectedOption.c_str(), (Vector2){dropdownBounds.x + 37, dropdownBounds.y - 11}, (Vector2){1}, 1, 40, 1, {225, 120, 80, 225});
@@ -1643,7 +1688,7 @@ std::string UI::helpGameControl()
         }
 
         BeginDrawing();
-        DrawTexture(backgroundMenu, 0, 0, WHITE);
+        DrawTexture(helpGeneral, 0, 0, WHITE);
 
         DrawRectangleRec(dropdownHelpBounds, LIGHTGRAY);
         DrawRectangleLinesEx(dropdownHelpBounds, 2, DARKGRAY);
@@ -1676,8 +1721,9 @@ bool UI::displayHelp(std::string SpecialChoosedHelp)
             return true; // next button has been pressed
         }
         BeginDrawing();
-        DrawTexture(backgroundIdentityMenu, 0, 0, WHITE);
-        DrawTextEx(gameFont, SpecialChoosedHelp.c_str(), (Vector2){200, 400}, gameFont.baseSize, 1, BLACK);
+        DrawTexture(helpGeneral, 0, 0, WHITE);
+        //DrawTextEx(gameFont, SpecialChoosedHelp.c_str(), (Vector2){10, 400}, gameFont.baseSize, 1, WHITE);
+        DrawTextPro(gameFont,SpecialChoosedHelp.c_str(),(Vector2){10, 400},(Vector2){1},1,25,1,WHITE);
         Color selectedColor = WHITE;
         if (CheckCollisionPointRec(mousePssitionIdentity, next.getRectangle()))
         {
