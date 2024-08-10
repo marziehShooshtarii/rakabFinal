@@ -271,7 +271,7 @@ private:
     std::string helpOptions[10];
     std::string selectedHelpOption;
     Rectangle dropdownHelpBounds;
-    Rectangle helpOptionBounds[5];
+    Rectangle helpOptionBounds[10];
     bool isDropdownOpenForHelp;
     std::string helpChoice;
     int numberOfPlayers;

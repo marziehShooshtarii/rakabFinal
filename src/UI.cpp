@@ -2015,6 +2015,8 @@ void UI::initializeHelpDropdownBounds()
     helpOptionBounds[5] = {420, 250 + 280, 200, 50};
     helpOptionBounds[6] = {420, 250 + 330, 200, 50};
     helpOptionBounds[7] = {420, 250 + 380, 200, 50};
+    helpOptionBounds[8] = {420, 250 + 430, 200, 50};
+    helpOptionBounds[9] = {420, 250 + 480, 200, 50};
 }
 void UI::initializeHelpOptionsAndDropdownBounds()
 {
@@ -2037,7 +2039,7 @@ std::string UI::helpGameControl()
             {
 
                 // Check if the click is within one of the option bounds
-                for (int i = 0; i < 8; i++)
+                for (int i = 0; i < 10; i++)
                 {
                     if (CheckCollisionPointRec(mousePos, helpOptionBounds[i]))
                     {
@@ -2062,7 +2064,7 @@ std::string UI::helpGameControl()
         // Draw the options if the dropdown is open
         if (isDropdownOpenForHelp)
         {
-            for (int i = 0; i < 8; i++)
+            for (int i = 0; i < 10; i++)
             {
                 DrawRectangleRec(helpOptionBounds[i], LIGHTGRAY);
                 DrawRectangleLinesEx(helpOptionBounds[i], 1, DARKGRAY);
