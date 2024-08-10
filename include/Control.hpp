@@ -108,6 +108,7 @@ public:
     void initializeAllOwenedStatesForUI();
     void calculateNumberOfWinners();
     void initializeColorsForUI();
+    void setOrderOfWinner();
     void run();
 
 private:
@@ -135,6 +136,7 @@ private:
     std::string newOrContinue;
     std::vector<std::string> numberOfSavedGames; // having more than one saved game
     int whichSavedGame;
+    int checkSelectedCard = -1; // differentiate from the card played
     UI ui;
     int goodLuckNumber;
     int badLuckNumber;

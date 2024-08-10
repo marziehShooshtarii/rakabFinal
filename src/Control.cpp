@@ -110,7 +110,7 @@ void Control::dealingCards()
         {"shirzan", 12},
         {"parcham_dar", 3},
         {"rish_sefid", 6},
-        {"fok_sefid", 3},   // new card added
+        {"fok_sefid", 3},     // new card added
         {"rakhsh_sefid", 2}, // new card added
         {"sarbaz_1", 8},
         {"sarbaz_2", 10},
@@ -187,58 +187,26 @@ void Control::displayStartOfWar()
 int Control::playingInput()
 {
     std::cout << "safewe" << std::endl;
-    // while (1)
-    // {
-    std::cout << "aval while playing" << std::endl;
-    if (newOrContinue == "n")
-    {
-        std::cout << "to while mosavi n playing" << std::endl;
-        startOfWarMassage();
-        std::cout << "bade start neew war mohtaram " << std::endl;
-        // displayStarterPlayer();
-    }
-    std::cout << "ghabl flag ghashng " << std::endl;
-    // displayWarzone();
-    // displayOwenedStates();
     bool checkParchamDar = true;
-    int checkSelectedCard = -1; // differentiate from the card played
-    std::cout << " checkSelectedCard " << checkSelectedCard << std::endl;
-    // if (newOrContinue == "n")
-    // {
-    //     for (int c = 0; c < identity.getPlayerNumber(); c++)
-    //     {
-    //         players[c].setIfPassed(false);
-    //     }
-    // }
     winner = -3;
-    // while (checkIfAllPlayersPassed())
-    // {
-    std::cout << "to while dovoms" << std::endl;
     int indexControler = identity.getPlayerNumber();
-    std::cout << "to while indexcontrol " << indexControler << std::endl;
     int i = TurnControl;
-    // for (int i = TurnControl; i < indexControler;)
-    // {
-    //     if (!checkIfCertianPlayerPassed(i))
-    //     {
-    std::cout << "aha " << i << std::endl;
-    std::cout << "aha2 " << TurnControl << std::endl;
 
-    // for (int d = 0; d < identity.getPlayerNumber(); d++)
-    //     displayPlayedCards(d);
-    std::cout << players[i].getName() << " it's your turn " << "\n\tplease chose your card from the list or pass or ask for help :\n " << "\t\n";
-    displayPlayingCards(i);
     std::cout << "bade displayPlayingCards" << std::endl;
-    // checkSelectedCard = cinSelectedCard(i);
-    // TurnControl = i;
     checkSelectedCard = setPlayedCardsFromUI();
     std::cout << "checkSelectedCard -> " << checkSelectedCard << std::endl;
+    if (checkSelectedCard == 8)
+    {
+        for (int j = 0; j < identity.getPlayerNumber(); j++)
+            players[j].setIfPassed(true);
+        checkProcessOfEndingWar();
+        return 2;
+    }
     if (checkSelectedCard != 5) // if player has played anything but parcham dar
     {
         std::cout << "4:05" << std::endl;
         if (playingCards(i, checkSelectedCard))
             return 4; // matarsak has been played
-                      // playingCards(i, checkSelectedCard);
         std::cout << "4:06" << std::endl;
     }
     else
@@ -252,21 +220,6 @@ int Control::playingInput()
         i = indexControler;
         checkParchamDar = false;
     }
-    // }
-    std::cout << "4:09" << std::endl;
-    // i++;
-    std::cout << std::endl;
-    // std::cin.ignore();
-    // if (i == identity.getPlayerNumber() && checkParchamDar == true)
-    // {
-    //     i = 0;
-    //     indexControler = TurnControl;
-    //     //     }
-    //     //     // system("CLS");
-    //     // }
-    //     // system("CLS");
-    //     controlTurn();
-    // }
     if (checkParchamDar)
         checkStatus = checkProcessOfEndingWar(); // to check the war status
     if (checkStatus == 1)
@@ -279,19 +232,27 @@ int Control::playingInput()
     if (checkStatus == 4)
         return 5; // there is no winner for this war
 
-    // }
 }
 int Control::checkProcessOfEndingWar()
 {
     if (!checkIfAllPlayersPassed())
     {
-
-        if (determinWinnerOfWar())
+        if (checkSelectedCard == 8)
+        {
+            std::cout << "aha tar " << identity.getName(TurnControl) << std::endl;
+            winner = TurnControl;
+            starterPlayer = winner;
             players[winner].setOwenedStates(warzone);
+            setOrderOfWinner();
+        }
         else
-            return 4; // there is no winner for this war
+        {
+            if (determinWinnerOfWar())
+                players[winner].setOwenedStates(warzone);
+            else
+                return 4; // there is no winner for this war
+        }
         std::cout << "after determining winner of war" << std::endl;
-        winner = -1;
         if (turn != 1)
         {
             if (checkIfItsTimeToDealHands())
@@ -314,6 +275,7 @@ int Control::checkProcessOfEndingWar()
         turnHandlerAfterEachWar = 0;
         baharVSzemestan.clear();
         orderOfRishSefids.clear();
+        winner = -1;
         for (int w = 0; w < identity.getPlayerNumber(); w++)
         {
             players[w].setIfPassed(false);
@@ -329,6 +291,10 @@ int Control::checkProcessOfEndingWar()
         return 2; // the winner of a certain war
     }
     return 3; // not all the palyers have passed
+}
+void Control::setOrderOfWinner()
+{
+    orderOfWinners.push_back(winner);
 }
 void Control::choiceForPeaceSign()
 {
@@ -351,7 +317,7 @@ bool Control::playingCards(int index, int checkSelectedCard)
         checkIfCertianPlayerPassed(index);
         return false;
     }
-    if (checkSelectedCard == 6)
+    if (checkSelectedCard == 6) // fok sefis has been played
     {
         for (int i = 0; i < identity.getPlayerNumber(); i++)
             players[i].eraseAllPlayedCards();
@@ -361,6 +327,7 @@ bool Control::playingCards(int index, int checkSelectedCard)
     }
     if (checkSelectedCard == 7)
         return false;
+
     if (checkSelectedCard == 2) // if player needs help
     {
         // system("CLS");
@@ -370,11 +337,11 @@ bool Control::playingCards(int index, int checkSelectedCard)
         playingCards(index, cinSelectedCard(index));
         return false;
     }
-    if (checkSelectedCard == 6)
-    {
-        saveAllInfo(index);
-        exit(0);
-    }
+    // if (checkSelectedCard == 6)
+    // {
+    //     saveAllInfo(index);
+    //     exit(0);
+    // }
     if (checkSelectedCard != 3) // if player has played matarsak
         return true;
 
@@ -719,7 +686,7 @@ bool Control::determinWinnerOfWar()
         return false; // there is no winner for this war
     }
     std::cout << "winner - > " << players[winner].getName() << std::endl;
-    orderOfWinners.push_back(winner);
+    setOrderOfWinner();
     for (int d = 0; d < identity.getPlayerNumber(); d++)
         std::cout << identity.getName(d) << " -> " << scorsAtEndOfWar[d] << std::endl;
     for (int i = 0; i < identity.getPlayerNumber(); i++)
@@ -1600,6 +1567,8 @@ int Control::setPlayedCardsFromUI()
                 return 5;
             if (selectedCard.getName() == "fok_sefid")
                 return 6;
+            if (selectedCard.getName() == "rakhsh_sefid")
+                return 8;
         }
         std::cout << "playerrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr " << players[TurnControl].getNumberOfPlayedCards() << std::endl;
         return 3;
