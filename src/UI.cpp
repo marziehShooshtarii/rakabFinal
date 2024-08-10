@@ -31,13 +31,15 @@ UI::UI()
     cards[5] = LoadTexture("../assets/shirzan.png");
     cards[6] = LoadTexture("../assets/rish_sefid.png");
     cards[7] = LoadTexture("../assets/parcham_dar.png");
-    cards[8] = LoadTexture("../assets/s1.png");
-    cards[9] = LoadTexture("../assets/s2.png");
-    cards[10] = LoadTexture("../assets/s3.png");
-    cards[11] = LoadTexture("../assets/s4.png");
-    cards[12] = LoadTexture("../assets/s5.png");
-    cards[13] = LoadTexture("../assets/s6.png");
-    cards[14] = LoadTexture("../assets/s10.png");
+    cards[8] = LoadTexture("../assets/fak_sefid.png");
+    cards[9] = LoadTexture("../assets/rakhsh_sefid.png");
+    cards[10] = LoadTexture("../assets/s1.png");
+    cards[11] = LoadTexture("../assets/s2.png");
+    cards[12] = LoadTexture("../assets/s3.png");
+    cards[13] = LoadTexture("../assets/s4.png");
+    cards[14] = LoadTexture("../assets/s5.png");
+    cards[15] = LoadTexture("../assets/s6.png");
+    cards[16] = LoadTexture("../assets/s10.png");
     warSigns[0] = LoadTexture("../assets/warSign1-2-Photoroom.png");
     warSigns[1] = LoadTexture("../assets/warSign2_2-Photoroom.png");
     warSigns[2] = LoadTexture("../assets/warSign3_2-Photoroom.png");
@@ -919,23 +921,21 @@ int UI::displayGameTableAndCharactersForThree(int turnHandlerForDisplay, int Tur
         // std::cout << "1:54 " << std::endl;
         if (turnHandlerForDisplay / 3 < 1)
         {
-            
 
-                for (int k = 0; k < (((turnHandlerForDisplay - 1) % 3 + TurnControler) % 4) + 1; k++)
+            for (int k = 0; k < (((turnHandlerForDisplay - 1) % 3 + TurnControler) % 4) + 1; k++)
+            {
+                // std::cout << "1:55 " << turnHandlerForDisplay % 4 + TurnControler << " k chi " << k << std::endl;
+                for (int j = 0; j < playedCardsHandler.at(k).size() / 3; j++)
                 {
-                    // std::cout << "1:55 " << turnHandlerForDisplay % 4 + TurnControler << " k chi " << k << std::endl;
-                    for (int j = 0; j < playedCardsHandler.at(k).size() / 3; j++)
-                    {
-                        // std::cout << "1:56 " << std::endl;
-                        for (int i = 0; i < 3; i++)
-                            DrawTexture(playedCardsHandler.at(k)[i], (k * 400) + (i * 65) + 50, (j * 100) + 290, WHITE);
-                        // std::cout << "1:57 " << playedCardsHandler.at(k).size() % 3 << std::endl;
-                    }
-                    // std::cout << "2:42 " << k << "2:44" <<playedCardsHandler.at(k).size() % 3 << std::endl;
-                    for (int i = playedCardsHandler.at(k).size() - (playedCardsHandler.at(k).size() % 3); i < playedCardsHandler.at(k).size() % 3; i++)
-                        DrawTexture(playedCardsHandler.at(k)[i], (k * 400) + (i * 65) + 50, (playedCardsHandler.at(k).size() / 3 * 100) + 290, WHITE);
+                    // std::cout << "1:56 " << std::endl;
+                    for (int i = 0; i < 3; i++)
+                        DrawTexture(playedCardsHandler.at(k)[i], (k * 400) + (i * 65) + 50, (j * 100) + 290, WHITE);
+                    // std::cout << "1:57 " << playedCardsHandler.at(k).size() % 3 << std::endl;
                 }
-            
+                // std::cout << "2:42 " << k << "2:44" <<playedCardsHandler.at(k).size() % 3 << std::endl;
+                for (int i = playedCardsHandler.at(k).size() - (playedCardsHandler.at(k).size() % 3); i < playedCardsHandler.at(k).size() % 3; i++)
+                    DrawTexture(playedCardsHandler.at(k)[i], (k * 400) + (i * 65) + 50, (playedCardsHandler.at(k).size() / 3 * 100) + 290, WHITE);
+            }
         }
 
         Color selectedColor = WHITE;
@@ -1241,39 +1241,19 @@ void UI::initializeCardTextureAndName()
             {"shirzan", cards[5]},
             {"rish_sefid", cards[6]},
             {"parcham_dar", cards[7]},
-            {"sarbaz_1", cards[8]},
-            {"sarbaz_2", cards[9]},
-            {"sarbaz_3", cards[10]},
-            {"sarbaz_4", cards[11]},
-            {"sarbaz_5", cards[12]},
-            {"sarbaz_6", cards[13]},
-            {"sarbaz_10", cards[14]},
+            {"fok_sefid", cards[8]},
+            {"rakhsh_sefid", cards[9]},
+            {"sarbaz_1", cards[10]},
+            {"sarbaz_2", cards[11]},
+            {"sarbaz_3", cards[12]},
+            {"sarbaz_4", cards[13]},
+            {"sarbaz_5", cards[14]},
+            {"sarbaz_6", cards[15]},
+            {"sarbaz_10", cards[16]},
 
         };
 }
 
-void UI::initializeCardTextureAndStrings()
-{
-    // UIStringName =
-    //     {
-    //         {cards[0] ,"bahar"},
-    //         {cards[1] , "zemestan"},
-    //         {cards[2] , "matarsak"},
-    //         {cards[3] , "tabl_zan"},
-    //         {cards[4] , "shah_dokht"},
-    //         {cards[5] , "shirzan"},
-    //         {cards[6] , "rish_sefid"},
-    //         {cards[7] , "parcham_dar"},
-    //         {cards[8] , "sarbaz_1"},
-    //         {cards[9] , "sarbaz_2"},
-    //         {cards[10] , "sarbaz_3"},
-    //         {cards[11] , "sarbaz_4"},
-    //         {cards[12] , "sarbaz_5"},
-    //         {cards[13] , "sarbaz_6"},
-    //         {cards[14] , "sarbaz_10"},
-
-    //     };
-}
 void UI::findTexture(std::vector<Card> cardsForUI, int starterPlayer)
 {
 

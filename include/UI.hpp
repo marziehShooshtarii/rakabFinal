@@ -152,7 +152,7 @@ private:
     RenderTexture2D renderTextureForGameTableAndCharactersForFour;
     RenderTexture2D renderTextureMatarsakCharacters[4];
     RenderTexture2D renderTextureForWarSigns;
-    Texture2D cards[15];
+    Texture2D cards[17];
     Texture2D winnerBackgroundForEachWar[4];
     Texture2D winnerBackgroundForEndOfGame[4];
     Texture2D noWinner;
