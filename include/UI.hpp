@@ -48,7 +48,8 @@ public:
     void initializeWarzoneMap();
     bool displayMap(std::string);
     void renderTextureForWarzoneMap();
-    bool displayCharectersAndNames(std::string, std::string, std::string);
+    bool displayCharectersAndNamesForThree(std::string, std::string, std::string);
+    bool displayCharectersAndNamesForFour(std::string, std::string, std::string,std::string);
     void initializeNextButton(float x, float y, float width, float hight);
     bool displaySelectedWarzone(std::string);
 
@@ -126,7 +127,7 @@ private:
     Texture2D backgroundWarzoneMap;
     Texture2D foregroundWarzoneMap;
     Button next;                         // for moving to the next step of the game
-    Texture2D charectersAndNames;        // for introducing charecters with their names
+    Texture2D charectersAndNames[2];        // for introducing charecters with their names
     Texture2D selectedWarzoneBackground; // for announcing the selected warzone
     Texture2D gameTableForThreePlayers;  // table background during the game for three players
     Texture2D gameTableForFourPlayers;   // table background during the game for four players

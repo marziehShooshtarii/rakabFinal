@@ -14,7 +14,9 @@ UI::UI()
     backgroundWarzoneMap = LoadTexture("../assets/warzone_map.png");
     warzoneMapWithSigns = LoadTexture("../assets/warzone_map2.png");
 
-    charectersAndNames = LoadTexture("../assets/charactersIntroForThree.png");
+    charectersAndNames[0] = LoadTexture("../assets/charactersIntroForThree.png");
+    charectersAndNames[1] = LoadTexture("../assets/charactersIntro4.png");
+
     luckNumberBackground = LoadTexture("../assets/luck2.png");
     selectedWarzoneBackground = LoadTexture("../assets/selected_warzone2.png");
     gameTableForThreePlayers = LoadTexture("../assets/dark_table.png");
@@ -156,8 +158,8 @@ void UI::unloadingTexture()
     UnloadTexture(backgroundMenu);
     UnloadTexture(backgroundIdentityMenu);
     UnloadTexture(backgroundWarzoneMap);
-
-    UnloadTexture(charectersAndNames);
+    for (int i = 0; i < 2; i++)
+        UnloadTexture(charectersAndNames[i]);
     UnloadTexture(luckNumberBackground);
     UnloadTexture(selectedWarzoneBackground);
     UnloadTexture(gameTableForThreePlayers);
@@ -235,21 +237,21 @@ int UI::displayPlayerNumberButton()
 }
 void UI::initializeWarzoneButton(float x, float y, float width, float hight)
 {
-    UIwarzone[0] = (Button){(Rectangle){820 + x, 115 + y, width, hight}, "", false};    // bella
+    UIwarzone[0] = (Button){(Rectangle){820 + x, 115 + y, width, hight}, "", false};  // bella
     UIwarzone[1] = (Button){(Rectangle){832 + x, 260 + y, width, hight}, "", false};  // calline
-    UIwarzone[2] = (Button){(Rectangle){768 + x, 360 + y, width, hight}, "", false};     // lia
-    UIwarzone[3] = (Button){(Rectangle){824 + x, 510 + y, width, hight}, "", false};    // atela
-    UIwarzone[4] = (Button){(Rectangle){654 + x, 467 + y, width, hight}, "", false};   // dimase
+    UIwarzone[2] = (Button){(Rectangle){768 + x, 360 + y, width, hight}, "", false};  // lia
+    UIwarzone[3] = (Button){(Rectangle){824 + x, 510 + y, width, hight}, "", false};  // atela
+    UIwarzone[4] = (Button){(Rectangle){654 + x, 467 + y, width, hight}, "", false};  // dimase
     UIwarzone[5] = (Button){(Rectangle){541 + x, 474 + y, width, hight}, "", false};  // olivadi
-    UIwarzone[6] = (Button){(Rectangle){443 + x, 572 + y, width, hight}, "", false};      // enna
+    UIwarzone[6] = (Button){(Rectangle){443 + x, 572 + y, width, hight}, "", false};  // enna
     UIwarzone[7] = (Button){(Rectangle){428 + x, 420 + y, width, hight}, "", false};  // armento
-    UIwarzone[8] = (Button){(Rectangle){489 + x, 237 + y, width, hight}, "", false};   // morina
+    UIwarzone[8] = (Button){(Rectangle){489 + x, 237 + y, width, hight}, "", false};  // morina
     UIwarzone[9] = (Button){(Rectangle){293 + x, 175 + y, width, hight}, "", false};  // talmone
-    UIwarzone[10] = (Button){(Rectangle){150 + x, 135 + y, width, hight}, "", false};  // elinia
-    UIwarzone[11] = (Button){(Rectangle){370 + x, 84 + y, width, hight}, "", false};    // rollo
+    UIwarzone[10] = (Button){(Rectangle){150 + x, 135 + y, width, hight}, "", false}; // elinia
+    UIwarzone[11] = (Button){(Rectangle){370 + x, 84 + y, width, hight}, "", false};  // rollo
     UIwarzone[12] = (Button){(Rectangle){619 + x, 108 + y, width, hight}, "", false}; // pladaci
-    UIwarzone[13] = (Button){(Rectangle){651 + x, 298 + y, width, hight}, "", false};   // borge
-    UIwarzone[14] = (Button){(Rectangle){719 + x, 550 + y, width, hight}, "", false};   // alora
+    UIwarzone[13] = (Button){(Rectangle){651 + x, 298 + y, width, hight}, "", false}; // borge
+    UIwarzone[14] = (Button){(Rectangle){719 + x, 550 + y, width, hight}, "", false}; // alora
 }
 
 int UI::displayWarzoneButton(std::string starterPlayer)
@@ -668,7 +670,6 @@ bool UI::displayCardsButtons()
             }
 
             DrawTextEx(fontMenu, this->cardsButtons[idx].title, (Vector2){this->cardsButtons[idx].getRectangle().x + 10, this->cardsButtons[idx].getRectangle().y + 10}, fontMenu.baseSize, 1, selectedColor);
-
         }
 
         EndDrawing();
@@ -729,7 +730,7 @@ int UI::displayGameTableAndCharactersForThree(int turnHandlerForDisplay, int Tur
             {
 
                 for (int j = 0; j < playedCardsHandler.at(k).size() / 3; j++)
-                { 
+                {
                     for (int i = 0; i < 3; i++)
                         DrawTexture(playedCardsHandler.at(k)[i], (k * 400) + (i * 65) + 50, (j * 100) + 290, WHITE);
                 }
@@ -827,7 +828,6 @@ int UI::displayGameTableAndCharactersForFour(int turnHandlerForDisplay, int Turn
                     }
                     for (int i = playedCardsHandler.at(k).size() - (playedCardsHandler.at(k).size() % 3); i < playedCardsHandler.at(k).size(); i++)
                         DrawTexture(playedCardsHandler.at(k)[i], (k * 400) + ((i - playedCardsHandler.at(k).size() + (playedCardsHandler.at(k).size() % 3)) * 65) + 65, (playedCardsHandler.at(k).size() / 3 * 70) + 250, WHITE);
- 
                 }
             }
 
@@ -838,9 +838,8 @@ int UI::displayGameTableAndCharactersForFour(int turnHandlerForDisplay, int Turn
             }
             for (int i = playedCardsHandler.at(3).size() - (playedCardsHandler.at(3).size() % 3); i < playedCardsHandler.at(3).size(); i++)
                 DrawTexture(playedCardsHandler.at(3)[i], ((i - playedCardsHandler.at(3).size() + (playedCardsHandler.at(3).size() % 3)) * 65) + 65, (playedCardsHandler.at(3).size() / 3 * 70) + 500, WHITE);
-
         }
-   
+
         if (turnHandlerForDisplay / 4 < 1)
         {
             for (int k = 0; k < (((turnHandlerForDisplay - 1) % 4 + TurnControler) % 4) + 1; k++)
@@ -866,8 +865,7 @@ int UI::displayGameTableAndCharactersForFour(int turnHandlerForDisplay, int Turn
                     DrawTexture(playedCardsHandler.at(3)[i], (i * 65) + 65, (j * 70) + 500, WHITE);
             }
             for (int i = playedCardsHandler.at(3).size() - (playedCardsHandler.at(3).size() % 3); i < playedCardsHandler.at(3).size() % 3; i++)
-                DrawTexture(playedCardsHandler.at(3)[i],  1200 + (i * 65) + 65, (playedCardsHandler.at(3).size() / 3 * 70) + 500, WHITE);
-         
+                DrawTexture(playedCardsHandler.at(3)[i], 1200 + (i * 65) + 65, (playedCardsHandler.at(3).size() / 3 * 70) + 500, WHITE);
         }
 
         Color selectedColor = WHITE;
@@ -1036,7 +1034,6 @@ void UI::findTexture(std::vector<Card> cardsForUI, int starterPlayer)
         playerCardsHandler.at(starterPlayer).emplace_back(UIcardName.at(cardsForUI[i].getName()));
         playerCardsFromUI.at(starterPlayer).emplace_back(cardsForUI[i].getName()); // player cards remain string for being used in played cards
     }
-
 }
 
 void UI::initializeCharacterNumber()
@@ -1051,7 +1048,7 @@ void UI::initializeCharacterNumber()
         };
 }
 
-bool UI::displayCharectersAndNames(std::string name1, std::string name2, std::string name3)
+bool UI::displayCharectersAndNamesForThree(std::string name1, std::string name2, std::string name3)
 {
     initializeNextButton(1100, 680, 120, 50);
     const char *playerName1 = name1.c_str();
@@ -1072,10 +1069,56 @@ bool UI::displayCharectersAndNames(std::string name1, std::string name2, std::st
 
         BeginDrawing();
         ClearBackground(RAYWHITE);
-        DrawTexture(charectersAndNames, 0, 0, WHITE);
+
+        DrawTexture(charectersAndNames[0], 0, 0, WHITE);
         DrawTextPro(gameFont, playerName1, (Vector2){200, 40}, (Vector2){1}, 1, 40, 1, {50, 190, 220, 225});
         DrawTextPro(gameFont, playerName2, (Vector2){600, 40}, (Vector2){1}, 1, 40, 1, {50, 190, 220, 225});
         DrawTextPro(gameFont, playerName3, (Vector2){980, 40}, (Vector2){1}, 1, 40, 1, {50, 190, 220, 225});
+
+        Color selectedColor = WHITE;
+        if (CheckCollisionPointRec(mousePssitionIdentity, next.getRectangle()))
+        {
+            selectedColor = WHITE;
+        }
+        else
+        {
+            selectedColor = RED;
+        }
+
+        DrawTextEx(fontMenu, this->next.title, (Vector2){this->next.getRectangle().x + 10, this->next.getRectangle().y + 10}, fontMenu.baseSize, 1, selectedColor);
+
+        EndDrawing();
+    }
+}
+bool UI::displayCharectersAndNamesForFour(std::string name1, std::string name2, std::string name3, std::string name4)
+{
+    initializeNextButton(1100, 680, 120, 50);
+    const char *playerName1 = name1.c_str();
+    const char *playerName2 = name2.c_str();
+    const char *playerName3 = name3.c_str();
+    const char *playerName4 = name4.c_str();
+
+    while (1)
+    {
+        Vector2 mousePssitionIdentity = GetMousePosition();
+        bool mousePressedIdentity = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
+
+        if (next.ifPressed(mousePssitionIdentity, mousePressedIdentity))
+        {
+
+            next.setStatus(false);
+            return true; // next button has been pressed
+        }
+
+        BeginDrawing();
+        ClearBackground(RAYWHITE);
+
+        DrawTexture(charectersAndNames[1], 0, 0, WHITE);
+
+        DrawTextPro(gameFont, playerName1, (Vector2){150, 40}, (Vector2){1}, 1, 40, 1, {50, 190, 220, 225});
+        DrawTextPro(gameFont, playerName2, (Vector2){450, 40}, (Vector2){1}, 1, 40, 1, {50, 190, 220, 225});
+        DrawTextPro(gameFont, playerName3, (Vector2){750, 40}, (Vector2){1}, 1, 40, 1, {50, 190, 220, 225});
+        DrawTextPro(gameFont, playerName4, (Vector2){1050, 40}, (Vector2){1}, 1, 40, 1, {50, 190, 220, 225});
 
         Color selectedColor = WHITE;
         if (CheckCollisionPointRec(mousePssitionIdentity, next.getRectangle()))
@@ -1428,7 +1471,7 @@ std::string UI::displayOpenDropDownMenuForColors(std::string playerName)
             Vector2 mousePos = GetMousePosition();
             if (CheckCollisionPointRec(mousePos, dropdownBoundsForColors))
             {
-                isDropdownOpenForColor = !isDropdownOpenForColor; 
+                isDropdownOpenForColor = !isDropdownOpenForColor;
             }
             else if (isDropdownOpenForColor)
             {
@@ -1436,8 +1479,8 @@ std::string UI::displayOpenDropDownMenuForColors(std::string playerName)
                 {
                     if (CheckCollisionPointRec(mousePos, colorOptionBounds[i]))
                     {
-                        selectedOptionForColors = colorOptions[i]; 
-                        isDropdownOpenForColor = false;            
+                        selectedOptionForColors = colorOptions[i];
+                        isDropdownOpenForColor = false;
                         return selectedOptionForColors;
                     }
                 }
@@ -1452,7 +1495,7 @@ std::string UI::displayOpenDropDownMenuForColors(std::string playerName)
         DrawTextPro(inputFont, selectedOptionForColors.c_str(), (Vector2){dropdownBoundsForColors.x + 37, dropdownBoundsForColors.y - 11}, (Vector2){1}, 1, 40, 1, {225, 120, 80, 225});
         DrawTextPro(gameFont, playerName.c_str(), (Vector2){300, 100}, (Vector2){1}, 1, 50, 1, {80, 200, 220, 225});
         DrawTextPro(gameFont, "choose the color: ", (Vector2){380, 100}, (Vector2){1}, 1, 50, 1, {80, 200, 220, 225});
-   
+
         if (isDropdownOpenForColor)
         {
             for (int i = 0; i < 4; i++)
@@ -1482,7 +1525,7 @@ int UI::displayOpenDropDownMenuForSavedGameNumber()
             Vector2 mousePos = GetMousePosition();
             if (CheckCollisionPointRec(mousePos, dropdownBounds))
             {
-                isDropdownOpen = !isDropdownOpen; 
+                isDropdownOpen = !isDropdownOpen;
             }
             else if (isDropdownOpen)
             {
@@ -1491,9 +1534,9 @@ int UI::displayOpenDropDownMenuForSavedGameNumber()
                 {
                     if (CheckCollisionPointRec(mousePos, optionBounds[i]))
                     {
-                        selectedOption = options[i]; 
-                        isDropdownOpen = false;      
-                        savedGameNumber = i;         
+                        selectedOption = options[i];
+                        isDropdownOpen = false;
+                        savedGameNumber = i;
                         return savedGameNumber;
                     }
                 }
@@ -1563,7 +1606,7 @@ std::string UI::helpGameControl()
             Vector2 mousePos = GetMousePosition();
             if (CheckCollisionPointRec(mousePos, dropdownHelpBounds))
             {
-                isDropdownOpenForHelp = !isDropdownOpenForHelp; 
+                isDropdownOpenForHelp = !isDropdownOpenForHelp;
             }
             else if (isDropdownOpenForHelp)
             {
@@ -1573,8 +1616,8 @@ std::string UI::helpGameControl()
                     if (CheckCollisionPointRec(mousePos, helpOptionBounds[i]))
                     {
 
-                        selectedHelpOption = helpOptions[i]; 
-                        isDropdownOpenForHelp = false;       
+                        selectedHelpOption = helpOptions[i];
+                        isDropdownOpenForHelp = false;
                         return selectedHelpOption;
                     }
                 }

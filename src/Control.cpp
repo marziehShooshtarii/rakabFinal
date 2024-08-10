@@ -133,7 +133,6 @@ void Control::randomCardSet()
 
     setPlayers();
 
-
     for (int j = 0; j < identity.getPlayerNumber(); j++)
     {
         for (int i = 0; i < (10 + players[j].getNumberOfOwenedStates()); i++)
@@ -588,7 +587,7 @@ bool Control::determinWinnerOfWar()
             winter.zemestanPlayed();
         }
     }
- 
+
     for (int i = 0; i < identity.getPlayerNumber(); i++)
     {
         for (int j = 0; j < armyAndSpecialCards.size(); j++)
@@ -622,7 +621,7 @@ bool Control::determinWinnerOfWar()
         return false; // there is no winner for this war
     }
     setOrderOfWinner();
-  
+
     // std::cin.ignore();
     // system("CLS");
     int counterBadLuck = 0;
@@ -1090,14 +1089,18 @@ void Control::menu()
         }
         case charactersIntro:
         {
-            ui.displayCharectersAndNames(identity.getName(starterPlayer), identity.getName((starterPlayer + 1) % 3), identity.getName((starterPlayer + 2) % 3));
+            if (identity.getPlayerNumber() == 3)
+                ui.displayCharectersAndNamesForThree(identity.getName(starterPlayer), identity.getName((starterPlayer + 1) % 3), identity.getName((starterPlayer + 2) % 3));
+            else
+                ui.displayCharectersAndNamesForFour(identity.getName(starterPlayer), identity.getName((starterPlayer + 1) % 4), identity.getName((starterPlayer + 2) % 4), identity.getName((starterPlayer + 3) % 4));
+
             uiStates = showSelectedWarzone;
             break;
         }
         case showSelectedWarzone:
         {
             ui.displaySelectedWarzone(warzone);
-    
+
             uiStates = displayPlayersCard;
             break;
         }
@@ -1124,7 +1127,6 @@ void Control::menu()
                 ui.findTexture(players[TurnControl].getAllPlayerCards(), TurnControl);
                 numberOfDealingHandsAfterSaveGame++;
             }
-
 
             if (PlayerTurnHandler < (identity.getPlayerNumber()) || players[TurnControl].getIfPassed() == false)
                 players[TurnControl].setIfPassed(ui.renderTextureForCharacterOnGameTable(TurnControl));
@@ -1170,7 +1172,7 @@ void Control::menu()
         {
             turnHandlerAfterEachWar++;
             PlayerTurnHandler++;
-     
+
             exitStatus = ui.displayGameTableAndCharactersForThree(PlayerTurnHandler, starterPlayer);
             if (exitStatus == 0)
                 uiStates = controlExit;
@@ -1185,7 +1187,7 @@ void Control::menu()
         {
             turnHandlerAfterEachWar++;
             PlayerTurnHandler++;
-    
+
             exitStatus = ui.displayGameTableAndCharactersForFour(PlayerTurnHandler, starterPlayer);
             if (exitStatus == 0)
                 uiStates = controlExit;
@@ -1193,7 +1195,7 @@ void Control::menu()
                 uiStates = displayPlayersCard;
             else if (exitStatus == 2)
                 uiStates = specialHelp;
-       
+
             break;
         }
 
@@ -1250,9 +1252,8 @@ void Control::menu()
         }
         }
     }
-  
+
     ui.unloadingTexture();
- 
 }
 int Control::setPlayedCardsFromUI()
 {
@@ -1351,7 +1352,7 @@ void Control::saveReadPlayerStates(int index)
     int numberOfStates;
     save >> stringNumberOfStates >> numberOfStates;
     save >> stringOwendStates;
-    
+
     for (int j = 0; j < numberOfStates; j++)
     {
         save >> stringOwendStates;
@@ -1491,7 +1492,6 @@ void Control::initializeColorsForUI()
     {
         colorsForUI.emplace_back(players[i].getColor());
     }
-   
 }
 void Control::run()
 {
