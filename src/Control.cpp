@@ -110,6 +110,8 @@ void Control::dealingCards()
         {"shirzan", 12},
         {"parcham_dar", 3},
         {"rish_sefid", 6},
+        {"fok_sefid", 3},   // new card added
+        {"rakhsh_sefid", 2}, // new card added
         {"sarbaz_1", 8},
         {"sarbaz_2", 10},
         {"sarbaz_3", 10},
@@ -156,7 +158,7 @@ void Control::randomCardSet()
         {
             std::cout << "identity.getPlayerNumber() -> " << identity.getPlayerNumber() << std::endl;
             std::cout << "randomCardSet ghabl " << std::endl;
-            randomCard = rand() % 110;
+            randomCard = rand() % 115;
             std::cout << "randomCardSet bad " << std::endl;
             std::cout << "randomCard " << randomCard << std::endl;
             players[j].setPlayerCard(allCards[randomCard]);
@@ -347,6 +349,14 @@ bool Control::playingCards(int index, int checkSelectedCard)
     {
         players[index].setIfPassed(true);
         checkIfCertianPlayerPassed(index);
+        return false;
+    }
+    if (checkSelectedCard == 6)
+    {
+        for (int i = 0; i < identity.getPlayerNumber(); i++)
+            players[i].eraseAllPlayedCards();
+
+        ui.eraseAllCardsAfterWar();
         return false;
     }
     if (checkSelectedCard == 7)
@@ -654,7 +664,7 @@ bool Control::determinWinnerOfWar()
     std::cout << "bashe. " << identity.getPlayerNumber() << std::endl;
     for (int i = 0; i < identity.getPlayerNumber(); i++)
     {
-        std::cout << "marg " << std::endl;
+        std::cout << "marg " << players[i].getNumberOfPlayedCards() << " azizam " << identity.getName(i) << std::endl;
         for (int j = 0; j < players[i].getNumberOfPlayedCards(); j++)
         {
             std::cout << "turn control " << TurnControl << std::endl;
@@ -676,12 +686,14 @@ bool Control::determinWinnerOfWar()
         std::cout << "akhar polymorphism" << std::endl;
         std::cout << "lalalaaaaaaaaa 1 " << goodLuckNumber << std::endl;
         std::cout << "olalaaaaaaaaa 2 " << badLuckNumber << std::endl;
+        if (scorsAtEndOfWar[i] > 0)
+        {
+            if (scorsAtEndOfWar[i] % goodLuckNumber == 0)
+                scorsAtEndOfWar[i] *= 2;
 
-        if (scorsAtEndOfWar[i] % goodLuckNumber == 0)
-            scorsAtEndOfWar[i] *= 2;
-
-        if (scorsAtEndOfWar[i] % badLuckNumber == 0)
-            scorsAtEndOfWar[i] = -1; // the player can't be the winner anyway
+            if (scorsAtEndOfWar[i] % badLuckNumber == 0)
+                scorsAtEndOfWar[i] = -1;
+        } // the player can't be the winner anyway
 
         std::cout << scorsAtEndOfWar[i] << " jan zizet" << std::endl;
         if (scorsAtEndOfWar[i] > winnerScore)
@@ -1157,13 +1169,13 @@ void Control::menu()
             for (int i = 0; i < 3; i++)
             {
                 ui.thripleTextBoxDraw();
-                //std::string UIColors = ui.displayOpenDropDownMenuForColors();
-                //std::cout << "uicolors" << UIColors << std::endl;
+                // std::string UIColors = ui.displayOpenDropDownMenuForColors();
+                // std::cout << "uicolors" << UIColors << std::endl;
                 std::cout << "for text box" << i << std::endl;
                 identity.setPlayerNameForSave(ui.getPlayerNameAndColorFromUI(i));
                 identity.setPlayerAgeForSave(ui.getPlayerAgeAndLuckFromUI(i + 3));
                 identity.setPlayerColorForSave(ui.getPlayerNameAndColorFromUI(i + 6));
-                 //identity.setPlayerColorForSave(UIColors);
+                // identity.setPlayerColorForSave(UIColors);
                 identity.setPlayerForSave();
             }
             std::cout << "threePlayerInput 2" << std::endl;
@@ -1586,6 +1598,8 @@ int Control::setPlayedCardsFromUI()
                 return 4;
             if (selectedCard.getName() == "parcham_dar")
                 return 5;
+            if (selectedCard.getName() == "fok_sefid")
+                return 6;
         }
         std::cout << "playerrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr " << players[TurnControl].getNumberOfPlayedCards() << std::endl;
         return 3;
