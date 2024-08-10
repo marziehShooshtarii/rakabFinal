@@ -910,29 +910,32 @@ int UI::displayGameTableAndCharactersForThree(int turnHandlerForDisplay, int Tur
                 for (int j = 0; j < playedCardsHandler.at(k).size() / 3; j++)
                 {
                     for (int i = (j * 3); i < (j * 3) + 3; i++)
-                        DrawTexture(playedCardsHandler.at(k)[i], (k * 300) + (i * 65) + 5, (j * 100) + 290, WHITE);
+                        DrawTexture(playedCardsHandler.at(k)[i], (k * 400) + (i * 65) + 50, (j * 100) + 290, WHITE);
                 }
                 for (int i = playedCardsHandler.at(k).size() - (playedCardsHandler.at(k).size() % 3); i < playedCardsHandler.at(k).size(); i++)
-                    DrawTexture(playedCardsHandler.at(k)[i], (k * 300) + (i * 65) + 5, (playedCardsHandler.at(k).size() / 3 * 100) + 290, WHITE);
+                    DrawTexture(playedCardsHandler.at(k)[i], (k * 400) + ((i - playedCardsHandler.at(k).size() + playedCardsHandler.at(k).size() % 3) * 65) + 50, (playedCardsHandler.at(k).size() / 3 * 100) + 290, WHITE);
             }
         }
         // std::cout << "1:54 " << std::endl;
         if (turnHandlerForDisplay / 3 < 1)
         {
-            for (int k = 0; k < (((turnHandlerForDisplay - 1) % 3 + TurnControler) % 4) + 1; k++)
-            {
-                // std::cout << "1:55 " << turnHandlerForDisplay % 4 + TurnControler << " k chi " << k << std::endl;
-                for (int j = 0; j < playedCardsHandler.at(k).size() / 3; j++)
+            
+
+                for (int k = 0; k < (((turnHandlerForDisplay - 1) % 3 + TurnControler) % 4) + 1; k++)
                 {
-                    // std::cout << "1:56 " << std::endl;
-                    for (int i = 0; i < 3; i++)
-                        DrawTexture(playedCardsHandler.at(k)[i], (k * 300) + (i * 65) + 5, (j * 100) + 290, WHITE);
-                    // std::cout << "1:57 " << playedCardsHandler.at(k).size() % 3 << std::endl;
+                    // std::cout << "1:55 " << turnHandlerForDisplay % 4 + TurnControler << " k chi " << k << std::endl;
+                    for (int j = 0; j < playedCardsHandler.at(k).size() / 3; j++)
+                    {
+                        // std::cout << "1:56 " << std::endl;
+                        for (int i = 0; i < 3; i++)
+                            DrawTexture(playedCardsHandler.at(k)[i], (k * 400) + (i * 65) + 50, (j * 100) + 290, WHITE);
+                        // std::cout << "1:57 " << playedCardsHandler.at(k).size() % 3 << std::endl;
+                    }
+                    // std::cout << "2:42 " << k << "2:44" <<playedCardsHandler.at(k).size() % 3 << std::endl;
+                    for (int i = playedCardsHandler.at(k).size() - (playedCardsHandler.at(k).size() % 3); i < playedCardsHandler.at(k).size() % 3; i++)
+                        DrawTexture(playedCardsHandler.at(k)[i], (k * 400) + (i * 65) + 50, (playedCardsHandler.at(k).size() / 3 * 100) + 290, WHITE);
                 }
-                // std::cout << "2:42 " << k << "2:44" <<playedCardsHandler.at(k).size() % 3 << std::endl;
-                for (int i = playedCardsHandler.at(k).size() - (playedCardsHandler.at(k).size() % 3); i < playedCardsHandler.at(k).size() % 3; i++)
-                    DrawTexture(playedCardsHandler.at(k)[i], (k * 300) + (i * 65) + 5, (playedCardsHandler.at(k).size() / 3 * 100) + 290, WHITE);
-            }
+            
         }
 
         Color selectedColor = WHITE;
@@ -1016,7 +1019,7 @@ int UI::displayGameTableAndCharactersForFour(int turnHandlerForDisplay, int Turn
                         DrawTexture(playedCardsHandler.at(k)[i], (k * 200) + (i * 65) + 5, (j * 100) + 290, WHITE);
                 }
                 for (int i = playedCardsHandler.at(k).size() - (playedCardsHandler.at(k).size() % 3); i < playedCardsHandler.at(k).size(); i++)
-                    DrawTexture(playedCardsHandler.at(k)[i], (k * 200) + (i * 65) + 5, (playedCardsHandler.at(k).size() / 3 * 100) + 290, WHITE);
+                    DrawTexture(playedCardsHandler.at(k)[i], (k * 200) + ((i - playedCardsHandler.at(k).size() + (playedCardsHandler.at(k).size() % 3)) * 65) + 5, (playedCardsHandler.at(k).size() / 3 * 100) + 290, WHITE);
             }
         }
         if (turnHandlerForDisplay / 4 < 1)
