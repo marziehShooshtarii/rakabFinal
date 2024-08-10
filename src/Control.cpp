@@ -978,12 +978,18 @@ void Control::menu()
     Map mapForUI;
     ifCardsAreSet = false;
     UIStates uiStates;
-    uiStates = UIMenu;
+    uiStates = begining;
     while (WindowShouldClose() == false)
     {
 
         switch (uiStates)
         {
+        case begining:
+        {
+            ui.displayStart();
+            uiStates = UIMenu;
+            break;
+        }
         case UIMenu:
         {
             newOrContinue = ui.menuGameLoop();

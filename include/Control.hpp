@@ -187,5 +187,6 @@ private:
         specialHelp,
         generalHelp,
         displayWarSigns,
+        begining,
     };
 };
