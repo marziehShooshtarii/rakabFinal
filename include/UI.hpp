@@ -10,40 +10,34 @@
 #include "Button.hpp"
 #include "uiInput.hpp"
 #include "Card.hpp"
-// #define windowWidth = 600
-// #define windowHeight = 800
-// Font fontMenu = LoadFont("C:\rakabFinal\assets\KaushanScript-Regular.ttf");
+
 class UI
 {
 public:
     UI();
     ~UI();
     void initializRec();
-    // bool ifPressed(Vector2 mousePos, bool mousePressed);
+
     void drawRectUI();
     void displayMenuBackground();
     std::string menuGameLoop();
     void unloadingTexture();
-    void unloadTextBox();
-    // void initializeFontMenu();
     void initializeBackgroundMenu();
     void initializeButtons();
     void initializeIdentityMenu();
     int displayPlayerNumberButton();
     void initializePlayerNumberButton();
     void clearTextBox();
-    // bool Textbox();
+ 
     void AddTextBox(float x, float y, float width, float height);
     void textBoxUpdate();
     void textBoxDraw(Font font, int framesCounter);
     bool thripleTextBoxDraw();
-    // bool confirmButton();
+
     bool quadrupleTextBoxDraw();
     std::vector<char> getNamesFromUI(int index);
     void initializeConfirmPlayerDataButton(float x, float y, float width, float hight);
-    void initializeQuadrupleConfirmPlayerDataButton();
-    // bool displayConfirmPlayerDataButton();
-    char *getFullNameFromUI(int index);
+
     std::vector<char> getAgeFromUI(int index);
     void controlTransitionVectors(int);
     std::string getPlayerNameAndColorFromUI(int playerTextBoxIndex);
@@ -62,7 +56,7 @@ public:
     bool getLuckNumbers(std::string);
     void displaycharactersCards(int);
     bool renderTextureForCharacterOnGameTable(int);
-    // bool renderTextureForCharactertwo();
+  
     void initializeCardTextureAndName();
     void initializeCardTextureAndStrings();
     void findTexture(std::vector<Card>, int);
@@ -110,15 +104,12 @@ public:
     void initializeDropDownMenuForColors();
     std::string displayOpenDropDownMenuForColors(std::string);
     int displayWarzoneForPeacsignButtons(std::string);
-    
 
-    // std::string findCard(Texture2D);
 private:
     const char *menuButtonsTitle[4];
     int windowWidth = 1200;
     int windowHeight = 800;
-    // Vector2 mousePssition;//find the mouse position
-    // bool mousePressed;//check if mouse is pressed
+
     Rectangle rect;
     Font fontMenu;                     // first menu font
     Font gameFont;                     // the game font
@@ -143,7 +134,7 @@ private:
     std::unordered_map<std::string, Texture2D> UIcardName;
 
     std::unordered_map<int, std::string> playedStringCard;
-    // std::unordered_map <Button,std::string> UIStringName;
+
     Texture2D character1;
     Texture2D character2;
     Texture2D character3;
@@ -162,21 +153,6 @@ private:
 
     Button saveGame;
     Button exitGame;
-    // Texture2D baharCards;
-    // Texture2D zemestanCards;
-    // Texture2D shirzanCards;
-    // Texture2D shahDokhtCards;
-    // Texture2D rishSefidCards;
-    // Texture2D tablzanCards;
-    // Texture2D matarsakCards;
-    // Texture2D sarbazOneCards;
-    // Texture2D sarbazTwoCards;
-    // Texture2D sarbazThreeCards;
-    // Texture2D sarbazFourCards;
-    // Texture2D sarbazFiveCards;
-    // Texture2D sarbazSixCards;
-    // Texture2D sarbazTenCards;
-    // Texture2D parchamDarCards;
 
     std::vector<Texture2D> firstCharacterplayerCards;
     std::vector<Texture2D> secondCharacterplayerCards;
@@ -196,6 +172,9 @@ private:
     Texture2D warSigns[4];
     Texture2D peaceSignForUI;
     Texture2D peaceSignBackground;
+    // Texture2D helpForEachCard;
+    // Texture2D helpGeneral;
+
     Button passPosition;
     bool ifPlayerPassed[3]; // check the whole players position
     std::vector<std::string> firstPlayedCardsFromUI;
@@ -212,56 +191,7 @@ private:
     std::map<std::string, std::map<int, int>> statesCoordinates;
     std::map<std::string, std::map<int, int>>::iterator statesCoordinatesItr;
     std::map<int, int>::iterator statesCoordinatesPtr;
-    // enum TextureString
-    // {
-    //     baharCards,
-    //     zemestanCards,
-    //     shirzanCards,
-    //     shahDokhtCards,
-    //     rishSefidCards,
-    //     tablzanCards,
-    //     matarsakCards,
-    //     sarbazOneCards,
-    //     sarbazTwoCards,
-    //     sarbazThreeCards,
-    //     sarbazFourCards,
-    //     sarbazFiveCards,
-    //     sarbazSixCards,
-    //     sarbazTenCards,
-    //     parchamDarCards,
-    // };
-    // uiInput UILuckNumber;//needed to get the luckNumber
-    // std::string UIPlayerName;
-    // std::vector <std::string> allUIPlayerNames;
-    // bool ifPressed(Vector2 mousePos, bool mousePressed);
-
-    // std::cout << "test" << std::endl;
-    //     InitWindow(windowWidth, windowHeight, "game");
-    //     SetTargetFPS(60);
-    //     Font font = LoadFont("../assets/KaushanScript-Regular.ttf");
-    //     Texture2D background = LoadTexture("../assets/tunel for menu.png");
-    //     Vector2 position;
-
-    //     while (WindowShouldClose() == false)
-    //     {
-    //         Vector2 mousePssition = GetMousePosition();
-    //         bool mousePressed = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
-    //         if (ifPressed(mousePssition,mousePressed))
-    //         {
-    //             std::cout<<"new game"<<std::endl;
-    //         }
-
-    //         BeginDrawing();
-    //         ClearBackground(WHITE);
-    //         DrawTexture(background, 0, 0, WHITE);
-    //         DrawTextEx(font,"button",(Vector2){rect.x+10,rect.y+10},font.baseSize,1,RED);
-
-    //         EndDrawing();
-    //     }
-    //     UnloadTexture(background);
-    //     CloseWindow();
-    //     bool ifPressed(Vector2 mousePos, bool mousePressed)
-    // {
+ 
     std::string options[5];
     std::string selectedOption;
     bool isDropdownOpen;

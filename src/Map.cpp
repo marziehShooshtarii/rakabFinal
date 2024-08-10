@@ -10,7 +10,7 @@ bool Map::setMapStates()
     readMapFile.open("../src/matrix.txt", std::ios::in);
     if (!readMapFile.is_open())
     {
-        std ::cerr << "Error opening the file! mapppppppppppppppppppppppppppppppppppp" << std::endl;
+        std ::cerr << "Error opening the file!" << std::endl;
         return 1;
     }
     for (int i = 0; i < 15; i++)
@@ -67,27 +67,16 @@ bool Map::ifElementExists(std::string str)
 
 std::string Map::findKey(int value)
 {
-    std::cout << value << std::endl;
-    std::cout << "inja" << std::endl;
     std::string_view key;
     auto it = states.begin();
-    // auto it = std::find_if(states.begin(),states.end(),[&key](const auto& value){return value.first == key;});
-    std::cout << "inja2" << std::endl;
     std::cout << it->second << std::endl;
     while (it != states.end())
     {
 
-        std::cout << "inja3" << std::endl;
-        std::cout << it->second << std::endl;
         if (it->second == value)
         {
-            std::cout << "inja4" << std::endl;
-            std::cout << "mohem - >>>>> " << it->first << std::endl;
             return it->first;
         }
-        std::cout << "inja5" << std::endl;
-        std::cout << value << std::endl;
         it++;
     }
-    std::cout << "inja6" << std::endl;
 }

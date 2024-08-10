@@ -62,22 +62,16 @@ void Control ::displayOwenedStates()
 }
 int Control::determinMinAge()
 {
-    std::cout << "determinMinAge 1" << std::endl;
     int min = identity.getAge(0);
-    std::cout << "determinMinAge 2" << std::endl;
     for (int i = 1; i < identity.getPlayerNumber(); i++)
     {
-        std::cout << "determinMinAge 3" << std::endl;
         if (min > identity.getAge(i))
         {
-            std::cout << "determinMinAge 4" << std::endl;
             min = identity.getAge(i);
-            std::cout << "determinMinAge 5" << std::endl;
             starterPlayer = i;
             TurnControl = i; // starterPlayer that can be changed
         }
     }
-    std::cout << "determinMinAge 5" << std::endl;
     return starterPlayer;
 }
 void Control::diplayBeggingOfTheGame()
@@ -100,7 +94,6 @@ void Control::diplayBeggingOfTheGame()
 }
 void Control::dealingCards()
 {
-    std::cout << "aval deck" << std::endl;
     deck = {
         {"bahar", 3},
         {"zemestan", 3},
@@ -127,7 +120,6 @@ void Control::dealingCards()
             allCards.emplace_back(pair.first);
         }
     }
-    std::cout << "akhar deck" << std::endl;
 }
 void Control::setPlayers()
 {
@@ -140,33 +132,17 @@ void Control::randomCardSet()
 {
 
     setPlayers();
-    std::cout << "after players" << std::endl;
-    std::cout << "identity.getPlayerNumber() -> random card set" << identity.getPlayerNumber() << std::endl;
-    std::cout << "player name - > " << players[0].getName() << std::endl;
-    std::cout << "size vector owened states - > " << players[0].getNumberOfOwenedStates() << std::endl;
 
-    // if (fistWarOfGame)
-    // {
-    //     for (int i = 0; i < identity.getPlayerNumber(); i++)
-    //         players[i].eraseOwenedStates();
-    // }
 
     for (int j = 0; j < identity.getPlayerNumber(); j++)
     {
-        std::cout << "identity.getPlayerNumber() -> " << identity.getPlayerNumber() << std::endl;
         for (int i = 0; i < (10 + players[j].getNumberOfOwenedStates()); i++)
         {
-            std::cout << "identity.getPlayerNumber() -> " << identity.getPlayerNumber() << std::endl;
-            std::cout << "randomCardSet ghabl " << std::endl;
             randomCard = rand() % 115;
-            std::cout << "randomCardSet bad " << std::endl;
-            std::cout << "randomCard " << randomCard << std::endl;
             players[j].setPlayerCard(allCards[randomCard]);
         }
-        std::cout << "bad for aval " << std::endl;
     }
     ifCardsAreSet = true;
-    std::cout << "bad for dovoom " << std::endl;
 }
 void Control::validateIdentity()
 {
@@ -176,9 +152,7 @@ void Control::validateIdentity()
 }
 void Control::shuffelingCards()
 {
-    std::cout << "too shuffle " << std::endl;
     random_shuffle(allCards.begin(), allCards.end());
-    std::cout << "tah shuffle " << std::endl;
 }
 void Control::displayStartOfWar()
 {
@@ -186,15 +160,12 @@ void Control::displayStartOfWar()
 }
 int Control::playingInput()
 {
-    std::cout << "safewe" << std::endl;
     bool checkParchamDar = true;
     winner = -3;
     int indexControler = identity.getPlayerNumber();
     int i = TurnControl;
 
-    std::cout << "bade displayPlayingCards" << std::endl;
     checkSelectedCard = setPlayedCardsFromUI();
-    std::cout << "checkSelectedCard -> " << checkSelectedCard << std::endl;
     if (checkSelectedCard == 8)
     {
         for (int j = 0; j < identity.getPlayerNumber(); j++)
@@ -204,19 +175,14 @@ int Control::playingInput()
     }
     if (checkSelectedCard != 5) // if player has played anything but parcham dar
     {
-        std::cout << "4:05" << std::endl;
         if (playingCards(i, checkSelectedCard))
             return 4; // matarsak has been played
-        std::cout << "4:06" << std::endl;
     }
     else
     {
-        std::cout << "4:07" << std::endl;
         checkProcessOfEndingWar();
-        std::cout << "4:08" << std::endl;
         for (int q = 0; q < identity.getPlayerNumber(); q++)
             players[q].setIfPassed(true);
-        std::cout << "4:09" << std::endl;
         i = indexControler;
         checkParchamDar = false;
     }
@@ -238,7 +204,6 @@ int Control::checkProcessOfEndingWar()
     {
         if (checkSelectedCard == 8)
         {
-            std::cout << "aha tar " << identity.getName(TurnControl) << std::endl;
             winner = TurnControl;
             starterPlayer = winner;
             players[winner].setOwenedStates(warzone);
@@ -251,7 +216,6 @@ int Control::checkProcessOfEndingWar()
             else
                 return 4; // there is no winner for this war
         }
-        std::cout << "after determining winner of war" << std::endl;
         if (turn != 1)
         {
             if (checkIfItsTimeToDealHands())
@@ -295,20 +259,12 @@ void Control::setOrderOfWinner()
 {
     orderOfWinners.push_back(winner);
 }
-// void Control::setPeaceSign(std::string peaceSignState)
-// {
-//     peaceSign = peaceSignState;
-// }
+
 void Control::choiceForPeaceSign()
 {
-    std::cout << " too choiceForPeaceSign ....................................................................................1" << std::endl;
     Map mapForPeaceSign;
     std::cout << players[orderOfRishSefids[orderOfRishSefids.size() - 1]].getName() << " please choose the state you want to place your peace sign on.";
-    std::cout << " too choiceForPeaceSign ....................................................................................2" << std::endl;
-    // std::cin >> peaceSign;
-    // ui.displayWarzoneButton(players[orderOfRishSefids[orderOfRishSefids.size() - 1]].getName());
     peaceSign = mapForPeaceSign.findKey(ui.displayWarzoneForPeacsignButtons(players[orderOfRishSefids[orderOfRishSefids.size() - 1]].getName()));
-    std::cout << " too choiceForPeaceSign ....................................................................................3" << std::endl;
 }
 void Control::displayPlayingCards(int index)
 {
@@ -605,7 +561,6 @@ bool Control::checkForRishSefid(std::vector<Card> playedCardsForRishSefid)
 }
 bool Control::determinWinnerOfWar()
 {
-    std::cout << "determinWinnerOfWar" << std::endl;
     std::vector<int> scorsAtEndOfWar(identity.getPlayerNumber());
     for (int i = 0; i < identity.getPlayerNumber(); i++)
     {
@@ -629,38 +584,17 @@ bool Control::determinWinnerOfWar()
         }
         else
         {
-            std::cout << "in the zemestan" << std::endl;
             Zemestan winter;
-            std::cout << "after class zemestan" << std::endl;
             winter.zemestanPlayed();
-            std::cout << "after class zemestanplayed" << std::endl;
         }
     }
-    std::cout << "bashe. " << identity.getPlayerNumber() << std::endl;
-    for (int i = 0; i < identity.getPlayerNumber(); i++)
-    {
-        std::cout << "marg " << players[i].getNumberOfPlayedCards() << " azizam " << identity.getName(i) << std::endl;
-        for (int j = 0; j < players[i].getNumberOfPlayedCards(); j++)
-        {
-            std::cout << "turn control " << TurnControl << std::endl;
-            // std::cout << ui.getPlayedCardsFromUI().size() << "aziiiiiiiiiiiz " << identity.getName(i)<< std::endl;
-            std::cout << players[i].getNumberOfPlayedCards() << "aziiiiiiiiiiiz2 " << identity.getName(i) << std::endl;
-            std::cout << "carta " << players[i].getPlayedCard(j).getName() << " " << identity.getName(i) << std::endl;
-        }
-    }
-    std::cout << "after zemestan" << std::endl;
+ 
     for (int i = 0; i < identity.getPlayerNumber(); i++)
     {
         for (int j = 0; j < armyAndSpecialCards.size(); j++)
         {
-            std::cout << "aval polymorphism" << armyAndSpecialCards.size() << std::endl;
             scorsAtEndOfWar[i] = armyAndSpecialCards[j]->effectOfCard(players[i].getAllPlayedCards(), scorsAtEndOfWar[i]);
-            std::cout << "bad polymorphism" << std::endl;
-            std::cout << "score -> " << scorsAtEndOfWar[i] << std::endl;
         }
-        std::cout << "akhar polymorphism" << std::endl;
-        std::cout << "lalalaaaaaaaaa 1 " << goodLuckNumber << std::endl;
-        std::cout << "olalaaaaaaaaa 2 " << badLuckNumber << std::endl;
         if (scorsAtEndOfWar[i] > 0)
         {
             if (scorsAtEndOfWar[i] % goodLuckNumber == 0)
@@ -670,41 +604,25 @@ bool Control::determinWinnerOfWar()
                 scorsAtEndOfWar[i] = -1;
         } // the player can't be the winner anyway
 
-        std::cout << scorsAtEndOfWar[i] << " jan zizet" << std::endl;
         if (scorsAtEndOfWar[i] > winnerScore)
         {
-            std::cout << "to score: " << winnerScore << std::endl;
             winnerScore = scorsAtEndOfWar[i];
-            std::cout << "to score2: " << winnerScore << std::endl;
             winner = i;
         }
-        std::cout << "to score3: " << winnerScore << std::endl;
     }
     int counterWinner = 0;
     for (int i = 0; i < identity.getPlayerNumber(); i++)
     {
-        std::cout << "to score: " << winnerScore << std::endl;
         if (scorsAtEndOfWar[i] == winnerScore)
             counterWinner++;
-        std::cout << "to score: " << winner << std::endl;
     }
     if (counterWinner > 1)
     {
         std::cout << "there is no winner for this war!! start a new war" << std::endl;
         return false; // there is no winner for this war
     }
-    std::cout << "winner - > " << players[winner].getName() << std::endl;
     setOrderOfWinner();
-    for (int d = 0; d < identity.getPlayerNumber(); d++)
-        std::cout << identity.getName(d) << " -> " << scorsAtEndOfWar[d] << std::endl;
-    for (int i = 0; i < identity.getPlayerNumber(); i++)
-    {
-        for (int j = 0; j < players[i].getNumberOfPlayedCards(); j++)
-        {
-            std::cout << identity.getName(i) << " -> " << players[i].getPlayedCard(j).getName() << " ";
-        }
-        std::cout << std::endl;
-    }
+  
     // std::cin.ignore();
     // system("CLS");
     int counterBadLuck = 0;
@@ -718,7 +636,6 @@ bool Control::determinWinnerOfWar()
     if (!checkShirzenForCertianPlayer()) // check if the number of shirzan's played is equal
     {
         starterPlayer = winner;
-        std::cout << "starter player - > " << starterPlayer << std::endl;
     }
     int temp = winner;
     // winner = -1;
@@ -778,7 +695,6 @@ bool Control ::checkWin(int index)
     {
         numberOfWinnerOfGame = index;
         winnerOfGame = players[index].getName();
-        std::cout << "winnerOfGame@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" << winnerOfGame << std::endl;
         return true;
     }
     return false;
@@ -959,45 +875,31 @@ bool Control::saveAllInfo(int index)
     // int counterOfSaveGame = 1;
     for (int i = 0; i < numberOfSavedGames.size(); i++)
     {
-        std::cout << "i - > " << i << std::endl;
         //   if (!std::filesystem::exists(save))
         //     {
         //         /// NOTE: if file save folder isn't available this will create it
         //         std::filesystem::create_directory(save);
         //     }
-        std::cout << "to save info" << std::endl;
         if (isFileEmpty(numberOfSavedGames[i]) == 1) // if file is empty
         {
             std::cout << "file if empty" << std::endl;
-            std::cout << "numberOfSavedGames[i] - > " << numberOfSavedGames[i] << std::endl;
             save.open(numberOfSavedGames[i], std::ios::in | std::ios::out);
             if (!save.is_open())
             {
                 std ::cerr << "Error opening the file!" << std::endl;
                 return false;
             }
-            std::cout << "1111111111111111111111" << std::endl;
             save << identity.getPlayerNumber() << std::endl;
             for (int i = 0; i < identity.getPlayerNumber(); i++)
             {
-                std::cout << "22222222222222" << std::endl;
                 savePlayerInfo(i);
-                std::cout << "33333333333333" << std::endl;
                 savePlayerStates(i);
-                std::cout << "44444444444444" << std::endl;
                 savePlayerCardsInfo(i);
-                std::cout << "55555555555555" << std::endl;
                 savePlayedCardsInfo(i);
-                std::cout << "66666666666666666" << std::endl;
             }
             saveBaharVSZemestan();
-            std::cout << "77777777777777" << std::endl;
             saveLuckNumbers();
-            std::cout << "goooooood " << goodLuckNumber << std::endl;
-            std::cout << "badddddddddddddd " << badLuckNumber << std::endl;
-            std::cout << "888888888888888" << std::endl;
             saveStarterPlayer(index);
-            std::cout << "9999999999999" << ifCardsAreSet << std::endl;
             save << "if_Card_passed : " << true << std::endl;
             saveSigns();
             break;
@@ -1078,21 +980,16 @@ void Control::menu()
     ifCardsAreSet = false;
     UIStates uiStates;
     uiStates = UIMenu;
-    std::cout << "menu1" << std::endl;
-    while (WindowShouldClose() == false /*&& exitGame == true /*&& exitPrevious == true*/)
+    while (WindowShouldClose() == false)
     {
-        // std::cout << "menu2" << std::endl;
 
         switch (uiStates)
         {
-            std::cout << "menu3" << std::endl;
         case UIMenu:
         {
-            std::cout << "menu4" << std::endl;
             newOrContinue = ui.menuGameLoop();
             if (newOrContinue == "n")
             {
-                std::cout << "menu5" << std::endl;
                 uiStates = UIplayerNumber;
             }
             if (newOrContinue == "c")
@@ -1129,7 +1026,6 @@ void Control::menu()
         {
             ifCardsAreSet = true;
             whichSavedGame = ui.displayOpenDropDownMenuForSavedGameNumber();
-            std::cout << "which saved game -> " << whichSavedGame << std::endl;
             uiStates = UISaveReadInfo;
             break;
         }
@@ -1179,14 +1075,9 @@ void Control::menu()
         }
         case warzoneMap:
         {
-            std::cout << "warzone1" << std::endl;
             ui.displayMap(identity.getName(determinMinAge()));
-            std::cout << "identity.getName(determinMinAge())" << identity.getName(determinMinAge()) << std::endl;
-            std::cout << "warzone2" << std::endl;
             setWarzone(mapForUI.findKey(ui.displayWarzoneButton(identity.getName(determinMinAge())))); // setting warzone based on UI output
-            std::cout << "warzone3" << std::endl;
             uiStates = luckAndBadLuckNumbers;
-            std::cout << "warzone4" << std::endl;
             break;
         }
         case luckAndBadLuckNumbers:
@@ -1206,29 +1097,17 @@ void Control::menu()
         case showSelectedWarzone:
         {
             ui.displaySelectedWarzone(warzone);
-            for (int i = 0; i < (identity.getPlayerNumber()); i++)
-            {
-                std::cout << "karaye ajib3 - > " << i << identity.getAge(i) << std::endl;
-                std::cout << "karaye ajib4 - > " << i << identity.getName(i) << std::endl;
-                std::cout << "karaye ajib4 - > " << i << identity.getColor(i) << std::endl;
-            }
+    
             uiStates = displayPlayersCard;
             break;
         }
         case displayWarSigns:
         {
-            std::cout << "aval displayWarSigns" << std::endl;
             initializeColorsForUI();
-            std::cout << "too displayWarSigns 1" << std::endl;
             allOwenedStatesForUI();
             calculateNumberOfWinners();
-            std::cout << "number -----" << numberOfOwendStatesForEachPlayer.size() << std::endl;
-            std::cout << "name -----" << nameOfOwenedStates.size() << std::endl;
-            std::cout << "too displayWarSigns 2" << std::endl;
             ui.displayRenderWarSigns();
-            std::cout << "too displayWarSigns 3" << std::endl;
             ui.displayWarSigns(numberOfOwendStatesForEachPlayer, nameOfOwenedStates, orderOfWinners, numberOfWinners, colorsForUI, peaceSign);
-            std::cout << "too displayWarSigns 4" << std::endl;
             uiStates = warzoneMap;
             break;
         }
@@ -1239,23 +1118,17 @@ void Control::menu()
                 newOrContinue = "n";
             if (!ifCardsAreSet)
                 StartNewGame();
-            std::cout << "ghable findTexture too control" << ifCardsAreSet << std::endl;
 
             if (PlayerTurnHandler < (identity.getPlayerNumber()) || newOrContinue == "c")
             {
-                std::cout << "finddddddddddddddddddddddddddd" << std::endl;
                 ui.findTexture(players[TurnControl].getAllPlayerCards(), TurnControl);
                 numberOfDealingHandsAfterSaveGame++;
             }
 
-            std::cout << "ghable findTexture too control 2" << std::endl;
 
             if (PlayerTurnHandler < (identity.getPlayerNumber()) || players[TurnControl].getIfPassed() == false)
                 players[TurnControl].setIfPassed(ui.renderTextureForCharacterOnGameTable(TurnControl));
 
-            std::cout << "ifpassed too control" << identity.getName(TurnControl) << players[TurnControl].getIfPassed() << std::endl;
-            // setPlayedCardsFromUI();
-            std::cout << "az tabe miad biroon" << std::endl;
             int returnPlayingInput = playingInput();
             if (returnPlayingInput == 1)
             {
@@ -1264,14 +1137,11 @@ void Control::menu()
             }
             if (returnPlayingInput == 4)
             {
-                std::cout << "matarsakkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk 1" << std::endl;
                 uiStates = showValidCardsForMatarsak;
-                std::cout << "matarsakkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk 2" << std::endl;
                 break;
             }
             if (returnPlayingInput == 5) // there is no winner for war
             {
-                std::cout << "aya too in if miofte" << std::endl;
                 uiStates = noWinnerForWar;
                 break;
             }
@@ -1283,31 +1153,24 @@ void Control::menu()
                 TurnControl++;
                 if (TurnControl == (identity.getPlayerNumber()))
                     TurnControl = 0;
-                std::cout << "ghabl playing input aziz " << std::endl;
                 if (uiNumberPlayers == 3)
                     uiStates = displayGameTableForThree;
-                std::cout << "bade che koofti" << std::endl;
                 if (uiNumberPlayers == 4)
                     uiStates = displayGameTableForFour;
-                std::cout << "beckandim" << std::endl;
             }
             break;
         }
         case noWinnerForWar:
         {
-            std::cout << "chera ino neshon nemeidi" << std::endl;
             ui.displayNoWinner();
-            std::cout << "chera ino neshon nemeidi 2" << std::endl;
             uiStates = warzoneMap;
-            std::cout << "chera ino neshon nemeidi 3" << std::endl;
             break;
         }
         case displayGameTableForThree:
         {
             turnHandlerAfterEachWar++;
             PlayerTurnHandler++;
-            // if (PlayerTurnHandler == 3)
-            //     PlayerTurnHandler = 0;
+     
             exitStatus = ui.displayGameTableAndCharactersForThree(PlayerTurnHandler, starterPlayer);
             if (exitStatus == 0)
                 uiStates = controlExit;
@@ -1315,19 +1178,14 @@ void Control::menu()
                 uiStates = displayPlayersCard;
             else if (exitStatus == 2)
                 uiStates = specialHelp;
-            // if (uiStates == PlayerTurnHandler)
-            //     break;
-            // else
-            //     uiStates = statesControler.at(PlayerTurnHandler);
+
             break;
         }
         case displayGameTableForFour:
         {
             turnHandlerAfterEachWar++;
             PlayerTurnHandler++;
-            // if (PlayerTurnHandler == 3)
-            //     PlayerTurnHandler = 0;
-            std::cout << "are areeeeeeeeeeeeeeeeeee" << std::endl;
+    
             exitStatus = ui.displayGameTableAndCharactersForFour(PlayerTurnHandler, starterPlayer);
             if (exitStatus == 0)
                 uiStates = controlExit;
@@ -1335,18 +1193,13 @@ void Control::menu()
                 uiStates = displayPlayersCard;
             else if (exitStatus == 2)
                 uiStates = specialHelp;
-            std::cout << "moshkel toii " << std::endl;
-            // if (uiStates == PlayerTurnHandler)
-            //     break;
-            // else
-            //     uiStates = statesControler.at(PlayerTurnHandler);
+       
             break;
         }
 
         case displayingWinner:
         {
             ui.eraseAllCardsAfterWar();
-            std::cout << "ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc" << std::endl;
             ui.displayWinner(starterPlayer, players[starterPlayer].getName());
             for (int i = 0; i < identity.getPlayerNumber(); i++)
                 players[i].eraseAllPlayedCards();
@@ -1356,10 +1209,8 @@ void Control::menu()
         case showValidCardsForMatarsak:
         {
             ui.displaycharactersCardsForMatarsak(PlayerTurnHandler % (identity.getPlayerNumber()));
-            std::cout << "matarsakkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk 3" << std::endl;
             ui.validCardsForMatarsak();
             setPlayedCardsAfterMatarsak();
-            std::cout << "matarsakkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk 4" << std::endl;
             if (uiNumberPlayers == 3)
                 uiStates = displayGameTableForThree;
             if (uiNumberPlayers == 4)
@@ -1399,180 +1250,20 @@ void Control::menu()
         }
         }
     }
-    // std::cout << "do you want to start a new game or continue or previous game ? " << std::endl;
-    // std::cin >> newOrContinue;
-    // ui.displayMenuBackground();
-    // // Map mapForUI;
-    // std::cout << "c1" << std::endl;
-    // bool exitGame = true;
-    // bool exitPrevious = true;
-    // ifCardsAreSet = false;
-    // newOrContinue = ui.menuGameLoop();
-    // int uiNumberPlayers = ui.displayPlayerNumberButton();
-    // ui.initializeCardTextureAndName();
-    // // ui.renderTextureForCharacterOnGame();
-    // //  StartNewGame();
-
-    // // ui.Textbox();
-    // // ui.renderTextureForWarzoneMap();
-    // while (WindowShouldClose() == false && exitGame == true /*&& exitPrevious == true*/)
-    // {
-    //     // for (int i = 0; i < 1; i++)
-    //     if (newOrContinue == "n")
-    //     {
-    //         std::cout << "display " << std::endl;
-    //         identity.setPlayerNumberForSave(uiNumberPlayers);
-    //         if (uiNumberPlayers == 3)
-    //         {
-    //             std::cout << "uiNumberPlayers -> " << uiNumberPlayers << std::endl;
-    //             std::cout << "identity.getPlayerNumber - > " << identity.getPlayerNumber() << std::endl;
-    //             for (int i = 0; i < 3; i++)
-    //             {
-    //                 ui.thripleTextBoxDraw();
-    //                 std::cout << "for text box" << i << std::endl;
-    //                 identity.setPlayerNameForSave(ui.getPlayerNameAndColorFromUI(i));
-    //                 identity.setPlayerAgeForSave(ui.getPlayerAgeAndLuckFromUI(i + 3));
-    //                 identity.setPlayerColorForSave(ui.getPlayerNameAndColorFromUI(i + 6));
-    //                 identity.setPlayerForSave();
-    //                 // setNameForUI(ui.getNamesFromUI(i));
-    //                 // setNameFromUI(ui.getFullNameFromUI(i));
-    //                 // setNameFromUI(ui.thripleTextBoxDraw(i));
-    //                 // ui.controlTransitionVectors(i);
-    //                 // setAgeForUI(ui.getAgeFromUI(i + 3));
-    //                 // ui.controlTransitionVectors(i + 3);
-    //                 // std::cout << "size vector ui -> " << ui.getNamesFromUI(i).size() << std::endl;
-    //                 // std::cout << "karaye ajib - > " << i << identity.getPlayerNameForUI() << std::endl;
-    //                 // std::cout << "karaye ajib2 - > " << i << identity.getPlayerAgeForUI() << std::endl;
-    //                 // std::cout << "size vector ui for age -> " << ui.getAgeFromUI(i).size() << std::endl;
-    //                 // ui.Textbox();
-    //             }
-    //             for (int i = 0; i < 3; i++)
-    //             {
-    //                 std::cout << "karaye ajib3 - > " << i << identity.getAge(i) << std::endl;
-    //                 std::cout << "karaye ajib4 - > " << i << identity.getName(i) << std::endl;
-    //                 std::cout << "karaye ajib4 - > " << i << identity.getColor(i) << std::endl;
-    //             }
-    //             ui.displayMap(identity.getName(determinMinAge()));
-
-    //             // exitPrevious = false;
-    //             std::cout << "salam" << std::endl;
-    //             setWarzone(mapForUI.findKey(ui.displayWarzoneButton(identity.getName(determinMinAge())))); // setting warzone based on UI output
-    //             std ::cout << "test" << std::endl;
-    //             ui.getLuckNumbers(identity.getName(starterPlayer));
-    //             goodLuckNumber = ui.getPlayerAgeAndLuckFromUI(0);
-    //             badLuckNumber = ui.getPlayerAgeAndLuckFromUI(1);
-    //             ui.displayCharectersAndNames(identity.getName(0), identity.getName(1), identity.getName(2));
-    //             ui.displaySelectedWarzone(warzone);
-    //             ui.displayGameTable();
-    //             // dealingCards();
-    //             // shuffelingCards();
-    //             // randomCardSet();
-    //             if (!ifCardsAreSet)
-    //                 StartNewGame();
-    //             // diplayBeggingOfTheGame();
-    //             std::cout << "ghable playingInput" << std::endl;
-    //             // playingInput();
-    //             std::cout << "ghable findTexture" << std::endl;
-    //             // for (int k = 0; k < identity.getPlayerNumber(); k++)
-    //             ui.findTexture(players[0].getAllPlayerCards());
-    //             std::cout << "bade findTexture" << std::endl;
-
-    //             ui.renderTextureForCharacterOnGame();
-    //             std::cout << "bade renderTextureForCharacterOnGame" << std::endl;
-
-    //             // exitGame = false;
-    //         }
-    //         if (uiNumberPlayers == 4)
-    //         {
-    //             ui.quadrupleTextBoxDraw();
-    //             std::cout << "uiNumberPlayers -> " << uiNumberPlayers << std::endl;
-    //             for (int i = 0; i < 4; i++)
-    //             {
-    //                 identity.setPlayerNameForSave(ui.getPlayerNameAndColorFromUI(i));
-    //                 identity.setPlayerAgeForSave(ui.getPlayerAgeAndLuckFromUI(i + 4));
-    //                 identity.setPlayerColorForSave(ui.getPlayerNameAndColorFromUI(i + 8));
-    //                 identity.setPlayerForSave();
-    //                 std::cout << "for text box" << std::endl;
-    //                 // ui.Textbox();
-    //                 // std::cout << "karaye ajib - > " << identity.getPlayerNameForUI() << std::endl;
-    //             }
-    //             for (int i = 0; i < 4; i++)
-    //             {
-    //                 std::cout << "karaye ajib3 - > " << i << identity.getAge(i) << std::endl;
-    //                 std::cout << "karaye ajib4 - > " << i << identity.getName(i) << std::endl;
-    //                 std::cout << "karaye ajib4 - > " << i << identity.getColor(i) << std::endl;
-    //             }
-    //             // exitPrevious = false;
-    //             // exitGame = false;
-    //         }
-    //         std::cout << "good luck -> " << goodLuckNumber << std::endl;
-    //         std::cout << "bad luck -> " << badLuckNumber << std::endl;
-    //         std::cout << "after display " << std::endl;
-    //         // exitGame = false;
-    //     }
-    //     if (newOrContinue == "c")
-    //         exitGame = false;
-    //     if (newOrContinue == "help")
-    //         exitGame = false;
-    //     if (newOrContinue == "exit")
-    //         exitGame = false;
-    // }
-    // std::cout << "c2" << std::endl;
-    // std::cout << "c3" << std::endl;
-    // if (newOrContinue == "c")
-    // {
-    //     std::cout << "if c " << std::endl;
-    //     // if (isFileEmpty("save.txt") == 1) // if tellg == 0 is true
-    //     // {
-    //     //     std::cout << "No previous game found." << std::endl;
-    //     //     menu();
-    //     // }
-    //     determinNumberOfSavedGame();
-    //     saveReadAllInfo();
-    //     std::cout << "IN menu!!!!!!!!!!!!!!!!!!!!!!!!!!" << std::endl;
-    //     // else
-    //     //     saveReadAllInfo();
-    // }
-    // else if (newOrContinue == "n")
-    // {
-    //     // int uiNumberPlayers = ui.displayPlayerNumberButton();
-    //     // if (uiNumberPlayers == 3)
-    //     // {
-    //     //     std::cout << "uiNumberPlayers -> " << uiNumberPlayers << std::endl;
-    //     //     exitPrevious = false;
-    //     //     // exitGame = false;
-    //     // }
-    //     // if (uiNumberPlayers == 4)
-    //     // {
-    //     //     std::cout << "uiNumberPlayers -> " << uiNumberPlayers << std::endl;
-    //     //     exitPrevious = false;
-    //     //     // exitGame = false;
-    //     // }
-    //     StartNewGame();
-    // }
+  
     ui.unloadingTexture();
-    // else
-    //     return;
-
-    // std::cout << "Exit Menu" << std::endl;
+ 
 }
 int Control::setPlayedCardsFromUI()
 {
 
-    std::cout << "to played Cards from UI" << std::endl;
     if (players[TurnControl].getIfPassed() == false)
     {
-        std::cout << "turn control azizam " << TurnControl << std::endl;
-        std::cout << "players[TurnControl].getIfPassed() aziztaram " << players[TurnControl].getIfPassed() << std::endl;
         for (int i = players[TurnControl].getNumberOfPlayedCards(); i < ui.getPlayedCardsFromUI().size(); i++)
         {
-
-            std::cout << "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii " << i << std::endl;
-            std::cout << "hi " << identity.getName(TurnControl) << ui.getPlayedCardsFromUI().size() << std::endl;
             selectedCard.setName(ui.getPlayedCardsFromUI()[i]);
             players[TurnControl].setPlayedCard(selectedCard);
             eraseSelectedCard();
-            std::cout << "lalala " << selectedCard.getName() << std::endl;
             if (selectedCard.getName() == "matarsak")
                 return 4;
             if (selectedCard.getName() == "parcham_dar")
@@ -1582,14 +1273,9 @@ int Control::setPlayedCardsFromUI()
             if (selectedCard.getName() == "rakhsh_sefid")
                 return 8;
         }
-        std::cout << "playerrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr " << players[TurnControl].getNumberOfPlayedCards() << std::endl;
         return 3;
     }
     return 7;
-    // for (int i = 0; i < players[TurnControl].getNumberOfPlayedCards(); i++)
-    // {
-    //     std::cout << "to control player aziz " << players[TurnControl].getNumberOfPlayedCards() << "cards " << identity.getName(TurnControl) << " " << players[TurnControl].getPlayedCard(i).getName() << std::endl;
-    // }
 }
 void Control::setPlayedCardsAfterMatarsak()
 {
@@ -1608,41 +1294,21 @@ void Control::setPlayedCardsAfterMatarsak()
 
 void Control::allOwenedStatesForUI()
 {
-    std::cout << "numberOfOwendStatesForEachPlayer.size()" << numberOfOwendStatesForEachPlayer.size() << std::endl;
-    std::cout << "nameOfOwenedStates.size()" << nameOfOwenedStates.size() << std::endl;
     numberOfOwendStatesForEachPlayer.clear();
     nameOfOwenedStates.clear();
-    std::cout << "numberOfOwendStatesForEachPlayer.size()" << numberOfOwendStatesForEachPlayer.size() << std::endl;
-    std::cout << "nameOfOwenedStates.size()" << nameOfOwenedStates.size() << std::endl;
-    std::cout << "allOwenedStatesForUI 1" << std::endl;
     for (int i = 0; i < identity.getPlayerNumber(); i++)
     {
-        std::cout << "allOwenedStatesForUI 2" << std::endl;
-        std::cout << "players[i].getNumberOfOwenedStates() - >>>>" << players[i].getNumberOfOwenedStates();
         numberOfOwendStatesForEachPlayer.emplace_back(players[i].getNumberOfOwenedStates());
-        std::cout << "allOwenedStatesForUI 3" << std::endl;
     }
-    std::cout << "allOwenedStatesForUI 4" << std::endl;
     for (int i = 0; i < identity.getPlayerNumber(); i++)
     {
-        std::cout << "allOwenedStatesForUI 5" << std::endl;
         for (int j = 0; j < players[i].getNumberOfOwenedStates(); j++)
         {
-            std::cout << "allOwenedStatesForUI 6" << std::endl;
             nameOfOwenedStates.emplace_back(players[i].getOwenedStates(j));
         }
     }
-    std::cout << "numberOfOwendStatesForEachPlayer.size()" << numberOfOwendStatesForEachPlayer.size() << std::endl;
-    std::cout << "nameOfOwenedStates.size()" << nameOfOwenedStates.size() << std::endl;
-    std::cout << "allOwenedStatesForUI 7" << std::endl;
 }
-// void Control::initializeAllOwenedStatesForUI()
-// {
-//     for (int i = 0; i < identity.getPlayerNumber(); i++)
-//     {
-//         numberOfOwendStatesForEachPlayer[i] = 0;
-//     }
-// }
+
 void Control::eraseSelectedCard()
 {
     for (int i = 0; i < players[TurnControl].getNumberOfPlayedCards(); i++)
@@ -1667,26 +1333,16 @@ bool Control::determinNumberOfSavedGame()
 void Control::saveReadPlayerInfo(int index)
 {
     // int numberOfPlayersForSave;
-    std::cout << "number of players " << identity.getPlayerNumber() << std::endl;
     std::string playerName;
     int playerAge;
     std::string playerColor;
     bool playerPosotion;
     save >> playerName >> playerAge >> playerColor >> playerPosotion;
-    std::cout << "name of players- > " << playerName << std::endl;
-    std::cout << "age of players- > " << playerAge << std::endl;
-    std::cout << "color of players -> " << playerColor << std::endl;
-    std::cout << "pass of players - > " << playerPosotion << std::endl;
-    std::cout << "after of players" << std::endl;
     identity.setPlayerNameForSave(playerName);
     identity.setPlayerAgeForSave(playerAge);
     identity.setPlayerColorForSave(playerColor);
     identity.setPlayerForSave();
     players.push_back(Player(identity.getAge(index), identity.getName(index), identity.getColor(index), playerPosotion));
-    std::cout << "name identity of players- > " << identity.getName(index) << std::endl;
-    std::cout << "age identity of players - > " << identity.getAge(index) << std::endl;
-    std::cout << "color identity of players -> " << identity.getColor(index) << std::endl;
-    std::cout << "akhar identity of players" << std::endl;
 }
 void Control::saveReadPlayerStates(int index)
 {
@@ -1695,8 +1351,7 @@ void Control::saveReadPlayerStates(int index)
     int numberOfStates;
     save >> stringNumberOfStates >> numberOfStates;
     save >> stringOwendStates;
-    // save >> numberOfStates;
-    // players[index].setOwenedStates(numberOfStates);
+    
     for (int j = 0; j < numberOfStates; j++)
     {
         save >> stringOwendStates;
@@ -1707,16 +1362,12 @@ void Control::saveReadPlayedCardsInfo(int index)
 {
     std::string stringPlayedCards, stringNumberOfCards;
     int numberOfPlayedCards;
-    std::cout << "number of played cards: " << numberOfPlayedCards << std::endl;
     save >> stringNumberOfCards >> numberOfPlayedCards;
     save >> stringPlayedCards;
-    std::cout << "string of played cards: " << stringPlayedCards << std::endl;
     for (int i = 0; i < numberOfPlayedCards; i++)
     {
         save >> stringPlayedCards;
-        std::cout << "played card " << i << stringPlayedCards << std::endl;
         players[index].setPlayedCard(stringPlayedCards);
-        // std::cout << "players[index].getPlayedCard() -> " << players[index].getPlayedCard(i).getName()<< std::endl;
     }
 }
 void Control::saveReadPlayerCardsInfo(int index)
@@ -1725,9 +1376,7 @@ void Control::saveReadPlayerCardsInfo(int index)
     int numberOfCards;
     save >> stringNumbrOfCards;
     save >> numberOfCards;
-    std::cout << "number of player cards: " << numberOfCards << std::endl;
     save >> stringPlayerCards;
-    std::cout << "string of player cards: " << stringPlayerCards << std::endl;
     for (int i = 0; i < numberOfCards; i++)
     {
         save >> stringPlayerCards;
@@ -1753,14 +1402,12 @@ void Control::saveReadLuckNumbers()
     std::string stringBadLuckNumbers;
     save >> stringGoodLuckNumbers >> goodLuckNumber;
     save >> stringBadLuckNumbers >> badLuckNumber;
-    std::cout << "good luck numbers -> " << goodLuckNumber << " bad luck numbers -> " << badLuckNumber << std::endl;
 }
 void Control::saveReadSigns()
 {
     std::string stringWarzone;
     std::string stringPeaceSign;
     save >> stringWarzone >> warzone >> stringPeaceSign >> peaceSign;
-    std::cout << "warzone -> " << warzone << "peacesign -> " << peaceSign << std::endl;
 }
 void Control::saveReadStarterPlayerAndSelectedCard()
 {
@@ -1778,56 +1425,35 @@ void Control::saveReadAllInfo()
         std ::cerr << "Error opening the file!" << std::endl;
         return;
     }
-    std::cout << "bad file khondan " << std::endl;
     int intPlayerNumber;
     save >> intPlayerNumber;
-    // std::cout << "bad tedad bazikon khondan " << std::endl;
     uiNumberPlayers = intPlayerNumber;
     identity.setPlayerNumberForSave(intPlayerNumber);
-    std::cout << "identity.getPlayerNumberForSave -> " << identity.getPlayerNumber() << std::endl;
     for (int i = 0; i < identity.getPlayerNumber(); i++)
     {
-        std::cout << "ghabl player info " << std::endl;
         saveReadPlayerInfo(i);
-        std::cout << "bad player info " << std::endl;
         saveReadPlayerStates(i);
-        std::cout << "ghabl player card " << std::endl;
         saveReadPlayerCardsInfo(i);
-        std::cout << "ghabl played card " << std::endl;
         saveReadPlayedCardsInfo(i);
-        std::cout << "player " << i << "tamoom shod\n\n"
-                  << std::endl;
     }
-    std::cout << "ghbl played bahar " << std::endl;
     saveReadBaharVSZemestan();
-    std::cout << "ghbl played signs " << std::endl;
-    std::cout << "ghbl played starter player " << std::endl;
     saveReadLuckNumbers();
     saveReadStarterPlayerAndSelectedCard();
     bool stirngIfCardSet;
-    std::cout << "ghabl ifCardSet " << ifCardsAreSet << std::endl;
     save >> stirngIfCardSet >> ifCardsAreSet;
     saveReadSigns();
     save.close();
 }
 void Control::StartNewGame()
 {
-    std::cout << "shoroe StartNewGame" << std::endl;
     if (!ifCardsAreSet)
     {
-        // std::cout << "ghabl validate " << std::endl;
         // validateIdentity();
-        std::cout << "ghabl dealing " << std::endl;
         dealingCards();
-        std::cout << "ghabl shuffle" << std::endl;
         shuffelingCards();
-        std::cout << "ghabl random" << std::endl;
         randomCardSet();
-        std::cout << "ghable randomCardSet" << std::endl;
         // diplayBeggingOfTheGame();
-        std::cout << "ghable determinMinAge" << std::endl;
         determinMinAge();
-        std::cout << "bad random function" << std::endl;
     }
 }
 void Control::initializingNumberOfSavedGames()
@@ -1853,7 +1479,6 @@ void Control::calculateNumberOfWinners()
             if (orderOfWinners[i] == j)
             {
                 numberOfWinners++;
-                std::cout << "chera eshtebahe" << std::endl;
                 // numberOfWins.push_back(numberOfWinsCounter);
                 break;
             }
@@ -1862,20 +1487,15 @@ void Control::calculateNumberOfWinners()
 }
 void Control::initializeColorsForUI()
 {
-    std::cout << "aval initializeColorsForUI" << std::endl;
     for (int i = 0; i < identity.getPlayerNumber(); i++)
     {
         colorsForUI.emplace_back(players[i].getColor());
     }
-    for (int i = 0; i < identity.getPlayerNumber(); i++)
-    {
-        std::cout << "colorsssssssssssssssssssssssssssssssss" << colorsForUI[i] << std::endl;
-    }
+   
 }
 void Control::run()
 {
     initializeSpecialCards();
     menu();
-    std::cout << "safewe" << std::endl;
     // playingInput();
 }

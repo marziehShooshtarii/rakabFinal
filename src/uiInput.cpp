@@ -1,37 +1,4 @@
 #include <cstring>
-// #include "uiInput.hpp"
-// Rectangle uiInput::getTextBoxRec()
-// {
-//     return textBoxRec;
-// }
-// char uiInput::getUIPlayerName(int index)
-// {
-//     return UIPlayerName[index];
-// }
-// std::vector<char> uiInput::getAllUIPlayerNames()
-// {
-//     return allUIPlayerNames;
-// }
-// void uiInput::initializeTextBoxRec()
-// {
-//     textBoxRec = {300, 200, 250, 50};
-// }
-// void uiInput::setUIPlayerName(int index, char playerName)
-// {
-//     UIPlayerName[index] = playerName;
-// }
-
-// char *uiInput::getFullName()
-// {
-//     return UIPlayerName;
-// }
-// void uiInput::resetInput()
-// {
-//     for (int i = 0; i < 50; i++)
-//     {
-//         UIPlayerName[i] = '\0';
-//     }
-// }
 #include <raylib.h>
 #include <string>
 #include <iostream>
@@ -102,19 +69,7 @@ bool uiInput::IsMouseOnText(Vector2 mousePoint)
 }
 void uiInput::transferPlayerNameToVector()
 {
-    std::cout << "--------------------------------" << std::endl;
-    // for (int h = 0; h < strlen(text); h++)
-    // {
-    //     textBoxName[h] = text[h];
-    // }
-    // std::cout<<std::strlen(text)<<"string"<<std::endl;
-    //  std::cout << textBoxName.size()<<"  ghabl textBoxName.size()" <<std::endl;
     textBoxName.insert(textBoxName.end(), text, text + letterCount); // -1 to avoid copying the null terminator
-    std::cout << textBoxName.size() << " textBoxName.size()" << std::endl;
-    // for (int h = 0; h < textBoxName.size(); h++)
-    // {
-    //     std::cout << textBoxName[h] << std::endl;
-    // }
 }
 
 std::vector<char> uiInput::getTextBoxName()
@@ -126,10 +81,8 @@ void uiInput::convertTextToString()
 {
     for (int i = 0; i < strlen(text); i++)
     {
-        std::cout << "name -> " << text[i] << std::endl;
         nameConversion += text[i];
     }
-    std::cout << "tempNames -> " << nameConversion << std::endl;
 }
 std::string uiInput::getTextBoxStringName()
 {
