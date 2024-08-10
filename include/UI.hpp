@@ -105,8 +105,10 @@ public:
     void setNumberOfPlayers(int);
     void initializeStatesCoordinates();
     void initializeWarSignColors();
-    // void initializeOptionsAndDropdownBoundsForColors();
-    // void initializeOptionsColors();
+    void initializeOptionsAndDropdownBoundsForColors();
+    void initializeOptionsColors();
+    void initializeDropDownMenuForColors();
+    std::string displayOpenDropDownMenuForColors();
 
     // std::string findCard(Texture2D);
 private:
@@ -270,10 +272,10 @@ private:
     std::string helpChoice;
     int numberOfPlayers;
     std::unordered_map<std::string, Texture2D> warSignColors;
-    // std::vector <Rectangle> colorOptionBounds;
-    // std::vector <std::string> colorOptions;
-    // bool isDropdownOpenForColor;
-    // Rectangle dropdownBoundsForColors;
-    // std::string selectedOptionForColors;
+    std::vector <Rectangle> colorOptionBounds;
+    std::vector <std::string> colorOptions;
+    bool isDropdownOpenForColor;
+    Rectangle dropdownBoundsForColors;
+    std::string selectedOptionForColors;
 };
 #endif

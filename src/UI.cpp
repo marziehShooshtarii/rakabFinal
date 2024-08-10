@@ -1782,25 +1782,79 @@ void UI::initializeOptionsAndDropdownBoundsForSavedGameNumber()
     optionBounds[3] = {420, 250 + 180, 200, 50};
     optionBounds[4] = {420, 250 + 230, 200, 50};
 }
-// void UI::initializeOptionsColors()
-// {
-//     colorOptions[0] = {"red"};
-//     colorOptions[1] = {"purple"};
-//     colorOptions[2] = {"blue"};
-//     colorOptions[3] = {"green"};
+void UI::initializeOptionsColors()
+{
+    colorOptions[0] = {"red"};
+    colorOptions[1] = {"purple"};
+    colorOptions[2] = {"blue"};
+    colorOptions[3] = {"green"};
     
-//     selectedOptionForColors = "select a color";
-//     isDropdownOpenForColor = false;
-// }
-// void UI::initializeOptionsAndDropdownBoundsForColors()
-// {
-//     dropdownBoundsForColors = {350, 250, 350, 30};
-//     colorOptionBounds[0] = {420, 250 + 30, 200, 50};
-//     colorOptionBounds[1] = {420, 250 + 80, 200, 50};
-//     colorOptionBounds[2] = {420, 250 + 130, 200, 50};
-//     colorOptionBounds[3] = {420, 250 + 180, 200, 50};
-//     colorOptionBounds[4] = {420, 250 + 230, 200, 50};
-// }
+    selectedOptionForColors = "select a color";
+    isDropdownOpenForColor = false;
+}
+void UI::initializeOptionsAndDropdownBoundsForColors()
+{
+    dropdownBoundsForColors = {350, 250, 350, 30};
+    colorOptionBounds[0] = {420, 250 + 30, 200, 50};
+    colorOptionBounds[1] = {420, 250 + 80, 200, 50};
+    colorOptionBounds[2] = {420, 250 + 130, 200, 50};
+    colorOptionBounds[3] = {420, 250 + 180, 200, 50};
+    colorOptionBounds[4] = {420, 250 + 230, 200, 50};
+}
+void UI::initializeDropDownMenuForColors()
+{
+    initializeOptionsColors();
+    initializeOptionsAndDropdownBoundsForColors();
+}
+std::string UI::displayOpenDropDownMenuForColors()
+{
+    initializeDropDownMenuForColors();
+    while (1)
+    {
+        if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON))
+        {
+            Vector2 mousePos = GetMousePosition();
+            if (CheckCollisionPointRec(mousePos, dropdownBoundsForColors))
+            {
+                isDropdownOpenForColor = !isDropdownOpenForColor; // Toggle dropdown open/close
+            }
+            else if (isDropdownOpenForColor)
+            {
+                // Check if the click is within one of the option bounds
+                for (int i = 0; i < 4; i++)
+                {
+                    if (CheckCollisionPointRec(mousePos, colorOptionBounds[i]))
+                    {
+                        selectedOptionForColors = colorOptions[i]; // Set selected option on click
+                        isDropdownOpenForColor = false;      // Close the dropdown
+                               // which option was selected
+                        return selectedOptionForColors;
+                    }
+                }
+            }
+        }
+        BeginDrawing();
+        ClearBackground(RAYWHITE);
+        DrawTexture(backgroundIdentityMenu, 0, 0, WHITE);
+        // Draw the dropdown box
+        DrawRectangleRec(dropdownBoundsForColors, LIGHTGRAY);
+        DrawRectangleLinesEx(dropdownBoundsForColors, 2, DARKGRAY);
+        DrawTextPro(inputFont, selectedOptionForColors.c_str(), (Vector2){dropdownBoundsForColors.x + 37, dropdownBoundsForColors.y - 11}, (Vector2){1}, 1, 40, 1, {225, 120, 80, 225});
+
+        // Draw the options if the dropdown is open
+        if (isDropdownOpenForColor)
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                DrawRectangleRec(colorOptionBounds[i], LIGHTGRAY);
+                DrawRectangleLinesEx(colorOptionBounds[i], 1, DARKGRAY);
+                DrawTextPro(inputFont, colorOptions[i].c_str(), (Vector2){colorOptionBounds[i].x + 10, colorOptionBounds[i].y + 5}, (Vector2){1}, 1, 40, 1, {225, 110, 80, 225});
+            }
+        }
+
+        EndDrawing();
+    }
+}
 void UI::initializeDropDownMenuForSavedGameNumber()
 {
     initializeOptionsForSavedGameNumber();
