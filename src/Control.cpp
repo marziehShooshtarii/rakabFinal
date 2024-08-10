@@ -296,11 +296,20 @@ void Control::setOrderOfWinner()
 {
     orderOfWinners.push_back(winner);
 }
+// void Control::setPeaceSign(std::string peaceSignState)
+// {
+//     peaceSign = peaceSignState;
+// }
 void Control::choiceForPeaceSign()
 {
+    std::cout << " too choiceForPeaceSign ....................................................................................1"<<std::endl;
+    Map mapForPeaceSign;
     std::cout << players[orderOfRishSefids[orderOfRishSefids.size() - 1]].getName() << " please choose the state you want to place your peace sign on.";
+    std::cout << " too choiceForPeaceSign ....................................................................................2"<<std::endl;
     // std::cin >> peaceSign;
-    ui.displayWarzoneButton(players[orderOfRishSefids[orderOfRishSefids.size() - 1]].getName());
+    //ui.displayWarzoneButton(players[orderOfRishSefids[orderOfRishSefids.size() - 1]].getName());
+    peaceSign = mapForPeaceSign.findKey(ui.displayWarzoneForPeacsignButtons(players[orderOfRishSefids[orderOfRishSefids.size() - 1]].getName()));
+    std::cout << " too choiceForPeaceSign ....................................................................................3"<<std::endl;
 }
 void Control::displayPlayingCards(int index)
 {
@@ -1215,7 +1224,7 @@ void Control::menu()
             std::cout << "too displayWarSigns 2" << std::endl;
             ui.displayRenderWarSigns();
             std::cout << "too displayWarSigns 3" << std::endl;
-            ui.displayWarSigns(numberOfOwendStatesForEachPlayer, nameOfOwenedStates, orderOfWinners, numberOfWinners, colorsForUI);
+            ui.displayWarSigns(numberOfOwendStatesForEachPlayer, nameOfOwenedStates, orderOfWinners, numberOfWinners, colorsForUI,peaceSign);
             std::cout << "too displayWarSigns 4" << std::endl;
             uiStates = warzoneMap;
             break;

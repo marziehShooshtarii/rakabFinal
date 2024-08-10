@@ -109,6 +109,7 @@ public:
     void calculateNumberOfWinners();
     void initializeColorsForUI();
     void setOrderOfWinner();
+    //void setPeaceSign(std::string);
     void run();
 
 private:
@@ -129,7 +130,7 @@ private:
     std::string winnerOfGame;
     int winner = -1; // can't be the numbers which may be the player's order
     std::vector<Card> baharVSzemestan;
-    std::string peaceSign;
+    std::string peaceSign = "default";
     int numberOfwars = 0; // for controling peace sign
     std::vector<int> orderOfRishSefids;
     std::fstream save;
