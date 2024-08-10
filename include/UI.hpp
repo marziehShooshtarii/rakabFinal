@@ -101,7 +101,7 @@ public:
     void initializeHelpDropdownBounds();
     bool displayHelp(std::string);
     void displayRenderWarSigns();
-    bool displayWarSigns(std::vector<int>, std::vector<std::string>, std::vector<int>, int, std::vector<std::string>);
+    bool displayWarSigns(std::vector<int>, std::vector<std::string>, std::vector<int>, int, std::vector<std::string>,std::string);
     void setNumberOfPlayers(int);
     void initializeStatesCoordinates();
     void initializeWarSignColors();
@@ -109,6 +109,8 @@ public:
     void initializeOptionsColors();
     void initializeDropDownMenuForColors();
     std::string displayOpenDropDownMenuForColors();
+    int displayWarzoneForPeacsignButtons(std::string);
+    
 
     // std::string findCard(Texture2D);
 private:
@@ -192,6 +194,8 @@ private:
     int UITurnHandler;
     Texture2D luckNumberBackground;
     Texture2D warSigns[4];
+    Texture2D peaceSignForUI;
+    Texture2D peaceSignBackground;
     Button passPosition;
     bool ifPlayerPassed[3]; // check the whole players position
     std::vector<std::string> firstPlayedCardsFromUI;

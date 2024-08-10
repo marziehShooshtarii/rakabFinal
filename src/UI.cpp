@@ -44,7 +44,8 @@ UI::UI()
     warSigns[1] = LoadTexture("../assets/warSign2_2-Photoroom.png");
     warSigns[2] = LoadTexture("../assets/warSign3_2-Photoroom.png");
     warSigns[3] = LoadTexture("../assets/warSign4_2-Photoroom.png");
-
+    peaceSignForUI = LoadTexture("../assets/peaceSign2_2-Photoroom.png");
+    peaceSignBackground = LoadTexture("../assets/peaceSignMap.png");
     winnerBackgroundForEachWar[0] = LoadTexture("../assets/winner2.png");
     winnerBackgroundForEachWar[1] = LoadTexture("../assets/winner3.png");
     winnerBackgroundForEachWar[2] = LoadTexture("../assets/winner1.png");
@@ -88,7 +89,7 @@ UI::UI()
 
     // initializeFontMenu();
     // initializeBackgroundMenu();
-    std::cout << "7777" << std::endl;
+ 
     // initializRec();
     initializeButtons();
     // initializePlayerNumberButton();
@@ -109,9 +110,7 @@ void UI::drawRectUI()
 }
 void UI::displayMenuBackground()
 {
-    std::cout << "111111111111111111" << std::endl;
-    std::cout << "2222222222222222" << std::endl;
-    std::cout << "33333333333333333" << std::endl;
+    
 
     // Vector2 position;
 }
@@ -247,18 +246,18 @@ int UI::displayPlayerNumberButton()
         Vector2 mousePssitionIdentity = GetMousePosition();
         bool mousePressedIdentity = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
         // std::cout << mousePressedIdentity << std::endl;
-        std::cout << "1111111111" << std::endl;
+      
         // for (int i = 0; i < 4; i++)
         // {
         if (playerNumberButtons[1].ifPressed(mousePssitionIdentity, mousePressedIdentity))
         {
-            std::cout << "player 3" << std::endl;
+           
             setNumberOfPlayers(3);
             return 3; // number of players
         }
         if (playerNumberButtons[2].ifPressed(mousePssitionIdentity, mousePressedIdentity))
         {
-            std::cout << "player 4" << std::endl;
+           
             setNumberOfPlayers(4);
             return 4; // number of players
         }
@@ -266,7 +265,7 @@ int UI::displayPlayerNumberButton()
         BeginDrawing();
         ClearBackground(WHITE);
         DrawTexture(backgroundIdentityMenu, 0, 0, WHITE);
-        std::cout << "cout 1" << std::endl;
+      
         for (int idx = 1; idx < 3; ++idx)
         {
             Color selectedColor = WHITE;
@@ -338,7 +337,7 @@ int UI::displayWarzoneButton(std::string starterPlayer)
         {
             if (UIwarzone[i].ifPressed(mousePssitionIdentity, mousePressedIdentity))
             {
-                std::cout << "warzone selected - > " << i << std::endl;
+                
 
                 return i; // number of the selected warzone according to states in Map.cpp
             }
@@ -366,6 +365,54 @@ int UI::displayWarzoneButton(std::string starterPlayer)
         }
         DrawTextPro(gameFont, starterPlayerInUI, (Vector2){40, 40}, (Vector2){1}, 1, 40, 1, {50, 180, 220, 255});
         DrawTextPro(gameFont, "choose the selected warzon", (Vector2){80, 40}, (Vector2){1}, 1, 40, 1, {50, 180, 220, 255});
+        // Draw the render texture to the screen
+        // DrawTextureRec(target.texture, (Rectangle){ 0, 0, (float)target.texture.width, (float)-target.texture.height }, (Vector2){ 0, 0 }, WHITE);
+        EndDrawing();
+    }
+    return -1;
+}
+int UI::displayWarzoneForPeacsignButtons(std::string lastPlayerPlayedRishSefid)
+{
+    initializeWarzoneButton(50, 50, 120, 50);
+    const char *lastPlayerPlayedRishSefidInUI = lastPlayerPlayedRishSefid.c_str();
+    while (1)
+    {
+        Vector2 mousePssitionIdentity = GetMousePosition();
+        bool mousePressedIdentity = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
+        // std::cout << mousePressedIdentity << std::endl;
+        // std::cout << "yek" << std::endl;
+        for (int i = 0; i < 15; i++)
+        {
+            if (UIwarzone[i].ifPressed(mousePssitionIdentity, mousePressedIdentity))
+            {
+                
+
+                return i; // number of the selected warzone according to states in Map.cpp
+            }
+        }
+
+        BeginDrawing();
+        DrawTexture(peaceSignBackground, 0, 0, WHITE);
+        // displayMap(starterPlayer);
+        ClearBackground(RAYWHITE);
+        for (int idx = 0; idx < 15; ++idx)
+        {
+            // std::cout << "to for " << std::endl;
+            Color selectedColor = WHITE;
+            if (CheckCollisionPointRec(mousePssitionIdentity, UIwarzone[idx].getRectangle()))
+            {
+                selectedColor = WHITE;
+            }
+            else
+            {
+                selectedColor = RED;
+            }
+
+            DrawTextEx(fontMenu, this->UIwarzone[idx].title, (Vector2){this->UIwarzone[idx].getRectangle().x + 10, this->UIwarzone[idx].getRectangle().y + 10}, fontMenu.baseSize, 1, selectedColor);
+            // std::cout << "tah for " << std::endl;
+        }
+        DrawTextPro(gameFont, lastPlayerPlayedRishSefidInUI, (Vector2){40, 40}, (Vector2){1}, 1, 40, 1, {50, 180, 220, 255});
+        DrawTextPro(gameFont, "choose the state you want to put your peace sign on:", (Vector2){80, 40}, (Vector2){1}, 1, 40, 1, {50, 180, 220, 255});
         // Draw the render texture to the screen
         // DrawTextureRec(target.texture, (Rectangle){ 0, 0, (float)target.texture.width, (float)-target.texture.height }, (Vector2){ 0, 0 }, WHITE);
         EndDrawing();
@@ -440,17 +487,17 @@ void UI::initializeWarzoneMap()
 }
 void UI::displayRenderWarSigns()
 {
-    std::cout << "displayRenderWarSigns 1" << std::endl;
+    
     BeginDrawing();
-    std::cout << "displayRenderWarSigns 2" << std::endl;
+    
     ClearBackground(RAYWHITE);
-    std::cout << "displayRenderWarSigns 3" << std::endl;
+    
     // DrawTexture(character1, 0, 0, WHITE);
     DrawTextureRec(renderTextureForWarSigns.texture, (Rectangle){0, 0, (float)renderTextureForWarSigns.texture.width, (float)-renderTextureForWarSigns.texture.height}, Vector2{0, 0}, WHITE);
-    std::cout << "displayRenderWarSigns 4" << std::endl;
+    
 
     EndDrawing();
-    std::clog << "end of display game table 1 " << std::endl;
+    
     return;
 }
 
@@ -538,7 +585,7 @@ void UI::displaycharactersCards(int turnHandler)
     DrawTextureRec(renderTextureForGameTable[turnHandler].texture, (Rectangle){0, 0, (float)renderTextureForGameTable[turnHandler].texture.width, (float)-renderTextureForGameTable[turnHandler].texture.height}, Vector2{0, 0}, WHITE);
 
     EndDrawing();
-    std::clog << "end of display game table 1 " << std::endl;
+   
     return;
 }
 void UI::displaycharactersCardsForMatarsak(int turnHandler)
@@ -549,7 +596,7 @@ void UI::displaycharactersCardsForMatarsak(int turnHandler)
     DrawTextureRec(renderTextureMatarsakCharacters[turnHandler].texture, (Rectangle){0, 0, (float)renderTextureMatarsakCharacters[turnHandler].texture.width, (float)-renderTextureMatarsakCharacters[turnHandler].texture.height}, Vector2{0, 0}, WHITE);
 
     EndDrawing();
-    std::clog << "end of display game table" << std::endl;
+  
     return;
 }
 
@@ -592,7 +639,7 @@ bool UI::renderTextureForCharacterOnGameTable(int starterPlayer)
                 // UnloadTexture(playerCardForUI[0]);
                 // std::cout << "UITurnHandler--------------too render" << UITurnHandler << std::endl;
                 playedCardsHandler.at(UIstarterPlayer).emplace_back(playerCardsHandler.at(UIstarterPlayer)[i]);
-                std::cout << "UIstarterPlayer--------------too render 2 " << std::endl;
+          
                 playedCardsFromUI.at(UIstarterPlayer).emplace_back(playerCardsFromUI.at(UIstarterPlayer)[i]);
 
                 // std::cout <<"16.6 -> " << playedCardsFromUI.at(UIstarterPlayer)[i];
@@ -602,8 +649,7 @@ bool UI::renderTextureForCharacterOnGameTable(int starterPlayer)
                 // firstCharacterPlayedCards.push_back(playerCardsHandler.at(UIstarterPlayer)[i]);
                 // isCardSelected = true;
 
-                std::cout << "warzone selected - > " << i << std::endl;
-                std::cout << "[playedCardsHandler.at(UIstarterPlayer).size()//////////////////////////////////////////////" << playedCardsHandler.at(UIstarterPlayer).size();
+          
                 // std::cout << "playedCardForUI - >>>>>>>>>>>>>> renderTextureForCharacterOnGameTable" << playedCardsHandler.at(UIstarterPlayer).size() << std::endl;
                 return false;
             }
@@ -699,7 +745,7 @@ bool UI::validCardsForMatarsak()
                 playedCardsFromUI.at(UIstarterPlayer).erase(playedCardsFromUI.at(UIstarterPlayer).begin() + i);
                 playedCardsHandler.at(UIstarterPlayer).erase(playedCardsHandler.at(UIstarterPlayer).begin() + i);
 
-                std::cout << "warzone selected - > " << i << std::endl;
+                
                 // std::cout << "playedCardForUI - >>>>>>>>>>>>>> renderTextureForCharacterOnGameTable" << playedCardsHandler.at(UIstarterPlayer).size() << std::endl;
                 return true;
             }
@@ -741,8 +787,7 @@ bool UI::validCardsForMatarsak()
             {
                 selectedColor = RED;
             }
-            std::cout << "cardsButtons[idx].getRectangle().x + 10 " << cardsButtons[idx].getRectangle().x + 10 << std::endl;
-            std::cout << "cardsButtons[idx].getRectangle().y + 10 " << cardsButtons[idx].getRectangle().y + 10 << std::endl;
+            
             DrawTextEx(fontMenu, this->cardsButtons[idx].title, (Vector2){this->cardsButtons[idx].getRectangle().x + 10, this->cardsButtons[idx].getRectangle().y + 10}, fontMenu.baseSize, 1, selectedColor);
             // std::cout << "tah for " << std::endl;
         }
@@ -801,21 +846,21 @@ void UI::eraseAllCardsAfterWar()
 
 void UI::initializeCardsButtons(float x, float y, float width, float hight)
 {
-    std::cout << "UIstarterPlayer too initialize " << UIstarterPlayer << std::endl;
+    
 
     for (int i = 0; i < playerCardsHandler.at(UIstarterPlayer).size() / 2; i++)
         cardsButtons[i] = (Button){(Rectangle){(i * 100) + 400 + x, 610 + y, width, hight}, "test", false};
 
-    std::cout << "UIstarterPlayer too initialize 2 " << UIstarterPlayer << std::endl;
+    
 
     for (int i = playerCardsHandler.at(UIstarterPlayer).size() / 2; i < 10; i++)
         cardsButtons[i] = (Button){(Rectangle){((i - playerCardsHandler.at(UIstarterPlayer).size() / 2) * 100) + 400 + x, 460 + y, width, hight}, "test", false};
 
-    std::cout << "UIstarterPlayer too initialize 3 " << UIstarterPlayer << std::endl;
+    
 }
 void UI::initializeCardsButtonsForMatarsak(float x, float y, float width, float hight)
 {
-    std::cout << "UIstarterPlayer too initialize " << UIstarterPlayer << std::endl;
+    
     for (int i = 0; i < playedCardsHandler.at(UIstarterPlayer).size() / 2; i++)
         cardsButtons[i] = (Button){(Rectangle){(i * 100) + 400 + x, 610 + y, width, hight}, "matarsak", false};
     for (int i = playedCardsHandler.at(UIstarterPlayer).size() / 2; i < playedCardsHandler.at(UIstarterPlayer).size(); i++)
@@ -835,7 +880,7 @@ bool UI::displayCardsButtons()
         {
             if (cardsButtons[i].ifPressed(mousePssitionIdentity, mousePressedIdentity))
             {
-                std::cout << "warzone selected - > " << i << std::endl;
+                
                 return i;
             }
         }
@@ -885,25 +930,25 @@ int UI::displayGameTableAndCharactersForThree(int turnHandlerForDisplay, int Tur
 
         if (next.ifPressed(mousePssitionIdentity, mousePressedIdentity))
         {
-            std::cout << "too if " << std::endl;
+           
             next.setStatus(false);
             return 1; // next button has been pressed
         }
         if (exitGame.ifPressed(mousePssitionIdentity, mousePressedIdentity))
         {
-            std::cout << "too if " << std::endl;
+            
             return 0; // exit button has been pressed
         }
         if (help.ifPressed(mousePssitionIdentity, mousePressedIdentity))
         {
-            std::cout << "too if " << std::endl;
+            
             return 2; // help button has been pressed
         }
 
         BeginDrawing();
         ClearBackground(RAYWHITE);
         DrawTexture(gameTableForThreePlayers, 0, 0, WHITE);
-        std::cout << "aha game table" << std::endl;
+        
         //  std::cout << "playedCardsHandler.at(k).size() - >........................displayGameTableAndCharacters" << playedCardsHandler.at(0).size() << std::endl;
         for (int q = 0; q < turnHandlerForDisplay / 3; q++)
         {
@@ -989,25 +1034,25 @@ int UI::displayGameTableAndCharactersForFour(int turnHandlerForDisplay, int Turn
 
         if (next.ifPressed(mousePssitionIdentity, mousePressedIdentity))
         {
-            std::cout << "too if " << std::endl;
+           
             next.setStatus(false);
             return 1; // next button has been pressed
         }
         if (exitGame.ifPressed(mousePssitionIdentity, mousePressedIdentity))
         {
-            std::cout << "too if " << std::endl;
+            
             return 0; // exit button has been pressed
         }
         if (help.ifPressed(mousePssitionIdentity, mousePressedIdentity))
         {
-            std::cout << "too if " << std::endl;
+           
             return 2; // help button has been pressed
         }
 
         BeginDrawing();
         ClearBackground(RAYWHITE);
         DrawTexture(gameTableForFourPlayers, 0, 0, WHITE);
-        std::cout << "aha ke shi" << std::endl;
+       
 
         //  std::cout << "playedCardsHandler.at(k).size() - >........................displayGameTableAndCharacters" << playedCardsHandler.at(0).size() << std::endl;
         if (turnHandlerForDisplay / 4 >= 1)
@@ -1084,12 +1129,12 @@ int UI::displayGameTableAndCharactersForFour(int turnHandlerForDisplay, int Turn
                 // std::cout << "1:55 " << turnHandlerForDisplay % 4 + TurnControler << " k chi " << k << std::endl;
                 for (int j = 0; j < playedCardsHandler.at(k).size() / 3; j++)
                 {
-                    std::cout << "1:56 " << std::endl;
+                    
                     for (int i = 0; i < 4; i++)
                         DrawTexture(playedCardsHandler.at(k)[i], (k * 400) + (i * 65) + 65, (j * 70) + 250, WHITE);
-                    std::cout << "1:57 " << playedCardsHandler.at(k).size() % 3 << std::endl;
+                    
                 }
-                std::cout << "2:42 " << k << "2:44" << playedCardsHandler.at(k).size() % 3 << std::endl;
+                
                 for (int i = playedCardsHandler.at(k).size() - (playedCardsHandler.at(k).size() % 3); i < playedCardsHandler.at(k).size() % 3/*% 3*/; i++)
                     DrawTexture(playedCardsHandler.at(k)[i], (k * 400) + (i * 65) + 65, (playedCardsHandler.at(k).size() / 3 * 70) + 250, WHITE);
             }
@@ -1115,7 +1160,7 @@ int UI::displayGameTableAndCharactersForFour(int turnHandlerForDisplay, int Turn
             // for (int i = playedCardsHandler.at(3).size() - ((playedCardsHandler.at(3).size() - 4) / 2); i < playedCardsHandler.at(3).size(); i++)
             //     DrawTexture(playedCardsHandler.at(3)[i], ((i - playedCardsHandler.at(3).size() + (playedCardsHandler.at(3).size() % 2)) * 65) + 465, (playedCardsHandler.at(3).size() / 2 * 70) + 500, WHITE);
         }
-        std::cout << "1:54 " << std::endl;
+        
 
         Color selectedColor = WHITE;
         if (CheckCollisionPointRec(mousePssitionIdentity, next.getRectangle()))
@@ -1142,12 +1187,12 @@ int UI::displayGameTableAndCharactersForFour(int turnHandlerForDisplay, int Turn
         DrawTextEx(fontMenu, this->exitGame.title, (Vector2){this->exitGame.getRectangle().x + 10, this->exitGame.getRectangle().y + 10}, fontMenu.baseSize, 1, exitColor);
 
         EndDrawing();
-        std::cout << "akhar zahamat " << std::endl;
+        
     }
 }
 std::vector<std::string> UI::getPlayedCardsFromUI()
 {
-    std::cout << "playedCardsFromUI.at(UIstarterPlayer)- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" << playedCardsFromUI.at(UIstarterPlayer).size() << std::endl;
+   
     return playedCardsFromUI.at(UIstarterPlayer);
     // for (int i=0 ; i < playedCardsFromUI.at(UIstarterPlayer).size(); i++)
     // {
@@ -1164,13 +1209,13 @@ int UI::ExitGameControl()
         bool mousePressedIdentity = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
         if (saveGame.ifPressed(mousePssitionIdentity, mousePressedIdentity))
         {
-            std::cout << "too if " << std::endl;
+            
             next.setStatus(false);
             return 1; // save button has been pressed
         }
         if (exitGame.ifPressed(mousePssitionIdentity, mousePressedIdentity))
         {
-            std::cout << "too if " << std::endl;
+            
             next.setStatus(false);
             return 2; // exit button has been pressed
         }
@@ -1240,7 +1285,7 @@ void UI::renderTextureForCharacterAndGameTable()
     DrawTextureRec(renderTextureForGameTableAndCharacters.texture, (Rectangle){0, 0, (float)renderTextureForGameTableAndCharacters.texture.width, (float)-renderTextureForGameTableAndCharacters.texture.height}, Vector2{0, 0}, WHITE);
 
     EndDrawing();
-    std::clog << "end of display game table" << std::endl;
+    
     return;
 }
 void UI::initializePlayerCardsHandler()
@@ -1333,25 +1378,19 @@ void UI::initializeCardTextureAndName()
 void UI::findTexture(std::vector<Card> cardsForUI, int starterPlayer)
 {
 
-    std::cout << "aval findTexture" << std::endl;
-    std::cout << "starterPlayer " << starterPlayer << std::endl;
+ 
     for (int i = 0; i < cardsForUI.size(); i++)
     {
 
-        std::cout << "to for find" << std::endl;
-        // std::cout << "cardsForUI[i].getName()" << cardsForUI[i].getName() << std::endl;
-        std::cout << "playerCardForUI.size " << playerCardsHandler.at(starterPlayer).size() << std::endl;
+     
+        
 
         playerCardsHandler.at(starterPlayer).emplace_back(UIcardName.at(cardsForUI[i].getName()));
         playerCardsFromUI.at(starterPlayer).emplace_back(cardsForUI[i].getName()); // player cards remain string for being used in played cards
 
-        std::cout << "to for find2" << std::endl;
+        
     }
-    for (int i = 0; i < playerCardsFromUI.at(starterPlayer).size(); i++)
-    {
-        std::cout << "cart jadid " << playerCardsFromUI.at(starterPlayer)[i] << std::endl;
-    }
-    std::cout << "akhar findTexture" << std::endl;
+  
 
     // return UIcardName.at(cardsForUI[cardIndex].getName());
 }
@@ -1383,7 +1422,7 @@ bool UI::displayCharectersAndNames(std::string name1, std::string name2, std::st
 
         if (next.ifPressed(mousePssitionIdentity, mousePressedIdentity))
         {
-            std::cout << "too if " << std::endl;
+           
             next.setStatus(false);
             return true; // next button has been pressed
         }
@@ -1422,17 +1461,17 @@ bool UI::displayNoWinner()
 
         if (next.ifPressed(mousePssitionIdentity, mousePressedIdentity))
         {
-            std::cout << "too if displayNoWinner" << std::endl;
+            
             next.setStatus(false);
             return true; // next button has been pressed
         }
-        std::cout << "too  displayNoWinner" << std::endl;
+        
 
         BeginDrawing();
         ClearBackground(RAYWHITE);
-        std::cout << "too  displayNoWinner 2" << std::endl;
+        
         DrawTexture(noWinner, 0, 0, WHITE);
-        std::cout << "too  displayNoWinner 3" << std::endl;
+       
         DrawTextPro(gameFont, "there is no winner in this war!!!", (Vector2){200, 40}, (Vector2){1}, 1, 40, 1, {50, 190, 220, 225});
 
         Color selectedColor = WHITE;
@@ -1454,14 +1493,14 @@ bool UI::displayWinner(int winnerPlayer, std::string winnerName)
 {
     initializeNextButton(250, 680, 120, 50);
     const char *winnerPlayerName = winnerName.c_str();
-    std::cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1" << std::endl;
+    
     firstCharacterPlayedCards.clear();
     secondCharacterPlayedCards.clear();
     thirdCharacterPlayedCards.clear();
     firstPlayedCardsFromUI.clear();
     secondPlayedCardsFromUI.clear();
     thirdCharacterPlayedCards.clear();
-    std::cout << "firstCharacterPlayedCards - >>>>>>>>>>" << firstCharacterPlayedCards.size() << std::endl;
+    
     while (1)
     {
         Vector2 mousePssitionIdentity = GetMousePosition();
@@ -1470,7 +1509,7 @@ bool UI::displayWinner(int winnerPlayer, std::string winnerName)
 
         if (next.ifPressed(mousePssitionIdentity, mousePressedIdentity))
         {
-            std::cout << "too if " << std::endl;
+            
             next.setStatus(false);
             return true; // next button has been pressed
         }
@@ -1498,20 +1537,20 @@ bool UI::displayWinner(int winnerPlayer, std::string winnerName)
 
         EndDrawing();
     }
-    std::cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!2" << std::endl;
+    
 }
 bool UI::displayFinalWinner(int winnerPlayer, std::string winnerName)
 {
     initializeNextButton(250, 680, 120, 50);
     const char *winnerPlayerName = winnerName.c_str();
-    std::cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1" << std::endl;
+    
     // firstCharacterPlayedCards.clear();
     // secondCharacterPlayedCards.clear();
     // thirdCharacterPlayedCards.clear();
     // firstPlayedCardsFromUI.clear();
     // secondPlayedCardsFromUI.clear();
     // thirdCharacterPlayedCards.clear();
-    std::cout << "firstCharacterPlayedCards - >>>>>>>>>>" << firstCharacterPlayedCards.size() << std::endl;
+
     while (1)
     {
         Vector2 mousePssitionIdentity = GetMousePosition();
@@ -1520,7 +1559,7 @@ bool UI::displayFinalWinner(int winnerPlayer, std::string winnerName)
 
         if (next.ifPressed(mousePssitionIdentity, mousePressedIdentity))
         {
-            std::cout << "too if " << std::endl;
+            
             next.setStatus(false);
             return true; // next button has been pressed
         }
@@ -2055,17 +2094,17 @@ std::string UI::helpGameControl()
             }
             else if (isDropdownOpenForHelp)
             {
-                std::cout << "farsh" << std::endl;
+                
                 // Check if the click is within one of the option bounds
                 for (int i = 0; i < 8; i++)
                 {
                     if (CheckCollisionPointRec(mousePos, helpOptionBounds[i]))
                     {
-                        std::cout << "kooh dard " << std::endl;
+                        
                         selectedHelpOption = helpOptions[i]; // Set selected option on click
                         isDropdownOpenForHelp = false;       // Close the dropdown
                         // helpChoice = helpOptions[i];
-                        std::cout << "help aziz " << selectedHelpOption << std::endl;
+                        
                         return selectedHelpOption;
                     }
                 }
@@ -2142,7 +2181,7 @@ int UI::getPlayerAgeAndLuckFromUI(int playerAgeIndex)
     return textBoxes[playerAgeIndex].getTextBoxIntNumber();
 }
 
-bool UI::displayWarSigns(std::vector<int> numberOfstates, std::vector<std::string> nameOfstates, std::vector<int> winners, int numberOfwinnersInUI, std::vector<std::string> colors)
+bool UI::displayWarSigns(std::vector<int> numberOfstates, std::vector<std::string> nameOfstates, std::vector<int> winners, int numberOfwinnersInUI, std::vector<std::string> colors,std::string UIPeaceSign)
 {
 
     initializeNextButton(1100, 680, 200, 100);
@@ -2159,86 +2198,86 @@ bool UI::displayWarSigns(std::vector<int> numberOfstates, std::vector<std::strin
         ClearBackground(BLANK);
         DrawTexture(warzoneMapWithSigns, 0, 0, WHITE);
         // int j = 0;
-        for (int i = 0; i < numberOfstates.size(); i++)
-        {
-            std::cout << "mohemmmmmmm" << numberOfstates[i] << std::endl;
-        }
-        for (int i = 0; i < nameOfstates.size(); i++)
-        {
-            std::cout << "mohemmmmmmm 2" << nameOfstates[i] << std::endl;
-        }
-        for (int i = 0; i < winners.size(); i++)
-        {
-            std::cout << "mohemmmmmmm 3" << winners[i] << std::endl;
-        }
-        // for (int i = 0; i < wins.size(); i++)
+        // for (int i = 0; i < numberOfstates.size(); i++)
         // {
-        std::cout << "mohemmmmmmm 4 " << numberOfwinnersInUI << std::endl;
+        //     std::cout << "mohemmmmmmm" << numberOfstates[i] << std::endl;
         // }
+        // for (int i = 0; i < nameOfstates.size(); i++)
+        // {
+        //     std::cout << "mohemmmmmmm 2" << nameOfstates[i] << std::endl;
+        // }
+        // for (int i = 0; i < winners.size(); i++)
+        // {
+        //     std::cout << "mohemmmmmmm 3" << winners[i] << std::endl;
+        // }
+        // // for (int i = 0; i < wins.size(); i++)
+        // // {
+        // std::cout << "mohemmmmmmm 4 " << numberOfwinnersInUI << std::endl;
+        //std::cout << "mohemmmmmmm 5 " << UIPeaceSign << std::endl;
+        // }
+        for (statesCoordinatesItr = statesCoordinates.begin(); statesCoordinatesItr != statesCoordinates.end(); statesCoordinatesItr++)
+                    {
+                       
+                    
+                        if (statesCoordinatesItr->first == UIPeaceSign)
+                        {
+                            
+                            
+                            statesCoordinatesPtr = statesCoordinatesItr->second.begin();
+                          
+                            DrawTexture(peaceSignForUI, statesCoordinatesPtr->first, statesCoordinatesPtr->second, WHITE);
+                        
+                        
+                        }
+                    }
         for (int i = 0; i < winners.size(); i++)
         {
-            // for (int q = winners[i]; q < )
-            std::cout << winners[i] << "winer.size" << std::endl;
-            std::cout << winners[i] << " winnerrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr" << std::endl;
-            // std::cout << "too displayWarSigns 1 " << std::endl;
+            
             if (i == 0)
             {
                 for (int j = 0; j < /*numberOfstates[winners[i]]*/ /*wins[i]*/ 1; j++)
                 {
                     for (statesCoordinatesItr = statesCoordinates.begin(); statesCoordinatesItr != statesCoordinates.end(); statesCoordinatesItr++)
                     {
-                        std::cout << "baz chera eshtebahe" << std::endl;
-                        // std::cout << "too displayWarSigns 3 " << std::endl;
-                        std::cout << "statesCoordinatesItr->first " << statesCoordinatesItr->first << std::endl;
-                        std::cout << "numberOfstates[i] " << nameOfstates[j] << std::endl;
+             
+            
                         if (statesCoordinatesItr->first == nameOfstates[j])
                         {
-                            std::cout << "too displayWarSigns 4 " << std::endl;
-                            // statesCoordinatesPtr = statesCoordinatesItr->first + statesCoordinatesItr->first.begin();
+                           
+                            
                             statesCoordinatesPtr = statesCoordinatesItr->second.begin();
-                            // for (statesCoordinatesPtr = statesCoordinatesItr->second.begin(); statesCoordinatesPtr != statesCoordinatesItr->second.end(); statesCoordinatesPtr++)
-                            // {
-                            //     if (statesCoordinatesItr->second == statesCoordinatesPtr->first)
+                            
                             DrawTexture(warSignColors.at(colors[winners[i]]), statesCoordinatesPtr->first, statesCoordinatesPtr->second, WHITE);
-                            // break;
-                            std::cout << "too displayWarSigns 5 " << std::endl;
-                            // }
+                           
                         }
                     }
                 }
-                // break;
+              
             }
             else if (/*numberOfwinnersInUI > i &&*/ i > 0)
             {
-                std::cout << "vared else mishe" << std::endl;
-                std::cout << "numberOfstates[winners[i - 1]]" << numberOfstates[winners[i - 1]] << std::endl;
-                std::cout << "numberOfstates[winners[i]]" << numberOfstates[winners[i]] << std::endl;
+                
                 for (int j = i /*numberOfstates[winners[i - 1]]*/ /*wins[i - 1]*/; j < (/*numberOfstates[winners[i - 1]]*/ i + 1 /*numberOfstates[winners[i]]*/) /*wins[i]*/; j++)
                 {
                     // std::cout << "too displayWarSigns 2 " << std::endl;
-                    std::cout << "injaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" << std::endl;
+                   
                     for (statesCoordinatesItr = statesCoordinates.begin(); statesCoordinatesItr != statesCoordinates.end(); statesCoordinatesItr++)
                     {
-                        // std::cout << "too displayWarSigns 3 " << std::endl;
-                        std::cout << "statesCoordinatesItr->first " << statesCoordinatesItr->first << std::endl;
-                        std::cout << "numberOfstates[i] " << nameOfstates[j] << std::endl;
+                        
                         if (statesCoordinatesItr->first == nameOfstates[j])
                         {
-                            std::cout << "too displayWarSigns 4 " << std::endl;
-                            // statesCoordinatesPtr = statesCoordinatesItr->first + statesCoordinatesItr->first.begin();
+                            
+                            
                             statesCoordinatesPtr = statesCoordinatesItr->second.begin();
-                            // for (statesCoordinatesPtr = statesCoordinatesItr->second.begin(); statesCoordinatesPtr != statesCoordinatesItr->second.end(); statesCoordinatesPtr++)
-                            // {
-                            //     if (statesCoordinatesItr->second == statesCoordinatesPtr->first)
+                            
                             DrawTexture(warSignColors.at(colors[winners[i]]), statesCoordinatesPtr->first, statesCoordinatesPtr->second, WHITE);
-                            std::cout << "too displayWarSigns 5 " << std::endl;
-                            // }
+                          
+                         
                         }
                     }
                 }
             }
-            // break;
-            //  j = numberOfstates[winners[i - 1]];
+          
         }
 
         Color color = WHITE;
