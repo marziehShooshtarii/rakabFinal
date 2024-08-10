@@ -1311,7 +1311,7 @@ void Control::allOwenedStatesForUI()
 
 void Control::eraseSelectedCard()
 {
-    for (int i = 0; i < players[TurnControl].getNumberOfPlayedCards(); i++)
+    for (int i = 0; i < players[TurnControl].getNumberOfPlayerCards(); i++)
     {
         if (players[TurnControl].getPlayerCard(i).getName() == selectedCard.getName())
             players[TurnControl].eraseCard(i);
