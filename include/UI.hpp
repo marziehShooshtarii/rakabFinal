@@ -272,8 +272,8 @@ private:
     std::string helpChoice;
     int numberOfPlayers;
     std::unordered_map<std::string, Texture2D> warSignColors;
-    std::vector <Rectangle> colorOptionBounds;
-    std::vector <std::string> colorOptions;
+    /*std::vector <Rectangle>*/ Rectangle colorOptionBounds [4];
+    /*std::vector <std::string>*/ std::string colorOptions [4];
     bool isDropdownOpenForColor;
     Rectangle dropdownBoundsForColors;
     std::string selectedOptionForColors;

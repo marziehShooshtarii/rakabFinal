@@ -739,7 +739,8 @@ bool UI::validCardsForMatarsak()
             {
                 selectedColor = RED;
             }
-
+            std::cout << "cardsButtons[idx].getRectangle().x + 10 " <<cardsButtons[idx].getRectangle().x + 10 << std::endl;
+            std::cout << "cardsButtons[idx].getRectangle().y + 10 " <<cardsButtons[idx].getRectangle().y + 10 << std::endl;
             DrawTextEx(fontMenu, this->cardsButtons[idx].title, (Vector2){this->cardsButtons[idx].getRectangle().x + 10, this->cardsButtons[idx].getRectangle().y + 10}, fontMenu.baseSize, 1, selectedColor);
             // std::cout << "tah for " << std::endl;
         }
@@ -781,7 +782,7 @@ int UI::numberOfInvalidCardsForMatarsak()
     int counterInvalidCards = 0;
     for (int i = 0; i < playedCardsFromUI.at(UIstarterPlayer).size(); i++)
     {
-        if (playedCardsFromUI.at(UIstarterPlayer)[i] == "bahar" || playedCardsFromUI.at(UIstarterPlayer)[i] == "zemestan" || playedCardsFromUI.at(UIstarterPlayer)[i] == "rish_sefid" || playedCardsFromUI.at(UIstarterPlayer)[i] == "parcham_dar" || playedCardsFromUI.at(UIstarterPlayer)[i] == "tabl_zan" || playedCardsFromUI.at(UIstarterPlayer)[i] == "shirzan" || playedCardsFromUI.at(UIstarterPlayer)[i] == "shah_dokht")
+        if (playedCardsFromUI.at(UIstarterPlayer)[i] == "bahar" || playedCardsFromUI.at(UIstarterPlayer)[i] == "zemestan" || playedCardsFromUI.at(UIstarterPlayer)[i] == "rish_sefid" || playedCardsFromUI.at(UIstarterPlayer)[i] == "parcham_dar" || playedCardsFromUI.at(UIstarterPlayer)[i] == "tabl_zan" || playedCardsFromUI.at(UIstarterPlayer)[i] == "shirzan" || playedCardsFromUI.at(UIstarterPlayer)[i] == "shah_dokht" || playedCardsFromUI.at(UIstarterPlayer)[i] == "matarsak")
             counterInvalidCards++;
     }
     return counterInvalidCards;
@@ -813,10 +814,10 @@ void UI::initializeCardsButtons(float x, float y, float width, float hight)
 void UI::initializeCardsButtonsForMatarsak(float x, float y, float width, float hight)
 {
     std::cout << "UIstarterPlayer too initialize " << UIstarterPlayer << std::endl;
-    for (int i = 0; i < /*(playedCardsHandler.at(UIstarterPlayer).size() - numberOfInvalidCardsForMatarsak()) / 2*/ 10; i++)
+    for (int i = 0; i < playedCardsHandler.at(UIstarterPlayer).size() / 2; i++)
         cardsButtons[i] = (Button){(Rectangle){(i * 100) + 400 + x, 610 + y, width, hight}, "matarsak", false};
-    // for (int i = /*(playedCardsHandler.at(UIstarterPlayer).size() - numberOfInvalidCardsForMatarsak()) / 2*/10; i < playedCardsHandler.at(UIstarterPlayer).size(); i++)
-    //     cardsButtons[i] = (Button){(Rectangle){((i - playedCardsHandler.at(UIstarterPlayer).size() / 2) * 100) + 400 + x, 460 + y, width, hight}, "matarsak", false};
+    for (int i = playedCardsHandler.at(UIstarterPlayer).size() / 2; i < playedCardsHandler.at(UIstarterPlayer).size(); i++)
+        cardsButtons[i] = (Button){(Rectangle){((i - playedCardsHandler.at(UIstarterPlayer).size() / 2) * 100) + 400 + x, 460 + y, width, hight}, "matarsak", false};
 }
 bool UI::displayCardsButtons()
 {
@@ -1788,68 +1789,102 @@ void UI::initializeOptionsColors()
     colorOptions[1] = {"purple"};
     colorOptions[2] = {"blue"};
     colorOptions[3] = {"green"};
-    
+    std::cout << "inja 1 " << std::endl;
+    // colorOptions.emplace_back("red");
+    // colorOptions.emplace_back("purple");
+    // colorOptions.emplace_back("blue");
+    // colorOptions.emplace_back("green");
+    std::cout << "inja 2 " << std::endl;
+
     selectedOptionForColors = "select a color";
     isDropdownOpenForColor = false;
 }
 void UI::initializeOptionsAndDropdownBoundsForColors()
 {
     dropdownBoundsForColors = {350, 250, 350, 30};
+    std::cout << "inja 3 " << std::endl;
     colorOptionBounds[0] = {420, 250 + 30, 200, 50};
     colorOptionBounds[1] = {420, 250 + 80, 200, 50};
     colorOptionBounds[2] = {420, 250 + 130, 200, 50};
     colorOptionBounds[3] = {420, 250 + 180, 200, 50};
     colorOptionBounds[4] = {420, 250 + 230, 200, 50};
+
+    // colorOptionBounds.emplace_back(420, 250 + 30, 200, 50);
+    // colorOptionBounds.emplace_back(420, 250 + 80, 200, 50);
+    // colorOptionBounds.emplace_back(420, 250 + 130, 200, 50);
+    // colorOptionBounds.emplace_back(420, 250 + 230, 200, 50);
+    std::cout << "inja 4 " << std::endl;
 }
 void UI::initializeDropDownMenuForColors()
 {
+    std::cout << "colors -1" << std::endl;
     initializeOptionsColors();
+    std::cout << "colors 0" << std::endl;
     initializeOptionsAndDropdownBoundsForColors();
 }
 std::string UI::displayOpenDropDownMenuForColors()
 {
+    std::cout << "colors 1" << std::endl;
     initializeDropDownMenuForColors();
+    std::cout << "colors 2" << std::endl;
     while (1)
     {
         if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON))
         {
+            std::cout << "colors 3" << std::endl;
             Vector2 mousePos = GetMousePosition();
             if (CheckCollisionPointRec(mousePos, dropdownBoundsForColors))
             {
+                std::cout << "colors 4" << std::endl;
                 isDropdownOpenForColor = !isDropdownOpenForColor; // Toggle dropdown open/close
             }
             else if (isDropdownOpenForColor)
             {
+                std::cout << "colors 5" << std::endl;
                 // Check if the click is within one of the option bounds
                 for (int i = 0; i < 4; i++)
                 {
+                    std::cout << "colors 6" << std::endl;
                     if (CheckCollisionPointRec(mousePos, colorOptionBounds[i]))
                     {
+                        std::cout << "colors 7" << std::endl;
                         selectedOptionForColors = colorOptions[i]; // Set selected option on click
-                        isDropdownOpenForColor = false;      // Close the dropdown
-                               // which option was selected
+                        isDropdownOpenForColor = false;            // Close the dropdown
+                                                                   // which option was selected
                         return selectedOptionForColors;
                     }
                 }
             }
         }
+        std::cout << "colors 7" << std::endl;
         BeginDrawing();
+        std::cout << "colors 8" << std::endl;
         ClearBackground(RAYWHITE);
         DrawTexture(backgroundIdentityMenu, 0, 0, WHITE);
+        std::cout << "colors 9" << std::endl;
         // Draw the dropdown box
         DrawRectangleRec(dropdownBoundsForColors, LIGHTGRAY);
+        std::cout << "colors 10" << std::endl;
         DrawRectangleLinesEx(dropdownBoundsForColors, 2, DARKGRAY);
+        std::cout << "colors 11" << std::endl;
         DrawTextPro(inputFont, selectedOptionForColors.c_str(), (Vector2){dropdownBoundsForColors.x + 37, dropdownBoundsForColors.y - 11}, (Vector2){1}, 1, 40, 1, {225, 120, 80, 225});
+        std::cout << "colors 12" << std::endl;
 
         // Draw the options if the dropdown is open
         if (isDropdownOpenForColor)
         {
+            std::cout << "colors 13" << std::endl;
             for (int i = 0; i < 4; i++)
             {
                 DrawRectangleRec(colorOptionBounds[i], LIGHTGRAY);
+                std::cout << "colors 14" << std::endl;
+                
                 DrawRectangleLinesEx(colorOptionBounds[i], 1, DARKGRAY);
+                std::cout << "colors 15" << std::endl;
                 DrawTextPro(inputFont, colorOptions[i].c_str(), (Vector2){colorOptionBounds[i].x + 10, colorOptionBounds[i].y + 5}, (Vector2){1}, 1, 40, 1, {225, 110, 80, 225});
+                std::cout << "colors 16" << std::endl;
             }
+                std::cout << "colors 17" << std::endl;
         }
 
         EndDrawing();
@@ -2040,7 +2075,7 @@ int UI::getPlayerAgeAndLuckFromUI(int playerAgeIndex)
     return textBoxes[playerAgeIndex].getTextBoxIntNumber();
 }
 
-bool UI::displayWarSigns(std::vector<int> numberOfstates, std::vector<std::string> nameOfstates, std::vector<int> winners, int numberOfwinnersInUI,std::vector<std::string> colors)
+bool UI::displayWarSigns(std::vector<int> numberOfstates, std::vector<std::string> nameOfstates, std::vector<int> winners, int numberOfwinnersInUI, std::vector<std::string> colors)
 {
 
     initializeNextButton(1100, 680, 200, 100);
@@ -2075,13 +2110,13 @@ bool UI::displayWarSigns(std::vector<int> numberOfstates, std::vector<std::strin
         // }
         for (int i = 0; i < winners.size(); i++)
         {
-            //for (int q = winners[i]; q < )
+            // for (int q = winners[i]; q < )
             std::cout << winners[i] << "winer.size" << std::endl;
             std::cout << winners[i] << " winnerrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr" << std::endl;
             // std::cout << "too displayWarSigns 1 " << std::endl;
             if (i == 0)
             {
-                for (int j = 0; j < /*numberOfstates[winners[i]]*/ /*wins[i]*/1; j++)
+                for (int j = 0; j < /*numberOfstates[winners[i]]*/ /*wins[i]*/ 1; j++)
                 {
                     for (statesCoordinatesItr = statesCoordinates.begin(); statesCoordinatesItr != statesCoordinates.end(); statesCoordinatesItr++)
                     {
@@ -2111,7 +2146,7 @@ bool UI::displayWarSigns(std::vector<int> numberOfstates, std::vector<std::strin
                 std::cout << "vared else mishe" << std::endl;
                 std::cout << "numberOfstates[winners[i - 1]]" << numberOfstates[winners[i - 1]] << std::endl;
                 std::cout << "numberOfstates[winners[i]]" << numberOfstates[winners[i]] << std::endl;
-                for (int j = i/*numberOfstates[winners[i - 1]]*/ /*wins[i - 1]*/; j < (/*numberOfstates[winners[i - 1]]*/i + 1 /*numberOfstates[winners[i]]*/) /*wins[i]*/; j++)
+                for (int j = i /*numberOfstates[winners[i - 1]]*/ /*wins[i - 1]*/; j < (/*numberOfstates[winners[i - 1]]*/ i + 1 /*numberOfstates[winners[i]]*/) /*wins[i]*/; j++)
                 {
                     // std::cout << "too displayWarSigns 2 " << std::endl;
                     std::cout << "injaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" << std::endl;
@@ -2135,8 +2170,8 @@ bool UI::displayWarSigns(std::vector<int> numberOfstates, std::vector<std::strin
                     }
                 }
             }
-            //break;
-            // j = numberOfstates[winners[i - 1]];
+            // break;
+            //  j = numberOfstates[winners[i - 1]];
         }
 
         Color color = WHITE;
@@ -2196,12 +2231,12 @@ void UI::initializeStatesCoordinates()
 
 void UI::initializeWarSignColors()
 {
-    warSignColors = 
-    {
-        {"purple",warSigns[0]},
-        {"blue",warSigns[1]},
-        {"green",warSigns[2]},
-        {"red",warSigns[3]},
+    warSignColors =
+        {
+            {"purple", warSigns[0]},
+            {"blue", warSigns[1]},
+            {"green", warSigns[2]},
+            {"red", warSigns[3]},
 
-    };
+        };
 }
