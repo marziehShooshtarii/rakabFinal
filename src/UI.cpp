@@ -85,7 +85,7 @@ UI::UI()
     renderTextureForGameTableAndCharactersForFour = LoadRenderTexture(gameTableForFourPlayers.width, gameTableForFourPlayers.height);
 
     renderTextureForWarSigns = LoadRenderTexture(warzoneMapWithSigns.width, warzoneMapWithSigns.height);
-    start = LoadTexture("../assets/start.png");
+    start = LoadTexture("../assets/start2.png");
     exit = LoadTexture("../assets/ending.png");
     initializeCardTextureAndName();
     initializePlayerCardsHandler();
@@ -362,7 +362,7 @@ bool UI::displayStart()
         ClearBackground(RAYWHITE);
 
         DrawTexture(start, 0, 0, WHITE);
-        DrawTextPro(gameFont, "rakab", (Vector2){590, 100}, (Vector2){1}, 1, 100, 1, {50, 190, 220, 225});
+      
        
 
         Color selectedColor = WHITE;
