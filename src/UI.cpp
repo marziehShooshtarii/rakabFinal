@@ -9,6 +9,7 @@ UI::UI()
     fontMenu = LoadFont("../assets/KaushanScript-Regular.ttf");
     gameFont = LoadFont("../assets/Future-TimeSplitters.otf");
     inputFont = LoadFont("../assets/SF-Atarian-System-Bold-Italic.ttf");
+    backUpFont = LoadFont("../assets/MOBLAZ Trial.ttf");
     backgroundMenu = LoadTexture("../assets/blueMenu.png");
     backgroundIdentityMenu = LoadTexture("../assets/b_6.png");
     backgroundWarzoneMap = LoadTexture("../assets/warzone_map.png");
@@ -156,7 +157,7 @@ void UI::unloadingTexture()
     UnloadFont(fontMenu);
     UnloadFont(gameFont);
     UnloadFont(inputFont);
-
+    UnloadFont(backUpFont);
     UnloadTexture(backgroundMenu);
     UnloadTexture(backgroundIdentityMenu);
     UnloadTexture(backgroundWarzoneMap);
@@ -962,8 +963,8 @@ std::vector<std::string> UI::getPlayedCardsFromUI()
 }
 int UI::ExitGameControl()
 {
-    initializeSaveGameButton(200, 100, 120, 50);
-    initializeExitGameButton(200, 200, 120, 50);
+    initializeSaveGameButton(60, 100, 120, 50);
+    initializeExitGameButton(60, 170, 120, 50);
     while (1)
     {
         Vector2 mousePssitionIdentity = GetMousePosition();
@@ -989,10 +990,10 @@ int UI::ExitGameControl()
         }
         else
         {
-            exitColor = RED;
+            exitColor = {250 , 0 , 0 , 250};
         }
 
-        DrawTextPro(fontMenu, this->exitGame.title, (Vector2){this->exitGame.getRectangle().x + 10, this->exitGame.getRectangle().y + 10}, (Vector2){1}, 1, 100, 1, exitColor);
+        DrawTextPro(backUpFont, this->exitGame.title, (Vector2){this->exitGame.getRectangle().x + 10, this->exitGame.getRectangle().y + 10}, (Vector2){1}, 1, 65, 1, exitColor);
 
         Color saveColor = WHITE;
         if (CheckCollisionPointRec(mousePssitionIdentity, saveGame.getRectangle()))
@@ -1001,10 +1002,10 @@ int UI::ExitGameControl()
         }
         else
         {
-            saveColor = RED;
+            saveColor = {250 , 0 , 0 , 250};
         }
 
-        DrawTextPro(fontMenu, this->saveGame.title, (Vector2){this->saveGame.getRectangle().x + 10, this->saveGame.getRectangle().y + 10}, (Vector2){1}, 1, 100, 1, saveColor);
+        DrawTextPro(backUpFont, this->saveGame.title, (Vector2){this->saveGame.getRectangle().x + 10, this->saveGame.getRectangle().y + 10}, (Vector2){1}, 1, 65, 1, saveColor);
 
         EndDrawing();
     }

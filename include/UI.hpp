@@ -116,6 +116,7 @@ private:
     Font fontMenu;                     // first menu font
     Font gameFont;                     // the game font
     Font inputFont;                    // font used for user input
+    Font backUpFont; // back up font   //font used for backup usage
     Texture2D backgroundMenu;          // menu background
     Texture2D backgroundIdentityMenu;  // identity menu background
     Button menuButtons[4];             // buttons displayed in the menu
