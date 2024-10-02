@@ -1007,7 +1007,7 @@ void Control::menu()
             }
             if (newOrContinue == "exit")
             {
-                // uiStates = UIplayerNumber;
+                exit(0);
             }
             break;
         }
@@ -1241,7 +1241,7 @@ void Control::menu()
         case generalHelp:
         {
             ui.displayHelp(helpChoice.searchInHelps("general"));
-            uiStates = UIplayerNumber;
+            uiStates = UIMenu;
             break;
         }
         case UISaveWriteInfo:
