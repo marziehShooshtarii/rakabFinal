@@ -28,7 +28,7 @@ public:
     int displayPlayerNumberButton();
     void initializePlayerNumberButton();
     void clearTextBox();
- 
+
     void AddTextBox(float x, float y, float width, float height);
     void textBoxUpdate();
     void textBoxDraw(Font font, int framesCounter);
@@ -49,15 +49,16 @@ public:
     bool displayMap(std::string);
     void renderTextureForWarzoneMap();
     bool displayCharectersAndNamesForThree(std::string, std::string, std::string);
-    bool displayCharectersAndNamesForFour(std::string, std::string, std::string,std::string);
+    bool displayCharectersAndNamesForFour(std::string, std::string, std::string, std::string);
     void initializeNextButton(float x, float y, float width, float hight);
+    void initializeMenuButton(float x, float y, float width, float hight);
     bool displaySelectedWarzone(std::string);
 
     void initializeCharacterNumber();
     bool getLuckNumbers(std::string);
     void displaycharactersCards(int);
     bool renderTextureForCharacterOnGameTable(int);
-  
+
     void initializeCardTextureAndName();
     void initializeCardTextureAndStrings();
     void findTexture(std::vector<Card>, int);
@@ -96,7 +97,7 @@ public:
     void initializeHelpDropdownBounds();
     bool displayHelp(std::string);
     void displayRenderWarSigns();
-    bool displayWarSigns(std::vector<int>, std::vector<std::string>, std::vector<int>, int, std::vector<std::string>,std::string);
+    bool displayWarSigns(std::vector<int>, std::vector<std::string>, std::vector<int>, int, std::vector<std::string>, std::string);
     void setNumberOfPlayers(int);
     void initializeStatesCoordinates();
     void initializeWarSignColors();
@@ -116,7 +117,8 @@ private:
     Font fontMenu;                     // first menu font
     Font gameFont;                     // the game font
     Font inputFont;                    // font used for user input
-    Font backUpFont; // back up font   //font used for backup usage
+    Font backUpFont;                   // back up font   //font used for backup usage
+    Font winnerFont;                   // the winner font
     Texture2D backgroundMenu;          // menu background
     Texture2D backgroundIdentityMenu;  // identity menu background
     Button menuButtons[4];             // buttons displayed in the menu
@@ -129,7 +131,8 @@ private:
     Texture2D backgroundWarzoneMap;
     Texture2D foregroundWarzoneMap;
     Button next;                         // for moving to the next step of the game
-    Texture2D charectersAndNames[2];        // for introducing charecters with their names
+    Button mainMenu;                     // for moving to the main menu
+    Texture2D charectersAndNames[2];     // for introducing charecters with their names
     Texture2D selectedWarzoneBackground; // for announcing the selected warzone
     Texture2D gameTableForThreePlayers;  // table background during the game for three players
     Texture2D gameTableForFourPlayers;   // table background during the game for four players
@@ -195,7 +198,7 @@ private:
     std::map<std::string, std::map<int, int>> statesCoordinates;
     std::map<std::string, std::map<int, int>>::iterator statesCoordinatesItr;
     std::map<int, int>::iterator statesCoordinatesPtr;
- 
+
     std::string options[5];
     std::string selectedOption;
     bool isDropdownOpen;
@@ -210,8 +213,8 @@ private:
     std::string helpChoice;
     int numberOfPlayers;
     std::unordered_map<std::string, Texture2D> warSignColors;
-    Rectangle colorOptionBounds [4];
-    std::string colorOptions [4];
+    Rectangle colorOptionBounds[4];
+    std::string colorOptions[4];
     bool isDropdownOpenForColor;
     Rectangle dropdownBoundsForColors;
     std::string selectedOptionForColors;
