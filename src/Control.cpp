@@ -165,6 +165,7 @@ int Control::playingInput()
     int i = TurnControl;
 
     checkSelectedCard = setPlayedCardsFromUI();
+
     if (checkSelectedCard == 8)
     {
         for (int j = 0; j < identity.getPlayerNumber(); j++)
@@ -227,21 +228,22 @@ int Control::checkProcessOfEndingWar()
                     displayPlayingCards(t);
             }
         }
-        if (orderOfRishSefids.size() != 0) // if rish sefid has been played in the current war
-            choiceForPeaceSign();
+        // if (orderOfRishSefids.size() != 0) // if rish sefid has been played in the current war
+        //     choiceForPeaceSign();
 
-        for (int s = 0; s < identity.getPlayerNumber(); s++)
-        {
-            players[s].eraseAllPlayedCards();
-        }
-        turnHandlerAfterEachWar = 0;
-        baharVSzemestan.clear();
-        orderOfRishSefids.clear();
-        winner = -1;
-        for (int w = 0; w < identity.getPlayerNumber(); w++)
-        {
-            players[w].setIfPassed(false);
-        }
+        // for (int s = 0; s < identity.getPlayerNumber(); s++)
+        // {
+        //     players[s].eraseAllPlayedCards();
+        // }
+        // turnHandlerAfterEachWar = 0;
+        // baharVSzemestan.clear();
+        // orderOfRishSefids.clear();
+        // winner = -1;
+        resetWar();
+        // for (int w = 0; w < identity.getPlayerNumber(); w++)
+        // {
+        //     players[w].setIfPassed(false);
+        // }
         for (int q = 0; q < identity.getPlayerNumber(); q++)
         {
             if (players[q].getNumberOfOwenedStates() > 2)
@@ -258,7 +260,24 @@ void Control::setOrderOfWinner()
 {
     orderOfWinners.push_back(winner);
 }
+void Control::resetWar()
+{
+    if (orderOfRishSefids.size() != 0) // if rish sefid has been played in the current war
+        choiceForPeaceSign();
 
+    for (int s = 0; s < identity.getPlayerNumber(); s++)
+    {
+        players[s].eraseAllPlayedCards();
+    }
+    for (int w = 0; w < identity.getPlayerNumber(); w++)
+    {
+        players[w].setIfPassed(false);
+    }
+    turnHandlerAfterEachWar = 0;
+    baharVSzemestan.clear();
+    orderOfRishSefids.clear();
+    winner = -1;
+}
 void Control::choiceForPeaceSign()
 {
     Map mapForPeaceSign;
@@ -1007,7 +1026,7 @@ void Control::menu()
             }
             if (newOrContinue == "exit")
             {
-                exit(0);
+                uiStates = exitTurn;
             }
             break;
         }
@@ -1123,38 +1142,38 @@ void Control::menu()
         case displayPlayersCard:
         {
             ui.displaycharactersCards(PlayerTurnHandler % (identity.getPlayerNumber()));
+
             if (numberOfDealingHandsAfterSaveGame == identity.getPlayerNumber())
                 newOrContinue = "n";
             if (!ifCardsAreSet)
                 StartNewGame();
-
             if (PlayerTurnHandler < (identity.getPlayerNumber()) || newOrContinue == "c")
             {
                 ui.findTexture(players[TurnControl].getAllPlayerCards(), TurnControl);
                 numberOfDealingHandsAfterSaveGame++;
             }
-
             if (PlayerTurnHandler < (identity.getPlayerNumber()) || players[TurnControl].getIfPassed() == false)
                 players[TurnControl].setIfPassed(ui.renderTextureForCharacterOnGameTable(TurnControl));
 
-            int returnPlayingInput = playingInput();
-            if (returnPlayingInput == 1)
+            int warStatus = playingInput();
+
+            if (warStatus == 1)
             {
                 uiStates = displayWinnerOfGame;
                 break;
             }
-            if (returnPlayingInput == 4)
+            if (warStatus == 4)
             {
                 uiStates = showValidCardsForMatarsak;
                 break;
             }
-            if (returnPlayingInput == 5) // there is no winner for war
+            if (warStatus == 5) // there is no winner for war
             {
                 uiStates = noWinnerForWar;
                 break;
             }
 
-            if (returnPlayingInput != 3)
+            if (warStatus != 3)
                 uiStates = displayingWinner;
             else
             {
@@ -1186,7 +1205,14 @@ void Control::menu()
                 uiStates = displayPlayersCard;
             else if (exitStatus == 2)
                 uiStates = specialHelp;
-
+            // else if (exitStatus == 3)
+            // {
+            //     resetWar();
+            //     ifCardsAreSet = false;
+            //     PlayerTurnHandler = 0;
+            //     std::cout << "resetWar" << std::endl;
+            //     uiStates = UIMenu;
+            // }
             break;
         }
         case displayGameTableForFour:
@@ -1228,7 +1254,7 @@ void Control::menu()
         case displayWinnerOfGame:
         {
             ui.displayFinalWinner(numberOfWinnerOfGame, winnerOfGame);
-            uiStates = UIMenu;
+            uiStates = controlExit;
             break;
         }
         case specialHelp:
@@ -1254,8 +1280,12 @@ void Control::menu()
             checkSaveGame = ui.ExitGameControl();
             if (checkSaveGame == 1)
                 uiStates = UISaveWriteInfo;
+            else
+                uiStates = exitTurn;
             break;
         }
+        case exitTurn:
+            exit(0);
         }
     }
 

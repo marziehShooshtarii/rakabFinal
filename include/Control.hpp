@@ -92,24 +92,23 @@ public:
     void saveReadSigns();
     void saveReadStarterPlayerAndSelectedCard();
     void saveReadAllInfo();
-    // bool is_empty(std::fstream& File);
     bool isFileEmpty(const std::string &filename);
     void StartNewGame();
     void initializingNumberOfSavedGames();
     bool determinNumberOfSavedGame();
-    void setNameForUI(std::vector<char>);
-    void setAgeForUI(std::vector<char>);
-    void setNameFromUI(char names[]);
+    // void setNameForUI(std::vector<char>);
+    // void setAgeForUI(std::vector<char>);
+    // void setNameFromUI(char names[]);
     void setWarzone(std::string);
     int setPlayedCardsFromUI();
     void eraseSelectedCard();
     void setPlayedCardsAfterMatarsak();
     void allOwenedStatesForUI();
-    void initializeAllOwenedStatesForUI();
+    // void initializeAllOwenedStatesForUI();
     void calculateNumberOfWinners();
     void initializeColorsForUI();
     void setOrderOfWinner();
-    //void setPeaceSign(std::string);
+    void resetWar();
     void run();
 
 private:
@@ -188,5 +187,6 @@ private:
         generalHelp,
         displayWarSigns,
         begining,
+        exitTurn,
     };
 };
